@@ -4,10 +4,10 @@
   box-sizing: border-box;
 }
 
-.main-container{
+.main{
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 51rem;
 background-image: url(../src/image/startbackground.webp);
 background-size: cover;
 background-repeat: no-repeat;
@@ -24,7 +24,7 @@ background-repeat: no-repeat;
   position: absolute;
   font-family: 'Bubblegum Sans', cursive;
   color: white;
-  margin-top: 15%;
+  padding-top: 14%;
   margin-left: 15%;
   font-size: 70px;
 }
@@ -47,3 +47,187 @@ background-repeat: no-repeat;
   margin-top: 35%;
   margin-left: 28%;
 }
+
+
+.parent {
+  position: relative;
+  display: grid;
+  grid-template-columns:  repeat(15, 5fr);
+  grid-template-rows: repeat(3, 3fr);
+  grid-column-gap:  22rem;
+  grid-row-gap: 0px;
+  width: 100%;
+  height: 20rem;
+  }
+  
+  .div1 { grid-area: 1 / 1 / 2 / 2;
+  margin-bottom: 4rem; }
+  .div2 { grid-area: 1 / 2 / 2 / 3; }
+  .div3 { grid-area: 1 / 3 / 2 / 4; }
+  .div4 { grid-area: 1 / 4 / 2 / 5; }
+  .div5 { grid-area: 2 / 1 / 3 / 2; }
+  .div6 { grid-area: 2 / 2 / 3 / 3; }
+  .div7 { grid-area: 2 / 3 / 3 / 4; }
+  .div8 { grid-area: 2 / 4 / 3 / 5; }
+  .div9 { grid-area: 3 / 1 / 4 / 2; }
+  .div10 { grid-area: 3 / 2 / 4 / 3; }
+  .div11 { grid-area: 3 / 3 / 4 / 4; }
+  .div12 { grid-area: 3 / 4 / 4 / 5; }
+  
+  .blocktitle{
+    position: absolute;
+    margin-top: 55px;
+    margin-left: 27rem;
+    font-size: 41px;
+    font-family: lisa bosa;
+  }
+  .blockdes{
+    position: absolute;
+    margin-top: 8rem;
+    margin-left: 32rem;
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: 100;
+    color: grey;
+  }
+  .blocks{
+    position: absolute;
+    width: 300px;
+    height: 230px;
+    text-align: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 6%;
+    padding: 5px 5px 5px 5px;
+  }
+  .div1 ,.div2, .div3,.div4{
+    position: absolute;
+    margin-left: 9rem;
+    margin-top: 13rem;
+  }
+  .div5 ,.div6, .div7,.div8{
+    position: absolute;
+    margin-left: 9rem;
+    margin-top: 25rem;
+  }
+  .div9 ,.div10, .div11,.div12{
+    position: absolute;
+    margin-left: 9rem;
+    margin-top: 37rem;
+    
+  }
+
+  .moduletitle{
+    margin-top: 10px;
+  }
+  .moduledes{
+    margin-top: 10px;
+    padding-bottom: 7px;
+    color: gray;
+  }
+
+
+  /* <---------third block---------> */
+
+  .thirdcontainer{
+    position: relative;
+    width: 100%;
+    height: 77rem;
+    border: 1px solid purple;
+    margin-top: 55rem;
+    background: linear-gradient(50deg, rgba(41,55,240,1) 27%, rgba(159,26,226,1) 65%);
+
+  }
+  .thirdcontainer >.des{
+    text-align: center;
+    font-size: 25px;
+    margin-top: 6%;
+    color: white;
+    font-weight: 600;
+  }
+
+  .ratecard{
+    position: absolute;
+    width: 100%;
+    height: 43rem;
+    margin-top: 5rem;
+    /* background-color: yellow; */
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+
+  }
+  .ratetitle{
+    font-size: 49px;
+    font-weight: 700;
+    margin-top: 2rem;
+    text-align: center;
+  }
+  .ratedes{
+    font-size: 30px;
+    font-weight: 400;
+    margin-top:1rem;
+    text-align: center;
+    color: white;
+  }
+  .ratecard >.card{
+    width: 20rem;
+    height: 20rem;
+    margin-top: 5rem;
+    /* margin-left: 10rem; */
+    background-color: white;
+    padding-top: 2rem;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    transition: 0.8s;
+
+  }
+  .ratecard >.card:hover{
+    /* margin-top: 0.1rem; */
+   transform: scale(1.05);
+  }
+  .freetrial{
+    position: absolute;
+    /* width: 20rem; */
+    /* height: 20rem; */
+    margin-left: 14rem;
+    text-align: center;
+  }
+  .onemonth{
+    position: absolute;
+    margin-left: 39rem;
+  }
+  .sixmonth{
+    position: absolute;
+    margin-left: 64rem;
+  }
+  .cardlist{
+    border: 1px ridge gray;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    padding: 30px 60px 25px 65px ;
+    position: absolute;
+  }
+  .cardtitle{
+    color: gray;
+  }
+  .downloadlink{
+    text-align: center;
+    /* position: absolute; */
+    margin-top:51rem ;
+    font-size: 40px;
+    color: white;
+  }
+  .playstorelink{
+    position: absolute;
+    width: 180px; 
+    margin-top: 3rem;
+    margin-left: 37rem;
+  }
+  .appstorelink{
+    position: absolute;
+    width: 180px;
+    margin-top: 3rem;
+    margin-left: 52rem;
+  }
