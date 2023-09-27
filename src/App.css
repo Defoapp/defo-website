@@ -8,22 +8,46 @@
   position: relative;
   width: auto;
   min-height: 47rem;
-background-image: url(../src/image/startbackground_1.webp);
-background-size: cover;
-background-repeat: no-repeat;
+  background-image: url(../src/image/startbackground_1.webp);
+  background-position:right;
+  background-size: cover;
+  background-repeat: no-repeat;
+  
 }
 
-.logo{
-  position: absolute;
+/* .logo{
   max-width: 6rem;
-  max-height: 3rem;
-  margin: 1rem 0 0 10rem;
+ 
 }
+
+.navbar{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.3rem 10%;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+.nav{
+  display: flex;
+}
+.nav>.link{
+  font-size: 1.15rem;
+  color: white;
+  text-decoration: none;
+  list-style: none;
+  font-weight: 500;
+  margin-left: 2.5rem;
+} */
+
 .home>.title{
   position: absolute;
-  /* font-family: 'Bubblegum Sans', cursive; */
+  font-family: 'Bubblegum Sans', cursive;     
   font-weight: 700;
-  font-family: Bubblegum;
   color: white;
   margin-left: 15%;
   font-size: calc(1.625rem + 3.1vw);
@@ -34,37 +58,45 @@ background-repeat: no-repeat;
   color: white;
   font-size: calc(1.225rem + 3.1px);
   font-weight: 100;
-  font-family:sans-serif;
+  font-family: 'Bubblegum Sans', cursive;
   margin-left: 15%;
-  margin-top: 30rem;
-
+  margin-top: 32rem;
 }
 .playstore{
-  position: absolute;
-  max-width: 10rem;
+  /* position: absolute; */
+  width: 10rem;
   margin-left: 15%;
-  margin-top: 33rem;
+  margin-top: 35rem;
 
 }
 .appstore{
-  position: absolute;
-  max-width: 10rem;
-  margin-left: 27%;
+  /* position: absolute; */
+  width: 10rem;
+  margin-left: 2%;
   margin-top: 33rem;
 }
 @media screen and (max-width:400px) {
+  .home{
+    background-image: url(../src/image/startbackground_1.webp);
+    background-position: left;
+  }
+  .logo{
+    margin: 1rem 0 0 1rem;
+  }
   .disc{
-    margin-top: 22rem;
+    margin-top: 23rem;
+    padding-right: 4rem;
   }
   .playstore{
     max-width: 8rem;
-    margin-top: 27rem;
-    margin-left: 1rem;
+    margin-top: 29rem;
+    margin-left: 2rem;
   }
   .appstore{
+    position: absolute;
     max-width: 8rem;
-    margin-left: 13rem;
-    margin-top: 27rem;
+    margin-left: 3rem;
+    margin-top: 29rem;
   }
 }
 /*----------------- home end---------------- */
@@ -81,15 +113,18 @@ background-repeat: no-repeat;
 .blocktitle{
   text-align: center;
   font-weight: 700;
-  font-size: 40px;
+  font-size: 48px;
   margin: 6rem 0 5px 5px;
   padding: 0px 20px;
+  font-family:'Times New Roman', Bold;
+  color: #100C41;
 }
 .blockdes{
-  text-align: center;
+  font-family: 'Poppins', Regular;
+    text-align: center;
   font-weight: 400;
   font-size : 20px;
-  color: gray;
+  color: #717075;
   margin: 0px 40px;
   padding: 0px 20px;
 }
@@ -103,7 +138,6 @@ background-repeat: no-repeat;
   max-width: 20rem;
   min-height: 13rem;
   text-align: center;
-
 }
 .first-block{
   /* margin-top: 1rem; */
@@ -136,11 +170,17 @@ background-repeat: no-repeat;
 }
 
 .blocks>.title{
+  font-family:'Times New Roman', Bold;
   padding-bottom: 0.5rem;
+  color: #100C41;
+  font-size: 20px;
 }
 .blocks>.description{
+  font-family: 'Poppins', Regular;
+  color: #717075;
   padding-bottom: 0.5rem;
   color: gray;
+  font-size: 16px;
 }
 
 
@@ -151,22 +191,20 @@ background-repeat: no-repeat;
 
   /* <---------price start---------> */
   .ratecard{
-    /* border: 1px solid black; */
     max-width:auto ;
     min-height: 30rem;
-    background: linear-gradient(94deg, rgba(62,207,122,1) 0%, rgba(0,0,0,1) 66%);
+    background: linear-gradient(140deg, #3ECF7A -50%, #100C40 70%);
 
   }
-  .about{
-    font-weight: 700;
-    font-size: 20px;
+  .abouts{
+    font-weight: 1000;
+    font-size: 24px;
+    font-family: 'Poppins', Bold;
     text-align: center;
     padding-top: 5rem;
-    /* margin-top: 4rem; */
-    /* background: linear-gradient(50deg, rgba(41,55,240,1) 27%, rgba(159,26,226,1) 65%); */
     background-color: #33AA94;
     padding-bottom: 5rem;
-    color: white;
+    color: #100C41;
   }
   .card>hr{
     margin-left: 10%;
@@ -175,20 +213,20 @@ background-repeat: no-repeat;
   }
   .ratetitle{
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 48px;
     font-weight: 700;
-    /* font-family: ; */
+    font-family: 'Times New Roman', bold;
     color: white;
     margin-top: 2rem;
   }
   .ratedes{
+    font-family: 'Poppins', Bold;
     text-align: center;
     font-weight: 400;
-    font-size: 1.5rem;
+    font-size: 20px;
     color: gray;
   }
   .card-container{
-   /* position: relative; */
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -202,6 +240,12 @@ background-repeat: no-repeat;
     height: 22rem;
     /* text-align: center; */
   }
+  .card:hover {
+    transform: translateY(-5px) scale(1.005) translateZ(0);
+    box-shadow: 0 24px 36px rgba(0,0,0,0.11),
+      0 24px 46px var(--box-shadow-color);
+  }
+  
   .cardtitle{
     color: gray;
     font-weight: 500;
@@ -210,16 +254,16 @@ background-repeat: no-repeat;
     text-align: center; 
   }
   .price{
-    font-family:Poppins ;
+    font-family: 'Poppins', Bold;
     font-size: 40px;
     font-weight: 800;
     text-align: center; 
     margin-top: 2rem;
   }
   .validity{
-    /* position: absolute; */
+    font-family: 'Poppins', Bold;
     font-size:12px;
-    font-weight: 500;
+    font-weight: 800;
     margin-right: 1rem;
     margin-top: 2rem;
   }
@@ -228,7 +272,7 @@ background-repeat: no-repeat;
     list-style-type:none;
     color: gray;
     padding-top: 1rem;
-    margin-left: 4rem;
+    margin-left: 5rem;
     
   }
   
@@ -240,35 +284,39 @@ background-repeat: no-repeat;
 
   .links{
     max-width: auto;
-    min-height: 34rem;
-    /* background: linear-gradient(50deg, rgba(41,55,240,1) 27%, rgba(159,26,226,1) 65%); */
+    min-height: 16rem;
     background-color: white;
   }
-  
-
   .downloadlink{
+    font-family: 'Poppins', Bold;
+    font-size: 36px;
     color: black;
     text-align: center;
-    padding-top: 4rem;
+    padding-top: 3rem;
   }
   .downlink{
     display: flex;
-    gap: 2rem;
+    gap: 4rem;
     justify-content: center;
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
   .playstorelink{
-    width: 10rem;
+    width: 11rem;
   }
   .appstorelink{
-    width: 10rem; 
+    width: 11rem; 
   }
   @media screen and (max-width:400px){
     .downlink{
-      gap: 1.5rem;
       display: flex;
-    
-    justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 5rem;
     }
   }
   /* <--------------------link end-----------------------> */ 
+
+
+  /* <------------------Footer start----------------------> */
+
+  /* <------------------Footer end----------------------> */
