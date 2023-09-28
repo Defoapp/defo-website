@@ -1,9 +1,12 @@
 import React from "react";
 import {Link} from 'react-router-dom'
 
+// <-------------react-icon---------------->
+import {GiHamburgerMenu} from "react-icons/gi"
+
 
 import logo from "../image/Logo.png"
-import {GiHamburgerMenu} from "react-icons/gi"
+
 
 import playstore from "../image/google-play-badge.svg";
 import appstore from "../image/app-store-badge.svg";
@@ -26,16 +29,16 @@ const Home = () =>{
     return(
         <div>
           <div className="home">
-            <div>
+            {/* <div>
       <img src={logo} alt="" className="logo" />
-    </div>
+    </div> */}
 
 
-    {/* <div className="navbar">
+    <div className="navbar">
       <Link ><img src={logo} alt="" className="logo"/></Link>
     
     <div for=" " className="icons">
-    <GiHamburgerMenu/>
+    <GiHamburgerMenu className="hamburger"/>
     </div>
       <div className="nav">
         
@@ -47,7 +50,7 @@ const Home = () =>{
         
 
       </div>
-    </div> */}
+    </div>
 
 
       <h1 className="title">Information<br/> with <br/>Entertainment</h1>

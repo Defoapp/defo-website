@@ -5,10 +5,7 @@ import {Link} from 'react-router-dom'
 
 
 import logos from "../footer/social media svg/Logo.png"
-// import instagram from "../footer/social media svg/instagram Default.svg"
-// import facebook from "../footer/social media svg/facebook default.svg"
-// import x from "../footer/social media svg/X Default.svg"
-// import linkedin from "../footer/social media svg/linkedin Default.svg"
+
 
 
 
@@ -64,7 +61,7 @@ function Footer() {
      </div>
      <div className='bottom'>
      <hr/>
-     <p id='copyright'>&copy; 2019, All rights reserved.</p>
+     <p id='copyright'>&copy; 2023 LowPow. All rights reserved.</p>
      <hr/>
      </div>
      

@@ -1,9 +1,8 @@
 import React from "react";
-import "./App.css";
 import { BrowserRouter,Routes,Route } from "react-router-dom";
-// -------------Home-------------------
-import Home from "../src/component/Home";
+import "./App.css";
 
+import Home from "../src/component/Home";
 import About from "../src/component/About";
 import OurStory from "../src/component/OurStory";
 import OurCreators from "../src/component/OurCreators";
@@ -15,6 +14,7 @@ function App(){
   return(
     
     <BrowserRouter>
+    
     <Routes>
     <Route index element={<Home/>}/>
     <Route path="/" element={<Home/>}/>
@@ -23,7 +23,7 @@ function App(){
     <Route path="/OurCreators" element={<OurCreators/>}/>
     <Route path="/OurTeams" element={<OurTeams/>}/> 
     
-    
+    {/* <Route path="" element={}/> */}
     </Routes>
      </BrowserRouter>
   ); 
