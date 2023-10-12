@@ -14,21 +14,19 @@ function Privacy() {
       <div className="main">
         <div className="priv">
           <div className="header-container">
-            <div className="head">
+            <div className="policy">
+                <img src={policy} alt="privacy" />{" "}
+              </div>
+            <div className="parent">
+              <div className="head">
               <h1>Privacy Policy</h1>
             </div>
-            <div className="parent">
-              <div className="items">
+            <div className="items">
                 LowPow built the Defo app as a Commercial app. This SERVICE is
-                provided by LowPow and is intended for use as is.
-                <br />
-                <br />
+                provided by LowPow and is intended for use as is. 
                 This page is used to inform visitors regarding our policies with
                 the collection, use, and disclosure of Personal Information if
                 anyone decided to use our Service
-              </div>
-              <div className="policy">
-                <img src={policy} alt="privacy" />{" "}
               </div>
             </div>
           </div>

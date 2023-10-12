@@ -15,32 +15,36 @@
   margin: 5rem auto;
 }
 
-.parent {
-
+/* .parent {
   display: flex;
   flex-wrap: wrap;
   gap: 24rem;
   justify-content: center;
   align-items: center;
-}
+} */
 
 .head>h1 {
-  margin-left: 1rem;
-  position: absolute;
-  margin-top: 2rem;
-
+  text-align: left;
+  /* position: absolute; */
+  margin-top: 5rem;
 }
 
 .items {
-  max-width: 30rem;
+  max-width: 100%;
   font-size: 20px;
   text-align: justify;
   margin-top: 2rem;
 }
-
-.policy>img {
-  max-width: 35rem;
+.policy{
+  display: flex;
+  justify-content: center;
 }
+/* .policy>img {
+  display: flex;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+} */
 
 @media (max-width:400px) {
   .main {
@@ -107,7 +111,7 @@ li {
 .link,
 .childrens,
 .changes {
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 .service>ul>li {
