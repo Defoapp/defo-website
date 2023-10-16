@@ -49,9 +49,9 @@ function Home() {
               <div>Pricing</div>
             </li>
             <li>
-              <Link className="join" to="/joincreator">
+              <a href="https://creator.yesdefo.com/" className="join" to="/joincreator">
                 Join Creator
-              </Link>
+              </a>
             </li>
           </ul>
         </nav>
