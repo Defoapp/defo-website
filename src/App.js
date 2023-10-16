@@ -20,8 +20,8 @@ function App() {
         <Route path="/OurStory" element={<OurStory />} />
         <Route path="/OurCreators" element={<OurCreators />} />
         <Route path="/OurTeams" element={<OurTeams />} />
-        <Route path="/privacy-policy" element={<Privacy />} />
-        <Route path="/term" element={<Term />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Term />} />
         {/* <Route path="" element={}/> */}
       </Routes>
     </BrowserRouter>

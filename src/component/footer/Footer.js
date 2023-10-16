@@ -81,12 +81,12 @@ export const Footer = () => {
             <h4>Legal</h4>
             <ul>
               <li>
-                <a href="/privacy-policy" className="z">
+                <a href="/privacy" className="z">
                   Privacy policy
                 </a>
               </li>
               <li>
-                <a href="/term" className="z">
+                <a href="/terms" className="z">
                   Terms of use
                 </a>
               </li>
