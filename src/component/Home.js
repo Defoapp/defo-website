@@ -67,7 +67,7 @@ function Home() {
         </p>
 
         <div className="linka">
-          <img src={playstore} alt="playstore" className="playstore" />
+          <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1"><img src={playstore} alt="playstore" className="playstore" /></a>
           <img src={appstore} alt="appstore" className="appstore" />
         </div>
       </div>
@@ -239,7 +239,7 @@ function Home() {
       <div className="links">
         <h1 className="downloadlink">Get the app now!</h1>
         <div className="downlink">
-          <img src={playstore} alt="Playstore" className="playstorelink" />
+          <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1"><img src={playstore} alt="Playstore" className="playstorelink" /></a>
           <img src={appstore} alt="Appstore" className="appstorelink" />
         </div>
       </div>
