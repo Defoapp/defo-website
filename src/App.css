@@ -270,6 +270,7 @@
 }
 
 .cardlist>li {
+  text-decoration: none;
   list-style-type: none;
   color: gray;
   padding-top: 1rem;
