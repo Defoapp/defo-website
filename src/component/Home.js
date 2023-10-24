@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 // -----------------Navbar--------------
 
 import { useState } from "react";
@@ -27,6 +27,10 @@ import Footer from "../component/footer/Footer";
 
 function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const ref= useRef(null);
+  const handleClick = () => {
+    ref.current?.scrollIntoView({behaviour:"smooth"});
+  };
   return (
     <div>
       <div className="home">
@@ -43,7 +47,7 @@ function Home() {
           </div>
           <ul className={menuOpen ? "open" : ""}>
             <li>
-              <div>Discover</div>
+              <div onClick={handleClick}>Discover</div>
             </li>
             <li>
               <div>Pricing</div>
@@ -72,7 +76,7 @@ function Home() {
         </div>
       </div>
       {/* ----------------------------------------- */}
-      <div class="discover">
+      <div ref={ref} className="discover">
         <h1 className="blocktitle">
           Discover, Like and Save the useful videos.
         </h1>
@@ -82,21 +86,21 @@ function Home() {
 
         <div className="block">
           <div className="first-block">
-            <div class="div1 blocks">
+            <div className="div1 blocks">
               <img src={adobe} alt="Adobe" className="module" />
               <h3 className="title">Adobe Tools</h3>
               <p className="description">
                 A tools are widely used in the creative industry
               </p>
             </div>
-            <div class="div2 blocks">
+            <div className="div2 blocks">
               <img src={uiux} alt="UIUX" className="module" />
               <h3 className="title">UI/UX Design Tools</h3>
               <p className="description">
                 Advanced UI/UX Design Videos for Professional Creatives
               </p>
             </div>
-            <div class="div3 blocks">
+            <div className="div3 blocks">
               <img src={photoedit} alt="Photoedit" className="module" />
               <h3 className="title">Photo Editing</h3>
               <p className="description">
@@ -104,7 +108,7 @@ function Home() {
                 <br /> <br />
               </p>
             </div>
-            <div class="div4 blocks">
+            <div className="div4 blocks">
               <img src={videoedit} alt="Videoedit" className="module" />
               <h3 className="title">Video Editing</h3>
               <p className="description">
@@ -113,28 +117,28 @@ function Home() {
             </div>
           </div>
           <div className="second-block">
-            <div class="div5 blocks">
+            <div className="div5 blocks">
               <img src={papercraft} alt="Papercraft" className="module" />
               <h3 className="title">Paper Craft</h3>
               <p className="description">
                 Paper crafts are a great way to learn new skills and have fun.
               </p>
             </div>
-            <div class="div6 blocks">
+            <div className="div6 blocks">
               <img src={cardboard} alt="Cardboard" className="module" />
               <h3 className="title">Cardboard Craft</h3>
               <p className="description">
                 Cardboard is an excellent medium for craft work.
               </p>
             </div>
-            <div class="div7 blocks">
+            <div className="div7 blocks">
               <img src={decorations} alt="Decorations" className="module" />
               <h3 className="title">Decorations</h3>
               <p className="description">
                 Unique Decorations for Every Occasion
               </p>
             </div>
-            <div class="div8 blocks">
+            <div className="div8 blocks">
               <img src={kids} alt="Kids" className="module" />
               <h3 className="title">Kids</h3>
               <p className="description">
@@ -143,28 +147,28 @@ function Home() {
             </div>
           </div>
           <div className="third-block">
-            <div class="div9 blocks">
+            <div className="div9 blocks">
               <img src={sports} alt="Sports" className="module" />
               <h3 className="title">Sports</h3>
               <p className="description">
                 Incredible Sports Videos for Every Athlete and Fan
               </p>
             </div>
-            <div class="div10 blocks">
+            <div className="div10 blocks">
               <img src={languages} alt="Languages" className="module" />
               <h3 className="title">Languages</h3>
               <p className="description">
                 Unlock the Power of Language Learning with our Videos
               </p>
             </div>
-            <div class="div11 blocks">
+            <div className="div11 blocks">
               <img src={cooking} alt="Cookings" className="module" />
               <h3 className="title">Cooking</h3>
               <p className="description">
                 Delicious Recipes and Step-by-Step Cooking Videos to Inspire You
               </p>
             </div>
-            <div class="div12 blocks">
+            <div className="div12 blocks">
               <img src={womensstyle} alt="Womenstyles" className="module" />
               <h3 className="title">Women's Style</h3>
               <p className="description">

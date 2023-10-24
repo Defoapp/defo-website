@@ -4,11 +4,11 @@ import logos from "../footer/social media svg/Logo.png";
 
 export const Footer = () => {
   return (
-    <div class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="footer-col">
-            <a href="/Home" className="logo">
+    <div className="footer">
+      <div className="container">
+        <div className="row">
+          <div className="footer-col">
+            <a href="/" className="logo">
               <img src={logos} alt="logo" className="logos" />
             </a>
             <ul>
@@ -37,7 +37,7 @@ export const Footer = () => {
               </li>
             </ul>
           </div>
-          <div class="footer-col">
+          <div className="footer-col">
             <h4>About</h4>
             <ul>
               <li>
@@ -62,11 +62,11 @@ export const Footer = () => {
               </li>
             </ul>
           </div>
-          <div class="footer-col">
+          <div className="footer-col">
             <h4>Resource</h4>
             <ul>
               <li>
-                <a href="/#" className="z">
+                <a href="https://creator.yesdefo.com/" className="z">
                   Join Creator
                 </a>
               </li>
@@ -77,7 +77,7 @@ export const Footer = () => {
               </li>
             </ul>
           </div>
-          <div class="footer-col">
+          <div className="footer-col">
             <h4>Legal</h4>
             <ul>
               <li>
@@ -97,7 +97,7 @@ export const Footer = () => {
               </li>
             </ul>
           </div>
-          <div class="footer-col">
+          <div className="footer-col">
             <h4>Usefull links</h4>
             <ul>
               <li>
