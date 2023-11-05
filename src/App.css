@@ -65,7 +65,7 @@
   margin-top: 33rem;
 }
 
-@media screen and (max-width:400px) {
+@media (max-width:600px) {
   .home {
     background-image: url(../src/image/startbackground_1.webp);
     background-position: left;
@@ -308,7 +308,7 @@
   width: 11rem;
 }
 
-@media screen and (max-width:400px) {
+@media screen and (max-width:600px) {
   .downlink {
     display: flex;
     flex-direction: column;
