@@ -7,6 +7,7 @@ export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
+  <div>
     <nav>
       <Link to="/" className="title">
         <img src={Logo} alt="logo" />
@@ -27,5 +28,6 @@ export const Navbar = () => {
         </li>
       </ul>
     </nav>
+    </div>
   );
 };

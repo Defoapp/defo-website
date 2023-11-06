@@ -14,9 +14,7 @@ const Term = () => {
       <div className="main-image">
         <img src={picture} alt="main" />
       </div>
-      <br />
-      <br />
-      <br />
+      
       <div className="content">
         <h1 className="heading">Terms & Conditions</h1>
         <p>

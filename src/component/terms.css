@@ -10,9 +10,9 @@
 }
 
 .main-image {
-    width: fit-content;
-    margin-left: 40%;
-    margin-top: 9rem;
+    display: flex;
+    justify-content: center;
+    margin: 9rem 0 5rem 0;
 }
 
 .content {
@@ -40,10 +40,4 @@ li {
     text-decoration: underline;
     cursor: pointer;
     margin-bottom: 5px;
-}
-
-@media (max-width:400px) {
-    .main-image {
-        margin-left: 18%;
-    }
 }
