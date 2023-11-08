@@ -15,17 +15,8 @@
   margin: 5rem auto;
 }
 
-/* .parent {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24rem;
-  justify-content: center;
-  align-items: center;
-} */
-
 .head>h1 {
   text-align: left;
-  /* position: absolute; */
   margin-top: 5rem;
 }
 
@@ -38,15 +29,10 @@
 .policy{
   display: flex;
   justify-content: center;
+  margin: 2rem;
 }
-/* .policy>img {
-  display: flex;
-  max-width: 100%;
-  justify-content: center;
-  align-items: center;
-} */
 
-@media (max-width:400px) {
+@media (max-width:600px) {
   .main {
     position: absolute;
     margin-top: 10rem;
