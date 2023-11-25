@@ -2,7 +2,7 @@ import { React, useEffect } from "react";
 import "../component/terms.css";
 import Footer from "../component/footer/Footer";
 import picture from "../image/illustrations/terms and condition.svg";
-import { Navbar } from "../component/Navbar/Navbar";
+import  Navbar from "../component/Navbar/Navbar";
 
 const Term = () => {
   useEffect(() => {

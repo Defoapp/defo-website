@@ -1,6 +1,6 @@
 import React from 'react';
 import "./About.css";
-import {Navbar} from "../component/Navbar/Navbar";
+import Navbar from "../component/Navbar/Navbar";
 import Footer from "../component/footer/Footer"
 import logo from "../component/About_page_Img/Logo.png"
 import playstore from "../component/About_page_Img/google-play-badge.svg";

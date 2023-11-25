@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "../component/privacy.css";
 import policy from "../image/illustrations/privacy_policy_hero 1.svg";
 import Footer from "../component/footer/Footer";
-import { Navbar } from "../component/Navbar/Navbar";
+import  Navbar  from "../component/Navbar/Navbar";
 
 function Privacy() {
   useEffect(() => {

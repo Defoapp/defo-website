@@ -1,10 +1,7 @@
-import React, { useRef } from "react";
-// -----------------Navbar--------------
+import React from "react";
+import "../App.css";
 
-import { useState } from "react";
-import "../component/Navbar/Navbar.css";
-import { Link } from "react-router-dom";
-import Logo from "../image/Logo.png";
+import Navbar from "../component/Navbar/mainNavbar"
 
 // ---------------Discover------------------
 import playstore from "../image/google-play-badge.svg";
@@ -26,41 +23,14 @@ import womensstyle from "../image/hair-styling.png";
 import Footer from "../component/footer/Footer";
 
 function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const ref= useRef(null);
-  const handleClick = () => {
-    ref.current?.scrollIntoView({behaviour:"smooth"});
-  };
+ 
+  
   return (
-    <div>
+    <div className="mainDiv">
+              {/* ------------Navbar------------------ */}
+       <Navbar/>
+
       <div className="home">
-        {/* ------------Navbar------------------ */}
-
-        <nav>
-          <Link to="/" className="title">
-            <img src={Logo} alt="logo" />
-          </Link>
-          <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <ul className={menuOpen ? "open" : ""}>
-            <li>
-              <div onClick={handleClick}>Discover</div>
-            </li>
-            <li>
-              <div>Pricing</div>
-            </li>
-            <li>
-              <a href="https://creator.yesdefo.com/" className="join" to="/joincreator">
-                Join Creator
-              </a>
-            </li>
-          </ul>
-        </nav>
-
-        {/* -------------Navbar End------------ */}
         <h1 className="topic">
           Information
           <br /> with <br />
@@ -76,7 +46,7 @@ function Home() {
         </div>
       </div>
       {/* ----------------------------------------- */}
-      <div ref={ref} className="discover">
+      <div id="discover" className="discover">
         <h1 className="blocktitle">
           Discover, Like and Save the useful videos.
         </h1>
@@ -187,7 +157,7 @@ function Home() {
             quality content and attract a loyal audience."
           </p>
         </div>
-        <div className="ratecard-des">
+        <div id="pricing" className="ratecard-des">
           <p className="ratetitle">Ready to get started?</p>
           <p className="ratedes">
             The only app you need for a complete Entertainment
