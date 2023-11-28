@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 
 export const navLinks = [
   {
-    id: "discover",
+    id: "1",
     title: "Discover",
     href:"#discover",
   },
   {
-    id: "pricing",
+    id: "2",
     title: "Pricing",
     href:"#pricing",
   },  
@@ -22,7 +22,7 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <nav className="relative top-0 bg-black w-full flex py-3 justify-between items-center navbar">
+    <nav className="relative top-0 bg-black w-full flex py-2 justify-between items-center navbar">
 
       {/* Logo */}
       <Link to="/">
@@ -43,7 +43,7 @@ const Navbar = () => {
           </li>
           
         ))}
-        <a href="https://creator.yesdefo.com/"><li className="relative flex p-1.5 text-lg rounded-xl no-underline   items-center justify-center overflow-hidden bg-green-500 font-medium text-white shadow-2xl transition-all duration-300 before:absolute before:inset-0 before:border-0 before:border-white before:duration-100 before:ease-linear hover:bg-white hover:text-green-500 hover:shadow-green-500 hover:before:border-[25px]"><span className      ="relative z-10">Join Creator</span></li></a>
+        <a href="https://creator.yesdefo.com/"><li className="relative flex px-3 py-2 text-lg rounded-xl no-underline   items-center justify-center overflow-hidden bg-green-500 font-medium text-white shadow-2xl transition-all duration-300 before:absolute before:inset-0 before:border-0 before:border-white before:duration-100 before:ease-linear hover:bg-white hover:text-green-500 hover:shadow-green-500 hover:before:border-[25px]"><span className      ="relative z-10">Join Creator</span></li></a>
       </ul>
 
       {/* Mobile Navigation */}
