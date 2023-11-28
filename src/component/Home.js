@@ -1,64 +1,22 @@
 import React from "react";
 import "../App.css";
-
+import {price} from "../constants/map"
+import {discover} from "../constants/map"
 import Navbar from "../component/Navbar/mainNavbar"
 import hero from "../image/startbackground_1.webp"
 
 // ---------------Discover------------------
 import playstore from "../image/google-play-badge.svg";
 import appstore from "../image/app-store-badge.svg";
-// import adobe from "../image/adobe.png";
-// import uiux from "../image/paper-crafts.png";
-// import photoedit from "../image/image-editing.png";
-// import videoedit from "../image/video-editing.png";
-// import papercraft from "../image/web-design.png";
-// import cardboard from "../image/box.png";
-// import decorations from "../image/decorations.png";
-// import kids from "../image/playtime.png";
-// import sports from "../image/sports.png";
-// import languages from "../image/presentation.png";
-// import cooking from "../image/cooking.png";
-// import womensstyle from "../image/hair-styling.png";
+
+// import disc from "../image/adobe.png";
 
 // -----------------------Footer-------------
 import Footer from "../component/footer/Footer";
 
 
-
-export const price = [
-  {
-    id: "1",
-    title:"Free Trail",
-    rate: "₹0",
-    valid:"/1 month",
-    spec1:"Single User",
-    spec2:"No Ads",
-    spec3:"Unlimited Videos",
-  },
-  {
-    id: "2",
-    title:"Free Trail",
-    rate: "₹99",
-    valid:"/1 month",
-    spec1:"Single User",
-    spec2:"No Ads",
-    spec3:"Unlimited Videos",
-  },
-  {
-    id: "3",
-    title:"Free Trail",
-    rate: "₹499",
-    valid:"/1 month",
-    spec1:"Single User",
-    spec2:"No Ads",
-    spec3:"Unlimited Videos",
-  },
-    
-];
-
-
-
 function Home() {
+  
   return (
     <div className="relative w-full h-full">
               {/* ------------Navbar------------------ */}
@@ -87,8 +45,28 @@ function Home() {
           <p className=" relative text-black font-bold bg-gradient-to-r from-3ECF7A to-blue-500 w-4/5 sm:w-2/5 text-xl   m-8">"A short video app with a subscription model can offer high-quality content and attract a loyal audience."</p>
         </div>
 
+        {/* Discover section */}
+        <div   className="w-full h-full py-20 ">
+          <h1 className="text-center text-2xl sm:text-4xl md:text-4xl font-medium">Discover, Like and Save the useful videos.</h1>
+          <p className="text-black text-xl md:text-xl font-medium">Discover a new way to learn and have fun at the same time!</p>
+          
+          {/* Discover Grid Section */}
+          <div  className="place-items-center grid  w-fit gap-24 m-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  py-10 text-center">
+          {discover.map((discover) =>(
+            <div key={discover.id} className=" w-56 h-full shadow-2xl py-2">
+              <img className="mx-auto w-28" src={discover.image} alt="loading"/>
+              <h1 className="font-medium lg:text-xl">{discover.title}</h1>
+              <p className="text-gray-500 font-medium">{discover.desc}</p>
+            </div>
+            ))}
+          </div>
+          
+
+        </div>
+
+        
         {/* Price Section */}
-        <div id="pricing" className="w-full ">
+        <div id="pricing" className="w-full bg-green-500 py-5">
           <h1 className="text-2xl sm:text-4xl md:text-4xl font-medium text-center mt-5 ">Ready to get started?</h1>
           <p className="text-xl md:text-2xl font-medium text-black ">The only app you need for a complete Entertainment</p>
 
