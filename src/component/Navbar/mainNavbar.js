@@ -22,7 +22,7 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <nav className="bg-black w-full flex py-3 justify-between items-center navbar">
+    <nav className="relative top-0 bg-black w-full flex py-3 justify-between items-center navbar">
 
       {/* Logo */}
       <Link to="/">
@@ -43,11 +43,11 @@ const Navbar = () => {
           </li>
           
         ))}
-        <a href="https://creator.yesdefo.com/"><li className="relative flex p-1.5 text-lg rounded-xl no-underline   items-center justify-center overflow-hidden bg-green-500 font-medium text-white shadow-2xl transition-all duration-300 before:absolute before:inset-0 before:border-0 before:border-white before:duration-100 before:ease-linear hover:bg-white hover:text-green-500 hover:shadow-green-500 hover:before:border-[25px]"><span class="relative z-10">Join Creator</span></li></a>
+        <a href="https://creator.yesdefo.com/"><li className="relative flex p-1.5 text-lg rounded-xl no-underline   items-center justify-center overflow-hidden bg-green-500 font-medium text-white shadow-2xl transition-all duration-300 before:absolute before:inset-0 before:border-0 before:border-white before:duration-100 before:ease-linear hover:bg-white hover:text-green-500 hover:shadow-green-500 hover:before:border-[25px]"><span className      ="relative z-10">Join Creator</span></li></a>
       </ul>
 
       {/* Mobile Navigation */}
-      <div className="sm:hidden mr-8  flex flex-1 justify-end items-center">
+      <div className="sm:hidden mr-8   flex flex-1 justify-end items-center">
         <img
           src={toggle ? close : menu}
           alt="menu"
@@ -65,7 +65,7 @@ const Navbar = () => {
             {navLinks.map((nav, index) => (
               <li
                 key={nav.id}
-                className={`font-poppins list-none text-center   no-underline font-medium ml-12 mr-12 cursor-pointer text-[16px] ${
+                className={`font-poppins  list-none text-center   no-underline font-medium ml-12 mr-12 cursor-pointer text-[16px] ${
                   active === nav.title ? "text-white" : "text-white"
                 } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
                 onClick={() => setActive(nav.title)}
@@ -73,7 +73,7 @@ const Navbar = () => {
                 <a href={`#${nav.id}`}>{nav.title}</a>
               </li>
             ))}
-            <li className="font-poppins list-none no-underline font-medium mr-5  cursor-pointer text-[16px] text-white  bg-green-500 p-1.5 rounded-xl mt-3 ">Join Creator</li>
+            <li className="font-poppins  list-none no-underline font-medium mr-5  cursor-pointer text-[16px] text-white  bg-green-500 p-1.5 rounded-xl mt-3 ">Join Creator</li>
           </ul>
         </div>
       </div>

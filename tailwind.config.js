@@ -12,6 +12,7 @@ module.exports = {
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
+        bubblegum: ['Bubblegum Sans', 'sans-serif'],
       },
     },
     screens: {

@@ -18,7 +18,7 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <nav className=" bg-black w-full flex py-3 justify-between items-center navbar">
+    <nav className="fixed top-0 bg-black w-full flex py-3 justify-between items-center navbar">
 
       {/* Logo */}
       <Link to="/" className="title">
@@ -28,8 +28,8 @@ const Navbar = () => {
 
       {/* Desktop Navigation */}
       <ul className="list-none sm:flex  mr-10 hidden justify-end items-center flex-1">
-        {navLinks.map((nav, index) => (
-          <Link to="/"><li
+        {navLinks.map((nav, index,i) => (
+          <Link key={i} to="/"><li
             key={nav.id}
             className={`font-poppins list-none no-underline font-normal cursor-pointer text-[16px]  text-[white]  hover:bg-[white] hover:text-[black] hover:transition-[0.3s] hover:duration-[ease] hover:rounded-md hover:p-1 ${
               active === nav.title ? "text-white" : "text-white"
@@ -40,7 +40,7 @@ const Navbar = () => {
           </li></Link>
           // 
         ))}
-        <a href="https://creator.yesdefo.com/"><li className="relative flex p-1.5 text-lg rounded-xl no-underline   items-center justify-center overflow-hidden bg-green-500 font-medium text-white shadow-2xl transition-all duration-300 before:absolute before:inset-0 before:border-0 before:border-white before:duration-100 before:ease-linear hover:bg-white hover:text-green-500 hover:shadow-green-500 hover:before:border-[25px]"><span class="relative z-10">Join Creator</span></li></a>  
+        <a href="https://creator.yesdefo.com/"><li className="relative flex p-1.5 text-lg rounded-xl no-underline   items-center justify-center overflow-hidden bg-green-500 font-medium text-white shadow-2xl transition-all duration-300 before:absolute before:inset-0 before:border-0 before:border-white before:duration-100 before:ease-linear hover:bg-white hover:text-green-500 hover:shadow-green-500 hover:before:border-[25px]"><span className="relative z-10">Join Creator</span></li></a>  
       </ul>
 
 
@@ -58,8 +58,8 @@ const Navbar = () => {
         <div
           className={`${ !toggle ? "hidden" : "flex"} p-6 bg-black-gradient  bg-black absolute mt-56 right-0 mx-4 my-2 w-96 rounded-xl sidebar`}>
           <ul className="list-none text-center flex   flex-1 flex-col">
-            {navLinks.map((nav, index) => (
-              <Link to="/"><li
+            {navLinks.map((nav, index,i) => (
+              <Link key={i} to="/"><li
                 key={nav.id}
                 className={`font-poppins list-none text-center   no-underline font-medium ml-12 mr-12 cursor-pointer text-[16px] ${
                   active === nav.title ? "text-white" : "text-white"
