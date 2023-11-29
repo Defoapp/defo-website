@@ -81,7 +81,7 @@ export const discover = [
     {
       id:"6",
       image:cardboard,
-      title:"Cardboard Craf",
+      title:"Cardboard Craft",
       desc:"Cardboard is an excellent medium for craft work.",
     },
     {
