@@ -46,7 +46,7 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="/#" className="z">
+                <a href="/OurTeams" className="z">
                   Our Teams
                 </a>
               </li>
