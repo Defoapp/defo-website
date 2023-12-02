@@ -22,10 +22,10 @@ function Home() {
     <div className="relative w-full h-full">
               {/* ------------Navbar------------------ */}
        <div className=" w-full mx-auto">
-        
+       <Navbar/>
         {/* Hero section */}
-        <div className="h-full relative">
-        <Navbar/>
+        <div className="h-full ">
+        
           {/* Overlay */}
 
           <div className="absolute w-full h-full text-white top-60 sm:top-26 md:top-20 lg:top-48  pl-4 md:pl-20 lg:pl-40 ">
