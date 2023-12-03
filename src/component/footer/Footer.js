@@ -41,12 +41,12 @@ export const Footer = () => {
             <h4>About</h4>
             <ul>
               <li>
-                <a href="/#" className="z">
+                <a href="/OurStory" className="z">
                   Our Story
                 </a>
               </li>
               <li>
-                <a href="/#" className="z">
+                <a href="/OurTeams" className="z">
                   Our Teams
                 </a>
               </li>
@@ -73,6 +73,11 @@ export const Footer = () => {
               <li>
                 <a href="/#" className="z">
                   Topics
+                </a>
+              </li>
+              <li>
+                <a href="/careers" className="z">
+                  Careers
                 </a>
               </li>
             </ul>

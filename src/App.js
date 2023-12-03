@@ -9,6 +9,7 @@ import OurCreators from "./component/OurCreators";
 import OurTeams from "./component/OurTeams";
 import Privacy from "./component/Privacy";
 import Term from "./component/Term";
+import Careers from "../src/component/Careers";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/OurTeams" element={<OurTeams />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Term />} />
+        <Route path="/careers" element={<Careers/>}/>
         {/* <Route path="" element={}/> */}
       </Routes>
     </BrowserRouter>

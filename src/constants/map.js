@@ -12,6 +12,15 @@ import Languages from "../image/presentation.png"
 import Cooking from "../image/cooking.png"
 import Women from "../image/hair-styling.png"
 
+
+// heads image
+import jk from "../image/ourTeams/heads img.png"
+
+// members image
+import member from "../image/ourTeams/member img.png"
+import jkLinkedin from "../image/ourTeams/icons8-linkedin.svg"
+
+
 // home page Price section
 export const price = [
     {
@@ -81,7 +90,7 @@ export const discover = [
     {
       id:"6",
       image:cardboard,
-      title:"Cardboard Craf",
+      title:"Cardboard Craft",
       desc:"Cardboard is an excellent medium for craft work.",
     },
     {
@@ -123,3 +132,108 @@ export const discover = [
     
   ]
   
+// our teams head section
+  export const heads = [
+    {
+      id:"1",
+      image: jk ,
+      name:"Jayakumar",
+      designation:"Founder & CEO",
+      desc1:"Description of the person ",
+      desc2:" and their goals",
+      linkedin: jkLinkedin,
+      
+    },
+    {
+      id:"2",
+      image: jk ,
+      name:"Rahul",
+      designation:"Co Founder & COO",
+      desc1:"Description of the person ",
+      desc2:" and their goals",
+      linkedin: jkLinkedin,
+    },
+  ]
+
+  // our teams members section
+  export const teamsMembers = [
+    {
+      id:"1",
+      image: member ,
+      name:"Name",
+      designation:"Role Name",
+      linkedin: jkLinkedin,
+    },
+    {
+      id:"2",
+      image: member ,
+      name:"Name",
+      designation:"Role Name",
+      linkedin: jkLinkedin,
+    },
+    {
+      id:"3",
+      image: member ,
+      name:"Name",
+      designation:"Role Name",
+      linkedin: jkLinkedin,
+    },
+    {
+      id:"4",
+      image: member ,
+      name:"Name",
+      designation:"Role Name",
+      linkedin: jkLinkedin,
+    },
+    {
+      id:"5",
+      image: member ,
+      name:"Name",
+      designation:"Role Name",
+      linkedin: jkLinkedin,
+    },
+    {
+      id:"6",
+      image: member ,
+      name:"Name",
+      designation:"Role Name",
+      linkedin: jkLinkedin,
+    },
+    
+  ]
+
+
+  // Careers
+
+  export const Vacancies = [
+    {
+      id:"1",
+      title:"UI/UX  Designer" ,
+      desc:"We are looking for a mid-level ui/ux designer to join our team.",
+      link: "https://www.linkedin.com/jobs/view/3643238774",
+    },
+    {
+      id:"2",
+      title:"Front-end developer" ,
+      desc:"We are looking for a mid-level front-end developer to join our team. ",
+      link: "https://www.linkedin.com/jobs/view/3643238774",
+    },
+    {
+      id:"3",
+      title:"Back-end developer" ,
+      desc:"We are looking for a mid-level back-end developer to join our team. ",
+      link: "https://www.linkedin.com/jobs/view/3643238774",
+    },
+    {
+      id:"4",
+      title:"Android developer" ,
+      desc:"We are looking for a mid-level android developer to join our team. ",
+      link: "https://www.linkedin.com/jobs/view/3643238774",
+    },
+    {
+      id:"5",
+      title:"Full stack developer" ,
+      desc:"We are looking for a mid-level full stack developer to join our team. ",
+      link: "https://www.linkedin.com/jobs/view/3643238774",
+    },
+  ]

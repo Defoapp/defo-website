@@ -18,7 +18,7 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <nav className="fixed top-0 bg-black w-full flex py-3 justify-between items-center navbar">
+    <nav className=" top-0 bg-black w-full flex py-3 justify-between items-center navbar">
 
       {/* Logo */}
       <Link to="/" className="title">
