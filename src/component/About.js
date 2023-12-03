@@ -13,8 +13,8 @@ function About() {
   return (
     <div className="relative w-full h-full">
       <Navbar />
-      <div className="w-full h-full">
-        <div className="w full h-full m-auto ">
+      
+        <div className="w-full h-full m-auto ">
           <h1
             className="font-bold text-center text-4xl
         my-10">
@@ -124,7 +124,7 @@ function About() {
             </div>
           </div>
         </div>
-      </div>
+      
       <Footer />
     </div>
   );

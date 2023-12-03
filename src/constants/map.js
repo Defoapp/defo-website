@@ -20,6 +20,7 @@ import jk from "../image/ourTeams/heads img.png"
 import member from "../image/ourTeams/member img.png"
 import jkLinkedin from "../image/ourTeams/icons8-linkedin.svg"
 
+
 // home page Price section
 export const price = [
     {
@@ -199,4 +200,40 @@ export const discover = [
       linkedin: jkLinkedin,
     },
     
+  ]
+
+
+  // Careers
+
+  export const Vacancies = [
+    {
+      id:"1",
+      title:"UI/UX  Designer" ,
+      desc:"We are looking for a mid-level ui/ux designer to join our team.",
+      link: "https://www.linkedin.com/jobs/view/3643238774",
+    },
+    {
+      id:"2",
+      title:"Front-end developer" ,
+      desc:"We are looking for a mid-level front-end developer to join our team. ",
+      link: "https://www.linkedin.com/jobs/view/3643238774",
+    },
+    {
+      id:"3",
+      title:"Back-end developer" ,
+      desc:"We are looking for a mid-level back-end developer to join our team. ",
+      link: "https://www.linkedin.com/jobs/view/3643238774",
+    },
+    {
+      id:"4",
+      title:"Android developer" ,
+      desc:"We are looking for a mid-level android developer to join our team. ",
+      link: "https://www.linkedin.com/jobs/view/3643238774",
+    },
+    {
+      id:"5",
+      title:"Full stack developer" ,
+      desc:"We are looking for a mid-level full stack developer to join our team. ",
+      link: "https://www.linkedin.com/jobs/view/3643238774",
+    },
   ]
