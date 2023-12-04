@@ -1,12 +1,15 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Navbar from "../component/Navbar/Navbar"
 import Footer from "../component/footer/Footer"
 
 import {faqmap} from "../constants/map";
 
-import search from "../image/majesticons_search-line.svg"
+import searchimg from "../image/majesticons_search-line.svg"
 
 const Faq = () => {
+  const [search,setSearch] = useState('');
+  console.log(search)
+
   return (
     <div className='w-full h-full'>
         <Navbar/>
@@ -15,8 +18,8 @@ const Faq = () => {
             <div className='bg-gray-300 w-5/6  lg:w-3/6 flex mx-auto py-3 rounded-lg'>
                 <h1 className='text-2xl font-bold mx-5 my-auto'>FAQ</h1>
                 <div className='relative w-4/6 mx-auto '>
-                <input type='search' placeholder='Search....' className='w-full px-5 py-3 rounded-full border-white' />
-                <button className='absolute right-1 top-1/2 -translate-y-1/2 p-1 rounded-full bg-gray-400' ><img className='w-5' src={search} alt='loading' /></button>
+                <input type='search' onChange={(e) => setSearch(e.target.value)} placeholder='Search....' className='w-full px-5 py-3 rounded-full border-white' />
+                <button className='absolute right-1  top-1/2 -translate-y-1/2 p-2 rounded-full bg-gray-400' ><img className='w-5' src={searchimg} alt='loading' /></button>
                 </div>
                 
             </div>
@@ -24,7 +27,9 @@ const Faq = () => {
             {/* Questions */}
             
             <div className='w-5/6 md:w-4/6 lg:w-4/6 mx-auto my-10 py-10  rounded-2xl  bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50%'>
-            {faqmap.map((faqmap) =>(
+            {faqmap.filter((faqmap) => {
+              return search.toLowerCase() === '' ? faqmap : faqmap.title.toLowerCase().includes(search)
+            }).map((faqmap) =>(
 
             <div key={faqmap.id} className="w-5/6  mx-auto py-4 my-4  rounded-2xl  bg-white ">
  			<details className="group mx-4">
