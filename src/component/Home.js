@@ -28,7 +28,7 @@ function Home() {
         
           {/* Overlay */}
 
-          <div className="absolute w-full h-full text-white top-60 sm:top-26 md:top-20 lg:top-48  pl-4 md:pl-20 lg:pl-40 ">
+          <div className="absolute w-full  text-white top-60 sm:top-26 md:top-20 lg:top-48  pl-4 md:pl-20 lg:pl-40 ">
             <h1 className=" text-4xl sm:text-5xl md:text-6xl lg:text-7xl
              font-bold font-bubblegum tracking-wide">Information<br/>with<br/>Entertainment</h1>
             <p className="font-bubblegum text-xl sm:text-2xl md:text-2xl lg:text-2xl text-left font-medium">Are you looking to have fun and learn at the same time?</p>
@@ -105,7 +105,7 @@ function Home() {
           <div className="m-auto text-center">
             <h1 className="font-bold text-xl md:text-2xl  lg:text-4xl">Get the app now!</h1>
             <div className="flex gap-10 flex-col lg:flex-row my-5">
-              <img className="w-40" src={playstore} alt="loading"/>
+            <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1"><img className="w-40" src={playstore} alt="loading"/></a>
               <img className="w-40" src={appstore} alt="loading"/>
             </div>
           </div>

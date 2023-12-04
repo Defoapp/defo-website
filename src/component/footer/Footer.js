@@ -111,7 +111,7 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="/#" className="z">
+                <a href="/faq" className="z">
                   FAQ
                 </a>
               </li>

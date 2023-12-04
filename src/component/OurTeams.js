@@ -7,6 +7,7 @@ import {heads} from "../constants/map"
 import {teamsMembers} from "../constants/map"
 
 import team from "../image/ourTeams/teams Illustation.svg"
+import linkedInImg from "../image/ourTeams/icon-park-outline_linked in.svg"
 
 
 const OurTeams = () => {
@@ -37,7 +38,8 @@ const OurTeams = () => {
             <h1 className='text-lg md:text-xl lg:text-2xl font-semibold mt-5'>{heads.name}</h1>
             <h1 className='text-lg md:text-xl lg:text-2xl font-semibold '>{heads.designation}</h1>
             <p className='text-black text-base md:text-lg lg:text-xl font-medium'>{heads.desc1}<br/>{heads.desc2}</p>
-            <img className='w-8 mx-auto bg-b mt-2 cursor-pointer' src={heads.linkedin} alt='loading'/>
+            <a className='w-fit mx-auto' href={heads.linkedin}><img className='w-8  bg-b mt-2 cursor-pointer' src={linkedInImg} alt='loading'/>
+            </a>
           </div>
           ))}
         </div>
@@ -55,7 +57,7 @@ const OurTeams = () => {
             <img className='w-4/6 mx-auto' src={teamsMembers.image} alt='loading'/>
             <h1 className='font-bold text-xl md:text-2xl lg:4xl mt-5  '>{teamsMembers.name}</h1>
             <h1 className='font-bold text-lg md:text-xl lg:text-xl'>{teamsMembers.designation} </h1>
-            <img className='w-10 mx-auto mt-5' src={teamsMembers.linkedin} alt='loading'/>
+            <a href={teamsMembers.linkedin}><img className='w-8 mx-auto mt-5 cursor-pointer' src={linkedInImg} alt='loading'/></a>
           </div >
           ))}
 

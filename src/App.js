@@ -10,6 +10,7 @@ import OurTeams from "./component/OurTeams";
 import Privacy from "./component/Privacy";
 import Term from "./component/Term";
 import Careers from "../src/component/Careers";
+import Faq from "../src/component/Faq";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Term />} />
         <Route path="/careers" element={<Careers/>}/>
+        <Route path="/faq" element={<Faq/>}/>
         {/* <Route path="" element={}/> */}
       </Routes>
     </BrowserRouter>
