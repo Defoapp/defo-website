@@ -18,7 +18,7 @@ import jk from "../image/ourTeams/heads img.png"
 
 // members image
 import member from "../image/ourTeams/member img.png"
-import jkLinkedin from "../image/ourTeams/icons8-linkedin.svg"
+// import jkLinkedin from "../image/ourTeams/icons8-linkedin.svg"
 
 
 // home page Price section
@@ -141,7 +141,7 @@ export const discover = [
       designation:"Founder & CEO",
       desc1:"Description of the person ",
       desc2:" and their goals",
-      linkedin: jkLinkedin,
+      linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
       
     },
     {
@@ -151,7 +151,7 @@ export const discover = [
       designation:"Co Founder & COO",
       desc1:"Description of the person ",
       desc2:" and their goals",
-      linkedin: jkLinkedin,
+      linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
     },
   ]
 
@@ -162,42 +162,42 @@ export const discover = [
       image: member ,
       name:"Name",
       designation:"Role Name",
-      linkedin: jkLinkedin,
+      linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
     },
     {
       id:"2",
       image: member ,
       name:"Name",
       designation:"Role Name",
-      linkedin: jkLinkedin,
+      linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
     },
     {
       id:"3",
       image: member ,
       name:"Name",
       designation:"Role Name",
-      linkedin: jkLinkedin,
+      linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
     },
     {
       id:"4",
       image: member ,
       name:"Name",
       designation:"Role Name",
-      linkedin: jkLinkedin,
+      linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
     },
     {
       id:"5",
       image: member ,
       name:"Name",
       designation:"Role Name",
-      linkedin: jkLinkedin,
+      linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
     },
     {
       id:"6",
       image: member ,
       name:"Name",
       designation:"Role Name",
-      linkedin: jkLinkedin,
+      linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
     },
     
   ]
@@ -246,4 +246,53 @@ export const discover = [
       jobType:"Full Time",
       link: "https://www.linkedin.com/jobs/view/3643238774",
     },
+  ]
+
+
+
+  // FAQ
+
+  export const faqmap = [
+    {
+      id:"1",
+      title:"What is Defo ?" ,
+      answer:"Defo is a subscription-based Short Video streaming service that allows our members to watch knowledgeable Videos and Tutorials.",
+    },
+    {
+      id:"2",
+      title:"Is this service available outside India?" ,
+      answer:"Defo is a subscription-based Short Video streaming service that allows our members to watch knowledgeable Videos and Tutorials.",
+    },
+    {
+      id:"3",
+      title:"Where do I manage my subscription?" ,
+      answer:"Defo is a subscription-based Short Video streaming service that allows our members to watch knowledgeable Videos and Tutorials.",
+    },
+    {
+      id:"4",
+      title:"When does my subscription renew, does it auto-renew?" ,
+      answer:"Defo is a subscription-based Short Video streaming service that allows our members to watch knowledgeable Videos and Tutorials.",
+    },
+    {
+      id:"5",
+      title:"How do I Cancel My Subscription?" ,
+      answer:"Defo is a subscription-based Short Video streaming service that allows our members to watch knowledgeable Videos and Tutorials.",
+    },
+    {
+      id:"6",
+      title:"Is this service available outside India?" ,
+      answer:"Defo is a subscription-based Short Video streaming service that allows our members to watch knowledgeable Videos and Tutorials.",
+    },
+    {
+      id:"7",
+      title:"Am I eligible for a free trial?" ,
+      answer:"Defo is a subscription-based Short Video streaming service that allows our members to watch knowledgeable Videos and Tutorials.",
+    },
+    {
+      id:"8",
+      title:"Why is my latest payment not visible in My Account?" ,
+      answer:"Defo is a subscription-based Short Video streaming service that allows our members to watch knowledgeable Videos and Tutorials.",
+    },
+
+
   ]
