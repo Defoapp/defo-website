@@ -4,7 +4,7 @@ import Footer from "../component/footer/Footer";
 import { creator } from "../constants/map";
 
 const OurCreators = () => {
-  const [noOfElement, setnoOfElement] = useState(6);
+  const [noOfElement, setnoOfElement] = useState(5);
   const loadMore = () => {
     setnoOfElement(noOfElement + noOfElement);
   };
@@ -18,16 +18,16 @@ const OurCreators = () => {
 
         <div className="w-5/6 h-full mx-auto my-10">
           <p className="text-black text-xl font-bold text-left">Hair Style</p>
-          <div className="flex gap-2 px-2 flex-wrap my-10 bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50%  ">
+          <div className="flex gap-2 px-2 py-2 flex-wrap my-10 bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50%  rounded-xl">
             {slice.map((item, index) => {
               return (
                 <div
                   key={index}
                   className="w-62 h-full mx-auto  my-2 "
                 >
-                  <div className="w-full px-4 py-2 backdrop-blur-3xl bg-white/30 ">
+                  <div className="w-60 px-4 py-4 backdrop-blur-3xl rounded-xl bg-white/30 ">
                     <img
-                      className="w-full  mx-auto rounded-full"
+                      className="w-60  mx-auto rounded-xl"
                       src={item.creatorimage}
                       alt="loading"
                     />
@@ -35,15 +35,23 @@ const OurCreators = () => {
                       {item.name}
                     </h1>
                     <div className="w-fit mx-auto my-2">
-                      <a href={item.instalink}>
-                        <div className="bg-black w-10  p-1 rounded-full ">
+                      
+                        <div className=" w-24  p-1 flex justify-center gap-5 ">
+                        <a href={item.instalink}>
                           <img
-                            className=" w-8"
-                            src={item.mediaimg}
+                            className=" w-full"
+                            src={item.instagram}
+                            alt="loading"
+                          /></a>
+                          <a href={item.youtubelink}>
+                          <img
+                            className=" w-full "
+                            src={item.youtube}
                             alt="loading"
                           />
+                          </a>
                         </div>
-                      </a>
+                      
                     </div>
                   </div>
                 </div>
