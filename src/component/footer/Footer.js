@@ -51,7 +51,7 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="/#" className="z">
+                <a href="/OurCreators" className="z">
                   Our Creators
                 </a>
               </li>

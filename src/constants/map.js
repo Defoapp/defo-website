@@ -18,7 +18,11 @@ import jk from "../image/ourTeams/heads img.png"
 
 // members image
 import member from "../image/ourTeams/member img.png"
-// import jkLinkedin from "../image/ourTeams/icons8-linkedin.svg"
+
+
+//OurCreators image
+import create from "../image/ourCreator/stephanie-liverani-Zz5LQe-VSMY-unsplash 1.svg"
+import insta from "../image/social media svg/linkedin Default.svg"
 
 
 // home page Price section
@@ -296,3 +300,118 @@ export const discover = [
 
 
   ]
+
+
+
+  // OurCreator
+
+  export const creator = {
+    cardData:[
+    {
+      id:"1",
+      creatorimage:create,
+      name:"jai",
+      mediaimg:insta,
+      instalink:"https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+      
+    },
+    {
+      id:"2",
+      creatorimage:create,
+      name:"jai",
+      mediaimg:insta,
+      instalink:"https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    },
+    {
+      id:"3",
+      creatorimage:create,
+      name:"jai",
+      mediaimg:insta,
+      instalink:"https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    },
+    {
+      id:"4",
+      creatorimage:create,
+      name:"jai",
+      mediaimg:insta,
+      instalink:"https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    },
+    {
+      id:"5",
+      creatorimage:create,
+      name:"jai",
+      mediaimg:insta,
+      instalink:"https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    },
+    {
+      id:"6",
+      creatorimage:create,
+      name:"jai",
+      mediaimg:insta,
+      instalink:"https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    },
+    {
+      id:"7",
+      creatorimage:create,
+      name:"jai",
+      mediaimg:insta,
+      instalink:"https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    },
+    {
+      id:"8",
+      creatorimage:create,
+      name:"jai",
+      mediaimg:insta,
+      instalink:"https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    },
+    {
+      id:"9",
+      creatorimage:create,
+      name:"jai",
+      mediaimg:insta,
+      instalink:"https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    },
+    {
+      id:"10",
+      creatorimage:create,
+      name:"jai",
+      mediaimg:insta,
+      instalink:"https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    },
+    {
+      id:"11",
+      creatorimage:create,
+      name:"jai",
+      mediaimg:insta,
+      instalink:"https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    },
+    {
+      id:"12",
+      creatorimage:create,
+      name:"jai",
+      mediaimg:insta,
+      instalink:"https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    },
+    {
+      id:"13",
+      creatorimage:create,
+      name:"jai",
+      mediaimg:insta,
+      instalink:"https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    },
+    {
+      id:"14",
+      creatorimage:create,
+      name:"jai",
+      mediaimg:insta,
+      instalink:"https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    },
+    {
+      id:"15",
+      creatorimage:create,
+      name:"jai",
+      mediaimg:insta,
+      instalink:"https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    },
+  ]
+  }
