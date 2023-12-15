@@ -1,108 +1,133 @@
-import React from "react";
+import React, { useState } from "react";
+
+// imported - images
 import logo from "./social media svg/Logo.png";
-
 import insta from "./social media svg/instagram Default.svg";
-import fb from "./social media svg/facebook default.svg";
+import instaHover from "./social media svg/instagram hover.svg";
+import fb from "./social media svg/facebook Default.svg";
+import fbHover from "./social media svg/facebook hover.svg";
 import x from "./social media svg/X Default.svg";
+import xHover from "./social media svg/x hover.svg";
 import In from "./social media svg/linkedin Default.svg";
+import InHover from "./social media svg/linkedin hover.svg";
 
-const Footer = () => {
+const ImageSwapOnHover = ({ image1, image2 }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    // main div
-    <div className="w-full h-full bg-black py-14">
-      <div className="w-fit flex flex-wrap gap-x-32 mx-auto ">
+    <div className="relative inline-block bg-black">
+      <img
+        src={isHovered ? image2 : image1}
+        alt="loading"
+        className=" w-6 transition-transform duration-300  transform hover:scale-110 "
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      />
+    </div>
+  );
+};
+
+function Footer() {
+  const titleStyle =
+    "text-white font-medium text-2xl  py-2 border-b-2 border-green-500 w-fit ";
+  const subHeadingStyle = `text-2xl font-light text-white w-44 my-3 hover:pl-2 duration-300   `;
+  return (
+    <div className="w-full h-full bg-black py-14 ">
+      <div className="w-fit flex flex-wrap gap-x-20 mx-auto ">
         {/* socialmedia */}
         <div className="mx-16 md:mx-0 lg:mx-0">
           {/* logo */}
-          <img src={logo} alt="loading" />
+          <a href="/">
+            <img src={logo} alt="loading" />
+          </a>
           <div className="my-5">
-            <a href="https://instagram.com/DefoApp" className="text-white text-2xl font-light flex my-3">
-              <img className="w-5 mx-2" src={insta} alt="loading" />
+            <a
+              href="https://instagram.com/DefoApp"
+              className="text-white text-2xl flex gap-1 items-center font-light"
+            >
+              <ImageSwapOnHover image1={insta} image2={instaHover} />
               Instagram
             </a>
-            <a href="https://facebook.com/DefoApp" className="text-white text-2xl font-light flex my-3">
-              <img className="w-5 mx-2" src={fb} alt="loading" />
+            <a
+              href="https://facebook.com/DefoApp"
+              className="text-white text-2xl font-light flex gap-1 items-center my-3"
+            >
+              <ImageSwapOnHover image1={fb} image2={fbHover} />
               Facebook
             </a>
-            <a href="https://twitter.com/DefoApp" className="text-white text-2xl font-light flex my-3">
-              <img className="w-5 mx-2" src={x} alt="loading" />X
+            <a
+              href="https://twitter.com/DefoApp"
+              className="text-white text-2xl font-light flex gap-1 items-center my-3"
+            >
+              <ImageSwapOnHover image1={x} image2={xHover} />X
             </a>
-            <a href="https://www.linkedin.com/showcase/defoapp" className="text-white text-2xl font-light flex my-3">
-              <img className="w-5 mx-2" src={In} alt="loading" />
+            <a
+              href="https://www.linkedin.com/showcase/defoapp"
+              className="text-white text-2xl font-light flex gap-1 items-center my-3"
+            >
+              <ImageSwapOnHover image1={In} image2={InHover} />
               LinkedIn
             </a>
           </div>
         </div>
         {/* about section */}
-        <div className="mx-16 md:mx-0 lg:mx-0 ">
-          <h1 className="text-white font-medium text-2xl my-3">About</h1>
+        <div className="mx-16 md:mx-0 lg:mx-0 px-4">
+          <h1 className={titleStyle}>About</h1>
           <div className="mt-5">
             <a href="/OurStory">
-              <h1 className="text-2xl font-light text-white my-3">Our Story</h1>{" "}
+              <h1 className={subHeadingStyle}>Our Story</h1>{" "}
             </a>
             <a href="/OurTeams">
-              <h1 className="text-2xl font-light text-white my-3">Our Teams</h1>
+              <h1 className={subHeadingStyle}>Our Teams</h1>
             </a>
             <a href="/OurCreators" className="z">
-              <h1 className="text-2xl font-light text-white my-3">
-                Our Creators
-              </h1>
+              <h1 className={subHeadingStyle}>Our Creators</h1>
             </a>
             <a href="/about">
-              <h1 className="text-2xl font-light text-white my-3">About</h1>
+              <h1 className={subHeadingStyle}>About</h1>
             </a>
           </div>
         </div>
         {/* Resource section */}
-        <div className=" mx-16 md:mx-0 lg:mx-0">
-          <h1 className="text-white font-medium text-2xl my-3">Resource</h1>
+        <div className=" mx-16 md:mx-0 lg:mx-0 px-2">
+          <h1 className={titleStyle}>Resource</h1>
           <div className="mt-5">
             <a href="https://creator.yesdefo.com/">
-              <h1 className="text-2xl font-light text-white my-3">
-                Join Creator
-              </h1>
+              <h1 className={subHeadingStyle}>Join Creator</h1>
             </a>
-            <a href="/#">
-              <h1 className="text-2xl font-light text-white my-3">Topics</h1>
+            <a href="/topics">
+              <h1 className={subHeadingStyle}>Topics</h1>
             </a>
             <a href="/careers">
-              <h1 className="text-2xl font-light text-white my-3">Careers</h1>
+              <h1 className={subHeadingStyle}>Careers</h1>
             </a>
           </div>
         </div>
         {/* legal section */}
-        <div className="mx-16 md:mx-0 lg:mx-0 ">
-          <h1 className="text-white font-medium text-2xl my-3">Legal</h1>
+        <div className="mx-16 md:mx-0 lg:mx-0 px-2">
+          <h1 className={titleStyle}>Legal</h1>
           <div className="mt-5">
             <a href="/privacy">
-              <h1 className="text-2xl font-light text-white my-3">
-                Privacy policy
-              </h1>
+              <h1 className={subHeadingStyle}>Privacy policy</h1>
             </a>
 
             <a href="/terms">
-              <h1 className="text-2xl font-light text-white my-3">
-                Terms of use
-              </h1>
+              <h1 className={subHeadingStyle}>Terms of use</h1>
             </a>
             <a href="/reportContent">
-              <h1 className="text-2xl font-light text-white my-3">
-                Report content
-              </h1>
+              <h1 className={subHeadingStyle}>Report content</h1>
             </a>
           </div>
         </div>
         {/* Usefull links section */}
-        <div className="mx-16 md:mx-0 lg:mx-0 ">
-          <h1 className="text-white font-medium text-2xl my-3">
-            Usefull Links
-          </h1>
+        <div className="mx-16 md:mx-0 lg:mx-0 px-2">
+          <h1 className={titleStyle}>Usefull Links</h1>
           <div className="mt-1">
             <a href="/#">
-              <h1 className="text-2xl font-light text-white my-3">Support</h1>
+              <h1 className={subHeadingStyle}>Support</h1>
             </a>
             <a href="/faq">
-              <h1 className="text-2xl font-light text-white my-3">FAQ</h1> FAQ
+              <h1 className={subHeadingStyle}>FAQ</h1> FAQ
             </a>
           </div>
         </div>
@@ -117,6 +142,6 @@ const Footer = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Footer;

@@ -17,6 +17,7 @@ import jk from "../image/ourTeams/heads img.png";
 
 // members image
 import member from "../image/ourTeams/member img.png";
+import yogi from "../image/ourTeams/IMG_8509.jpg"
 
 //OurCreators image
 import create from "../image/ourCreator/stephanie-liverani-Zz5LQe-VSMY-unsplash 1.svg";
@@ -158,10 +159,10 @@ export const heads = [
 export const teamsMembers = [
   {
     id: "1",
-    image: member,
-    name: "Name",
-    designation: "Role Name",
-    linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
+    image: yogi,
+    name: "Yogeeswaran N",
+    designation: "Developer",
+    linkedin: "https://www.linkedin.com/in/yogeeswaran-n-b2b366196/",
   },
   {
     id: "2",

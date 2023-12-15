@@ -59,10 +59,10 @@ const OurCreators = () => {
             })}
             
           </div>
-          <div className="ml-auto">
+          <div className="">
             <button
               onClick={() => loadMore()}
-              className="w-30 bg-gray-500  flex rounded-full p-2  text-white"
+              className="w-30 bg-gray-500 ml-auto flex rounded-full p-2  text-white "
             >
               Show more
               <span className=" my-auto bg-blue-900 mx-1 text-white  rounded-full transition group-open:rotate-180">

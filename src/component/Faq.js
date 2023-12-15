@@ -31,6 +31,7 @@ const Faq = () => {
               placeholder="Search...."
               className="w-full px-5 py-3 rounded-full border-white"
             />
+            
             <button className="absolute right-1  top-1/2 -translate-y-1/2 p-2 rounded-full bg-gray-400">
               <img className="w-5" src={searchimg} alt="loading" />
             </button>
