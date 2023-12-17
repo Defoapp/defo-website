@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import logo from "./social media svg/Logo.png";
 import insta from "./social media svg/instagram Default.svg";
 import instaHover from "./social media svg/instagram hover.svg";
-import fb from "./social media svg/facebook Default.svg";
+import fb from "./social media svg/facebook default.svg";
 import fbHover from "./social media svg/facebook hover.svg";
 import x from "./social media svg/X Default.svg";
 import xHover from "./social media svg/x hover.svg";
