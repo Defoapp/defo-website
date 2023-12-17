@@ -1,131 +1,147 @@
-import React from "react";
-import "./Footer.css";
-import logos from "../footer/social media svg/Logo.png";
+import React, { useState } from "react";
 
-export const Footer = () => {
+// imported - images
+import logo from "./social media svg/Logo.png";
+import insta from "./social media svg/instagram Default.svg";
+import instaHover from "./social media svg/instagram hover.svg";
+import fb from "./social media svg/facebook Default.svg";
+import fbHover from "./social media svg/facebook hover.svg";
+import x from "./social media svg/X Default.svg";
+import xHover from "./social media svg/x hover.svg";
+import In from "./social media svg/linkedin Default.svg";
+import InHover from "./social media svg/linkedin hover.svg";
+
+const ImageSwapOnHover = ({ image1, image2 }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <div className="footer">
-      <div className="container">
-        <div className="row">
-          <div className="footer-col">
-            <a href="/" className="logo">
-              <img src={logos} alt="logo" className="logos" />
+    <div className="relative inline-block bg-black">
+      <img
+        src={isHovered ? image2 : image1}
+        alt="loading"
+        className=" w-6 transition-transform duration-300  transform hover:scale-110 "
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      />
+    </div>
+  );
+};
+
+function Footer() {
+  const titleStyle =
+    "text-white font-medium text-2xl  py-2 border-b-2 border-green-500 w-fit ";
+  const subHeadingStyle = `text-2xl font-light text-white w-44 my-3 hover:pl-2 duration-300   `;
+  return (
+    <div className="w-full h-full bg-black py-14 ">
+      <div className="w-fit flex flex-wrap gap-x-20 mx-auto ">
+        {/* socialmedia */}
+        <div className="mx-16 md:mx-0 lg:mx-0">
+          {/* logo */}
+          <a href="/">
+            <img src={logo} alt="loading" />
+          </a>
+          <div className="my-5">
+            <a
+              href="https://instagram.com/DefoApp"
+              className="text-white text-2xl flex gap-1 items-center font-light"
+            >
+              <ImageSwapOnHover image1={insta} image2={instaHover} />
+              Instagram
             </a>
-            <ul>
-              <li>
-                <a href="https://instagram.com/DefoApp" className="z">
-                  <div className="soclogo-insta soclogo"></div>Instagram
-                </a>
-              </li>
-              <li>
-                <a href="https://facebook.com/DefoApp" className="z">
-                  <div className="soclogo-fb soclogo"></div>Facebook
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com/DefoApp" className="z">
-                  <div className="soclogo-x soclogo"></div>X
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.linkedin.com/showcase/defoapp"
-                  className="z"
-                >
-                  <div className="soclogo-in soclogo"></div>Linkedin
-                </a>
-              </li>
-            </ul>
+            <a
+              href="https://facebook.com/DefoApp"
+              className="text-white text-2xl font-light flex gap-1 items-center my-3"
+            >
+              <ImageSwapOnHover image1={fb} image2={fbHover} />
+              Facebook
+            </a>
+            <a
+              href="https://twitter.com/DefoApp"
+              className="text-white text-2xl font-light flex gap-1 items-center my-3"
+            >
+              <ImageSwapOnHover image1={x} image2={xHover} />X
+            </a>
+            <a
+              href="https://www.linkedin.com/showcase/defoapp"
+              className="text-white text-2xl font-light flex gap-1 items-center my-3"
+            >
+              <ImageSwapOnHover image1={In} image2={InHover} />
+              LinkedIn
+            </a>
           </div>
-          <div className="footer-col">
-            <h4>About</h4>
-            <ul>
-              <li>
-                <a href="/OurStory" className="z">
-                  Our Story
-                </a>
-              </li>
-              <li>
-                <a href="/OurTeams" className="z">
-                  Our Teams
-                </a>
-              </li>
-              <li>
-                <a href="/#" className="z">
-                  Our Creators
-                </a>
-              </li>
-              <li>
-                <a href="/about" className="z">
-                  About
-                </a>
-              </li>
-            </ul>
+        </div>
+        {/* about section */}
+        <div className="mx-16 md:mx-0 lg:mx-0 px-4">
+          <h1 className={titleStyle}>About</h1>
+          <div className="mt-5">
+            <a href="/OurStory">
+              <h1 className={subHeadingStyle}>Our Story</h1>{" "}
+            </a>
+            <a href="/OurTeams">
+              <h1 className={subHeadingStyle}>Our Teams</h1>
+            </a>
+            <a href="/OurCreators" className="z">
+              <h1 className={subHeadingStyle}>Our Creators</h1>
+            </a>
+            <a href="/about">
+              <h1 className={subHeadingStyle}>About</h1>
+            </a>
           </div>
-          <div className="footer-col">
-            <h4>Resource</h4>
-            <ul>
-              <li>
-                <a href="https://creator.yesdefo.com/" className="z">
-                  Join Creator
-                </a>
-              </li>
-              <li>
-                <a href="/#" className="z">
-                  Topics
-                </a>
-              </li>
-              <li>
-                <a href="/careers" className="z">
-                  Careers
-                </a>
-              </li>
-            </ul>
+        </div>
+        {/* Resource section */}
+        <div className=" mx-16 md:mx-0 lg:mx-0 px-2">
+          <h1 className={titleStyle}>Resource</h1>
+          <div className="mt-5">
+            <a href="https://creator.yesdefo.com/">
+              <h1 className={subHeadingStyle}>Join Creator</h1>
+            </a>
+            <a href="/topics">
+              <h1 className={subHeadingStyle}>Topics</h1>
+            </a>
+            <a href="/careers">
+              <h1 className={subHeadingStyle}>Careers</h1>
+            </a>
           </div>
-          <div className="footer-col">
-            <h4>Legal</h4>
-            <ul>
-              <li>
-                <a href="/privacy" className="z">
-                  Privacy policy
-                </a>
-              </li>
-              <li>
-                <a href="/terms" className="z">
-                  Terms of use
-                </a>
-              </li>
-              <li>
-                <a href="/#" className="z">
-                  Report content
-                </a>
-              </li>
-            </ul>
+        </div>
+        {/* legal section */}
+        <div className="mx-16 md:mx-0 lg:mx-0 px-2">
+          <h1 className={titleStyle}>Legal</h1>
+          <div className="mt-5">
+            <a href="/privacy">
+              <h1 className={subHeadingStyle}>Privacy policy</h1>
+            </a>
+
+            <a href="/terms">
+              <h1 className={subHeadingStyle}>Terms of use</h1>
+            </a>
+            <a href="/reportContent">
+              <h1 className={subHeadingStyle}>Report content</h1>
+            </a>
           </div>
-          <div className="footer-col">
-            <h4>Usefull links</h4>
-            <ul>
-              <li>
-                <a href="/#" className="z">
-                  Support
-                </a>
-              </li>
-              <li>
-                <a href="/faq" className="z">
-                  FAQ
-                </a>
-              </li>
-            </ul>
+        </div>
+        {/* Usefull links section */}
+        <div className="mx-16 md:mx-0 lg:mx-0 px-2">
+          <h1 className={titleStyle}>Usefull Links</h1>
+          <div className="mt-1">
+            <a href="/#">
+              <h1 className={subHeadingStyle}>Support</h1>
+            </a>
+            <a href="/faq">
+              <h1 className={subHeadingStyle}>FAQ</h1> FAQ
+            </a>
           </div>
         </div>
       </div>
-      <div className="bottom">
+      {/* copywrite bar */}
+      <div className="mt-10 w-5/6 mx-auto">
         <hr />
-        <p className="copyright">&copy; 2023 LowPow. All rights reserved.</p>
+        <h1 className="text-white text-center my-3">
+          &copy; 2023 Lowpow. All rights reserved.
+        </h1>
         <hr />
       </div>
     </div>
   );
-};
+}
 
 export default Footer;

@@ -28,7 +28,7 @@ const OurTeams = () => {
       </div>
 
       {/* heads section  */}
-      <div className='w-full h-full border-green-600 border-2 '>
+      <div className='w-full h-full  '>
         <div className=' text-center'>
         <h1 className='text-black text-xl md:text-2xl lg:text-4xl font-bold mt-10'>Meet Our Heads</h1>
         <div className='flex justify-center  gap-10 flex-wrap my-16  '>
@@ -38,7 +38,7 @@ const OurTeams = () => {
             <h1 className='text-lg md:text-xl lg:text-2xl font-semibold mt-5'>{heads.name}</h1>
             <h1 className='text-lg md:text-xl lg:text-2xl font-semibold '>{heads.designation}</h1>
             <p className='text-black text-base md:text-lg lg:text-xl font-medium'>{heads.desc1}<br/>{heads.desc2}</p>
-            <a className='w-fit mx-auto' href={heads.linkedin}><img className='w-8  bg-b mt-2 cursor-pointer' src={linkedInImg} alt='loading'/>
+            <a className='w-fit mx-auto' href={heads.linkedin}><img className='w-8  bg-b mt-2  cursor-pointer' src={linkedInImg} alt='loading'/>
             </a>
           </div>
           ))}
@@ -54,7 +54,7 @@ const OurTeams = () => {
         <div className='place-items-center gap-y-10  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:px-28'>
         {teamsMembers.map((teamsMembers) =>(
           <div key={teamsMembers.id} className=' w-fit text-center'>
-            <img className='w-4/6 mx-auto' src={teamsMembers.image} alt='loading'/>
+            <img className='rounded-full mx-auto w-64 h-64 object-cover ' src={teamsMembers.image} alt='loading'/>
             <h1 className='font-bold text-xl md:text-2xl lg:4xl mt-5  '>{teamsMembers.name}</h1>
             <h1 className='font-bold text-lg md:text-xl lg:text-xl'>{teamsMembers.designation} </h1>
             <a href={teamsMembers.linkedin}><img className='w-8 mx-auto mt-5 cursor-pointer' src={linkedInImg} alt='loading'/></a>
