@@ -1,48 +1,95 @@
-import React from "react";
+import React, { useState } from 'react';
 import Navbar from "../component/Navbar/Navbar";
 import Footer from "../component/footer/Footer";
 
-const Max_Steps = 2;
-
-
 
 const ReportContent = () => {
-  const [formStep, setFormStep] = React.useState(0);
-  const completeFormStep = () => {
-    setFormStep((cur) => cur + 1);
+  // State to manage form data
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    companyName: "",
+    phoneNumber: "",
+    email: "",
+    furtherDetails: "",
+    option1: "",
+    option2: "",
+    input2: "",
+    content: "",
+    furtherDetails2: "",
+  });
+
+  // State to manage the current step
+  const [currentStep, setCurrentStep] = useState(1);
+
+  // State to manage error messages
+  const [errors, setErrors] = useState({});
+
+  // Function to handle form data changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
-  const renderButton = () => {
-    if (formStep > 1) {
-      return undefined;
-    } else if (formStep === 1) {
-      return (
-        <button
-          onClick={completeFormStep}
-          type="button"
-          className="border-2 bg-blue-950 text-xl font-medium text-white w-32 h-10 rounded-xl ml-auto "
-        >
-          Finish
-        </button>
-      );
-    } else {
-      return (
-        <button
-          onClick={completeFormStep}
-          type="button"
-          className="border-2 bg-blue-950 text-xl font-medium text-white w-32 h-10 rounded-xl ml-auto "
-        >
-          Next Step
-        </button>
-      );
+
+  // Function to handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add your form submission logic here
+    // For simplicity, let's just console log the form data
+    console.log("Form submitted:", formData);
+  };
+
+  // Function to validate form data for the current step
+  const validateForm = () => {
+    const errors = {};
+    switch (currentStep) {
+      case 1:
+        if (!formData.firstName.trim()) {
+          errors.firstName = "First name is required";
+        }
+        if (!formData.lastName.trim()) {
+          errors.lastName = "Last name is required";
+        }
+        if (!formData.email.trim()) {
+          errors.email = "Email is required";
+        }
+        break;
+      case 2:
+        if (!formData.option1.trim()) {
+          errors.option1 = "Any Option is required";
+        }
+        if (!formData.option2.trim()) {
+          errors.option2 = "Any Option  is required";
+        }
+        if (!formData.input2.trim()) {
+          errors.input2 = "  provide the URL of the content";
+        }
+        if (!formData.furtherDetails2.trim()) {
+          errors.furtherDetails2 = " furtherDetails2 are required";
+        }
+        break;
+      // Add additional cases for more steps if needed
+      default:
+        break;
+    }
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  // Function to handle next step
+  const handleNextStep = () => {
+    if (validateForm()) {
+      setCurrentStep((prevStep) => prevStep + 1);
     }
   };
 
-  const goToPreviousStep = () => {
-    setFormStep(cur => cur - 1)
-  }
-
-
-
+  // Function to handle previous step
+  const handlePrevStep = () => {
+    setCurrentStep((prevStep) => prevStep - 1);
+  };
 
   return (
     <div>
@@ -59,34 +106,41 @@ const ReportContent = () => {
             </h1>
           </div>
           <div className="w-full h-full">
-            <form >
-              {formStep < Max_Steps && (
-                <div>
-                  <p>
-                    Step {formStep + 1} of {Max_Steps}
-                  </p>
-                </div>
-              )}
+            <form onSubmit={handleSubmit}>
               {/* First section */}
-              {formStep === 0 && (
+              {currentStep === 1 && (
                 <section>
                   <div className="w-full h-full flex flex-col gap-y-1">
-                    <label className="text-xl ">
+                    <label htmlFor="firstName" className="text-xl ">
                       First Name<span className="text-red-600 mx-1">*</span>
                     </label>
-                    <input 
+                    <input
                       type="text"
-                      name="username"
-                      className="border-2 border-black rounded-md w-full h-9 my-1 pl-3" 
+                      id="firstName"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      className="border-2 border-black rounded-md w-full h-9 my-1 pl-3 form-input"
                     />
-                    <label className="text-xl ">
+                    {errors.firstName && (
+                      <div className="text-red-600 text-sm">{errors.firstName}</div>
+                    )}
+
+                    <label htmlFor="lastName" className="text-xl ">
                       Last Name<span className="text-red-600 mx-1">*</span>
                     </label>
                     <input
                       type="text"
-                      name="username"
-                      className="border-2 border-black rounded-md w-full h-9 my-1 pl-3"
+                      id="lastName"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      className="border-2 border-black rounded-md w-full h-9 my-1 pl-3 form-input"
                     />
+                    {errors.lastName && (
+                      <div className="text-red-600 text-sm">{errors.lastName}</div>
+                    )}
+
                     <label className="text-xl ">Company Name</label>
                     <input
                       type="text"
@@ -99,14 +153,21 @@ const ReportContent = () => {
                       name="username"
                       className="border-2 border-black rounded-md w-full h-9 my-1 pl-3"
                     />
-                    <label className="text-xl ">
+                    <label  htmlFor="email" className="text-xl ">
                       Email<span className="text-red-600 mx-1">*</span>
                     </label>
                     <input
                       type="text"
-                      name="username"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
                       className="border-2 border-black rounded-md w-full h-9 my-1 pl-3"
                     />
+                    {errors.email && (
+                      <div className="text-red-600 text-sm">{errors.email}</div>
+                    )}
+
                     <label className="text-xl ">Any further details</label>
                     <textarea
                       type="text"
@@ -117,13 +178,20 @@ const ReportContent = () => {
                 </section>
               )}
               {/* second section */}
-              {formStep === 1 && (
+              {currentStep === 2 && (
                 <section>
                   <div className="w-full h-full flex flex-col gap-y-1">
-                    <label className="text-xl">
+                    <label htmlFor="option1" className="text-xl">
                       Claim type<span className="text-red-600 mx-1">*</span>
                     </label>
-                    <select className="border-2 border-black rounded-md font-medium w-full h-9 my-1 ">
+                    <select
+                      id="option1"
+                      name="option1"
+                      value={formData.option1}
+                      onChange={handleInputChange}
+                      className="border-2 border-black rounded-md font-medium w-full h-9 my-1 form-select"
+                    >
+                      <option className="font-medium">Select</option>
                       <option className="font-medium">Copyright</option>
                       <option className="font-medium">Trademark</option>
                       <option className="font-medium">
@@ -131,46 +199,69 @@ const ReportContent = () => {
                       </option>
                       <option className="font-medium">Other legal claim</option>
                     </select>
-                    <label className="text-xl">
+                    {errors.option1 && (
+                      <div className="text-red-600 text-sm">{errors.option1}</div>
+                    )}
+
+                    <label htmlFor="option2" className="text-xl">
                       Please select the content type you’d like to report
                       <span className="text-red-600 mx-1">*</span>
                     </label>
-                    <select className="border-2 border-black rounded-md font-medium w-full h-9 my-1">
+                    <select
+                      className="border-2 border-black rounded-md font-medium w-full h-9 my-1 form-select"
+                      id="option2"
+                      name="option2"
+                      value={formData.option2}
+                      onChange={handleInputChange}
+                    >
+                      <option className="font-medium">Select</option>
                       <option className="font-medium">Music/Audio</option>
                       <option className="font-medium">Image</option>
                       <option className="font-medium">Video</option>
                       <option className="font-medium">
                         Title & description
                       </option>
-                    </select>
-                    <label className="text-xl ">
+                    </select>{errors.option2 && (
+                      <div className="text-red-600 text-sm">{errors.option2}</div>
+                    )}
+                    
+
+                    <label  htmlFor="input2" className="text-xl ">
                       Please provide the URL of the content you’d like to report
                       <span className="text-red-600 mx-1">*</span>
                     </label>
                     <textarea
-                      type="text"
-                      name="username"
-                      className="border-2 border-black rounded-md w-full h-20 my-1 pl-3"
+                       type="text"
+                       id="input2"
+                       name="input2"
+                       value={formData.input2}
+                       onChange={handleInputChange}
+                      className="border-2 border-black rounded-md w-full h-20 my-1 pl-3 form-input"
                     />
+                    {errors.input2 && <div className="text-red-600 text-sm">{errors.input2}</div>}
                     <label className="text-xl ">
                       Why are you reporting the content ?
-                      <span className="text-red-600 mx-1">*</span>
+                      
                     </label>
                     <textarea
                       type="text"
-                      name="username"
                       className="border-2 border-black rounded-md w-full h-20 my-1 pl-3"
                     />
-                    <label className="text-xl ">Any further details</label>
+                    
+                    <label className="text-xl ">Any further details<span className="text-red-600 mx-1">*</span></label>
                     <textarea
                       type="text"
-                      name="username"
+                      id="furtherDetails2"
+                      name="furtherDetails2"
+                      value={formData.furtherDetails2}
+                      onChange={handleInputChange}
                       className="border-2 border-black rounded-md w-full h-20 my-2 pl-3"
-                    />
+                    />{errors.furtherDetails2 && <div className="text-red-600 text-sm">{errors.furtherDetails2}</div>}
                   </div>
                 </section>
               )}
-              {formStep === 2 && (
+              {/* final submission */}
+              {currentStep === 3 && (
                 <section>
                   <div className="bg-green-500 w-fit p-4 rounded-xl mx-auto">
                     <h6 className=" text-white font-bold text-2xl">
@@ -180,15 +271,26 @@ const ReportContent = () => {
                 </section>
               )}
 
-              {/*  next & back buttons  */}
-              <div className="flex my-5">
-                {formStep > 0 && (
-                <button onClick={goToPreviousStep} type="button" className="border-2 border-black text-xl font-medium w-20 h-9 rounded-xl">
-                  Back
-                </button>
-                )}
-                {renderButton()}
-              </div>
+              {/* Navigation buttons */}
+        <div className="flex justify-between mt-4">
+          {currentStep === 2 && (
+            <button type="button" onClick={handlePrevStep} className="border-2 border-black text-xl font-medium w-20 h-9 rounded-xl">
+              Back
+            </button>
+          )}
+
+          {currentStep === 1 && (
+            <button type="button" onClick={handleNextStep} className="border-2 bg-blue-950 text-xl font-medium text-white w-32 h-10 rounded-xl ml-auto ">
+              Next
+            </button>
+          )}
+          {currentStep === 2 && (
+            <button type="button" onClick={handleNextStep} className="border-2 bg-green-600 text-xl font-medium text-white w-32 h-10 rounded-xl ml-auto ">
+              Submit
+            </button>
+          )}
+        </div>
+
             </form>
           </div>
         </div>

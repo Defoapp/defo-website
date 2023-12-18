@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
 // imported - images
-import logo from "./social media svg/Logo.png";
-import insta from "./social media svg/instagram Default.svg";
-import instaHover from "./social media svg/instagram hover.svg";
-import fb from "./social media svg/facebook default.svg";
-import fbHover from "./social media svg/facebook hover.svg";
-import x from "./social media svg/X Default.svg";
-import xHover from "./social media svg/x hover.svg";
-import In from "./social media svg/linkedin Default.svg";
-import InHover from "./social media svg/linkedin hover.svg";
+import logo from "./socialMediaSvg/Logo.png";
+import insta from "./socialMediaSvg/instagram_Default.svg";
+import instaHover from "./socialMediaSvg/instagram_hover.svg";
+import fb from "./socialMediaSvg/facebook_Default.svg";
+import fbHover from "./socialMediaSvg/facebook_hover.svg";
+import x from "./socialMediaSvg/X_Default.svg";
+import xHover from "./socialMediaSvg/x_hover.svg";
+import In from "./socialMediaSvg/linkedin_Default.svg";
+import InHover from "./socialMediaSvg/linkedin_hover.svg";
 
 const ImageSwapOnHover = ({ image1, image2 }) => {
   const [isHovered, setIsHovered] = useState(false);
