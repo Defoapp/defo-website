@@ -13,7 +13,7 @@ import Cooking from "../image/cooking.png";
 import Women from "../image/hair-styling.png";
 
 // heads image
-import jk from "../image/ourTeams/heads img.png";
+// import jk from "../image/ourTeams/heads img.png";
 
 // members image
 import member from "../image/ourTeams/member img.png";
@@ -21,9 +21,8 @@ import yogi from "../image/ourTeams/IMG_8509.jpg"
 
 //OurCreators image
 import create from "../image/ourCreator/stephanie-liverani-Zz5LQe-VSMY-unsplash 1.svg";
-import jai from "../image/ourCreator/K9bkhSnB_400x400 1.svg";
-import insta from "../image/social media svg/instagram.svg";
-import yt from "../image/social media svg/youtube.svg";
+import insta from "../image/social media svg/instagram Default.svg";
+import yt from "../image/social media svg/mingcute_youtube-line.svg";
 
 // home page Price section
 export const price = [
@@ -134,26 +133,26 @@ export const discover = [
 ];
 
 // our teams head section
-export const heads = [
-  {
-    id: "1",
-    image: jk,
-    name: "Jayakumar",
-    designation: "Founder & CEO",
-    desc1: "Description of the person ",
-    desc2: " and their goals",
-    linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
-  },
-  {
-    id: "2",
-    image: jk,
-    name: "Rahul",
-    designation: "Co Founder & COO",
-    desc1: "Description of the person ",
-    desc2: " and their goals",
-    linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
-  },
-];
+// export const heads = [
+//   {
+//     id: "1",
+//     image: jk,
+//     name: "Jayakumar",
+//     designation: "Founder & CEO",
+//     desc1: "Description of the person ",
+//     desc2: " and their goals",
+//     linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
+//   },
+//   {
+//     id: "2",
+//     image: jk,
+//     name: "Rahul",
+//     designation: "Co Founder & COO",
+//     desc1: "Description of the person ",
+//     desc2: " and their goals",
+//     linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
+//   },
+// ];
 
 // our teams members section
 export const teamsMembers = [
@@ -298,157 +297,155 @@ export const faqmap = [
 ];
 
 // OurCreator
-export const creator = {
-  cardData: [
-    {
-      id: "1",
-      creatorimage: jai,
-      name: "jai",
-      instagram: insta,
-      instalink:
-        "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
-      youtube: yt,
-      youtubelink: "https://www.youtube.com/@LowPowDev",
-    },
-    {
-      id: "2",
-      creatorimage: create,
-      name: "jai",
-      instagram: insta,
-      instalink:
-        "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
-      youtube: yt,
-      youtubelink: "https://www.youtube.com/@LowPowDev",
-    },
-    {
-      id: "3",
-      creatorimage: create,
-      name: "jai",
-      instagram: insta,
-      instalink:
-        "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
-      youtube: yt,
-      youtubelink: "https://www.youtube.com/@LowPowDev",
-    },
-    {
-      id: "4",
-      creatorimage: create,
-      name: "jai",
-      instagram: insta,
-      instalink:
-        "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
-      youtube: yt,
-      youtubelink: "https://www.youtube.com/@LowPowDev",
-    },
-    {
-      id: "5",
-      creatorimage: create,
-      name: "jai",
-      instagram: insta,
-      instalink:
-        "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
-      youtube: yt,
-      youtubelink: "https://www.youtube.com/@LowPowDev",
-    },
-    {
-      id: "6",
-      creatorimage: create,
-      name: "jai",
-      instagram: insta,
-      instalink:
-        "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
-      youtube: yt,
-      youtubelink: "https://www.youtube.com/@LowPowDev",
-    },
-    {
-      id: "7",
-      creatorimage: create,
-      name: "jai",
-      instagram: insta,
-      instalink:
-        "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
-      youtube: yt,
-      youtubelink: "https://www.youtube.com/@LowPowDev",
-    },
-    {
-      id: "8",
-      creatorimage: create,
-      name: "jai",
-      instagram: insta,
-      instalink:
-        "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
-      youtube: yt,
-      youtubelink: "https://www.youtube.com/@LowPowDev",
-    },
-    {
-      id: "9",
-      creatorimage: create,
-      name: "jai",
-      instagram: insta,
-      instalink:
-        "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
-      youtube: yt,
-      youtubelink: "https://www.youtube.com/@LowPowDev",
-    },
-    {
-      id: "10",
-      creatorimage: create,
-      name: "jai",
-      mediaimg: insta,
-      instalink:
-        "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
-      youtube: yt,
-      youtubelink: "https://www.youtube.com/@LowPowDev",
-    },
-    {
-      id: "11",
-      creatorimage: create,
-      name: "jai",
-      instagram: insta,
-      instalink:
-        "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
-      youtube: yt,
-      youtubelink: "https://www.youtube.com/@LowPowDev",
-    },
-    {
-      id: "12",
-      creatorimage: create,
-      name: "jai",
-      instagram: insta,
-      instalink:
-        "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
-      youtube: yt,
-      youtubelink: "https://www.youtube.com/@LowPowDev",
-    },
-    {
-      id: "13",
-      creatorimage: create,
-      name: "jai",
-      instagram: insta,
-      instalink:
-        "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
-      youtube: yt,
-      youtubelink: "https://www.youtube.com/@LowPowDev",
-    },
-    {
-      id: "14",
-      creatorimage: create,
-      name: "jai",
-      instagram: insta,
-      instalink:
-        "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
-      youtube: yt,
-      youtubelink: "https://www.youtube.com/@LowPowDev",
-    },
-    {
-      id: "15",
-      creatorimage: create,
-      name: "jai",
-      instagram: insta,
-      instalink:
-        "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
-      youtube: yt,
-      youtubelink: "https://www.youtube.com/@LowPowDev",
-    },
-  ],
-};
+export const sampleData = [
+  {
+    id: "1",
+    creatorimage: create,
+    name: "jai",
+    instagram: insta,
+    instalink:
+      "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    youtube: yt,
+    youtubelink: "https://www.youtube.com/@LowPowDev",
+  },
+  {
+    id: "2",
+    creatorimage: create,
+    name: "jai",
+    instagram: insta,
+    instalink:
+      "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    youtube: yt,
+    youtubelink: "https://www.youtube.com/@LowPowDev",
+  },
+  {
+    id: "3",
+    creatorimage: create,
+    name: "jai",
+    instagram: insta,
+    instalink:
+      "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    youtube: yt,
+    youtubelink: "https://www.youtube.com/@LowPowDev",
+  },
+  {
+    id: "4",
+    creatorimage: create,
+    name: "jai",
+    instagram: insta,
+    instalink:
+      "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    youtube: yt,
+    youtubelink: "https://www.youtube.com/@LowPowDev",
+  },
+  {
+    id: "5",
+    creatorimage: create,
+    name: "jai",
+    instagram: insta,
+    instalink:
+      "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    youtube: yt,
+    youtubelink: "https://www.youtube.com/@LowPowDev",
+  },
+  {
+    id: "6",
+    creatorimage: create,
+    name: "jai",
+    instagram: insta,
+    instalink:
+      "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    youtube: yt,
+    youtubelink: "https://www.youtube.com/@LowPowDev",
+  },
+  {
+    id: "7",
+    creatorimage: create,
+    name: "jai",
+    instagram: insta,
+    instalink:
+      "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    youtube: yt,
+    youtubelink: "https://www.youtube.com/@LowPowDev",
+  },
+  {
+    id: "8",
+    creatorimage: create,
+    name: "jai",
+    instagram: insta,
+    instalink:
+      "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    youtube: yt,
+    youtubelink: "https://www.youtube.com/@LowPowDev",
+  },
+  {
+    id: "9",
+    creatorimage: create,
+    name: "jai",
+    instagram: insta,
+    instalink:
+      "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    youtube: yt,
+    youtubelink: "https://www.youtube.com/@LowPowDev",
+  },
+  {
+    id: "10",
+    creatorimage: create,
+    name: "jai",
+    instagram: insta,
+    instalink:
+      "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    youtube: yt,
+    youtubelink: "https://www.youtube.com/@LowPowDev",
+  },
+  {
+    id: "11",
+    creatorimage: create,
+    name: "jai",
+    instagram: insta,
+    instalink:
+      "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    youtube: yt,
+    youtubelink: "https://www.youtube.com/@LowPowDev",
+  },
+  {
+    id: "12",
+    creatorimage: create,
+    name: "jai",
+    instagram: insta,
+    instalink:
+      "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    youtube: yt,
+    youtubelink: "https://www.youtube.com/@LowPowDev",
+  },
+  {
+    id: "13",
+    creatorimage: create,
+    name: "jai",
+    instagram: insta,
+    instalink:
+      "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    youtube: yt,
+    youtubelink: "https://www.youtube.com/@LowPowDev",
+  },
+  {
+    id: "14",
+    creatorimage: create,
+    name: "jai",
+    instagram: insta,
+    instalink:
+      "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    youtube: yt,
+    youtubelink: "https://www.youtube.com/@LowPowDev",
+  },
+  {
+    id: "15",
+    creatorimage: create,
+    name: "jai",
+    instagram: insta,
+    instalink:
+      "https://www.instagram.com/yosoyjayakumar/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA==",
+    youtube: yt,
+    youtubelink: "https://www.youtube.com/@LowPowDev",
+  },
+];

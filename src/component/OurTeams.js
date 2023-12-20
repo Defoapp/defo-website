@@ -3,7 +3,7 @@ import Navbar from "../component/Navbar/Navbar"
 import Footer from "../component/footer/Footer"
 
 // map
-import {heads} from "../constants/map"
+// import {heads} from "../constants/map"
 import {teamsMembers} from "../constants/map"
 
 import team from "../image/ourTeams/teams Illustation.svg"
@@ -28,7 +28,7 @@ const OurTeams = () => {
       </div>
 
       {/* heads section  */}
-      <div className='w-full h-full  '>
+      {/* <div className='w-full h-full  '>
         <div className=' text-center'>
         <h1 className='text-black text-xl md:text-2xl lg:text-4xl font-bold mt-10'>Meet Our Heads</h1>
         <div className='flex justify-center  gap-10 flex-wrap my-16  '>
@@ -45,7 +45,7 @@ const OurTeams = () => {
         </div>
         </div>
         
-      </div>
+      </div> */}
 
       {/* Team Members */}
       <div className='w-full h-full pb-16 '>

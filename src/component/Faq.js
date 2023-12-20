@@ -24,16 +24,16 @@ const Faq = () => {
 
         <div className="bg-gray-300 w-5/6  lg:w-3/6 flex mx-auto py-3 rounded-lg">
           <h1 className="text-2xl font-bold mx-5 my-auto">FAQ</h1>
-          <div className="relative w-4/6 mx-auto ">
+          <div className="relative w-4/6 mx-auto z-20">
             <input
               type="search"
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search...."
-              className="w-full px-5 py-3 rounded-full border-white"
+              className="w-full px-5 py-3 rounded-full border-white z-20"
             />
             
             <button className="absolute right-1  top-1/2 -translate-y-1/2 p-2 rounded-full bg-gray-400">
-              <img className="w-5" src={searchimg} alt="loading" />
+              <img className="w-5 ba" src={searchimg} alt="loading" />
             </button>
           </div>
         </div>
@@ -45,7 +45,7 @@ const Faq = () => {
             .filter((faqmap) => {
               return search.toLowerCase() === ""
                 ? faqmap
-                : faqmap.title.toLowerCase().includes(search);
+                : faqmap.title.toLowerCase().includes(search.toLowerCase());
             })
             .map((faqmap) => (
               <div

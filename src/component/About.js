@@ -15,11 +15,7 @@ function About() {
       <Navbar />
       
         <div className="w-full h-full m-auto ">
-          <h1
-            className="font-bold text-center text-4xl
-        my-10">
-            About
-          </h1>
+          
           <div className="flex justify-center flex-col lg:flex-row ">
             <div className="w-full  lg:mx-10   py-5">
               <img
@@ -27,23 +23,22 @@ function About() {
                 src={logo}
                 alt="loading"
               />
-              <p className="text-black text-center lg:text-left text-2xl  ">
-                Defo is an infotainment video app.
-              </p>
-              <p className=" text-black text-center lg:text-left text-2xl  ">
+      
+              <p className=" text-black text-center leading-10 font-medium lg:text-left text-2xl  ">
+              Defo is an infotainment video app.<br/>
                 Introducing a new infotainment app, the one-top destination for
                 all your entertainment and information needs. Stay informed,
                 Entertained and connected with Defo!
               </p>
-              <div className=" my-10 flex flex-wrap gap-5 justify-center lg:justify-start">
+              <div className=" my-16 flex flex-wrap gap-5 justify-center lg:justify-start">
                 <a
                   href={
                     "https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1"
                   }
                 >
-                  <img className="w-36" src={playstore} alt="loading" />
+                  <img className="w-48 lg:w-40 transition-all hover:scale-95" src={playstore} alt="loading" />
                 </a>
-                <img className="w-36" src={appstore} alt="loading" />
+                <img className="w-48 lg:w-40 transition-all hover:scale-95" src={appstore} alt="loading" />
               </div>
             </div>
 
@@ -53,13 +48,14 @@ function About() {
                 src={lowPow}
                 alt="loading"
               />
-              <p className="text-black text-center lg:text-left text-2xl  ">
+              <p className="text-black text-center leading-10 font-medium lg:text-left text-2xl  ">
                 Lowpow is a digital product company. We to build best apps for
                 you. Our products that inspire, empower, and simplify. We're
                 here to create tools and experiences that not only meet but
                 exceed expectations. Through creativity, expertise, and a
                 passion for innovation, we're redefining what's possible.
               </p>
+              <a href="https://lowpow.dev/"><h1 className="py-2 w-48 h-12 px-3 tracking-wider font-semibold text-4xl md:text-2xl lg:text-2xl rounded-md my-4 mx-auto md:mx-0 lg:mx-0 bg-blue-950 text-white text-center hover:scale-95 transition-all">Explore</h1></a>
             </div>
           </div>
 

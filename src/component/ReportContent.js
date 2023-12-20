@@ -53,8 +53,11 @@ const ReportContent = () => {
         if (!formData.lastName.trim()) {
           errors.lastName = "Last name is required";
         }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!formData.email.trim()) {
           errors.email = "Email is required";
+        } else if (!emailRegex.test(formData.email.trim())) {
+          errors.email = "Invalid email address";
         }
         break;
       case 2:
@@ -96,7 +99,21 @@ const ReportContent = () => {
       <Navbar />
       <div className="w-full h-full">
         <div className="w-5/6 md:w-4/6 lg:w-3/6 h-full my-10 mx-auto">
-          <div>
+          {/* <div>
+            <h1 className="font-bold text-4xl w-5/6 text-center mx-auto my-5">
+              How to make a legal claim relating to content on Defo
+            </h1>
+            <h1 className="my-5 text-2xl font-medium text-center mx-auto w-full">
+              To notify Defo of an infringement or other legal claim relating to
+              content on the Defo app ,please complete the form below.
+            </h1>
+          </div> */}
+          <div className="w-full h-full">
+            <form onSubmit={handleSubmit}>
+              {/* First section */}
+              {currentStep === 1 && (
+                <section>
+                  <div>
             <h1 className="font-bold text-4xl w-5/6 text-center mx-auto my-5">
               How to make a legal claim relating to content on Defo
             </h1>
@@ -105,11 +122,6 @@ const ReportContent = () => {
               content on the Defo app ,please complete the form below.
             </h1>
           </div>
-          <div className="w-full h-full">
-            <form onSubmit={handleSubmit}>
-              {/* First section */}
-              {currentStep === 1 && (
-                <section>
                   <div className="w-full h-full flex flex-col gap-y-1">
                     <label htmlFor="firstName" className="text-xl ">
                       First Name<span className="text-red-600 mx-1">*</span>
@@ -180,6 +192,15 @@ const ReportContent = () => {
               {/* second section */}
               {currentStep === 2 && (
                 <section>
+                  <div>
+            <h1 className="font-bold text-4xl w-5/6 text-center mx-auto my-5">
+              How to make a legal claim relating to content on Defo
+            </h1>
+            <h1 className="my-5 text-2xl font-medium text-center mx-auto w-full">
+              To notify Defo of an infringement or other legal claim relating to
+              content on the Defo app ,please complete the form below.
+            </h1>
+          </div>
                   <div className="w-full h-full flex flex-col gap-y-1">
                     <label htmlFor="option1" className="text-xl">
                       Claim type<span className="text-red-600 mx-1">*</span>

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+
 
 // imported - images
 import logo from "./socialMediaSvg/Logo.png";
@@ -11,23 +12,19 @@ import xHover from "./socialMediaSvg/x_hover.svg";
 import In from "./socialMediaSvg/linkedin_Default.svg";
 import InHover from "./socialMediaSvg/linkedin_hover.svg";
 
-const ImageSwapOnHover = ({ image1, image2 }) => {
-  const [isHovered, setIsHovered] = useState(false);
 
-  return (
-    <div className="relative inline-block bg-black">
-      <img
-        src={isHovered ? image2 : image1}
-        alt="loading"
-        className=" w-6 transition-transform duration-300  transform hover:scale-110 "
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      />
-    </div>
-  );
-};
 
 function Footer() {
+
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const containersData = [
+    { id: 1, icon1: insta, icon2: instaHover, text: 'Instagram', link: 'https://instagram.com/DefoApp' },
+    { id: 2, icon1: fb, icon2: fbHover, text: 'Facebook', link: 'https://facebook.com/DefoApp' },
+    { id: 3, icon1: x, icon2: xHover, text: 'X', link: 'https://twitter.com/DefoApp' },
+    { id: 4, icon1: In, icon2: InHover, text: 'LinkedIn', link: 'https://www.linkedin.com/showcase/defoapp' },
+  ];
+
+
   const titleStyle =
     "text-white font-medium text-2xl  py-2 border-b-2 border-green-500 w-fit ";
   const subHeadingStyle = `text-2xl font-light text-white w-44 my-3 hover:pl-2 duration-300   `;
@@ -35,43 +32,36 @@ function Footer() {
     <div className="w-full h-full bg-black py-14 ">
       <div className="w-fit flex flex-wrap gap-x-20 mx-auto ">
         {/* socialmedia */}
-        <div className="mx-16 md:mx-0 lg:mx-0">
+        <div className="mx-16  md:mx-0 lg:mx-0 ">
           {/* logo */}
           <a href="/">
-            <img src={logo} alt="loading" />
+            <img className='w-28' src={logo} alt="loading" />
           </a>
-          <div className="my-5">
-            <a
-              href="https://instagram.com/DefoApp"
-              className="text-white text-2xl flex gap-1 items-center font-light"
-            >
-              <ImageSwapOnHover image1={insta} image2={instaHover} />
-              Instagram
-            </a>
-            <a
-              href="https://facebook.com/DefoApp"
-              className="text-white text-2xl font-light flex gap-1 items-center my-3"
-            >
-              <ImageSwapOnHover image1={fb} image2={fbHover} />
-              Facebook
-            </a>
-            <a
-              href="https://twitter.com/DefoApp"
-              className="text-white text-2xl font-light flex gap-1 items-center my-3"
-            >
-              <ImageSwapOnHover image1={x} image2={xHover} />X
-            </a>
-            <a
-              href="https://www.linkedin.com/showcase/defoapp"
-              className="text-white text-2xl font-light flex gap-1 items-center my-3"
-            >
-              <ImageSwapOnHover image1={In} image2={InHover} />
-              LinkedIn
-            </a>
+          <div className="my-5  w-fit flex flex-col gap-y-3 ">
+            
+            
+          {containersData.map((container, index) => (
+        <div className='w-44 hover:pl-2 duration-300 '><a
+          key={container.id}
+          href={container.link}
+          className='flex gap-1 items-center'
+          onMouseEnter={() => setHoveredIndex(index)}
+          onMouseLeave={() => setHoveredIndex(null)}
+        >
+          <img
+            src={hoveredIndex === index ? container.icon2 : container.icon1}
+            alt={`Icon ${index}`}
+            className="w-6 transition-transform duration-300  transform hover:scale-y-95 font-light"
+          />
+          <h1 className='text-white text-2xl font-light mx-2'>{container.text}</h1>
+        </a></div>
+      ))} 
+            
+     
           </div>
         </div>
         {/* about section */}
-        <div className="mx-16 md:mx-0 lg:mx-0 px-4">
+        <div className="mx-16 md:mx-0 lg:mx-0 px-4 ">
           <h1 className={titleStyle}>About</h1>
           <div className="mt-5">
             <a href="/OurStory">
