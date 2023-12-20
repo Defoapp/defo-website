@@ -1,118 +1,224 @@
-import React, { useState } from 'react';
-import Navbar from "./Navbar/Navbar"
-import Footer from "./footer/Footer"
+import React, { useRef, useState, useEffect, useCallback } from "react";
 
-const HorizontalScrollList = () => {
-  const items = ['Cooking', 'Editing', 'Hairstyle', 'Crafts','Photography', 'Travel', 'Design', 'Item4','Item1', 'Item2', 'Item3', 'Item4','Item1', 'Item2', 'Item3', 'Item4',];
+// Import arrow images using require
+import rightarrow from "../image/topics/Frame.svg";
 
-  // Define sub-items with descriptions for each item
-  const subItemsMap = {
-    'Cooking': [
-      { name: 'Chicken', description: 'Quick and Easy Recipe for Beginners' },
-      { name: 'Biriyani', description: 'Quick and Easy Recipe for Beginners' },
-      { name: 'Grevey', description: 'Quick and Easy Recipe for Beginners' },
-    ],
-    'Editing': [
-      { name: 'Chicken', description: 'Quick and Easy Recipe for Beginners' },
-      { name: 'Biriyani', description: 'Quick and Easy Recipe for Beginners' },
-      { name: 'Grevey', description: 'Quick and Easy Recipe for Beginners' },
-    ],
-    'Hairstyle': [
-      { name: 'Chicken', description: 'Quick and Easy Recipe for Beginners' },
-      { name: 'Biriyani', description: 'Quick and Easy Recipe for Beginners' },
-      { name: 'Grevey', description: 'Quick and Easy Recipe for Beginners' },
-    ],
-    'Crafts': [
-      { name: 'Chicken', description: 'Quick and Easy Recipe for Beginners' },
-      { name: 'Biriyani', description: 'Quick and Easy Recipe for Beginners' },
-      { name: 'Grevey', description: 'Quick and Easy Recipe for Beginners' },
-    ],
-    'Photography': [
-      { name: 'Chicken', description: 'Quick and Easy Recipe for Beginners' },
-      { name: 'Biriyani', description: 'Quick and Easy Recipe for Beginners' },
-      { name: 'Grevey', description: 'Quick and Easy Recipe for Beginners' },
-    ],
-    'Travel': [
-      { name: 'Chicken', description: 'Quick and Easy Recipe for Beginners' },
-      { name: 'Biriyani', description: 'Quick and Easy Recipe for Beginners' },
-      { name: 'Grevey', description: 'Quick and Easy Recipe for Beginners' },
-    ],
-    'Design': [
-      { name: 'Chicken', description: 'Quick and Easy Recipe for Beginners' },
-      { name: 'Biriyani', description: 'Quick and Easy Recipe for Beginners' },
-      { name: 'Grevey', description: 'Quick and Easy Recipe for Beginners' },
-    ],
-    // 'Item 5': [
-    //     { name: 'Sub-item 1A', description: 'Description for Sub-item 1A' },
-    //     { name: 'Sub-item 1B', description: 'Description for Sub-item 1B' },
-    //     { name: 'Sub-item 1C', description: 'Description for Sub-item 1C' },
-    //   ],
-    //   'Item 6': [
-    //     { name: 'Sub-item 2A', description: 'Description for Sub-item 2A' },
-    //     { name: 'Sub-item 2B', description: 'Description for Sub-item 2B' },
-    //     { name: 'Sub-item 2C', description: 'Description for Sub-item 2C' },
-    //   ],
-    //   'Item 7': [
-    //     { name: 'Sub-item 3A', description: 'Description for Sub-item 3A' },
-    //     { name: 'Sub-item 3B', description: 'Description for Sub-item 3B' },
-    //     { name: 'Sub-item 3C', description: 'Description for Sub-item 3C' },
-    //   ],
-    //   'Item 8': [
-    //     { name: 'Sub-item 4A', description: 'Description for Sub-item 4A' },
-    //     { name: 'Sub-item 4B', description: 'Description for Sub-item 4B' },
-    //     { name: 'Sub-item 4C', description: 'Description for Sub-item 4C' },
-    //   ],
+// Import images using require
+import subtopic1Image from "../image/topics/Rectangle 112.svg";
+import subtopic2Image from "../image/topics/Rectangle 112.svg";
+
+const ScrollContainer = () => {
+  const scrollContainerRef = useRef(null);
+  const titleWidth = 48; // Adjust the width based on your title card width
+  const titlesPerPage = 8; // Number of titles to move per click
+
+  const topics = [
+    "Cooking",
+    "Editing",
+    "Hairstyle",
+    "Crafts",
+    "Photography",
+    "Travel",
+    "Adibe Tools",
+    "UI/UX Design Tools",
+    "Paper Craft",
+    "Cardboard Craft",
+    "Sports",
+    "Languages",
+    "Decorations",
+    "Kids",
+    "Women's Style",
+  ];
+
+  const getSubTopicsForTitle = (title) => {
+    // Mock function to get subtopics for a given title
+    // You may replace this with actual logic or API calls
+    switch (title) {
+      case "Cooking":
+        return [
+          {
+            name: "Chicken",
+            description: "Quick and Easy Recipe for Beginners",
+            imageUrl: subtopic1Image, // Use the imported image
+          },
+          {
+            name: "Gravy",
+            description: "Quick and Easy Recipe for Beginners",
+            imageUrl: subtopic2Image, // Use the imported image
+          },
+          {
+            name: "Rice",
+            description: "Quick and Easy Recipe for Beginners",
+            imageUrl: subtopic2Image, // Use the imported image
+          },
+          {
+            name: "Pasta",
+            description: "Quick and Easy Recipe for Beginners",
+            imageUrl: subtopic2Image, // Use the imported image
+          },
+          {
+            name: "Noodle",
+            description: "Quick and Easy Recipe for Beginners",
+            imageUrl: subtopic2Image, // Use the imported image
+          },
+          {
+            name: "Milk Sweet",
+            description: "Quick and Easy Recipe for Beginners",
+            imageUrl: subtopic2Image, // Use the imported image
+          },
+          {
+            name: "Sharma",
+            description: "Quick and Easy Recipe for Beginners",
+            imageUrl: subtopic2Image, // Use the imported image
+          },
+          {
+            name: "Pulao",
+            description: "Quick and Easy Recipe for Beginners",
+            imageUrl: subtopic2Image, // Use the imported image
+          },
+        ];
+      case "Editing":
+        return [
+          {
+            name: "Subtopic A",
+            description: "Description for Subtopic A",
+            imageUrl:  subtopic2Image,
+          },
+          {
+            name: "Subtopic B",
+            description: "Description for Subtopic B",
+            imageUrl:  subtopic2Image,
+          },
+        ];
+      // Add more cases for other titles
+      default:
+        return [];
+    }
   };
 
-  // Initialize selected item with the first item
-  const [selectedItem, setSelectedItem] = useState(items[0]);
+  // Initialize selectedTitle and subTopics with the data for the first title
+  const [selectedTitle, setSelectedTitle] = useState("Cooking");
+  const [selectedSubtopic, setSelectedSubtopic] = useState(null);
+  const [subTopics, setSubTopics] = useState({
+    Cooking: getSubTopicsForTitle("Cooking"),
+  });
 
-  const handleItemClick = (item) => {
-    setSelectedItem(item);
+  const scrollLeft = () => {
+    scrollContainerRef.current.scrollLeft -= titleWidth * titlesPerPage;
   };
+
+  const scrollRight = () => {
+    scrollContainerRef.current.scrollLeft += titleWidth * titlesPerPage;
+  };
+
+  const handleTitleClick = useCallback(
+    (title) => {
+      // Only update the selected title if it's different from the current one
+      if (selectedTitle !== title) {
+        setSelectedTitle(title);
+
+        // Fetch and set subtopics for the selected title (you may fetch this data from an API)
+        const fetchedSubTopics = getSubTopicsForTitle(title);
+        setSubTopics((prevSubTopics) => ({
+          ...prevSubTopics,
+          [title]: fetchedSubTopics,
+        }));
+
+        // Reset selected subtopic when a new title is clicked
+        setSelectedSubtopic(null);
+      }
+    },
+    [selectedTitle]
+  );
+
+  useEffect(() => {
+    // Set the first title as selected and show its subtopics initially
+    handleTitleClick(selectedTitle);
+  }, [handleTitleClick, selectedTitle]);
+
+  const handleSubtopicClick = (subtopic) => {
+    setSelectedSubtopic(subtopic);
+  };
+
+
 
   return (
-    <div>
-      <Navbar/>
-    <div className="flex flex-col items-center">
-      <div  className="overflow-x-scroll scrollbar-thin  scrollbar-thumb-blue-950 scrollbar-track-gray-300 w-4/6  p-4 mb-4">
-        <ul className="flex ">
-          {items.map((item, index) => (
-            <li
+    <div className="relative overflow-hidden">
+      <style>
+        {`
+          .scroll-container::-webkit-scrollbar {
+            display: none;
+          }
+        `}
+      </style>
+      <div className="w-4/6 mx-auto flex items-center justify-between mb-4 ">
+        {/* left arrow */}
+        <button
+          onClick={scrollLeft}
+          className="bg-gray-400 text-white  rounded-full"
+        >
+          <img src={rightarrow} alt="loading" />
+        </button>
+        {/* scroll bar */}
+        <div
+          ref={scrollContainerRef}
+          className="w-full scroll-container flex gap-x-4 py-1  mx-2 overflow-x-auto"
+          style={{ scrollBehavior: "smooth" }}
+        >
+          {/* scroll bar titles */}
+          {topics.map((color, index) => (
+            <div
               key={index}
-              className={`cursor-pointer w-fit mx-3 px-3 py-1 text-xl font-semibold text-center border bg-gray-200 rounded-lg ${selectedItem === item ? 'bg-green-500  text-white' : ''}`}
-              onClick={() => handleItemClick(item)}
+              className={`flex-shrink-0 w-fit h-fit py-1 px-4 text-xl font-medium text-white bg-blue-900 rounded-lg flex items-center justify-center cursor-pointer ${
+                selectedTitle === color ? "border border-blue-500" : ""
+              }`}
+              onClick={() => handleTitleClick(color)}
             >
-              {item}
-            </li>
+              {color}
+            </div>
           ))}
-        </ul>
+        </div>
+        {/* right arrow */}
+        <button
+          onClick={scrollRight}
+          className="bg-gray-400 text-white  rounded-full"
+        >
+          <img src={rightarrow} alt="loading" />
+        </button>
       </div>
 
-      {selectedItem && (
-        <div className="my-4 w-4/6 h-full flex  ">
-          
-          <div className="flex flex-col w-4/6 ">
-          <h3 className="text-2xl  font-bold mb-2 ">{selectedItem}</h3>
-            {subItemsMap[selectedItem].map((subItem, index) => (
-              <div key={index} className=''>
-                
-                <h4 className="text-2xl font-medium mb-2">{subItem.name}</h4>
-                <p className='text-xl'>{subItem.description}</p>
-                <hr className='border-black'/>
+      {selectedTitle && (
+        <div className="w-4/6 mx-auto mt-4 p-2 ">
+          <p className="text-lg font-semibold">
+             {selectedTitle}
+          </p>
+          {subTopics[selectedTitle]?.map((subTopic, index) => (
+            <div
+              key={index}
+              className={`cursor-pointer ${
+                selectedSubtopic === subTopic.name ? "font-bold" : ""
+              }`}
+              onClick={() => handleSubtopicClick(subTopic.name)}
+            >
+              <div className="flex items-center my-5">
+                <img
+                  src={subTopic.imageUrl}
+                  alt="loading"
+                  className="w-10 h-10 mr-2"
+                />
+                <div>
+                <p className="text-xl font-medium ">{subTopic.name}</p>
+                <p className="text-xl font-medium ">{subTopic.description}</p>
+                <hr className="border-black " />
+              </div>
               </div>
               
-            ))}
-          </div>
-          <div className='w-2/6 h-full '>
-
-          </div>
+            </div>
+          ))}
         </div>
       )}
-    </div>
-    <Footer/>
     </div>
   );
 };
 
-export default HorizontalScrollList;
+export default ScrollContainer;

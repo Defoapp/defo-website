@@ -15,8 +15,6 @@ const OurCreators = () => {
     setShowItems(5); // Reset the number of items to show
   };
 
-  
-
   return (
     <div className="w-full h-full">
       <Navbar />
