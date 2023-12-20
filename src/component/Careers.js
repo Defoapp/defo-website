@@ -9,6 +9,12 @@ import location from "../image/careers/location.svg"
 import time from "../image/careers/carbon_time.svg"
 
 const Carrers = () => {
+
+  const scrollToContainer = () => {
+    const container = document.getElementById('container');
+    container.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className='relative w-full h-full'>
         <Navbar/>
@@ -21,7 +27,7 @@ const Carrers = () => {
               <h1 className='border-black border-2 w-fit py-2 px-4 rounded-lg my-5 font-semibold '>We Hiring!</h1>
               <h1 className='text-2xl md:text-4xl lg:text-4xl font-semibold'>Be part of our mission</h1>
               <p className='text-black text-left text-lg '>We are looking for passionate people to join us on our mission. We values flat hierarchies, clear comunication and full ownership and responsibility.</p>
-              <div  className='flex gap-x-2 border-black border-2 rounded-3xl py-1 px-3 w-fit font-semibold my-8 cursor-pointer'>View Openings <span className='font-bold '><img className='w-3 h-7' src={arrow} alt='loading' /></span> </div>
+              <div onClick={scrollToContainer}  className='flex gap-x-2 border-black border-2 rounded-3xl py-1 px-3 w-fit font-semibold my-8 cursor-pointer transition-all hover:scale-95'>View Openings <span className='font-bold '><img className='w-3 h-7' src={arrow} alt='loading' /></span> </div>
             </div>
 
             <div className='w-full  lg:w-2/6 h-4/6 '>
@@ -33,7 +39,7 @@ const Carrers = () => {
           {/* Vacancies */}
           <div className='w-full h-full '>
             
-          <div className='w-5/6 h-full m-auto'>
+          <div id="container" className='w-5/6 h-full m-auto'>
             <hr className='w-full h-0.5 mx-auto  bg-gray-100 border-0 rounded md:my-7 dark:bg-gray-700'/>
 
             {Vacancies.map((Vacancies) =>(
