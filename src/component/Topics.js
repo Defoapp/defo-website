@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import React, { useRef, useState, useCallback } from "react";
 
 // Import arrow images using require
 import rightarrow from "../image/topics/Frame.svg";
@@ -6,6 +6,9 @@ import rightarrow from "../image/topics/Frame.svg";
 // Import images using require
 import subtopic1Image from "../image/topics/Rectangle 112.svg";
 import subtopic2Image from "../image/topics/Rectangle 112.svg";
+
+import Navbar from "../component/Navbar/Navbar"
+import Footer from "../component/footer/Footer"
 
 const ScrollContainer = () => {
   const scrollContainerRef = useRef(null);
@@ -76,19 +79,22 @@ const ScrollContainer = () => {
             description: "Quick and Easy Recipe for Beginners",
             imageUrl: subtopic2Image, // Use the imported image
           },
+          
+          //... (more subtopics)
         ];
       case "Editing":
         return [
           {
             name: "Subtopic A",
             description: "Description for Subtopic A",
-            imageUrl:  subtopic2Image,
+            imageUrl: subtopic2Image,
           },
           {
             name: "Subtopic B",
             description: "Description for Subtopic B",
-            imageUrl:  subtopic2Image,
+            imageUrl: subtopic2Image,
           },
+          //... (more subtopics)
         ];
       // Add more cases for other titles
       default:
@@ -102,6 +108,8 @@ const ScrollContainer = () => {
   const [subTopics, setSubTopics] = useState({
     Cooking: getSubTopicsForTitle("Cooking"),
   });
+  const [visibleSubtopics, setVisibleSubtopics] = useState(3); // Initial number of visible subtopics
+  const [showAllSubtopics, setShowAllSubtopics] = useState(false);
 
   const scrollLeft = () => {
     scrollContainerRef.current.scrollLeft -= titleWidth * titlesPerPage;
@@ -126,24 +134,33 @@ const ScrollContainer = () => {
 
         // Reset selected subtopic when a new title is clicked
         setSelectedSubtopic(null);
+        // Reset visible subtopics when a new title is clicked
+        setVisibleSubtopics(3);
+        setShowAllSubtopics(false);
       }
     },
     [selectedTitle]
   );
 
-  useEffect(() => {
-    // Set the first title as selected and show its subtopics initially
-    handleTitleClick(selectedTitle);
-  }, [handleTitleClick, selectedTitle]);
-
   const handleSubtopicClick = (subtopic) => {
     setSelectedSubtopic(subtopic);
   };
 
+  const handleShowMore = () => {
+    setVisibleSubtopics((prev) => prev + 4); // Increase the number of visible subtopics
+    setShowAllSubtopics(true);
+  };
 
+  const handleShowLess = () => {
+    setVisibleSubtopics(3); // Reset the number of visible subtopics
+    setShowAllSubtopics(false);
+  };
 
   return (
+    <div>
+      <Navbar/>
     <div className="relative overflow-hidden">
+      <h1 className="text-4xl font-bold text-center my-10" >Topics</h1>
       <style>
         {`
           .scroll-container::-webkit-scrollbar {
@@ -151,7 +168,7 @@ const ScrollContainer = () => {
           }
         `}
       </style>
-      <div className="w-4/6 mx-auto flex items-center justify-between mb-4 ">
+      <div className="w-5/6 lg:w-4/6 mx-auto flex items-center justify-between mb-4 ">
         {/* left arrow */}
         <button
           onClick={scrollLeft}
@@ -188,11 +205,9 @@ const ScrollContainer = () => {
       </div>
 
       {selectedTitle && (
-        <div className="w-4/6 mx-auto mt-4 p-2 ">
-          <p className="text-lg font-semibold">
-             {selectedTitle}
-          </p>
-          {subTopics[selectedTitle]?.map((subTopic, index) => (
+        <div className="w-5/6 lg:w-4/6 mx-auto my-10 p-2 ">
+          <p className="text-2xl font-bold">{selectedTitle}</p>
+          {subTopics[selectedTitle]?.slice(0, showAllSubtopics ? subTopics[selectedTitle].length : visibleSubtopics).map((subTopic, index) => (
             <div
               key={index}
               className={`cursor-pointer ${
@@ -207,16 +222,33 @@ const ScrollContainer = () => {
                   className="w-10 h-10 mr-2"
                 />
                 <div>
-                <p className="text-xl font-medium ">{subTopic.name}</p>
-                <p className="text-xl font-medium ">{subTopic.description}</p>
-                <hr className="border-black " />
-              </div>
+                  <p className="text-xl font-medium ">{subTopic.name}</p>
+                  <p className="text-xl font-medium ">{subTopic.description}</p>
+                  <hr className="border-black " />
+                </div>
+                
               </div>
               
             </div>
           ))}
+          {subTopics[selectedTitle]?.length > visibleSubtopics && (
+            <div className="flex justify-center border border-black rounded-lg  py-1">
+              {showAllSubtopics ? (
+                <button onClick={handleShowLess} className= "w-full text-black font-medium  cursor-pointer">
+                  Show Less
+                </button>
+              ) : (
+                <button onClick={handleShowMore} className="w-full text-black font-medium cursor-pointer">
+                  Show More
+                </button>
+              )}
+            </div>
+          )}
         </div>
       )}
+      <Footer/>
+    </div>
+    
     </div>
   );
 };
