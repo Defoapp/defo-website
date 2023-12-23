@@ -55,7 +55,7 @@ const Carrers = () => {
               </div>
               </div>
 
-              <div className=' flex items-center transition-all hover:scale-90' ><a href={Vacancies.link}><span className='w-fit rounded-xl bg-blue-950 text-white py-1 px-6 '>Apply</span></a></div>
+              <div className=' flex items-center transition-all hover:scale-90' ><a href={Vacancies.link}><span className='w-fit rounded-xl bg-blue-950 text-white py-1 lg:py-2 px-6 lg:px-8 '>Apply</span></a></div>
               </div>
               <hr className='w-full h-0.5 mx-auto  bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700'/>
             </div>
