@@ -10,9 +10,7 @@ export const navLinks = [
     title: "Home",
     path: "/",
   },
-  { id: "2",
-    title: "Pricing", 
-   },
+  { id: "2", title: "Pricing" },
   {
     id: "3",
     title: "Our Story",
@@ -30,16 +28,15 @@ export const navLinks = [
   },
   {
     id: "6",
-    title: "Career",
-    path: "/career",
+    title: "Careers",
+    path: "/careers",
   },
 ];
 
 const Navbar = () => {
-
   const scrollToContainer = () => {
-    const container = document.getElementById('container');
-    container.scrollIntoView({ behavior: 'smooth' });
+    const container = document.getElementById("container");
+    container.scrollIntoView({ behavior: "smooth" });
   };
 
   const [active, setActive] = useState("Home");
@@ -55,14 +52,16 @@ const Navbar = () => {
       {/* Desktop Navigation */}
       <ul className="list-none sm:flex lg:flex hidden justify-center items-center flex-1">
         {navLinks.map((nav, index) => (
-          <li 
+          <li
             key={nav.id}
             className={` relative font-poppins list-none no-underline font-normal cursor-pointer text-[16px] text-[white]  hover:bg-[white] hover:text-[black] hover:transition-[0.3s] hover:duration-[ease] hover:rounded-md py-1 px-4  ${
               active === nav.title ? "text-white" : "text-white"
             } ${index === navLinks.length - 1 ? "mr-8" : "mr-10"}`}
             onClick={() => setActive(nav.title)}
           >
-            <Link onClick={scrollToContainer} to={nav.path}>{nav.title}</Link>
+            <Link onClick={scrollToContainer} to={nav.path}>
+              {nav.title}
+            </Link>
           </li>
         ))}
       </ul>
@@ -98,7 +97,9 @@ const Navbar = () => {
                 } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
                 onClick={() => setActive(nav.title)}
               >
-                <Link onClick={scrollToContainer} to={nav.path}>{nav.title}</Link>
+                <Link onClick={scrollToContainer} to={nav.path}>
+                  {nav.title}
+                </Link>
               </li>
             ))}
             <li className="font-poppins  list-none no-underline font-medium mr-5  cursor-pointer text-[16px] text-white  bg-green-500 p-1.5 rounded-xl mt-3 ">
