@@ -1,14 +1,12 @@
 import React from "react";
 
-
-
 import { price } from "../constants/map";
 import { discover } from "../constants/map";
 import Navbar from "../component/Navbar/mainNavbar";
 import hero from "../image/startbackground_1.webp";
 import screenshot from "../image/tp201-sasi6-presentation43-02_2.png";
 
-import tick from "../image/price_box/Vector.svg"
+import tick from "../image/price_box/Vector.svg";
 
 // ---------------Discover------------------
 import playstore from "../image/google-play-badge.svg";
@@ -20,7 +18,6 @@ import GpIcon from "../image/Google_Play-Icon-Logo.wine.svg";
 import Footer from "../component/footer/Footer";
 
 function Home() {
-
   return (
     <div className="relative w-full h-full">
       {/* ------------Navbar------------------ */}
@@ -31,13 +28,15 @@ function Home() {
           {/* Overlay */}
 
           <div className="absolute w-full  text-white top-60 sm:top-26 md:top-20 lg:top-48  pl-4 md:pl-20 lg:pl-40 ">
-
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold font-bubblegum tracking-wide"> Information
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold font-bubblegum tracking-wide">
+              {" "}
+              Information
               <br />
               with
               <br />
-              Entertainment</h1>
-              <p className="font-bubblegum text-xl sm:text-2xl md:text-2xl lg:text-3xl text-left font-medium">
+              Entertainment
+            </h1>
+            <p className="font-bubblegum text-xl sm:text-2xl md:text-2xl lg:text-3xl text-left font-medium">
               Are you looking to have fun and learn at the same time?
             </p>
             <div className=" w-full flex gap-10 mt-10  flex-col md:flex-row  place-items-center lg:justify-start">
@@ -54,7 +53,6 @@ function Home() {
                 alt="loading"
               />
             </div>
-            
           </div>
           <img
             className="w-full h-screen object-cover"
@@ -119,8 +117,8 @@ function Home() {
         </div>
 
         {/* Price Section */}
-        <div id="container"
-          
+        <div
+          id="container"
           className="w-full bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50% py-5"
         >
           <h1 className=" text-white text-2xl sm:text-4xl md:text-4xl font-medium text-center mt-5 ">
@@ -132,34 +130,44 @@ function Home() {
 
           {/* Cards */}
 
-          <div  className="flex justify-center  gap-10 flex-wrap my-16 ">
+          <div className="flex justify-center  gap-10 flex-wrap my-16 ">
             {price.map((price) => (
-              <div 
+              <div
                 key={price.id}
                 className=" bg-white rounded-2xl w-80 h-96 text-center shadow-2xl border-2  transition-all hover:scale-95"
               >
-                {/* <h1 className="text-gray-500 font-semibold font-poppins mt-10">
-                  {price.title}
-                </h1> */}
                 <h1 className=" mt-8 text-sm  font-poppins">
                   <span className="font-bold text-xl sm:text-2xl lg:text-4xl ">
                     {price.rate}
                   </span>
-                  
                 </h1>
-                <h1>{price.valid}</h1>
+                <h1 className="font-medium ">{price.valid}</h1>
                 <hr className="w-5/6 mx-auto" />
                 <div className="flex mx-10 mt-5">
                   <ul className="text-left flex flex-col gap-y-3 font-poppins text-gray-500">
-                    <li className="flex"><img src={tick} alt="loading" className="w-4 mx-2"/>{price.spec1}</li>
-                    <li className="flex"><img src={tick} alt="loading" className="w-4 mx-2"/>{price.spec3}</li>
-                    <li className="flex"><img src={tick} alt="loading" className="w-4 mx-2"/>{price.spec2}</li>
-                    <li className="flex"><img src={tick} alt="loading" className="w-4 mx-2"/>{price.spec4}</li>
+                    <li className="flex">
+                      <img src={tick} alt="loading" className="w-4 mx-2" />
+                      {price.spec1}
+                    </li>
+                    <li className="flex">
+                      <img src={tick} alt="loading" className="w-4 mx-2" />
+                      {price.spec3}
+                    </li>
+                    <li className="flex">
+                      <img src={tick} alt="loading" className="w-4 mx-2" />
+                      {price.spec2}
+                    </li>
+                    <li className="flex">
+                      <img src={tick} alt="loading" className="w-4 mx-2" />
+                      {price.spec4}
+                    </li>
                   </ul>
-                  
                 </div>
                 <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo">
-                  <div className="text-2xl font-semibold bg-green-500 text-white w-fit px-6 py-3 rounded-xl mx-auto my-8">Get Started</div></a>
+                  <div className="text-2xl font-semibold bg-green-500 text-white w-fit px-6 py-3 rounded-xl mx-auto my-8">
+                    Get Started
+                  </div>
+                </a>
               </div>
             ))}
           </div>

@@ -15,13 +15,11 @@ const Faq = () => {
       <Navbar />
       <div className="w-full h-full">
         {/* Page Heading */}
-
-        <h1 className="text-4xl font-bold text-center my-10">
+        <h1 className="text-4xl font-bold text-center my-10 ">
           Frequently Asked Questions
         </h1>
 
         {/* Search bar */}
-
         <div className="bg-gray-300 w-5/6  lg:w-3/6 flex mx-auto py-3 rounded-lg">
           <h1 className="text-2xl font-bold mx-5 my-auto">FAQ</h1>
           <div className="relative w-4/6 mx-auto z-20">
@@ -39,7 +37,6 @@ const Faq = () => {
         </div>
 
         {/* Questions */}
-
         <div className="w-5/6 md:w-4/6 lg:w-4/6 mx-auto my-10 py-10  rounded-2xl  bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50%">
           {faqmap
             .filter((faqmap) => {
@@ -77,6 +74,19 @@ const Faq = () => {
                 </details>
               </div>
             ))}
+          
+          {faqmap.length > 0 && // Check if there are no search results
+            faqmap
+              .filter((faqmap) => {
+                return search.toLowerCase() === ""
+                  ? faqmap
+                  : faqmap.title.toLowerCase().includes(search.toLowerCase());
+              })
+              .length === 0 && (
+              <div className="w-full text-center text-white">
+                No results found for "{search}".
+              </div>
+            )}
         </div>
       </div>
       <Footer />

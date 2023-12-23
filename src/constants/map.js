@@ -12,11 +12,7 @@ import Languages from "../image/presentation.png";
 import Cooking from "../image/cooking.png";
 import Women from "../image/hair-styling.png";
 
-// pprice card icon
-// import tick from "../image/price_box/Vector.svg"
 
-// heads image
-// import jk from "../image/ourTeams/heads img.png";
 
 // members image
 import member from "../image/ourTeams/member img.png";
@@ -29,11 +25,17 @@ import create from "../image/ourCreator/stephanie-liverani-Zz5LQe-VSMY-unsplash 
 import insta from "../image/social media svg/instagram Default.svg";
 import yt from "../image/social media svg/mingcute_youtube-line.svg";
 
+// Vacancies image
+import uiux from "../image/careers/jobs-icon/responsive-design.png"
+import frontend from "../image/careers/jobs-icon/front-development.png"
+import backend from "../image/careers/jobs-icon/back-end.png"
+import android from "../image/careers/jobs-icon/programming.png"
+import fullstack from "../image/careers/jobs-icon/web-developer.png"
+
 // home page Price section
 export const price = [
   {
     id: "1",
-    // title: "Free Trail",
     rate: "₹0",
     valid: "30 Days",
     spec1: "New Users Only",
@@ -43,7 +45,6 @@ export const price = [
   },
   {
     id: "2",
-    // title: "Free Trail",
     rate: "₹99",
     valid: "1 Month",
     spec1: "Including Free Trial",
@@ -53,7 +54,6 @@ export const price = [
   },
   {
     id: "3",
-    // title: "Free Trail",
     rate: "₹499",
     valid: "6 Months",
     spec1: "Including Free Trial",
@@ -197,6 +197,7 @@ export const Vacancies = [
     location: "Remote",
     jobType: "Full Time",
     link: "https://www.linkedin.com/jobs/view/3643238774",
+    img: uiux,
   },
   {
     id: "2",
@@ -205,6 +206,7 @@ export const Vacancies = [
     location: "Remote",
     jobType: "Full Time",
     link: "https://www.linkedin.com/jobs/view/3643238774",
+    img: frontend,
   },
   {
     id: "3",
@@ -213,6 +215,7 @@ export const Vacancies = [
     location: "Remote",
     jobType: "Full Time",
     link: "https://www.linkedin.com/jobs/view/3643238774",
+    img: backend,
   },
   {
     id: "4",
@@ -221,6 +224,7 @@ export const Vacancies = [
     location: "Remote",
     jobType: "Full Time",
     link: "https://www.linkedin.com/jobs/view/3643238774",
+    img: android,
   },
   {
     id: "5",
@@ -229,6 +233,7 @@ export const Vacancies = [
     location: "Remote",
     jobType: "Full Time",
     link: "https://www.linkedin.com/jobs/view/3643238774",
+    img: fullstack,
   },
 ];
 

@@ -55,9 +55,9 @@ function Privacy() {
           the app
         </p>
 
-        <ul className="my-8 list-disc ml-5">
+        <ul className="my-8 underline list-disc ml-5 ">
           <a href="https://policies.google.com/privacy">
-            <li>Google Play Services</li>
+            <li >Google Play Services</li>
           </a>
           <a href="https://firebase.google.com/policies/analytics">
             <li>Google Analytics for Firebase</li>

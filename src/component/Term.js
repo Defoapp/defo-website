@@ -52,7 +52,7 @@ const Term = () => {
           the app
         </p>
 
-        <ul className="my-8 list-disc ml-5">
+        <ul className="my-8 list-disc ml-5 underline">
           <a
             className="underline-offset-1"
             href="https://policies.google.com/privacy"
