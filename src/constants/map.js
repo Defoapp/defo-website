@@ -12,6 +12,9 @@ import Languages from "../image/presentation.png";
 import Cooking from "../image/cooking.png";
 import Women from "../image/hair-styling.png";
 
+// pprice card icon
+// import tick from "../image/price_box/Vector.svg"
+
 // heads image
 // import jk from "../image/ourTeams/heads img.png";
 
@@ -28,30 +31,33 @@ import yt from "../image/social media svg/mingcute_youtube-line.svg";
 export const price = [
   {
     id: "1",
-    title: "Free Trail",
+    // title: "Free Trail",
     rate: "₹0",
-    valid: "/1 month",
-    spec1: "Single User",
+    valid: "30 Days",
+    spec1: "New Users Only",
     spec2: "No Ads",
     spec3: "Unlimited Videos",
+    spec4: "Daily New Videos",
   },
   {
     id: "2",
-    title: "Free Trail",
+    // title: "Free Trail",
     rate: "₹99",
-    valid: "/1 month",
-    spec1: "Single User",
+    valid: "1 Month",
+    spec1: "Including Free Trial",
     spec2: "No Ads",
     spec3: "Unlimited Videos",
+    spec4: "Daily New Videos",
   },
   {
     id: "3",
-    title: "Free Trail",
+    // title: "Free Trail",
     rate: "₹499",
-    valid: "/1 month",
-    spec1: "Single User",
+    valid: "6 Months",
+    spec1: "Including Free Trial",
     spec2: "No Ads",
     spec3: "Unlimited Videos",
+    spec4: "Daily New Videos",
   },
 ];
 
