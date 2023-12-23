@@ -27,8 +27,8 @@ export const navLinks = [
   },
   {
     id: "5",
-    title: "Career",
-    path: "/career",
+    title: "Careers",
+    path: "/careers",
   },
 ];
 
@@ -46,9 +46,8 @@ const Navbar = () => {
       {/* Desktop Navigation */}
       <ul className=" list-none sm:flex lg:flex hidden ml-5 justify-center items-center flex-1 ">
         {navLinks.map((nav, index) => (
-          <Link to={navLinks.path}>
+          <Link key={nav.id} to={navLinks.path}>
             <li
-              key={nav.id}
               className={`font-poppins list-none no-underline font-normal cursor-pointer text-[16px]  text-[white]   hover:bg-[white] hover:text-[black] hover:transition-[0.3s] hover:duration-[ease] hover:rounded-md py-1 px-4 ${
                 active === nav.title ? "text-white" : "text-white"
               } ${index === navLinks.length - 1 ? "mr-0" : "mr-8"}`}
@@ -85,9 +84,8 @@ const Navbar = () => {
         >
           <ul className="list-none text-center flex   flex-1 flex-col">
             {navLinks.map((nav, index) => (
-              <Link key={navLinks.id} to="/">
+              <Link key={nav.id} to={navLinks.path}>
                 <li
-                  key={nav.id}
                   className={`font-poppins list-none text-center   no-underline font-medium ml-12 mr-12 cursor-pointer text-[16px] ${
                     active === nav.title ? "text-white" : "text-white"
                   } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}

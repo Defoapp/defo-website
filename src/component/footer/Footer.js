@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-
+import React, { useState } from "react";
 
 // imported - images
 import logo from "./socialMediaSvg/Logo.png";
@@ -12,21 +11,40 @@ import xHover from "./socialMediaSvg/x_hover.svg";
 import In from "./socialMediaSvg/linkedin_Default.svg";
 import InHover from "./socialMediaSvg/linkedin_hover.svg";
 
-
-
 function Footer() {
-
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const containersData = [
-    { id: 1, icon1: insta, icon2: instaHover, text: 'Instagram', link: 'https://instagram.com/DefoApp' },
-    { id: 2, icon1: fb, icon2: fbHover, text: 'Facebook', link: 'https://facebook.com/DefoApp' },
-    { id: 3, icon1: x, icon2: xHover, text: 'X', link: 'https://twitter.com/DefoApp' },
-    { id: 4, icon1: In, icon2: InHover, text: 'LinkedIn', link: 'https://www.linkedin.com/showcase/defoapp' },
+    {
+      id: "1",
+      icon1: insta,
+      icon2: instaHover,
+      text: "Instagram",
+      link: "https://instagram.com/DefoApp",
+    },
+    {
+      id: "2",
+      icon1: fb,
+      icon2: fbHover,
+      text: "Facebook",
+      link: "https://facebook.com/DefoApp",
+    },
+    {
+      id: "3",
+      icon1: x,
+      icon2: xHover,
+      text: "X",
+      link: "https://twitter.com/DefoApp",
+    },
+    {
+      id: "4",
+      icon1: In,
+      icon2: InHover,
+      text: "LinkedIn",
+      link: "https://www.linkedin.com/showcase/defoapp",
+    },
   ];
 
-
-  const titleStyle =
-    "text-white font-medium text-2xl  py-2 border-b-2 border-green-500 w-fit ";
+  const titleStyle = "text-white font-medium text-2xl  py-2  w-fit ";
   const subHeadingStyle = `text-2xl font-light text-white w-44 my-3 hover:pl-2 duration-300   `;
   return (
     <div className="w-full h-full bg-black py-14 ">
@@ -35,29 +53,30 @@ function Footer() {
         <div className="mx-16  md:mx-0 lg:mx-0 ">
           {/* logo */}
           <a href="/">
-            <img className='w-28' src={logo} alt="loading" />
+            <img className="w-28" src={logo} alt="loading" />
           </a>
           <div className="my-5  w-fit flex flex-col gap-y-3 ">
-            
-            
-          {containersData.map((container, index) => (
-        <div className='w-44 hover:pl-2 duration-300 '><a
-          key={container.id}
-          href={container.link}
-          className='flex gap-1 items-center'
-          onMouseEnter={() => setHoveredIndex(index)}
-          onMouseLeave={() => setHoveredIndex(null)}
-        >
-          <img
-            src={hoveredIndex === index ? container.icon2 : container.icon1}
-            alt={`Icon ${index}`}
-            className="w-6 transition-transform duration-300  transform hover:scale-y-95 font-light"
-          />
-          <h1 className='text-white text-2xl font-light mx-2'>{container.text}</h1>
-        </a></div>
-      ))} 
-            
-     
+            {containersData.map((container, index) => (
+              <div key={container.id} className="w-44 hover:pl-2 duration-300 ">
+                <a
+                  href={container.link}
+                  className="flex gap-1 items-center"
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  <img
+                    src={
+                      hoveredIndex === index ? container.icon2 : container.icon1
+                    }
+                    alt={`Icon ${index}`}
+                    className="w-6 transition-transform duration-300  transform hover:scale-y-95 font-light"
+                  />
+                  <h1 className="text-white text-2xl font-light mx-2">
+                    {container.text}
+                  </h1>
+                </a>
+              </div>
+            ))}
           </div>
         </div>
         {/* about section */}
