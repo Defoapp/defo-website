@@ -10,24 +10,24 @@ export const navLinks = [
     title: "Home",
     path: "/",
   },
-  { id: "2", title: "Pricing" },
+  // { id: "2", title: "Pricing" },
   {
-    id: "3",
+    id: "2",
     title: "Our Story",
     path: "/OurStory",
   },
   {
-    id: "4",
+    id: "3",
     title: "About",
     path: "/about",
   },
   {
-    id: "5",
+    id: "4",
     title: "Our Team",
     path: "/OurTeams",
   },
   {
-    id: "6",
+    id: "5",
     title: "Careers",
     path: "/careers",
   },
@@ -50,20 +50,37 @@ const Navbar = () => {
       </Link>
 
       {/* Desktop Navigation */}
-      <ul className="list-none sm:flex lg:flex hidden justify-center items-center flex-1">
-        {navLinks.map((nav, index) => (
-          <li
-            key={nav.id}
-            className={` relative font-poppins list-none no-underline font-normal cursor-pointer text-[16px] text-[white]  hover:bg-[white] hover:text-[black] hover:transition-[0.3s] hover:duration-[ease] hover:rounded-md py-1 px-4  ${
-              active === nav.title ? "text-white" : "text-white"
-            } ${index === navLinks.length - 1 ? "mr-8" : "mr-10"}`}
-            onClick={() => setActive(nav.title)}
-          >
-            <Link onClick={scrollToContainer} to={nav.path}>
-              {nav.title}
-            </Link>
+      <ul className="list-none sm:flex lg:flex hidden justify-center items-center gap-x-5 py-2 ">
+        <Link to="/">
+          <li className=" relative font-poppins list-none no-underline font-normal cursor-pointer text-[16px] text-[white]  hover:bg-[white] hover:text-[black] hover:transition-[0.3s] hover:duration-[ease] hover:rounded-md py-1 px-4">
+            Home
           </li>
-        ))}
+        </Link>
+        <Link onClick={scrollToContainer}>
+          <li className=" relative font-poppins list-none no-underline font-normal cursor-pointer text-[16px] text-[white]  hover:bg-[white] hover:text-[black] hover:transition-[0.3s] hover:duration-[ease] hover:rounded-md py-1 px-4">
+            Pricing
+          </li>
+        </Link>
+        <Link to="/ourstory">
+          <li className=" relative font-poppins list-none no-underline font-normal cursor-pointer text-[16px] text-[white]  hover:bg-[white] hover:text-[black] hover:transition-[0.3s] hover:duration-[ease] hover:rounded-md py-1 px-4">
+            OurStory
+          </li>
+        </Link>
+        <Link to="/about">
+          <li className=" relative font-poppins list-none no-underline font-normal cursor-pointer text-[16px] text-[white]  hover:bg-[white] hover:text-[black] hover:transition-[0.3s] hover:duration-[ease] hover:rounded-md py-1 px-4">
+            About
+          </li>
+        </Link>
+        <Link to="/ourteams">
+          <li className=" relative font-poppins list-none no-underline font-normal cursor-pointer text-[16px] text-[white]  hover:bg-[white] hover:text-[black] hover:transition-[0.3s] hover:duration-[ease] hover:rounded-md py-1 px-4">
+            OurTeam
+          </li>
+        </Link>
+        <Link to="/careers">
+          <li className=" relative font-poppins list-none no-underline font-normal cursor-pointer text-[16px] text-[white]  hover:bg-[white] hover:text-[black] hover:transition-[0.3s] hover:duration-[ease] hover:rounded-md py-1 px-4">
+            Careers
+          </li>
+        </Link>
       </ul>
       <ul>
         <a href="https://creator.yesdefo.com/">
@@ -74,7 +91,7 @@ const Navbar = () => {
       </ul>
 
       {/* Mobile Navigation */}
-      <div className="sm:hidden mr-8   flex flex-1 justify-end items-center">
+      <div className="sm:hidden mr-8 my-2   flex flex-1 justify-end items-center">
         <img
           src={toggle ? close : menu}
           alt="menu"

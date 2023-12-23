@@ -2,6 +2,7 @@ import React, { useRef, useState, useCallback } from "react";
 
 // Import arrow images using require
 import rightarrow from "../image/topics/Frame.svg";
+import leftarrow from "../image/topics/Vector.svg";
 
 // Import images using require
 import subtopic1Image from "../image/topics/Rectangle 112.svg";
@@ -172,9 +173,10 @@ const ScrollContainer = () => {
         {/* left arrow */}
         <button
           onClick={scrollLeft}
-          className="bg-gray-400 text-white  rounded-full"
+          
+          className="bg-gray-400 text-white w-8 h-8  rounded-full"
         >
-          <img src={rightarrow} alt="loading" />
+          <img src={leftarrow} alt="loading" className="mx-auto" />
         </button>
         {/* scroll bar */}
         <div
@@ -198,9 +200,9 @@ const ScrollContainer = () => {
         {/* right arrow */}
         <button
           onClick={scrollRight}
-          className="bg-gray-400 text-white  rounded-full"
+          className="bg-gray-400 text-white w-8 h-8  rounded-full"
         >
-          <img src={rightarrow} alt="loading" />
+          <img src={rightarrow} alt="loading" className="mx-auto" />
         </button>
       </div>
 

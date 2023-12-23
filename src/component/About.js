@@ -55,7 +55,7 @@ function About() {
                 exceed expectations. Through creativity, expertise, and a
                 passion for innovation, we're redefining what's possible.
               </p>
-              <a href="https://lowpow.dev/"><h1 className="py-2 w-48 h-12 px-3 tracking-wider font-semibold text-4xl md:text-2xl lg:text-2xl rounded-md my-4 mx-auto md:mx-0 lg:mx-0 bg-blue-950 text-white text-center hover:scale-95 transition-all">Explore</h1></a>
+              <a href="https://lowpow.dev/"><h1 className="py-1 w-36 h-12  tracking-wider font-semibold text-2xl  rounded-md my-4 mx-auto md:mx-0 lg:mx-0 bg-blue-950 text-white text-center hover:scale-95 transition-all">Explore</h1></a>
             </div>
           </div>
 
@@ -72,7 +72,7 @@ function About() {
               <h1 className="text-4xl font-semibold my-10">
                 Explore a World of Knowledge
               </h1>
-              <h1>
+              <h1 className="text-2xl font-medium">
                 The videos and interactive content covering an array of
                 intriguing topics. From science to history, pop culture to DIY
                 hacks, we've got it all. Our informative content keeps you in
@@ -96,7 +96,7 @@ function About() {
               <h1 className="text-4xl font-semibold my-10">
                 Infographics and Visual Delights
               </h1>
-              <h1 className="text-2xl">
+              <h1 className="text-2xl font-medium">
                 Feast your eyes on visually stunning infographics that simplify
                 complex concepts. Learn, share, and impress with these
                 eye-catching visuals.
@@ -109,14 +109,14 @@ function About() {
               <h1 className="text-4xl font-semibold my-10">
                 Daily Dose of Fun
               </h1>
-              <h1>
+              <h1 className="text-2xl font-medium">
                 Infotainment doesn't have to be serious. Enjoy a daily dose of
                 humor, weird facts, and intriguing anecdotes to brighten your
                 day.
               </h1>
             </div>
             <div className="w-full mx-auto my-5 lg:my-0 lg:w-1/2">
-              <img src={dailyDose} alt="loading" />
+              <img className=" w-4/6 lg:w-3/6 mx-auto" src={dailyDose}  alt="loading" />
             </div>
           </div>
         </div>
