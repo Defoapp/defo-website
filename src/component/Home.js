@@ -8,6 +8,8 @@ import Navbar from "../component/Navbar/mainNavbar";
 import hero from "../image/startbackground_1.webp";
 import screenshot from "../image/tp201-sasi6-presentation43-02_2.png";
 
+import tick from "../image/price_box/Vector.svg"
+
 // ---------------Discover------------------
 import playstore from "../image/google-play-badge.svg";
 import appstore from "../image/app-store-badge.svg";
@@ -134,37 +136,42 @@ function Home() {
             {price.map((price) => (
               <div 
                 key={price.id}
-                className=" bg-white rounded-2xl w-80 h-80 text-center shadow-2xl border-2  transition-all hover:scale-95"
+                className=" bg-white rounded-2xl w-80 h-96 text-center shadow-2xl border-2  transition-all hover:scale-95"
               >
-                <h1 className="text-gray-500 font-semibold font-poppins mt-10">
+                {/* <h1 className="text-gray-500 font-semibold font-poppins mt-10">
                   {price.title}
-                </h1>
-                <h1 className=" mt-5 text-sm  font-poppins">
+                </h1> */}
+                <h1 className=" mt-8 text-sm  font-poppins">
                   <span className="font-bold text-xl sm:text-2xl lg:text-4xl ">
                     {price.rate}
                   </span>
-                  {price.valid}
+                  
                 </h1>
+                <h1>{price.valid}</h1>
                 <hr className="w-5/6 mx-auto" />
-                <div className="flex justify-center mt-5">
-                  <ul className="text-left font-poppins text-gray-500">
-                    <li>{price.spec1}</li>
-                    <li>{price.spec2}</li>
-                    <li>{price.spec3}</li>
+                <div className="flex mx-10 mt-5">
+                  <ul className="text-left flex flex-col gap-y-3 font-poppins text-gray-500">
+                    <li className="flex"><img src={tick} alt="loading" className="w-4 mx-2"/>{price.spec1}</li>
+                    <li className="flex"><img src={tick} alt="loading" className="w-4 mx-2"/>{price.spec3}</li>
+                    <li className="flex"><img src={tick} alt="loading" className="w-4 mx-2"/>{price.spec2}</li>
+                    <li className="flex"><img src={tick} alt="loading" className="w-4 mx-2"/>{price.spec4}</li>
                   </ul>
+                  
                 </div>
+                <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo">
+                  <div className="text-2xl font-semibold bg-green-500 text-white w-fit px-6 py-3 rounded-xl mx-auto my-8">Get Started</div></a>
               </div>
             ))}
           </div>
         </div>
 
         {/* store links */}
-        <div className="w-full h-fit content-center flex justify-center py-10">
-          <div className="m-auto text-center">
-            <h1 className="font-bold text-xl md:text-2xl  lg:text-4xl">
+        <div className="w-full h-fit  flex justify-center py-10">
+          <div className="mx-auto ">
+            <h1 className="font-bold text-2xl md:text-2xl  lg:text-5xl">
               Get the app now!
             </h1>
-            <div className="flex gap-10 flex-col lg:flex-row my-5">
+            <div className="flex gap-x-5 gap-y-5 flex-col lg:flex-row ml-0 lg:ml-5 my-10 ">
               <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1">
                 <img
                   className="w-48 lg:w-40  transition-all hover:scale-95"
