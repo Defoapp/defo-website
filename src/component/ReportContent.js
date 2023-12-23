@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Navbar from "../component/Navbar/Navbar";
 import Footer from "../component/footer/Footer";
 
+import tick from "../image/report_content/verified.mp4";
 
 const ReportContent = () => {
   // State to manage form data
@@ -99,29 +100,21 @@ const ReportContent = () => {
       <Navbar />
       <div className="w-full h-full">
         <div className="w-5/6 md:w-4/6 lg:w-3/6 h-full my-10 mx-auto">
-          <div>
-            <h1 className="font-bold text-5xl font-bubblegum w-6/6 text-center mx-auto my-5">
-              How to make a legal claim relating to content on Defo
-            </h1>
-            <h1 className="my-5 text-2xl font-medium text-center mx-auto w-full">
-              To notify Defo of an infringement or other legal claim relating to
-              content on the Defo app ,please complete the form below.
-            </h1>
-          </div>
           <div className="w-full h-full">
             <form onSubmit={handleSubmit}>
               {/* First section */}
               {currentStep === 1 && (
                 <section>
-                  {/* <div>
-            <h1 className="font-bold text-5xl w-6/6 text-center font-bubblegum mx-auto my-5">
-              How to make a legal claim relating to content on Defo
-            </h1>
-            <h1 className="my-5 text-2xl font-medium text-center mx-auto w-full">
-              To notify Defo of an infringement or other legal claim relating to
-              content on the Defo app ,please complete the form below.
-            </h1>
-          </div> */}
+                  <div>
+                    <h1 className="font-bold text-5xl w-6/6 text-center font-bubblegum mx-auto my-5">
+                      How to make a legal claim relating to content on Defo
+                    </h1>
+                    <h1 className="my-5 text-2xl font-medium text-center mx-auto w-full">
+                      To notify Defo of an infringement or other legal claim
+                      relating to content on the Defo app ,please complete the
+                      form below.
+                    </h1>
+                  </div>
                   <div className="w-full h-full flex flex-col gap-y-1">
                     <label htmlFor="firstName" className="text-xl ">
                       First Name<span className="text-red-600 mx-1">*</span>
@@ -135,7 +128,9 @@ const ReportContent = () => {
                       className="border-2 border-black rounded-md w-full h-9 my-1 pl-3 form-input"
                     />
                     {errors.firstName && (
-                      <div className="text-red-600 text-sm">{errors.firstName}</div>
+                      <div className="text-red-600 text-sm">
+                        {errors.firstName}
+                      </div>
                     )}
 
                     <label htmlFor="lastName" className="text-xl ">
@@ -150,7 +145,9 @@ const ReportContent = () => {
                       className="border-2 border-black rounded-md w-full h-9 my-1 pl-3 form-input"
                     />
                     {errors.lastName && (
-                      <div className="text-red-600 text-sm">{errors.lastName}</div>
+                      <div className="text-red-600 text-sm">
+                        {errors.lastName}
+                      </div>
                     )}
 
                     <label className="text-xl ">Company Name</label>
@@ -165,7 +162,7 @@ const ReportContent = () => {
                       name="username"
                       className="border-2 border-black rounded-md w-full h-9 my-1 pl-3"
                     />
-                    <label  htmlFor="email" className="text-xl ">
+                    <label htmlFor="email" className="text-xl ">
                       Email<span className="text-red-600 mx-1">*</span>
                     </label>
                     <input
@@ -192,15 +189,16 @@ const ReportContent = () => {
               {/* second section */}
               {currentStep === 2 && (
                 <section>
-                  {/* <div>
-            <h1 className="font-bold text-4xl w-5/6 text-center   mx-auto my-5">
-              How to make a legal claim relating to content on Defo
-            </h1>
-            <h1 className="my-5 text-2xl font-medium text-center mx-auto w-full">
-              To notify Defo of an infringement or other legal claim relating to
-              content on the Defo app ,please complete the form below.
-            </h1>
-          </div> */}
+                  <div>
+                    <h1 className="font-bold text-4xl w-5/6 text-center   mx-auto my-5">
+                      How to make a legal claim relating to content on Defo
+                    </h1>
+                    <h1 className="my-5 text-2xl font-medium text-center mx-auto w-full">
+                      To notify Defo of an infringement or other legal claim
+                      relating to content on the Defo app ,please complete the
+                      form below.
+                    </h1>
+                  </div>
                   <div className="w-full h-full flex flex-col gap-y-1">
                     <label htmlFor="option1" className="text-xl">
                       Claim type<span className="text-red-600 mx-1">*</span>
@@ -221,7 +219,9 @@ const ReportContent = () => {
                       <option className="font-medium">Other legal claim</option>
                     </select>
                     {errors.option1 && (
-                      <div className="text-red-600 text-sm">{errors.option1}</div>
+                      <div className="text-red-600 text-sm">
+                        {errors.option1}
+                      </div>
                     )}
 
                     <label htmlFor="option2" className="text-xl">
@@ -242,34 +242,42 @@ const ReportContent = () => {
                       <option className="font-medium">
                         Title & description
                       </option>
-                    </select>{errors.option2 && (
-                      <div className="text-red-600 text-sm">{errors.option2}</div>
+                    </select>
+                    {errors.option2 && (
+                      <div className="text-red-600 text-sm">
+                        {errors.option2}
+                      </div>
                     )}
-                    
 
-                    <label  htmlFor="input2" className="text-xl ">
+                    <label htmlFor="input2" className="text-xl ">
                       Please provide the URL of the content you’d like to report
                       <span className="text-red-600 mx-1">*</span>
                     </label>
                     <textarea
-                       type="text"
-                       id="input2"
-                       name="input2"
-                       value={formData.input2}
-                       onChange={handleInputChange}
+                      type="text"
+                      id="input2"
+                      name="input2"
+                      value={formData.input2}
+                      onChange={handleInputChange}
                       className="border-2 border-black rounded-md w-full h-20 my-1 pl-3 form-input"
                     />
-                    {errors.input2 && <div className="text-red-600 text-sm">{errors.input2}</div>}
+                    {errors.input2 && (
+                      <div className="text-red-600 text-sm">
+                        {errors.input2}
+                      </div>
+                    )}
                     <label className="text-xl ">
                       Why are you reporting the content ?
-                      
                     </label>
                     <textarea
                       type="text"
                       className="border-2 border-black rounded-md w-full h-20 my-1 pl-3"
                     />
-                    
-                    <label className="text-xl ">Any further details<span className="text-red-600 mx-1">*</span></label>
+
+                    <label className="text-xl ">
+                      Any further details
+                      <span className="text-red-600 mx-1">*</span>
+                    </label>
                     <textarea
                       type="text"
                       id="furtherDetails2"
@@ -277,13 +285,19 @@ const ReportContent = () => {
                       value={formData.furtherDetails2}
                       onChange={handleInputChange}
                       className="border-2 border-black rounded-md w-full h-20 my-2 pl-3"
-                    />{errors.furtherDetails2 && <div className="text-red-600 text-sm">{errors.furtherDetails2}</div>}
+                    />
+                    {errors.furtherDetails2 && (
+                      <div className="text-red-600 text-sm">
+                        {errors.furtherDetails2}
+                      </div>
+                    )}
                   </div>
                 </section>
               )}
               {/* final submission */}
               {currentStep === 3 && (
                 <section>
+                  <video src={tick} autoPlay className="w-2/6 mx-auto" />
                   <div className="bg-green-500 w-fit p-4 rounded-xl mx-auto">
                     <h6 className=" text-white font-bold text-2xl">
                       Submitted Successfully
@@ -293,25 +307,36 @@ const ReportContent = () => {
               )}
 
               {/* Navigation buttons */}
-        <div className="flex justify-between mt-4">
-          {currentStep === 2 && (
-            <button type="button" onClick={handlePrevStep} className="border-2 border-black text-xl font-medium w-20 h-9 rounded-xl">
-              Back
-            </button>
-          )}
+              <div className="flex justify-between mt-4">
+                {currentStep === 2 && (
+                  <button
+                    type="button"
+                    onClick={handlePrevStep}
+                    className="border-2 border-black text-xl font-medium w-20 h-9 rounded-xl"
+                  >
+                    Back
+                  </button>
+                )}
 
-          {currentStep === 1 && (
-            <button type="button" onClick={handleNextStep} className="border-2 bg-blue-950 text-xl font-medium text-white w-32 h-10 rounded-xl ml-auto ">
-              Next
-            </button>
-          )}
-          {currentStep === 2 && (
-            <button type="button" onClick={handleNextStep} className="border-2 bg-green-600 text-xl font-medium text-white w-32 h-10 rounded-xl ml-auto ">
-              Submit
-            </button>
-          )}
-        </div>
-
+                {currentStep === 1 && (
+                  <button
+                    type="button"
+                    onClick={handleNextStep}
+                    className="border-2 bg-blue-950 text-xl font-medium text-white w-32 h-10 rounded-xl ml-auto "
+                  >
+                    Next
+                  </button>
+                )}
+                {currentStep === 2 && (
+                  <button
+                    type="button"
+                    onClick={handleNextStep}
+                    className="border-2 bg-green-600 text-xl font-medium text-white w-32 h-10 rounded-xl ml-auto "
+                  >
+                    Submit
+                  </button>
+                )}
+              </div>
             </form>
           </div>
         </div>
