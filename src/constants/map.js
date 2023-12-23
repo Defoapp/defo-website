@@ -20,7 +20,9 @@ import Women from "../image/hair-styling.png";
 
 // members image
 import member from "../image/ourTeams/member img.png";
-import yogi from "../image/ourTeams/IMG_8509.jpg"
+import jai from "../image/ourTeams/team_Members/jayakumar.webp";
+import rahul from "../image/ourTeams/team_Members/rahul.webp";
+import yogi from "../image/ourTeams/team_Members/yogeeswaran1.webp";
 
 //OurCreators image
 import create from "../image/ourCreator/stephanie-liverani-Zz5LQe-VSMY-unsplash 1.svg";
@@ -138,72 +140,52 @@ export const discover = [
   },
 ];
 
-// our teams head section
-// export const heads = [
-//   {
-//     id: "1",
-//     image: jk,
-//     name: "Jayakumar",
-//     designation: "Founder & CEO",
-//     desc1: "Description of the person ",
-//     desc2: " and their goals",
-//     linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
-//   },
-//   {
-//     id: "2",
-//     image: jk,
-//     name: "Rahul",
-//     designation: "Co Founder & COO",
-//     desc1: "Description of the person ",
-//     desc2: " and their goals",
-//     linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
-//   },
-// ];
-
 // our teams members section
 export const teamsMembers = [
   {
     id: "1",
-    image: yogi,
-    name: "Yogeeswaran N",
-    designation: "Developer",
-    linkedin: "https://www.linkedin.com/in/yogeeswaran-n-b2b366196/",
+    image: jai,
+    name: "Jayakumar S",
+    designation: "CEO & Founder",
+    linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
   },
   {
     id: "2",
-    image: member,
-    name: "Name",
-    designation: "Role Name",
-    linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
+    image: rahul,
+    name: "Rahul M",
+    designation: "COO & Co Founder",
+    linkedin:
+      "https://www.linkedin.com/in/rahulmurugaiyan/?originalSubdomain=in",
   },
   {
     id: "3",
     image: member,
-    name: "Name",
-    designation: "Role Name",
-    linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
+    name: "Karan P",
+    designation: "CTO & UI/UX Designer",
+    linkedin: "https://www.linkedin.com/in/karan-p-965915211/",
   },
   {
     id: "4",
-    image: member,
-    name: "Name",
-    designation: "Role Name",
-    linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
+    image: yogi,
+    name: "Yogeeswaran N",
+    designation: "CPO & Full Stack Developer",
+    linkedin: "https://www.linkedin.com/in/yogeeswaran-n/",
   },
   {
     id: "5",
     image: member,
-    name: "Name",
-    designation: "Role Name",
-    linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
+    name: "Sakthivel S",
+    designation: "Social Media Manager",
+    linkedin:
+      "https://www.linkedin.com/in/sakthivel-senthilkumar13/?original_referer=https%3A%2F%2Fwww%2Elinkedin%2Ecom%2F&originalSubdomain=in",
   },
-  {
-    id: "6",
-    image: member,
-    name: "Name",
-    designation: "Role Name",
-    linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
-  },
+  // {
+  //   id: "6",
+  //   image: member,
+  //   name: "Name",
+  //   designation: "Role Name",
+  //   linkedin: "https://www.linkedin.com/in/yosoyjayakumar/",
+  // },
 ];
 
 // Careers

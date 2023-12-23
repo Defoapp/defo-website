@@ -37,7 +37,7 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <nav className=" top-0 bg-black w-full flex h-16 justify-between items-center ">
+    <nav className="sticky top-0 bg-black w-full flex h-16 justify-between items-center z-50">
       {/* Logo */}
       <Link to="/" className="title">
         <img className=" ml-4 w-15 h-7" src={logo} alt="logo" />

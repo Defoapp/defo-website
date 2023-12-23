@@ -145,7 +145,7 @@ function Footer() {
       <div className="mt-10 w-5/6 mx-auto">
         <hr />
         <h1 className="text-white text-center my-3">
-          &copy; 2023 Lowpow. All rights reserved.
+          &copy; 2023 LowPow. All rights reserved.
         </h1>
         <hr />
       </div>
