@@ -35,7 +35,7 @@ export const navLinks = [
 
 const Navbar = () => {
   const scrollToContainer = () => {
-    const container = document.getElementById("container");
+    const container = document.getElementById("price");
     container.scrollIntoView({ behavior: "smooth" });
   };
 

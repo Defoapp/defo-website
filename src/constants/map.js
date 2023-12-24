@@ -12,8 +12,6 @@ import Languages from "../image/presentation.png";
 import Cooking from "../image/cooking.png";
 import Women from "../image/hair-styling.png";
 
-
-
 // members image
 import member from "../image/ourTeams/member img.png";
 import jai from "../image/ourTeams/team_Members/jayakumar.webp";
@@ -26,11 +24,11 @@ import insta from "../image/social media svg/instagram Default.svg";
 import yt from "../image/social media svg/mingcute_youtube-line.svg";
 
 // Vacancies image
-import uiux from "../image/careers/jobs-icon/responsive-design.png"
-import frontend from "../image/careers/jobs-icon/front-development.png"
-import backend from "../image/careers/jobs-icon/back-end.png"
-import android from "../image/careers/jobs-icon/programming.png"
-import fullstack from "../image/careers/jobs-icon/web-developer.png"
+import uiux from "../image/careers/jobs-icon/responsive-design.png";
+import frontend from "../image/careers/jobs-icon/front-development.png";
+import backend from "../image/careers/jobs-icon/back-end.png";
+import android from "../image/careers/jobs-icon/programming.png";
+import fullstack from "../image/careers/jobs-icon/web-developer.png";
 
 // home page Price section
 export const price = [
