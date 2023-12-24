@@ -58,23 +58,29 @@ const Carrers = () => {
                 <div className="flex flex-col md:flex-row lg:flex-row justify-between my-10">
                   <div className="flex">
                     <div>
-                      <img className="w-28 lg:w-12 mx-0 lg:mx-4 my-5" src={Vacancies.img} alt="loading"/>
+                      <img
+                        className="w-28 lg:w-12 mx-0 lg:mx-4 my-5"
+                        src={Vacancies.img}
+                        alt="loading"
+                      />
                     </div>
                     <div>
-                    <h1 className="font-bold text-2xl text-center md:text-left">{Vacancies.title}</h1>
-                    <p className="text-black text-xl  text-left">
-                      {Vacancies.desc}
-                    </p>
-                    <div className="flex gap-x-5 my-3">
-                      <span className="border-2 border-black rounded-3xl flex justify-between gap-2 px-2 py-1 font-medium">
-                        <img className="w-5" src={location} alt="loading" />
-                        {Vacancies.location}
-                      </span>
-                      <span className="border-2 border-black rounded-3xl flex justify-between gap-2 px-2 py-1 font-medium">
-                        <img className="w-5" src={time} alt="loading" />
-                        {Vacancies.jobType}
-                      </span>
-                    </div>
+                      <h1 className="font-bold text-2xl text-center md:text-left">
+                        {Vacancies.title}
+                      </h1>
+                      <p className="text-black text-xl  text-left">
+                        {Vacancies.desc}
+                      </p>
+                      <div className="flex gap-x-5 my-3">
+                        <span className="border-2 border-black rounded-3xl flex justify-between gap-2 px-2 py-1 font-medium">
+                          <img className="w-5" src={location} alt="loading" />
+                          {Vacancies.location}
+                        </span>
+                        <span className="border-2 border-black rounded-3xl flex justify-between gap-2 px-2 py-1 font-medium">
+                          <img className="w-5" src={time} alt="loading" />
+                          {Vacancies.jobType}
+                        </span>
+                      </div>
                     </div>
                   </div>
 
@@ -93,9 +99,8 @@ const Carrers = () => {
         </div>
 
         {/* Desctiption */}
-        <div className="w-full py-10 mt-10 bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50%">
-          <h1 className="flex  items-center text-center  font-semibold text-white text-2xl w-3/6 h-52 mx-auto">
-            {" "}
+        <div className="w-full py-6 mt-10 bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50%">
+          <h1 className="flex  items-center text-center  font-semibold text-white text-4xl w-4/6  h-52 mx-auto">
             Defo truly values work life balance. We work hard and deliver, but
             at the end of the day you can switch off.
           </h1>
