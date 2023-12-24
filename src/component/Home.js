@@ -1,8 +1,7 @@
 import React from "react";
- // framer-motion for header title
- import { motion } from 'framer-motion';
- import { useInView } from 'react-intersection-observer';
- 
+// framer-motion for header title
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 import { price } from "../constants/map";
 import { discover } from "../constants/map";
@@ -44,38 +43,39 @@ function Home() {
           {/* Overlay */}
 
           <div className="absolute w-full  text-white top-60 sm:top-26 md:top-20 lg:top-48  pl-4 md:pl-20 lg:pl-40 ">
-          <motion.div
-        ref={ref}
-        initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
-        variants={animationVariants}
-        transition={{ duration: 0.8 }}
-        
-      >
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold font-bubblegum tracking-wide"> Information
-              <br />
-              with
-              <br />
-              Entertainment</h1>
+            <motion.div
+              ref={ref}
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+              variants={animationVariants}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold font-bubblegum tracking-wide">
+                {" "}
+                Information
+                <br />
+                with
+                <br />
+                Entertainment
+              </h1>
               <p className="font-bubblegum text-xl sm:text-2xl md:text-2xl lg:text-3xl text-left font-medium">
-              Are you looking to have fun and learn at the same time?
-            </p>
-            <div className=" w-full flex gap-10 mt-10  flex-col md:flex-row  place-items-center lg:justify-start">
-              <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1">
+                Are you looking to have fun and learn at the same time?
+              </p>
+              <div className=" w-full flex gap-10 mt-10  flex-col md:flex-row  place-items-center lg:justify-start">
+                <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1">
+                  <img
+                    className="w-48 lg:w-40 transition-all hover:scale-95"
+                    src={playstore}
+                    alt="loading"
+                  />
+                </a>
                 <img
                   className="w-48 lg:w-40 transition-all hover:scale-95"
-                  src={playstore}
+                  src={appstore}
                   alt="loading"
                 />
-              </a>
-              <img
-                className="w-48 lg:w-40 transition-all hover:scale-95"
-                src={appstore}
-                alt="loading"
-              />
-            </div>
-      </motion.div>
-
+              </div>
+            </motion.div>
           </div>
           <img
             className="w-full h-screen object-cover"
@@ -137,13 +137,13 @@ function Home() {
               </div>
             ))}
           </div>
+          {/* price card scroll id */}
+          <div id="price"></div>
         </div>
 
         {/* Price Section */}
-        <div
-          id="container"
-          className="w-full bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50% py-5"
-        >
+
+        <div className="w-full bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50% py-5">
           <h1 className=" text-white text-2xl sm:text-4xl md:text-4xl font-medium text-center mt-5 ">
             Ready to get started?
           </h1>
