@@ -44,7 +44,7 @@ function Footer() {
     },
   ];
 
-  const titleStyle = "text-white font-medium text-2xl  py-2  w-fit ";
+  const titleStyle = "text-white font-semibold lg:font-semibold text-2xl  py-2  w-fit ";
   const subHeadingStyle = `text-2xl font-light text-white w-44 my-3 hover:pl-2 duration-300   `;
   return (
     <div className="w-full h-full bg-black py-14 ">
@@ -53,9 +53,9 @@ function Footer() {
         <div className="mx-16  md:mx-0 lg:mx-0 ">
           {/* logo */}
           <a href="/">
-            <img className="w-28" src={logo} alt="loading" />
+            <img className="w-28 mx-3 md:mx-0 lg:mx-0" src={logo} alt="loading" />
           </a>
-          <div className="my-5  w-fit flex flex-col gap-y-3 ">
+          <div className="my-5 mx-3 md:mx-0 lg:mx-0   w-fit flex flex-col gap-y-3 ">
             {containersData.map((container, index) => (
               <div key={container.id} className="w-44 hover:pl-2 duration-300 ">
                 <a
@@ -80,7 +80,7 @@ function Footer() {
           </div>
         </div>
         {/* about section */}
-        <div className="mx-16 md:mx-0 lg:mx-0 px-4 ">
+        <div className="mx-14 md:mx-0 lg:mx-0 px-4 ">
           <h1 className={titleStyle}>About</h1>
           <div className="mt-5">
             <a href="/OurStory">
