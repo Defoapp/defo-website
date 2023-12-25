@@ -13,7 +13,7 @@ import Cooking from "../image/cooking.png";
 import Women from "../image/hair-styling.png";
 
 // members image
-import member from "../image/ourTeams/member img.png";
+// import member from "../image/ourTeams/member img.png";
 import jai from "../image/ourTeams/team_Members/jayakumar.webp";
 import rahul from "../image/ourTeams/team_Members/rahul.webp";
 import karan from "../image/ourTeams/team_Members/Karan.webp"
