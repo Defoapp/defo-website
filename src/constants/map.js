@@ -16,6 +16,8 @@ import Women from "../image/hair-styling.png";
 import member from "../image/ourTeams/member img.png";
 import jai from "../image/ourTeams/team_Members/jayakumar.webp";
 import rahul from "../image/ourTeams/team_Members/rahul.webp";
+import karan from "../image/ourTeams/team_Members/Karan.webp"
+import sakthi from "../image/ourTeams/team_Members/Sakthi.webp"
 import yogi from "../image/ourTeams/team_Members/yogeeswaran1.webp";
 
 //OurCreators image
@@ -157,7 +159,7 @@ export const teamsMembers = [
   },
   {
     id: "3",
-    image: member,
+    image: karan,
     name: "Karan P",
     designation: "CTO & UI/UX Designer",
     linkedin: "https://www.linkedin.com/in/karan-p-965915211/",
@@ -171,7 +173,7 @@ export const teamsMembers = [
   },
   {
     id: "5",
-    image: member,
+    image: sakthi,
     name: "Sakthivel S",
     designation: "Social Media Manager",
     linkedin:
