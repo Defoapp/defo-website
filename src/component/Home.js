@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 // framer-motion for header title
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 import { price } from "../constants/map";
@@ -31,6 +31,22 @@ function Home() {
   const animationVariants = {
     hidden: { opacity: 0, x: -100 },
     visible: { opacity: 1, x: 0 },
+  };
+
+  const controls = useAnimation();
+  const [priceRef, priceInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+  });
+  useEffect(() => {
+    if (priceInView) {
+      controls.start("visible");
+    }
+  }, [controls, priceInView]);
+
+  const cardanimation = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
   };
 
   return (
@@ -153,18 +169,25 @@ function Home() {
 
           {/* Cards */}
 
-          <div className="flex justify-center  gap-10 flex-wrap my-16 ">
+          <div  ref={priceRef} className="flex justify-center  gap-10 flex-wrap my-16 ">
             {price.map((price) => (
+               <motion.div
+               key={price.id}
+               className=" rounded-2xl w-80 h-96 text-center shadow-2xl transition ease-out lg:duration-1000"
+               variants={cardanimation}
+               initial="hidden"
+               animate={controls}
+             >
               <div
                 key={price.id}
                 className=" bg-white rounded-2xl w-80 h-96 text-center shadow-2xl border-2  transition-all hover:scale-95"
               >
                 <h1 className=" mt-8 text-sm  font-poppins">
-                  <span className="font-bold text-xl sm:text-2xl lg:text-4xl ">
+                  <span className="font-bold text-4xl ">
                     {price.rate}
                   </span>
                 </h1>
-                <h1 className="font-medium ">{price.valid}</h1>
+                <h1 className="font-medium  ">{price.valid}</h1>
                 <hr className="w-5/6 mx-auto" />
                 <div className="flex mx-10 mt-5">
                   <ul className="text-left flex flex-col gap-y-3 font-poppins text-gray-500">
@@ -192,6 +215,7 @@ function Home() {
                   </div>
                 </a>
               </div>
+              </motion.div>
             ))}
           </div>
         </div>
