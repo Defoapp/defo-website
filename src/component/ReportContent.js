@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import Navbar from "../component/Navbar/Navbar";
 import Footer from "../component/footer/Footer";
-
 import tick from "../image/report_content/verified.mp4";
 
 const ReportContent = () => {
-  // State to manage form data
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -20,30 +18,29 @@ const ReportContent = () => {
     furtherDetails2: "",
   });
 
-  // State to manage the current step
   const [currentStep, setCurrentStep] = useState(1);
-
-  // State to manage error messages
   const [errors, setErrors] = useState({});
 
-  // Function to handle form data changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    console.log("Input changed:", name, value);
     setFormData({
       ...formData,
       [name]: value,
     });
+    console.log("Form state after input change:", formData);
   };
 
-  // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Submitting form with data:", formData);
+
     // Add your form submission logic here
-    // For simplicity, let's just console log the form data
-    console.log("Form submitted:", formData);
+
+    // For simplicity, let's just console log a success message
+    console.log("Form submitted successfully!");
   };
 
-  // Function to validate form data for the current step
   const validateForm = () => {
     const errors = {};
     switch (currentStep) {
@@ -75,7 +72,6 @@ const ReportContent = () => {
           errors.furtherDetails2 = " furtherDetails2 are required";
         }
         break;
-      // Add additional cases for more steps if needed
       default:
         break;
     }
@@ -83,14 +79,12 @@ const ReportContent = () => {
     return Object.keys(errors).length === 0;
   };
 
-  // Function to handle next step
   const handleNextStep = () => {
     if (validateForm()) {
       setCurrentStep((prevStep) => prevStep + 1);
     }
   };
 
-  // Function to handle previous step
   const handlePrevStep = () => {
     setCurrentStep((prevStep) => prevStep - 1);
   };
@@ -102,6 +96,7 @@ const ReportContent = () => {
         <div className="w-5/6 md:w-4/6 lg:w-3/6 h-full my-10 mx-auto">
           <div className="w-full h-full">
             <form onSubmit={handleSubmit}>
+              {/* ... existing code ... */}
               {/* First section */}
               {currentStep === 1 && (
                 <section>
