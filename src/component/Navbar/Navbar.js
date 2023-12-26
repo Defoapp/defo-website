@@ -46,17 +46,15 @@ const Navbar = () => {
       {/* Desktop Navigation */}
       <ul className=" list-none sm:flex lg:flex hidden ml-5 justify-center items-center flex-1 ">
         {navLinks.map((nav, index) => (
-          <Link key={nav.id} to={navLinks.path}>
-            <li
-              className={`font-poppins list-none no-underline font-normal cursor-pointer text-[16px]  text-[white]   hover:bg-[white] hover:text-[black] hover:transition-[0.3s] hover:duration-[ease] hover:rounded-md py-1 px-4 ${
-                active === nav.title ? "text-white" : "text-white"
-              } ${index === navLinks.length - 1 ? "mr-0" : "mr-8"}`}
-              onClick={() => setActive(nav.title)}
-            >
-              <Link to={nav.path}>{nav.title}</Link>
-            </li>
-          </Link>
-          //
+          <li
+            key={nav.id}
+            className={`font-poppins list-none no-underline font-normal cursor-pointer text-[16px]  text-[white]   hover:bg-[white] hover:text-[black] hover:transition-[0.3s] hover:duration-[ease] hover:rounded-md py-1 px-4 ${
+              active === nav.title ? "text-white" : "text-white"
+            } ${index === navLinks.length - 1 ? "mr-0" : "mr-8"}`}
+            onClick={() => setActive(nav.title)}
+          >
+            <Link to={nav.path}>{nav.title}</Link>
+          </li>
         ))}
       </ul>
       <ul>
@@ -84,16 +82,18 @@ const Navbar = () => {
         >
           <ul className="list-none text-center flex   flex-1 flex-col">
             {navLinks.map((nav, index) => (
-              <Link key={nav.id} to={navLinks.path}>
-                <li
-                  className={`font-poppins list-none text-center   no-underline font-medium ml-12 mr-12 cursor-pointer text-[16px] ${
-                    active === nav.title ? "text-white" : "text-white"
-                  } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
-                  onClick={() => setActive(nav.title)}
-                >
-                  <Link to={nav.path}>{nav.title}</Link>
-                </li>
-              </Link>
+              <li
+                key={nav.id}
+                className={`font-poppins list-none text-center no-underline font-medium ml-12 mr-12 cursor-pointer text-[16px] ${
+                  active === nav.title ? "text-white" : "text-white"
+                } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
+                onClick={() => {
+                  setActive(nav.title);
+                  setToggle(false);
+                }}
+              >
+                <Link to={nav.path}>{nav.title}</Link>
+              </li>
             ))}
             <li className="font-poppins list-none no-underline font-medium mr-5  cursor-pointer text-[16px] text-white  bg-green-500 p-1.5 rounded-xl mt-3 ">
               Join Creator

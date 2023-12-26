@@ -44,8 +44,9 @@ function Footer() {
     },
   ];
 
-  const titleStyle = "text-white font-semibold lg:font-semibold text-2xl  py-2  w-fit ";
-  const subHeadingStyle = `text-2xl font-light text-white w-44 my-3 hover:pl-2 duration-300   `;
+  const titleStyle =
+    "text-white font-semibold lg:font-semibold text-2xl  py-2  w-fit ";
+  const subHeadingStyle = `text-2xl font-light text-white w-44 my-1 hover:pl-2 duration-300   `;
   return (
     <div className="w-full h-full bg-black py-14 ">
       <div className="w-fit flex flex-wrap gap-x-20 mx-auto ">
@@ -53,7 +54,11 @@ function Footer() {
         <div className="mx-16  md:mx-0 lg:mx-0 ">
           {/* logo */}
           <a href="/">
-            <img className="w-28 mx-3 md:mx-0 lg:mx-0" src={logo} alt="loading" />
+            <img
+              className="w-28 mx-3 md:mx-0 lg:mx-0"
+              src={logo}
+              alt="loading"
+            />
           </a>
           <div className="my-5 mx-3 md:mx-0 lg:mx-0   w-fit flex flex-col gap-y-3 ">
             {containersData.map((container, index) => (
@@ -82,18 +87,18 @@ function Footer() {
         {/* about section */}
         <div className="mx-14 md:mx-0 lg:mx-0 px-4 ">
           <h1 className={titleStyle}>About</h1>
-          <div className="mt-5">
-            <a href="/OurStory">
-              <h1 className={subHeadingStyle}>Our Story</h1>{" "}
+          <div className="mt-5 flex flex-col">
+            <a href="/OurStory" className={subHeadingStyle}>
+              Our Story
             </a>
-            <a href="/OurTeams">
-              <h1 className={subHeadingStyle}>Our Teams</h1>
+            <a href="/OurTeams" className={subHeadingStyle}>
+              Our Teams
             </a>
-            <a href="/OurCreators" className="z">
-              <h1 className={subHeadingStyle}>Our Creators</h1>
+            <a href="/OurCreators" className={subHeadingStyle}>
+              Our Creators
             </a>
-            <a href="/about">
-              <h1 className={subHeadingStyle}>About</h1>
+            <a href="/about" className={subHeadingStyle}>
+              About
             </a>
           </div>
         </div>

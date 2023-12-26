@@ -169,52 +169,53 @@ function Home() {
 
           {/* Cards */}
 
-          <div  ref={priceRef} className="flex justify-center  gap-10 flex-wrap my-16 ">
+          <div
+            ref={priceRef}
+            className="flex justify-center  gap-10 flex-wrap my-16 "
+          >
             {price.map((price) => (
-               <motion.div
-               key={price.id}
-               className=" rounded-2xl w-80 h-96 text-center shadow-2xl transition ease-out lg:duration-1000"
-               variants={cardanimation}
-               initial="hidden"
-               animate={controls}
-             >
-              <div
+              <motion.div
                 key={price.id}
-                className=" bg-white rounded-2xl w-80 h-96 text-center shadow-2xl border-2  transition-all hover:scale-95"
+                className=" rounded-2xl w-80 h-96 text-center shadow-2xl transition ease-out lg:duration-1000"
+                variants={cardanimation}
+                initial="hidden"
+                animate={controls}
               >
-                <h1 className=" mt-8 text-sm  font-poppins">
-                  <span className="font-bold text-4xl ">
-                    {price.rate}
-                  </span>
-                </h1>
-                <h1 className="font-medium  ">{price.valid}</h1>
-                <hr className="w-5/6 mx-auto" />
-                <div className="flex mx-10 mt-5">
-                  <ul className="text-left flex flex-col gap-y-3 font-poppins text-gray-500">
-                    <li className="flex">
-                      <img src={tick} alt="loading" className="w-4 mx-2" />
-                      {price.spec1}
-                    </li>
-                    <li className="flex">
-                      <img src={tick} alt="loading" className="w-4 mx-2" />
-                      {price.spec3}
-                    </li>
-                    <li className="flex">
-                      <img src={tick} alt="loading" className="w-4 mx-2" />
-                      {price.spec2}
-                    </li>
-                    <li className="flex">
-                      <img src={tick} alt="loading" className="w-4 mx-2" />
-                      {price.spec4}
-                    </li>
-                  </ul>
-                </div>
-                <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo">
-                  <div className="text-2xl font-semibold bg-green-500 text-white w-fit px-6 py-3 rounded-xl mx-auto my-8">
-                    Get Started
+                <div
+                  key={price.id}
+                  className=" bg-white rounded-2xl w-80 h-96 text-center shadow-2xl border-2  transition-all hover:scale-95"
+                >
+                  <h1 className=" mt-8 text-sm  font-poppins">
+                    <span className="font-bold text-4xl ">{price.rate}</span>
+                  </h1>
+                  <h1 className="font-medium  ">{price.valid}</h1>
+                  <hr className="w-5/6 mx-auto" />
+                  <div className="flex mx-10 mt-5">
+                    <ul className="text-left flex flex-col gap-y-3 font-poppins text-gray-500">
+                      <li className="flex">
+                        <img src={tick} alt="loading" className="w-4 mx-2" />
+                        {price.spec1}
+                      </li>
+                      <li className="flex">
+                        <img src={tick} alt="loading" className="w-4 mx-2" />
+                        {price.spec3}
+                      </li>
+                      <li className="flex">
+                        <img src={tick} alt="loading" className="w-4 mx-2" />
+                        {price.spec2}
+                      </li>
+                      <li className="flex">
+                        <img src={tick} alt="loading" className="w-4 mx-2" />
+                        {price.spec4}
+                      </li>
+                    </ul>
                   </div>
-                </a>
-              </div>
+                  <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo">
+                    <div className="text-2xl font-semibold bg-green-500 text-white w-fit px-6 py-3 rounded-xl mx-auto my-8">
+                      Get Started
+                    </div>
+                  </a>
+                </div>
               </motion.div>
             ))}
           </div>
