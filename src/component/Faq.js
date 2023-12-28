@@ -5,6 +5,7 @@ import Footer from "../component/footer/Footer";
 import { faqmap } from "../constants/map";
 
 import searchimg from "../image/majesticons_search-line.svg";
+import noData from "../image/faq/3009287 1.svg"
 
 const Faq = () => {
   const [search, setSearch] = useState("");
@@ -83,8 +84,11 @@ const Faq = () => {
                   : faqmap.title.toLowerCase().includes(search.toLowerCase());
               })
               .length === 0 && (
-              <div className="w-full text-center text-white">
-                No results found for "{search}".
+              <div className="w-full ">
+                <img className="w-2/6 mx-auto  " src={noData} alt="loading" />
+                <h1 className="text-center text-white text-2xl font-medium">No results found for "{search}".</h1>
+                <h1 className="text-center text-white text-2xl my-2">Try adjusting your search or filter to find what you’re looking for.</h1>
+                <h1 className="text-center text-white text-2xl my-2">visit our<span className="text-blue-600 text-2xl mx-2">Help Center</span></h1>
               </div>
             )}
         </div>

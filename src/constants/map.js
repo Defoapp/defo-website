@@ -18,7 +18,7 @@ import jai from "../image/ourTeams/team_Members/jayakumar.webp";
 import rahul from "../image/ourTeams/team_Members/rahul.webp";
 import karan from "../image/ourTeams/team_Members/Karan.webp";
 import sakthi from "../image/ourTeams/team_Members/Sakthi.webp";
-import yogi from "../image/ourTeams/team_Members/yogeeswaran1.webp";
+import yogi from "../image/ourTeams/team_Members/yogeeswaran.webp";
 
 //OurCreators image
 import create from "../image/ourCreator/stephanie-liverani-Zz5LQe-VSMY-unsplash 1.svg";
