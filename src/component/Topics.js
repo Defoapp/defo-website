@@ -174,9 +174,9 @@ const ScrollContainer = () => {
         <button
           onClick={scrollLeft}
           
-          className="bg-gray-400 text-white w-8 h-8  rounded-full"
+          className="bg-gray-400 text-white px-2 py-2  rounded-full"
         >
-          <img src={leftarrow} alt="loading" className="mx-auto" />
+          <img src={leftarrow} alt="loading" className="w-5 pr-1" />
         </button>
         {/* scroll bar */}
         <div
@@ -200,9 +200,9 @@ const ScrollContainer = () => {
         {/* right arrow */}
         <button
           onClick={scrollRight}
-          className="bg-gray-400 text-white w-8 h-8  rounded-full"
+          className="bg-gray-400 text-white  rounded-full"
         >
-          <img src={rightarrow} alt="loading" className="mx-auto" />
+          <img src={rightarrow} alt="loading" className="w-10 pl-1"  />
         </button>
       </div>
 
@@ -248,6 +248,7 @@ const ScrollContainer = () => {
           )}
         </div>
       )}
+
       <Footer/>
     </div>
     

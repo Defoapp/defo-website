@@ -84,7 +84,7 @@ function About() {
             </div>
           </div>
 
-          <div className="w-full flex flex-wrap my-10 py-10 bg-green-400">
+          <div className="w-full flex flex-wrap my-10 py-10 bg-slate-500">
             <div className="w-full  my-5 lg:my-0 lg:w-1/2">
               <img
                 className="w-4/6 lg:w-3/6 mx-auto"
@@ -93,10 +93,10 @@ function About() {
               />
             </div>
             <div className="w-full lg:w-1/2 text-center text-2xl px-5 lg:px-32 pt-10">
-              <h1 className="text-4xl font-semibold my-10">
+              <h1 className="text-4xl text-white font-semibold my-10">
                 Infographics and Visual Delights
               </h1>
-              <h1 className="text-2xl font-medium">
+              <h1 className="text-2xl font-medium text-white">
                 Feast your eyes on visually stunning infographics that simplify
                 complex concepts. Learn, share, and impress with these
                 eye-catching visuals.

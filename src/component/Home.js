@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
-// framer-motion for header title
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import React from "react";
+
+// AOS
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 import { price } from "../constants/map";
 import { discover } from "../constants/map";
@@ -21,33 +22,15 @@ import GpIcon from "../image/Google_Play-Icon-Logo.wine.svg";
 import Footer from "../component/footer/Footer";
 
 function Home() {
-  // framer-motion for header title
-
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.5, // Adjust this value based on when you want the animation to trigger
-  });
-
-  const animationVariants = {
-    hidden: { opacity: 0, x: -100 },
-    visible: { opacity: 1, x: 0 },
-  };
-
-  const controls = useAnimation();
-  const [priceRef, priceInView] = useInView({
-    triggerOnce: true,
-    threshold: 0.5,
-  });
-  useEffect(() => {
-    if (priceInView) {
-      controls.start("visible");
-    }
-  }, [controls, priceInView]);
-
-  const cardanimation = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 },
-  };
+  React.useEffect(() => {
+    AOS.init({
+      offset: 100,
+      duration: 600,
+      easing: "ease-in-sine",
+      delay: 100,
+    });
+    AOS.refresh();
+  }, []);
 
   return (
     <div className="relative w-full h-full">
@@ -59,39 +42,43 @@ function Home() {
           {/* Overlay */}
 
           <div className="absolute w-full  text-white top-60 sm:top-26 md:top-20 lg:top-48  pl-4 md:pl-20 lg:pl-40 ">
-            <motion.div
-              ref={ref}
-              initial="hidden"
-              animate={inView ? "visible" : "hidden"}
-              variants={animationVariants}
-              transition={{ duration: 0.8 }}
+            <h1
+              data-aos="fade-up"
+              data-aos-delay="400"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold font-bubblegum tracking-wide"
             >
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold font-bubblegum tracking-wide">
-                {" "}
-                Information
-                <br />
-                with
-                <br />
-                Entertainment
-              </h1>
-              <p className="font-bubblegum text-xl sm:text-2xl md:text-2xl lg:text-3xl text-left font-medium">
-                Are you looking to have fun and learn at the same time?
-              </p>
-              <div className=" w-full flex gap-10 mt-10  flex-col md:flex-row  place-items-center lg:justify-start">
-                <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1">
-                  <img
-                    className="w-48 lg:w-40 transition-all hover:scale-95"
-                    src={playstore}
-                    alt="loading"
-                  />
-                </a>
+              {" "}
+              Information
+              <br />
+              with
+              <br />
+              Entertainment
+            </h1>
+            <p
+              data-aos="fade-up"
+              data-aos-delay="600"
+              className="font-bubblegum text-xl sm:text-2xl md:text-2xl lg:text-3xl text-left font-medium"
+            >
+              Are you looking to have fun and learn at the same time?
+            </p>
+            <div
+              data-aos="fade-up"
+              data-aos-delay="800"
+              className=" w-full flex gap-10 my-10  flex-col md:flex-row items-center"
+            >
+              <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1">
                 <img
                   className="w-48 lg:w-40 transition-all hover:scale-95"
-                  src={appstore}
+                  src={playstore}
                   alt="loading"
                 />
-              </div>
-            </motion.div>
+              </a>
+              <img
+                className="w-48 lg:w-40 transition-all hover:scale-95"
+                src={appstore}
+                alt="loading"
+              />
+            </div>
           </div>
           <img
             className="w-full h-screen object-cover"
@@ -119,7 +106,11 @@ function Home() {
         </div>
 
         {/* Description lines */}
-        <div className=" w-full  flex justify-center   bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50% ">
+        <div
+          data-aos="zoom-in"
+          data-aos-delay="100"
+          className=" w-full  flex justify-center   bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50% "
+        >
           <p className=" relative text-white font-bold text-center w-4/5 sm:w-2/5 text-xl  font-poppins m-8">
             "A short video app with a subscription model can offer high-quality
             content and attract a loyal audience."
@@ -138,7 +129,12 @@ function Home() {
           {/* Discover Grid Section */}
           <div className="place-items-center grid  w-fit gap-y-10 gap-x-10 m-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  py-10 text-center">
             {discover.map((discover) => (
-              <div key={discover.id} className=" w-56 h-full py-2">
+              <div
+                data-aos="zoom-in-up"
+                data-aos-delay="100"
+                key={discover.id}
+                className=" w-56 h-full py-2"
+              >
                 <img
                   className="mx-auto w-28"
                   src={discover.image}
@@ -169,54 +165,45 @@ function Home() {
 
           {/* Cards */}
 
-          <div
-            ref={priceRef}
-            className="flex justify-center  gap-10 flex-wrap my-16 "
-          >
+          <div className="flex justify-center  gap-10 flex-wrap my-16 ">
             {price.map((price) => (
-              <motion.div
+              <div
+                data-aos="flip-right"
+                data-aos-delay="300"
                 key={price.id}
-                className=" rounded-2xl w-80 h-96 text-center shadow-2xl transition ease-out lg:duration-1000"
-                variants={cardanimation}
-                initial="hidden"
-                animate={controls}
+                className=" bg-white rounded-2xl w-80 h-96 text-center shadow-2xl border-2  transition-all hover:scale-95"
               >
-                <div
-                  key={price.id}
-                  className=" bg-white rounded-2xl w-80 h-96 text-center shadow-2xl border-2  transition-all hover:scale-95"
-                >
-                  <h1 className=" mt-8 text-sm  font-poppins">
-                    <span className="font-bold text-4xl ">{price.rate}</span>
-                  </h1>
-                  <h1 className="font-medium  ">{price.valid}</h1>
-                  <hr className="w-5/6 mx-auto" />
-                  <div className="flex mx-10 mt-5">
-                    <ul className="text-left flex flex-col gap-y-3 font-poppins text-gray-500">
-                      <li className="flex">
-                        <img src={tick} alt="loading" className="w-4 mx-2" />
-                        {price.spec1}
-                      </li>
-                      <li className="flex">
-                        <img src={tick} alt="loading" className="w-4 mx-2" />
-                        {price.spec3}
-                      </li>
-                      <li className="flex">
-                        <img src={tick} alt="loading" className="w-4 mx-2" />
-                        {price.spec2}
-                      </li>
-                      <li className="flex">
-                        <img src={tick} alt="loading" className="w-4 mx-2" />
-                        {price.spec4}
-                      </li>
-                    </ul>
-                  </div>
-                  <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo">
-                    <div className="text-2xl font-semibold bg-green-500 text-white w-fit px-6 py-3 rounded-xl mx-auto my-8">
-                      Get Started
-                    </div>
-                  </a>
+                <h1 className=" mt-8 text-sm  font-poppins">
+                  <span className="font-bold text-4xl ">{price.rate}</span>
+                </h1>
+                <h1 className="font-medium  ">{price.valid}</h1>
+                <hr className="w-5/6 mx-auto" />
+                <div className="flex mx-10 mt-5">
+                  <ul className="text-left flex flex-col gap-y-3 font-poppins text-gray-500">
+                    <li className="flex">
+                      <img src={tick} alt="loading" className="w-4 mx-2" />
+                      {price.spec1}
+                    </li>
+                    <li className="flex">
+                      <img src={tick} alt="loading" className="w-4 mx-2" />
+                      {price.spec3}
+                    </li>
+                    <li className="flex">
+                      <img src={tick} alt="loading" className="w-4 mx-2" />
+                      {price.spec2}
+                    </li>
+                    <li className="flex">
+                      <img src={tick} alt="loading" className="w-4 mx-2" />
+                      {price.spec4}
+                    </li>
+                  </ul>
                 </div>
-              </motion.div>
+                <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo">
+                  <div className="text-2xl font-semibold bg-green-500 text-white w-fit px-6 py-3 rounded-xl mx-auto my-8">
+                    Get Started
+                  </div>
+                </a>
+              </div>
             ))}
           </div>
         </div>
@@ -224,10 +211,18 @@ function Home() {
         {/* store links */}
         <div className="w-full h-fit  flex justify-center py-10">
           <div className="mx-auto ">
-            <h1 className="font-bold text-2xl md:text-2xl  lg:text-5xl">
+            <h1
+              data-aos="zoom-in"
+              data-aos-delay="400"
+              className="font-bold text-2xl md:text-2xl  lg:text-5xl"
+            >
               Get the app now!
             </h1>
-            <div className="flex gap-x-5 gap-y-5 flex-col lg:flex-row ml-0 lg:ml-5 my-10 ">
+            <div
+              data-aos="zoom-in"
+              data-aos-delay="400"
+              className="flex gap-x-5 gap-y-5 flex-col lg:flex-row ml-0 lg:ml-5 my-10 "
+            >
               <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1">
                 <img
                   className="w-48 lg:w-40  transition-all hover:scale-95"

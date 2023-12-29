@@ -45,7 +45,7 @@ function Footer() {
   ];
 
   const titleStyle =
-    "text-white font-semibold lg:font-semibold text-2xl  py-2  w-fit ";
+    "text-white font-semibold lg:font-semibold text-2xl  py-4  w-fit ";
   const subHeadingStyle = `text-2xl font-light text-white w-44 my-1 hover:pl-2 duration-300   `;
   return (
     <div className="w-full h-full bg-black py-14 ">
@@ -85,9 +85,9 @@ function Footer() {
           </div>
         </div>
         {/* about section */}
-        <div className="mx-14 md:mx-0 lg:mx-0 px-4 ">
+        <div className="mx-14 md:mx-0 lg:mx-0 px-4 mt-2 lg:mt-0 ">
           <h1 className={titleStyle}>About</h1>
-          <div className="mt-5 flex flex-col">
+          <div className="mt-1 lg:mt-5 flex flex-col">
             <a href="/OurStory" className={subHeadingStyle}>
               Our Story
             </a>
@@ -103,9 +103,9 @@ function Footer() {
           </div>
         </div>
         {/* Resource section */}
-        <div className=" mx-16 md:mx-0 lg:mx-0 px-2">
+        <div className=" mx-16 md:mx-0 lg:mx-0 px-2 mt-2 lg:mt-0">
           <h1 className={titleStyle}>Resource</h1>
-          <div className="mt-5">
+          <div className="mt-1 lg:mt-5">
             <a href="https://creator.yesdefo.com/">
               <h1 className={subHeadingStyle}>Join Creator</h1>
             </a>
@@ -118,9 +118,9 @@ function Footer() {
           </div>
         </div>
         {/* legal section */}
-        <div className="mx-16 md:mx-0 lg:mx-0 px-2">
+        <div className="mx-16 md:mx-0 lg:mx-0 px-2 mt-2 lg:mt-0">
           <h1 className={titleStyle}>Legal</h1>
-          <div className="mt-5">
+          <div className="mt-1 lg:mt-5">
             <a href="/privacy">
               <h1 className={subHeadingStyle}>Privacy policy</h1>
             </a>
@@ -134,9 +134,9 @@ function Footer() {
           </div>
         </div>
         {/* Usefull links section */}
-        <div className="mx-16 md:mx-0 lg:mx-0 px-2">
+        <div className="mx-16 md:mx-0 lg:mx-0 px-2 mt-2 lg:mt-0">
           <h1 className={titleStyle}>Usefull Links</h1>
-          <div className="mt-1">
+          <div className="mt-1 lg:mt-5">
             <a href="/#">
               <h1 className={subHeadingStyle}>Support</h1>
             </a>
