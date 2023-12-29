@@ -47,46 +47,46 @@ const Carrers = () => {
             <img className="w-5/6 mx-auto" src={carrerimg1} alt="loading" />
           </div>
         </div>
-        <div id="container"></div>
+        <div id="container" className=""></div>
         {/* Vacancies */}
-        <div className="w-full h-full border">
+        <div className="w-full h-full ">
           <div className="w-5/6 h-full mx-auto">
             <hr className="w-full h-0.5 mx-auto  bg-gray-100 border-0 rounded md:my-7 dark:bg-gray-700" />
 
             {Vacancies.map((Vacancies) => (
               <div className="" key={Vacancies.id}>
-                <div className="flex flex-col md:flex-row lg:flex-row justify-between my-10">
+                <div className="flex flex-col md:flex-row lg:flex-row justify-between my-6">
                   <div className="flex">
                     <div>
                       <img
-                        className="w-28 lg:w-12 mx-0 lg:mx-4 my-5"
+                        className="w-28 lg:w-12 mx-0 lg:mx-4 my-1 lg:my-5"
                         src={Vacancies.img}
                         alt="loading"
                       />
                     </div>
-                    <div>
-                      <h1 className="font-bold text-2xl text-center md:text-left">
+                    <div className="mx-5 lg:mx-0">
+                      <h1 className="font-bold text-2xl  md:text-left">
                         {Vacancies.title}
                       </h1>
-                      <p className="text-black text-xl  text-left">
+                      <p className="text-black text-xl  text-left my-2 lg:my-0">
                         {Vacancies.desc}
                       </p>
                       <div className="flex gap-x-5 my-3">
                         <span className="border-2 border-black rounded-3xl flex justify-between gap-2 px-2 py-1 font-medium">
-                          <img className="w-5" src={location} alt="loading" />
-                          {Vacancies.location}
+                          <img className="w-3" src={location} alt="loading" />
+                          <h1 className="text-sm">{Vacancies.location}</h1>
                         </span>
-                        <span className="border-2 border-black rounded-3xl flex justify-between gap-2 px-2 py-1 font-medium">
-                          <img className="w-5" src={time} alt="loading" />
-                          {Vacancies.jobType}
+                        <span className="border-2 border-black rounded-3xl flex justify-between gap-x-2 gap-y-0 px-2 py-1 lg:py-1 font-medium">
+                          <img className="w-3" src={time} alt="loading" />
+                          <h1 className="text-sm">{Vacancies.jobType}</h1>
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  <div className=" flex items-center justify-center transition-all hover:scale-90">
+                  <div className=" flex lg:items-center  justify-center transition-all hover:scale-90 my-4">
                     <a href={Vacancies.link}>
-                      <span className="w-fit rounded-xl bg-blue-950 text-white py-1 lg:py-2 px-6 lg:px-8 ">
+                      <span className="w-5 rounded-xl font-bold bg-blue-950 text-white py-2 lg:py-2 px-8 lg:px-8  ">
                         Apply
                       </span>
                     </a>
@@ -100,7 +100,7 @@ const Carrers = () => {
 
         {/* Desctiption */}
         <div className="w-full py-6 mt-10 bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50%">
-          <h1 className="flex  items-center text-center  font-semibold text-white text-4xl w-4/6  h-52 mx-auto">
+          <h1 className="flex  items-center text-center  font-semibold text-white text-4xl w-4/6  py-10 mx-auto">
             Defo truly values work life balance. We work hard and deliver, but
             at the end of the day you can switch off.
           </h1>

@@ -61,7 +61,7 @@ const OurCreators = () => {
             {showItems < sampleData.length ? (
               <button
                 onClick={handleShowMore}
-                className="flex items-center bg-purple-200 rounded-xl px-1 text-blue-500 hover:text-blue-700 focus:outline-none"
+                className="flex items-center bg-slate-400 rounded-3xl px-1 py-1 text-white hover:text-white focus:outline-none"
               >
                 Show More
                 <span className="bg-blue-950 text-white mx-1 p-1 rounded-full transition group-open:rotate-180">
