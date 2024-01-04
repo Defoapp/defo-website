@@ -45,7 +45,7 @@ function Home() {
             <h1
               data-aos="fade-up"
               data-aos-delay="400"
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold font-bubblegum tracking-wide"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold font-bubblegum tracking-wide text-center md:text-left lg:text-left"
             >
               {" "}
               Information
@@ -57,7 +57,7 @@ function Home() {
             <p
               data-aos="fade-up"
               data-aos-delay="600"
-              className="font-bubblegum text-xl sm:text-2xl md:text-2xl lg:text-3xl text-left font-medium"
+              className="font-bubblegum text-2xl lg:text-3xl font-medium text-center md:text-left lg:text-left"
             >
               Are you looking to have fun and learn at the same time?
             </p>
@@ -107,8 +107,6 @@ function Home() {
 
         {/* Description lines */}
         <div
-          data-aos="zoom-in"
-          data-aos-delay="100"
           className=" w-full  flex justify-center   bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50% "
         >
           <p className=" relative text-white font-bold text-center w-4/5 sm:w-2/5 text-xl  font-poppins m-8">
@@ -131,7 +129,7 @@ function Home() {
             {discover.map((discover) => (
               <div
                 data-aos="zoom-in-up"
-                data-aos-delay="100"
+                data-aos-delay="50"
                 key={discover.id}
                 className=" w-56 h-full py-2"
               >

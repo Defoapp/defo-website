@@ -98,7 +98,7 @@ const Timeline = () => {
 
         <div>
           <h1
-            data-aos="zoom-in"
+            data-aos="fade-up"
             data-aos-delay="100"
             className="font-bold font-bubblegum tracking-wider text-5xl text-white text-center my-16 py-5  bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50% "
           >

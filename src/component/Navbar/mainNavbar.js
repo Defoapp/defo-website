@@ -80,7 +80,7 @@ const Navbar = () => {
       {/* Join Creator button */}
       <ul>
         <a href="https://creator.yesdefo.com/">
-          <li className="relative sm:flex lg:flex hidden right-16  px-3 py-1.5 text-lg rounded-2xl no-underline    overflow-hidden bg-green-500 font-medium text-white shadow-2xl transition-all duration-300 before:absolute before:inset-0 before:border-0 before:border-white before:duration-100 before:ease-linear hover:bg-white hover:text-green-500 hover:shadow-green-500 hover:before:border-[25px]">
+          <li className="relative sm:flex lg:flex hidden right-16  px-3 py-1.5 text-lg rounded-xl no-underline    overflow-hidden bg-green-500 font-medium text-white shadow-2xl transition-all duration-300 before:absolute before:inset-0 before:border-0 before:border-white before:duration-100 before:ease-linear hover:bg-white hover:text-green-500 hover:shadow-green-500 hover:before:border-[25px]">
             <span className="relative z-10">Join Creator</span>
           </li>
         </a>
