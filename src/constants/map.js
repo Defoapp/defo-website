@@ -46,7 +46,7 @@ export const price = [
   {
     id: "2",
     rate: "₹99",
-    valid: "1 Month",
+    valid: "3 Month",
     spec1: "Including Free Trial",
     spec2: "No Ads",
     spec3: "Unlimited Videos",
@@ -54,7 +54,7 @@ export const price = [
   },
   {
     id: "3",
-    rate: "₹499",
+    rate: "₹199",
     valid: "6 Months",
     spec1: "Including Free Trial",
     spec2: "No Ads",
