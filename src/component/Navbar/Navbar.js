@@ -66,11 +66,11 @@ const Navbar = () => {
       </ul>
 
       {/* Mobile Navigation */}
-      <div className=" sm:hidden mr-8  flex flex-1 justify-end items-center">
+      <div className="sm:hidden mr-4 flex flex-1 justify-end items-center">
         <img
           src={toggle ? close : menu}
           alt="menu"
-          className="w-[28px] h-[28px] text-black   object-contain"
+          className="w-[28px] h-[28px] text-black object-contain cursor-pointer"
           onClick={() => setToggle(!toggle)}
         />
 
@@ -78,15 +78,15 @@ const Navbar = () => {
         <div
           className={`${
             !toggle ? "hidden" : "flex"
-          }  absolute z-40 p-6 bg-black-gradient  bg-black  top-16 right-0 mx-4 my-2 w-96 rounded-xl sidebar`}
+          } absolute z-40 p-6 bg-black top-16 right-0 mx-2 my-2 w-[calc(100vw-2rem)] max-w-xs rounded-xl sidebar shadow-xl`}
         >
-          <ul className="list-none text-center flex   flex-1 flex-col">
+          <ul className="list-none text-center flex flex-1 flex-col">
             {navLinks.map((nav, index) => (
               <li
                 key={nav.id}
-                className={`font-poppins list-none text-center no-underline font-medium ml-12 mr-12 cursor-pointer text-[16px] ${
-                  active === nav.title ? "text-white" : "text-white"
-                } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
+                className={`font-poppins list-none text-center no-underline font-medium mx-4 cursor-pointer text-[16px] text-white ${
+                  index === navLinks.length - 1 ? "mb-0" : "mb-4"
+                }`}
                 onClick={() => {
                   setActive(nav.title);
                   setToggle(false);
@@ -95,9 +95,14 @@ const Navbar = () => {
                 <Link to={nav.path}>{nav.title}</Link>
               </li>
             ))}
-            <li className="font-poppins list-none no-underline font-medium mr-5  cursor-pointer text-[16px] text-white  bg-green-500 p-1.5 rounded-xl mt-3 ">
-              Join Creator
-            </li>
+            <a href="https://creator.yesdefo.com/" target="_blank" rel="noreferrer">
+              <li
+                onClick={() => setToggle(false)}
+                className="font-poppins list-none no-underline font-medium cursor-pointer text-[16px] text-white bg-green-500 p-1.5 rounded-xl mt-4"
+              >
+                Join Creator
+              </li>
+            </a>
           </ul>
         </div>
       </div>

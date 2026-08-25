@@ -2,8 +2,6 @@ import React from "react";
 import Navbar from "../component/Navbar/Navbar";
 import Footer from "../component/footer/Footer";
 
-// map
-// import {heads} from "../constants/map"
 import { teamsMembers } from "../constants/map";
 
 import team from "../image/ourTeams/teams Illustation.svg";
@@ -15,48 +13,48 @@ const OurTeams = () => {
       <div className="w-full mx-auto">
         <Navbar />
         {/* hero section */}
-        <div className="relative w-5/6  mx-auto  flex flex-col justify-center items-center h-screen">
-          <div>
-            <h1 className="mb-12 text-4xl md:text-2xl lg:text-4xl font-bold text-center font-bubblegum">
+        <div className="relative w-11/12 md:w-5/6 mx-auto flex flex-col justify-center items-center py-12 md:py-16">
+          <div className="text-center w-full">
+            <h1 className="mb-8 text-3xl md:text-4xl lg:text-5xl font-bold text-center font-bubblegum">
               Our Team
             </h1>
-            <img className="w-full  lg:w-3/6 m-auto" src={team} alt="loading" />
+            <img className="w-full sm:w-4/5 md:w-3/5 lg:w-2/5 mx-auto" src={team} alt="Defo Team Illustration" />
           </div>
-          <div>
-            <h1 className="text-black text-center w-fit h-fit  text-xl md:text-2xl lg:text-2xl  font-semibold mt-9">
+          <div className="max-w-4xl mx-auto">
+            <p className="text-black text-center text-lg md:text-xl lg:text-2xl font-semibold mt-8 leading-relaxed">
               Behind every success story, there's a dedicated team of
               individuals who are passionate about making a difference. Meet the
               incredible people who make up Defo's team – a diverse group of
               talents, united by a shared commitment to our mission.
-            </h1>
+            </p>
           </div>
         </div>
 
         {/* Team Members */}
-        <div className="w-full h-full pb-16 ">
-          <h1 className="my-10 py-5 text-center w-full text-white text-xl md:text-2xl lg:text-4xl font-bubblegum bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50%">
+        <div className="w-full h-full pb-16">
+          <h2 className="my-10 py-5 text-center w-full text-white text-2xl md:text-3xl lg:text-4xl font-bubblegum bg-gradient-to-r from-defoGreen from-[-58.97%] to-defoBlue to-50%">
             Team Members
-          </h1>
+          </h2>
 
-          <div className="place-items-center gap-y-10  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:px-28">
-            {teamsMembers.map((teamsMembers) => (
-              <div key={teamsMembers.id} className=" w-fit text-center">
+          <div className="place-items-center gap-y-12 gap-x-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-6xl mx-auto px-6">
+            {teamsMembers.map((member) => (
+              <div key={member.id} className="w-full max-w-xs text-center flex flex-col items-center">
                 <img
-                  className=" mx-auto w-64 h-64 object-cover "
-                  src={teamsMembers.image}
-                  alt="loading"
+                  className="mx-auto w-56 h-56 md:w-64 md:h-64 object-cover rounded-full shadow-md"
+                  src={member.image}
+                  alt={member.name}
                 />
-                <h1 className="font-bold text-xl md:text-2xl lg:4xl mt-5  ">
-                  {teamsMembers.name}
-                </h1>
-                <h1 className="font-bold text-lg md:text-xl lg:text-xl">
-                  {teamsMembers.designation}{" "}
-                </h1>
-                <a href={teamsMembers.linkedin}>
+                <h3 className="font-bold text-xl md:text-2xl lg:text-3xl mt-5">
+                  {member.name}
+                </h3>
+                <p className="font-semibold text-gray-600 text-base md:text-lg mt-1">
+                  {member.designation}
+                </p>
+                <a href={member.linkedin} target="_blank" rel="noreferrer" className="mt-4 inline-block hover:scale-110 transition-transform">
                   <img
-                    className="w-8 mx-auto mt-5 cursor-pointer"
+                    className="w-7 h-7 mx-auto"
                     src={linkedInImg}
-                    alt="loading"
+                    alt={`${member.name} LinkedIn`}
                   />
                 </a>
               </div>

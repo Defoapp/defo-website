@@ -5,92 +5,86 @@ import Footer from "../component/footer/Footer";
 import { faqmap } from "../constants/map";
 
 import searchimg from "../image/majesticons_search-line.svg";
-import noData from "../image/faq/3009287 1.svg"
+import noData from "../image/faq/3009287 1.svg";
 
 const Faq = () => {
   const [search, setSearch] = useState("");
-  console.log(search);
+
+  const filteredFaqs = faqmap.filter((item) =>
+    search.toLowerCase() === ""
+      ? true
+      : item.title.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div className="w-full h-full">
       <Navbar />
-      <div className="w-full h-full">
+      <div className="w-full h-full pb-10">
         {/* Page Heading */}
-        <h1 className="text-4xl font-bold text-center my-10 ">
+        <h1 className="text-3xl md:text-4xl font-bold text-center my-8 md:my-10 px-4">
           Frequently Asked Questions
         </h1>
 
         {/* Search bar */}
-        <div className="bg-gray-300 w-5/6  lg:w-3/6 flex mx-auto py-3 rounded-lg">
-          <h1 className="text-2xl font-bold mx-5 my-auto">FAQ</h1>
-          <div className="relative w-4/6 mx-auto z-20">
+        <div className="bg-gray-300 w-11/12 sm:w-4/5 lg:w-3/6 flex flex-col sm:flex-row items-center justify-between mx-auto p-4 rounded-xl gap-4">
+          <h2 className="text-xl md:text-2xl font-bold">FAQ</h2>
+          <div className="relative w-full sm:w-4/5">
             <input
               type="search"
+              value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search...."
-              className="w-full px-5 py-3 rounded-full border-white z-20"
+              placeholder="Search..."
+              className="w-full px-5 py-3 rounded-full border-0 focus:ring-2 focus:ring-blue-500 outline-none text-base pr-12"
             />
-            
-            <button className="absolute right-1  top-1/2 -translate-y-1/2 p-2 rounded-full bg-gray-400">
-              <img className="w-5 ba" src={searchimg} alt="loading" />
+            <button className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-gray-400 hover:bg-gray-500 transition-colors">
+              <img className="w-4 h-4" src={searchimg} alt="Search icon" />
             </button>
           </div>
         </div>
 
         {/* Questions */}
-        <div className="w-5/6 md:w-4/6 lg:w-4/6 mx-auto my-10 py-10  rounded-2xl  bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50%">
-          {faqmap
-            .filter((faqmap) => {
-              return search.toLowerCase() === ""
-                ? faqmap
-                : faqmap.title.toLowerCase().includes(search.toLowerCase());
-            })
-            .map((faqmap) => (
-              <div
-                key={faqmap.id}
-                className="w-5/6  mx-auto py-4 my-4  rounded-2xl  bg-white "
-              >
-                <details className="group mx-4">
-                  <summary className="flex justify-between items-center font-medium cursor-pointer list-none">
-                    <span>{faqmap.title}</span>
-                    <span className="bg-blue-950 text-white  p-1 rounded-full transition group-open:rotate-180">
-                      <svg
-                        fill="none"
-                        height="24"
-                        shapeRendering="geometricPrecision"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        viewBox="0 0 24 24"
-                        width="24"
-                      >
-                        <path d="M6 9l6 6 6-6"></path>
-                      </svg>
-                    </span>
-                  </summary>
-                  <p className="text-neutral-600 mt-3 text-left group-open:animate-fadeIn">
-                    {faqmap.answer}
-                  </p>
-                </details>
-              </div>
-            ))}
-          
-          {faqmap.length > 0 && // Check if there are no search results
-            faqmap
-              .filter((faqmap) => {
-                return search.toLowerCase() === ""
-                  ? faqmap
-                  : faqmap.title.toLowerCase().includes(search.toLowerCase());
-              })
-              .length === 0 && (
-              <div className="w-full ">
-                <img className="w-2/6 mx-auto  " src={noData} alt="loading" />
-                <h1 className="text-center text-white text-2xl font-medium">No results found for "{search}".</h1>
-                <h1 className="text-center text-white text-2xl my-2">Try adjusting your search or filter to find what you’re looking for.</h1>
-                <h1 className="text-center text-white text-2xl my-2">visit our<span className="text-blue-600 text-2xl mx-2">Help Center</span></h1>
-              </div>
-            )}
+        <div className="w-11/12 md:w-4/6 mx-auto my-10 py-6 md:py-10 px-4 rounded-2xl bg-gradient-to-r from-defoGreen from-[-58.97%] to-defoBlue to-50%">
+          {filteredFaqs.map((item) => (
+            <div
+              key={item.id}
+              className="w-full mx-auto py-4 my-3 rounded-xl bg-white shadow-sm"
+            >
+              <details className="group px-4">
+                <summary className="flex justify-between items-center font-medium cursor-pointer list-none text-base md:text-lg">
+                  <span className="pr-4">{item.title}</span>
+                  <span className="bg-blue-950 text-white p-1 rounded-full transition-transform group-open:rotate-180 flex-shrink-0">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      width="20"
+                    >
+                      <path d="M6 9l6 6 6-6"></path>
+                    </svg>
+                  </span>
+                </summary>
+                <p className="text-gray-600 mt-3 text-left text-sm md:text-base leading-relaxed">
+                  {item.answer}
+                </p>
+              </details>
+            </div>
+          ))}
+
+          {filteredFaqs.length === 0 && (
+            <div className="w-full text-center py-8">
+              <img className="w-44 md:w-56 mx-auto mb-4" src={noData} alt="No data found" />
+              <h2 className="text-white text-xl md:text-2xl font-medium px-4">
+                No results found for "{search}".
+              </h2>
+              <p className="text-gray-200 text-base md:text-lg my-2 px-4">
+                Try adjusting your search to find what you're looking for.
+              </p>
+            </div>
+          )}
         </div>
       </div>
       <Footer />

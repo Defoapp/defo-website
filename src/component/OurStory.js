@@ -100,307 +100,183 @@ const Timeline = () => {
           <h1
             data-aos="fade-up"
             data-aos-delay="100"
-            className="font-bold font-bubblegum tracking-wider text-5xl text-white text-center my-16 py-5  bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50% "
+            className="font-bold font-bubblegum tracking-wider text-4xl md:text-5xl text-white text-center my-12 py-5 bg-gradient-to-r from-defoGreen from-[-58.97%] to-defoBlue to-50%"
           >
-            Time line
+            Timeline
           </h1>
         </div>
 
         {/* timeline */}
-
-        <div className=" w-5/6 lg:w-4/6 mx-auto my-10 ">
-          <div className=" flex">
-            {/* ----------------- */}
-            {/* left side */}
-            {/* ----------------- */}
-            <ul className="w-fit mr-10 ">
-              {/* <!--First item--> */}
-
-              <div
-                data-aos="zoom-in-down"
-                data-aos-delay="100"
-                className="h-1/6 mb-20 lg:mb-10    "
-              >
-                <h1 className="text-xl md:text-2xl lg:text-4xl flex justify-end font-semibold ">
-                  2022
-                </h1>
+        <div className="w-11/12 md:w-5/6 lg:w-4/6 mx-auto my-10 px-2 sm:px-4">
+          <div className="relative border-l-2 border-black ml-4 md:ml-28 space-y-12 pb-8">
+            {/* Timeline Item 1 */}
+            <div className="relative pl-8 md:pl-10">
+              {/* Year indicator on left for desktop */}
+              <div className="md:absolute md:-left-28 md:top-0 text-xl md:text-3xl font-bold text-defoBlue mb-2 md:mb-0">
+                2022
               </div>
-
-              {/* <!--Second item--> */}
-              <div
-                data-aos="zoom-in-down"
-                data-aos-delay="100"
-                className="h-1/6 mb-5 "
-              >
-                <h1 className="text-xl md:text-2xl lg:text-4xl flex justify-end font-semibold ">
-                  {" "}
-                </h1>
+              {/* Timeline Icon Node */}
+              <div className="absolute -left-[17px] top-1 w-8 h-8 bg-white border-2 border-black rounded-full flex items-center justify-center">
+                <img src={firsticon} alt="Inception icon" className="w-5 h-5 object-contain" />
               </div>
-
-              {/* <!--Third item--> */}
-              <div
-                data-aos="zoom-in-down"
-                data-aos-delay="100"
-                className="h-1/6 mb-56  lg:mb-36"
-              >
-                <h1 className="text-xl md:text-2xl lg:text-4xl  flex justify-end font-semibold ">
-                  2023
-                </h1>
+              <div className="max-w-3xl">
+                <p
+                  data-aos="zoom-in"
+                  data-aos-delay="100"
+                  className="mb-3 text-lg md:text-2xl font-medium text-black"
+                >
+                  The inception of <span className="font-bold">Defo</span>. A small team with a big dream laid the foundation for what would become a go-to destination for edutainment enthusiasts.
+                </p>
+                <div className="mb-4">
+                  <h2 data-aos="fade-up" data-aos-delay="100" className="text-lg md:text-xl font-bold text-gray-700">
+                    Jul 22, 2022
+                  </h2>
+                </div>
+                <div>
+                  <img
+                    data-aos="fade-right"
+                    data-aos-delay="100"
+                    src={firstPicture}
+                    alt="Defo inception"
+                    className="w-full sm:w-4/5 lg:w-3/5 rounded-lg shadow-sm"
+                  />
+                </div>
               </div>
+            </div>
 
-              {/* <!--forth item--> */}
-              <div
-                data-aos="zoom-in-down"
-                data-aos-delay="100"
-                className="h-1/6 mb-6 "
-              >
-                <h1 className="text-xl md:text-2xl lg:text-4xl flex justify-end font-semibold ">
-                  {" "}
-                </h1>
+            {/* Timeline Item 2 */}
+            <div className="relative pl-8 md:pl-10">
+              {/* Timeline Icon Node */}
+              <div className="absolute -left-[17px] top-1 w-8 h-8 bg-white border-2 border-black rounded-full flex items-center justify-center">
+                <img src={secondicon} alt="Website launch icon" className="w-5 h-5 object-contain" />
               </div>
-
-              {/* <!--fifth item--> */}
-              <div
-                data-aos="zoom-in-down"
-                data-aos-delay="100"
-                className="h-96 mb-16 "
-              >
-                <h1 className="text-xl md:text-2xl lg:text-4xl  flex justify-end font-semibold ">
-                  2024
-                </h1>
+              <div className="max-w-3xl">
+                <p
+                  data-aos="zoom-in"
+                  data-aos-delay="200"
+                  className="mb-3 text-lg md:text-2xl font-medium text-black"
+                >
+                  Witness the grand reveal of Defo's infotainment <span className="font-bold">website</span>. A user-friendly platform designed to deliver a seamless and immersive experience to our audience.
+                </p>
+                <div className="mb-4">
+                  <h2 data-aos="fade-up" data-aos-delay="100" className="text-lg md:text-xl font-bold text-gray-700">
+                    Aug 30, 2022
+                  </h2>
+                </div>
+                <div>
+                  <img
+                    data-aos="fade-right"
+                    data-aos-delay="100"
+                    src={secondPicture}
+                    alt="Website reveal"
+                    className="w-full sm:w-4/5 lg:w-3/5 rounded-lg shadow-sm"
+                  />
+                </div>
               </div>
-            </ul>
-            {/* ----------------- */}
-            {/* right side of the time line */}
-            {/* ----------------- */}
-            <ul className="border-l-2 h-fit border-black ">
-              {/* <!--First item--> */}
-              <li className=" ">
-                <div className="flex-start md:flex ">
-                  <div className="-ml-[18px] lg:-ml-[16px] w-8  ">
-                    <img
-                      data-aos="fade-right"
-                      data-aos-delay="100"
-                      src={firsticon}
-                      alt="loading"
-                      className="bg-white border-2 border-black  rounded-full"
-                    />
-                  </div>
-                  <div className="  lg:mb-2 ml-6 lg:ml-6  max-w-4xl  ">
-                    <p
-                      data-aos="zoom-in"
-                      data-aos-delay="100"
-                      className="mb-6 text-xl md:text-2xl lg:text-2xl font-medium text-black"
-                    >
-                      The inception of <span className="font-bold">Defo</span>.
-                      A small team with a big dream laid the foundation for what
-                      would become a go-to destination for edutainment
-                      enthusiasts.
-                    </p>
-                    <div className="mb-4 ">
-                      <h1
-                        data-aos="fade-up"
-                        data-aos-delay="100"
-                        className="text-xl font-bold "
-                      >
-                        Jul 22, 2022
-                      </h1>
-                    </div>
-                    <div>
-                      <img
-                        data-aos="fade-right"
-                        data-aos-delay="100"
-                        src={firstPicture}
-                        alt="loading"
-                        className=" mx-auto sm:w-5/6 lg:w-3/6"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </li>
+            </div>
 
-              {/* <!--Second item--> */}
-              <li className="h-2/5">
-                <div className="flex-start md:flex ">
-                  <div className="-ml-[16px] w-8 ">
-                    <img
-                      data-aos="fade-right"
-                      data-aos-delay="100"
-                      src={secondicon}
-                      alt="loading"
-                      className="bg-white border-2 border-black  rounded-full"
-                    />
-                  </div>
-                  <div className="mb-2 ml-6  max-w-4xl  ">
-                    <p
-                      data-aos="zoom-in"
-                      data-aos-delay="200"
-                      className="mb-6 text-2xl font-medium text-black"
-                    >
-                      Witness the grand reveal of Defo's infotainment{" "}
-                      <span className="font-bold">website</span>. A
-                      user-friendly platform designed to deliver a seamless and
-                      immersive experience to our audience.
-                    </p>
-                    <div className="mb-4 ">
-                      <h1
-                        data-aos="fade-up"
-                        data-aos-delay="100"
-                        className="text-xl font-bold "
-                      >
-                        Aug 30, 2022
-                      </h1>
-                    </div>
-                    <div>
-                      <img
-                        data-aos="fade-right"
-                        data-aos-delay="100"
-                        src={secondPicture}
-                        alt="loading"
-                        className=" mx-auto sm:w-5/6 lg:w-3/6"
-                      />
-                    </div>
-                  </div>
+            {/* Timeline Item 3 */}
+            <div className="relative pl-8 md:pl-10">
+              {/* Year indicator */}
+              <div className="md:absolute md:-left-28 md:top-0 text-xl md:text-3xl font-bold text-defoBlue mb-2 md:mb-0">
+                2023
+              </div>
+              {/* Timeline Icon Node */}
+              <div className="absolute -left-[17px] top-1 w-8 h-8 bg-white border-2 border-black rounded-full flex items-center justify-center">
+                <img src={thirdicon} alt="App launch icon" className="w-5 h-5 object-contain" />
+              </div>
+              <div className="max-w-3xl">
+                <p
+                  data-aos="zoom-in"
+                  data-aos-delay="200"
+                  className="mb-3 text-lg md:text-2xl font-medium text-black"
+                >
+                  The moment that changed it all! <span className="font-bold">Defo officially launched</span> its groundbreaking entertainment app, bringing joy and excitement to millions worldwide.
+                </p>
+                <div className="mb-4">
+                  <h2 data-aos="fade-up" data-aos-delay="100" className="text-lg md:text-xl font-bold text-gray-700">
+                    Jan 19, 2023
+                  </h2>
                 </div>
-              </li>
-              {/* <!--Third item--> */}
-              <li className="h-2/5">
-                <div className="flex-start md:flex ">
-                  <div className="-ml-[16px] w-8">
-                    <img
-                      data-aos="fade-right"
-                      data-aos-delay="100"
-                      src={thirdicon}
-                      alt="loading"
-                      className="bg-white border-2 border-black  rounded-full"
-                    />
-                  </div>
-                  <div className="mb-2 ml-6  max-w-4xl  ">
-                    <p
-                      data-aos="zoom-in"
-                      data-aos-delay="200"
-                      className="mb-6 text-2xl font-medium text-black"
-                    >
-                      The moment that changed it all!{" "}
-                      <span className="font-bold">
-                        Defo officially launched
-                      </span>{" "}
-                      its groundbreaking entertainment app, bringing joy and
-                      excitement to millions worldwide.
-                    </p>
-                    <div className="mb-4 ">
-                      <h1
-                        data-aos="fade-up"
-                        data-aos-delay="100"
-                        className="text-xl font-bold "
-                      >
-                        19 Jan, 2023
-                      </h1>
-                    </div>
-                    <div>
-                      <img
-                        data-aos="fade-right"
-                        data-aos-delay="100"
-                        src={thirdPicture}
-                        alt="loading"
-                        className=" mx-auto sm:w-5/6 lg:w-3/6"
-                      />
-                    </div>
-                  </div>
+                <div>
+                  <img
+                    data-aos="fade-right"
+                    data-aos-delay="100"
+                    src={thirdPicture}
+                    alt="App launch"
+                    className="w-full sm:w-4/5 lg:w-3/5 rounded-lg shadow-sm"
+                  />
                 </div>
-              </li>
-              {/* <!--fouth item--> */}
-              <li className="h-2/5">
-                <div className="flex-start md:flex ">
-                  <div className="-ml-[16px] w-8 ">
-                    <img
-                      data-aos="fade-right"
-                      data-aos-delay="100"
-                      src={fourthicon}
-                      alt="loading"
-                      className="bg-white border-2 border-black  rounded-full"
-                    />
-                  </div>
-                  <div className="mb-2 ml-6  max-w-4xl  ">
-                    <p
-                      data-aos="zoom-in"
-                      data-aos-delay="200"
-                      className="mb-6 text-2xl font-medium text-black"
-                    >
-                      Celebrate with us as we introduce{" "}
-                      <span className="font-bold">“Join Creator”</span>, a
-                      game-changing addition to our app. Users experienced a new
-                      level of entertainment like never before.
-                    </p>
-                    <div className="mb-4 ">
-                      <h1
-                        data-aos="fade-up"
-                        data-aos-delay="100"
-                        className="text-xl font-bold "
-                      >
-                        05 June, 2023
-                      </h1>
-                    </div>
-                    <div className="my-20">
-                      <img
-                        data-aos="fade-right"
-                        data-aos-delay="100"
-                        src={fourthPicture}
-                        alt="loading"
-                        className=" mx-auto w-full lg:w-4/6"
-                      />
-                    </div>
-                  </div>
+              </div>
+            </div>
+
+            {/* Timeline Item 4 */}
+            <div className="relative pl-8 md:pl-10">
+              {/* Timeline Icon Node */}
+              <div className="absolute -left-[17px] top-1 w-8 h-8 bg-white border-2 border-black rounded-full flex items-center justify-center">
+                <img src={fourthicon} alt="Join Creator icon" className="w-5 h-5 object-contain" />
+              </div>
+              <div className="max-w-3xl">
+                <p
+                  data-aos="zoom-in"
+                  data-aos-delay="200"
+                  className="mb-3 text-lg md:text-2xl font-medium text-black"
+                >
+                  Celebrate with us as we introduce <span className="font-bold">“Join Creator”</span>, a game-changing addition to our app. Users experienced a new level of entertainment like never before.
+                </p>
+                <div className="mb-4">
+                  <h2 data-aos="fade-up" data-aos-delay="100" className="text-lg md:text-xl font-bold text-gray-700">
+                    Jun 05, 2023
+                  </h2>
                 </div>
-              </li>
-              {/* <!--fifth item--> */}
-              <li className="h-2/5">
-                <div className="flex-start md:flex ">
-                  <div className="-ml-[16px]  w-8 ">
-                    <img
-                      data-aos="fade-right"
-                      data-aos-delay="100"
-                      src={fifthicon}
-                      alt="loading"
-                      className="bg-white border-2 border-black  rounded-full"
-                    />
-                  </div>
-                  <div className="mb-2 ml-6  max-w-4xl  ">
-                    <p
-                      data-aos="zoom-in"
-                      data-aos-delay="200"
-                      className="mb-6 text-2xl font-medium text-black"
-                    >
-                      We're thrilled to introduce the latest update to Defo’s
-                      Website. Our team has been hard at work to bring you an
-                      enhanced and seamless experience.
-                    </p>
-                    <div className="mb-4 ">
-                      <h1
-                        data-aos="fade-up"
-                        data-aos-delay="100"
-                        className="text-xl font-bold "
-                      >
-                        Jan 01, 2024
-                      </h1>
-                    </div>
-                    <div>
-                      <img
-                        data-aos="fade-right"
-                        data-aos-delay="100"
-                        src={fifthPicture}
-                        alt="loading"
-                        className=" mx-auto sm:w-5/6 lg:w-3/6"
-                      />
-                    </div>
-                  </div>
+                <div>
+                  <img
+                    data-aos="fade-right"
+                    data-aos-delay="100"
+                    src={fourthPicture}
+                    alt="Join Creator launch"
+                    className="w-full sm:w-4/5 lg:w-3/5 rounded-lg shadow-sm"
+                  />
                 </div>
-              </li>
-            </ul>
+              </div>
+            </div>
+
+            {/* Timeline Item 5 */}
+            <div className="relative pl-8 md:pl-10">
+              {/* Year indicator */}
+              <div className="md:absolute md:-left-28 md:top-0 text-xl md:text-3xl font-bold text-defoBlue mb-2 md:mb-0">
+                2024
+              </div>
+              {/* Timeline Icon Node */}
+              <div className="absolute -left-[17px] top-1 w-8 h-8 bg-white border-2 border-black rounded-full flex items-center justify-center">
+                <img src={fifthicon} alt="Website updates icon" className="w-5 h-5 object-contain" />
+              </div>
+              <div className="max-w-3xl">
+                <p
+                  data-aos="zoom-in"
+                  data-aos-delay="200"
+                  className="mb-3 text-lg md:text-2xl font-medium text-black"
+                >
+                  We're thrilled to introduce the latest update to Defo’s Website. Our team has been hard at work to bring you an enhanced and seamless experience.
+                </p>
+                <div className="mb-4">
+                  <h2 data-aos="fade-up" data-aos-delay="100" className="text-lg md:text-xl font-bold text-gray-700">
+                    Jan 01, 2024
+                  </h2>
+                </div>
+                <div>
+                  <img
+                    data-aos="fade-right"
+                    data-aos-delay="100"
+                    src={fifthPicture}
+                    alt="Website update"
+                    className="w-full sm:w-4/5 lg:w-3/5 rounded-lg shadow-sm"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* ------------------- */}
       </div>
 
       <Footer />

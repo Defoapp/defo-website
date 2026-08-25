@@ -38,16 +38,21 @@ function Home() {
       <div className=" w-full mx-auto">
         <Navbar />
         {/* Hero section */}
-        <div className="h-full ">
-          {/* Overlay */}
+        <div className="relative w-full min-h-[calc(100vh-4rem)] flex items-center bg-black">
+          {/* Background Hero Image */}
+          <img
+            className="absolute inset-0 w-full h-full object-cover opacity-80"
+            src={hero}
+            alt="Defo hero background"
+          />
 
-          <div className="absolute w-full  text-white top-60 sm:top-26 md:top-20 lg:top-48  pl-4 md:pl-20 lg:pl-40 ">
+          {/* Overlay Content */}
+          <div className="relative z-10 w-full text-white px-6 md:px-20 lg:px-40 py-16">
             <h1
               data-aos="fade-up"
               data-aos-delay="400"
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold font-bubblegum tracking-wide text-center md:text-left lg:text-left"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-bubblegum tracking-wide text-center md:text-left"
             >
-              {" "}
               Information
               <br />
               with
@@ -57,92 +62,84 @@ function Home() {
             <p
               data-aos="fade-up"
               data-aos-delay="600"
-              className="font-bubblegum text-2xl lg:text-3xl font-medium text-center md:text-left lg:text-left"
+              className="font-bubblegum text-xl sm:text-2xl lg:text-3xl font-medium text-center md:text-left mt-4"
             >
               Are you looking to have fun and learn at the same time?
             </p>
             <div
               data-aos="fade-up"
               data-aos-delay="800"
-              className=" w-full flex gap-10 my-10  flex-col md:flex-row items-center"
+              className="w-full flex gap-6 my-8 flex-col sm:flex-row justify-center md:justify-start items-center"
             >
-              <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1">
+              <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1" target="_blank" rel="noreferrer">
                 <img
-                  className="w-48 lg:w-40 transition-all hover:scale-95"
+                  className="w-44 lg:w-40 transition-all hover:scale-95"
                   src={playstore}
-                  alt="loading"
+                  alt="Google Play Store badge"
                 />
               </a>
               <img
-                className="w-48 lg:w-40 transition-all hover:scale-95"
+                className="w-44 lg:w-40 transition-all hover:scale-95"
                 src={appstore}
-                alt="loading"
+                alt="Apple App Store badge"
               />
             </div>
           </div>
-          <img
-            className="w-full h-screen object-cover"
-            src={hero}
-            alt="loading"
-          />
         </div>
 
         {/* screenshot section */}
-        <div className="w-full h-full lg:h-screen py-16 flex justify-center items-center flex-col">
-          <img className="w-4.5/5 lg:w-3/5" src={screenshot} alt="loading" />
+        <div className="w-full min-h-fit py-16 flex justify-center items-center flex-col px-4">
+          <img className="w-11/12 md:w-4/5 lg:w-3/5 object-contain" src={screenshot} alt="Defo app presentation screenshot" />
           <a
-            href={
-              "https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1"
-            }
+            href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1"
+            target="_blank"
+            rel="noreferrer"
           >
-            <div className="flex  bg-black w-fit px-5 py-3 mt-10 rounded-full transition-all hover:scale-95 ">
-              <img className="w-12" src={GpIcon} alt="loading" />
-              <h1 className="text-white text-xl font-bold">
-                {" "}
+            <div className="flex items-center gap-3 bg-black w-fit px-6 py-3 mt-10 rounded-full transition-all hover:scale-95 shadow-lg">
+              <img className="w-8 h-8" src={GpIcon} alt="Google Play icon" />
+              <h2 className="text-white text-lg font-bold">
                 Download The App
-              </h1>
+              </h2>
             </div>
           </a>
         </div>
 
         {/* Description lines */}
-        <div
-          className=" w-full  flex justify-center   bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50% "
-        >
-          <p className=" relative text-white font-bold text-center w-4/5 sm:w-2/5 text-xl  font-poppins m-8">
+        <div className="w-full flex justify-center bg-gradient-to-r from-defoGreen from-[-58.97%] to-defoBlue to-50% py-8 px-4">
+          <p className="text-white font-bold text-center w-11/12 sm:w-3/4 md:w-2/3 text-lg sm:text-xl font-poppins">
             "A short video app with a subscription model can offer high-quality
             content and attract a loyal audience."
           </p>
         </div>
 
         {/* Discover section */}
-        <div className="w-full h-full py-20 ">
-          <h1 className="text-center text-2xl md:text-4xl lg:text-4xl font-bold">
+        <div className="w-full py-16 px-4">
+          <h2 className="text-center text-2xl md:text-4xl font-bold">
             Discover, Like and Save the useful videos.
-          </h1>
-          <p className="text-black text-center my-2 text-xl  md:text-2xl font-medium font-poppins">
+          </h2>
+          <p className="text-black text-center my-2 text-lg md:text-2xl font-medium font-poppins">
             Discover a new way to learn and have fun at the same time!
           </p>
 
           {/* Discover Grid Section */}
-          <div className="place-items-center grid  w-fit gap-y-10 gap-x-10 m-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  py-10 text-center">
-            {discover.map((discover) => (
+          <div className="place-items-center grid gap-8 m-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-6xl py-10 text-center">
+            {discover.map((item) => (
               <div
                 data-aos="zoom-in-up"
                 data-aos-delay="50"
-                key={discover.id}
-                className=" w-56 h-full py-2"
+                key={item.id}
+                className="w-56 py-4 flex flex-col items-center"
               >
                 <img
-                  className="mx-auto w-28"
-                  src={discover.image}
-                  alt="loading"
+                  className="mx-auto w-24 h-24 object-contain"
+                  src={item.image}
+                  alt={item.title}
                 />
-                <h1 className="font-medium lg:text-xl pt-4">
-                  {discover.title}
-                </h1>
-                <p className="text-gray-500 font-medium font-poppins ">
-                  {discover.desc}
+                <h3 className="font-medium lg:text-xl pt-4">
+                  {item.title}
+                </h3>
+                <p className="text-gray-500 font-medium font-poppins text-sm md:text-base mt-1">
+                  {item.desc}
                 </p>
               </div>
             ))}
@@ -152,52 +149,50 @@ function Home() {
         </div>
 
         {/* Price Section */}
-
-        <div className="w-full bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50% py-5">
-          <h1 className=" text-white text-2xl sm:text-4xl md:text-4xl font-medium text-center mt-5 ">
+        <div className="w-full bg-gradient-to-r from-defoGreen from-[-58.97%] to-defoBlue to-50% py-12 px-4">
+          <h2 className="text-white text-2xl sm:text-4xl font-medium text-center">
             Ready to get started?
-          </h1>
-          <p className="text-xl text-center md:text-2xl font-medium text-gray-500 font-poppins my-2">
-            The only app you need for a complete Entertainment
+          </h2>
+          <p className="text-lg md:text-2xl text-center font-medium text-gray-200 font-poppins my-2">
+            The only app you need for complete Entertainment
           </p>
 
           {/* Cards */}
-
-          <div className="flex justify-center  gap-10 flex-wrap my-16 ">
-            {price.map((price) => (
+          <div className="flex justify-center gap-8 flex-wrap my-12 max-w-6xl mx-auto">
+            {price.map((priceItem) => (
               <div
                 data-aos="flip-right"
                 data-aos-delay="300"
-                key={price.id}
-                className=" bg-white rounded-2xl w-80 h-96 text-center shadow-2xl border-2  transition-all hover:scale-95"
+                key={priceItem.id}
+                className="bg-white rounded-2xl w-80 min-h-[26rem] p-6 text-center shadow-2xl border-2 flex flex-col justify-between transition-all hover:scale-95"
               >
-                <h1 className=" mt-8 text-sm  font-poppins">
-                  <span className="font-bold text-4xl ">{price.rate}</span>
-                </h1>
-                <h1 className="font-medium  ">{price.valid}</h1>
-                <hr className="w-5/6 mx-auto" />
-                <div className="flex mx-10 mt-5">
-                  <ul className="text-left flex flex-col gap-y-3 font-poppins text-gray-500">
-                    <li className="flex">
-                      <img src={tick} alt="loading" className="w-4 mx-2" />
-                      {price.spec1}
+                <div>
+                  <h3 className="mt-4 font-poppins">
+                    <span className="font-bold text-4xl text-gray-900">{priceItem.rate}</span>
+                  </h3>
+                  <p className="font-medium text-gray-600 my-1">{priceItem.valid}</p>
+                  <hr className="w-5/6 mx-auto my-4" />
+                  <ul className="text-left flex flex-col gap-y-3 font-poppins text-gray-600 px-4">
+                    <li className="flex items-center">
+                      <img src={tick} alt="check" className="w-4 h-4 mr-2" />
+                      <span>{priceItem.spec1}</span>
                     </li>
-                    <li className="flex">
-                      <img src={tick} alt="loading" className="w-4 mx-2" />
-                      {price.spec3}
+                    <li className="flex items-center">
+                      <img src={tick} alt="check" className="w-4 h-4 mr-2" />
+                      <span>{priceItem.spec3}</span>
                     </li>
-                    <li className="flex">
-                      <img src={tick} alt="loading" className="w-4 mx-2" />
-                      {price.spec2}
+                    <li className="flex items-center">
+                      <img src={tick} alt="check" className="w-4 h-4 mr-2" />
+                      <span>{priceItem.spec2}</span>
                     </li>
-                    <li className="flex">
-                      <img src={tick} alt="loading" className="w-4 mx-2" />
-                      {price.spec4}
+                    <li className="flex items-center">
+                      <img src={tick} alt="check" className="w-4 h-4 mr-2" />
+                      <span>{priceItem.spec4}</span>
                     </li>
                   </ul>
                 </div>
-                <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo">
-                  <div className="text-2xl font-semibold bg-green-500 text-white w-fit px-6 py-3 rounded-xl mx-auto my-8">
+                <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo" target="_blank" rel="noreferrer">
+                  <div className="text-xl font-semibold bg-green-500 hover:bg-green-600 text-white w-fit px-8 py-3 rounded-xl mx-auto mt-6 transition-colors">
                     Get Started
                   </div>
                 </a>
@@ -207,31 +202,31 @@ function Home() {
         </div>
 
         {/* store links */}
-        <div className="w-full h-fit  flex justify-center py-10">
-          <div className="mx-auto ">
-            <h1
+        <div className="w-full flex justify-center py-16 px-4">
+          <div className="mx-auto text-center">
+            <h2
               data-aos="zoom-in"
               data-aos-delay="400"
-              className="font-bold text-2xl md:text-2xl  lg:text-5xl"
+              className="font-bold text-3xl md:text-4xl lg:text-5xl"
             >
               Get the app now!
-            </h1>
+            </h2>
             <div
               data-aos="zoom-in"
               data-aos-delay="400"
-              className="flex gap-x-5 gap-y-5 flex-col lg:flex-row ml-0 lg:ml-5 my-10 "
+              className="flex gap-5 flex-col sm:flex-row justify-center items-center my-8"
             >
-              <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1">
+              <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1" target="_blank" rel="noreferrer">
                 <img
-                  className="w-48 lg:w-40  transition-all hover:scale-95"
+                  className="w-44 lg:w-40 transition-all hover:scale-95"
                   src={playstore}
-                  alt="loading"
+                  alt="Google Play Store badge"
                 />
               </a>
               <img
-                className="w-48 lg:w-40 transition-all hover:scale-95"
+                className="w-44 lg:w-40 transition-all hover:scale-95"
                 src={appstore}
-                alt="loading"
+                alt="Apple App Store badge"
               />
             </div>
           </div>

@@ -8,10 +8,12 @@ import arrow from "../image/careers/formkit_arrowdown.svg";
 import location from "../image/careers/location.svg";
 import time from "../image/careers/carbon_time.svg";
 
-const Carrers = () => {
+const Careers = () => {
   const scrollToContainer = () => {
     const container = document.getElementById("container");
-    container.scrollIntoView({ behavior: "smooth" });
+    if (container) {
+      container.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -19,99 +21,96 @@ const Carrers = () => {
       <Navbar />
       <div className="w-full h-full">
         {/* hero section */}
-        <div className="w-full h-screen  flex   items-center justify-center  flex-col lg:flex-row">
-          <div className="w-5/6 lg:w-2/6 h-4/6 mt-10 md:mt-0 lg:mt-0 ">
-            <h1 className="border-black border-2 w-fit py-2 px-4 rounded-lg my-5 font-semibold ">
-              We Hiring!
-            </h1>
-            <h1 className="text-2xl md:text-4xl lg:text-4xl font-semibold">
+        <div className="w-11/12 md:w-5/6 mx-auto min-h-fit py-12 md:py-20 flex items-center justify-between flex-col md:flex-row gap-8">
+          <div className="w-full md:w-1/2">
+            <span className="inline-block border-black border-2 py-1 px-4 rounded-lg mb-4 font-semibold text-sm">
+              We're Hiring!
+            </span>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-4">
               Be part of our mission
             </h1>
-            <p className="text-black text-left text-lg ">
+            <p className="text-black text-left text-base md:text-lg leading-relaxed mb-6">
               We are looking for passionate people to join us on our mission. We
-              values flat hierarchies, clear comunication and full ownership and
+              value flat hierarchies, clear communication, and full ownership and
               responsibility.
             </p>
-            <div
+            <button
               onClick={scrollToContainer}
-              className="flex gap-x-2 border-black border-2 rounded-3xl py-1 px-3 w-fit font-semibold my-8 cursor-pointer transition-all hover:scale-95"
+              className="flex items-center gap-x-2 border-black border-2 rounded-3xl py-2 px-5 font-semibold cursor-pointer transition-all hover:scale-95 bg-transparent"
             >
-              View Openings{" "}
-              <span className="font-bold ">
-                <img className="w-3 h-7" src={arrow} alt="loading" />
-              </span>{" "}
-            </div>
+              <span>View Openings</span>
+              <img className="w-3 h-4 object-contain" src={arrow} alt="arrow down" />
+            </button>
           </div>
 
-          <div className="w-full md:w-1/6 md:mb-10  lg:w-2/6 h-4/6 ">
-            <img className="w-5/6 mx-auto" src={carrerimg1} alt="loading" />
+          <div className="w-full md:w-1/2 flex justify-center">
+            <img className="w-4/5 sm:w-3/5 md:w-4/5 max-w-md mx-auto" src={carrerimg1} alt="Careers illustration" />
           </div>
         </div>
-        <div id="container" className=""></div>
-        {/* Vacancies */}
-        <div className="w-full h-full ">
-          <div className="w-5/6 h-full mx-auto">
-            <hr className="w-full h-0.5 mx-auto  bg-gray-100 border-0 rounded md:my-7 dark:bg-gray-700" />
+        <div id="container"></div>
 
-            {Vacancies.map((Vacancies) => (
-              <div className="" key={Vacancies.id}>
-                <div className="flex flex-col md:flex-row lg:flex-row justify-between my-6">
-                  <div className="flex">
+        {/* Vacancies */}
+        <div className="w-full h-full py-6">
+          <div className="w-11/12 md:w-5/6 mx-auto">
+            <hr className="w-full h-0.5 mx-auto bg-gray-200 border-0 rounded my-6" />
+
+            {Vacancies.map((vacancy) => (
+              <div key={vacancy.id}>
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 my-6">
+                  <div className="flex flex-col sm:flex-row items-start gap-4">
+                    <img
+                      className="w-12 h-12 object-contain"
+                      src={vacancy.img}
+                      alt={vacancy.title}
+                    />
                     <div>
-                      <img
-                        className="w-28 lg:w-12 mx-0 lg:mx-4 my-1 lg:my-5"
-                        src={Vacancies.img}
-                        alt="loading"
-                      />
-                    </div>
-                    <div className="mx-5 lg:mx-0">
-                      <h1 className="font-bold text-2xl  md:text-left">
-                        {Vacancies.title}
-                      </h1>
-                      <p className="text-black text-xl  text-left my-2 lg:my-0">
-                        {Vacancies.desc}
+                      <h2 className="font-bold text-xl md:text-2xl text-left">
+                        {vacancy.title}
+                      </h2>
+                      <p className="text-gray-700 text-base md:text-lg text-left my-1">
+                        {vacancy.desc}
                       </p>
-                      <div className="flex gap-x-5 my-3">
-                        <span className="border-2 border-black rounded-3xl flex justify-between gap-2 px-2 py-1 font-medium">
-                          <img className="w-3" src={location} alt="loading" />
-                          <h1 className="text-sm">{Vacancies.location}</h1>
+                      <div className="flex flex-wrap gap-3 my-2">
+                        <span className="border-2 border-black rounded-3xl flex items-center gap-2 px-3 py-1 font-medium">
+                          <img className="w-3 h-3" src={location} alt="location icon" />
+                          <span className="text-xs md:text-sm">{vacancy.location}</span>
                         </span>
-                        <span className="border-2 border-black rounded-3xl flex justify-between gap-x-2 gap-y-0 px-2 py-1 lg:py-1 font-medium">
-                          <img className="w-3" src={time} alt="loading" />
-                          <h1 className="text-sm">{Vacancies.jobType}</h1>
+                        <span className="border-2 border-black rounded-3xl flex items-center gap-2 px-3 py-1 font-medium">
+                          <img className="w-3 h-3" src={time} alt="time icon" />
+                          <span className="text-xs md:text-sm">{vacancy.jobType}</span>
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  <div className=" flex lg:items-center  justify-center transition-all hover:scale-90 my-4">
-                    <a href={Vacancies.link}>
-                      <span className="w-5 rounded-xl font-bold bg-blue-950 text-white py-2 lg:py-2 px-8 lg:px-8  ">
+                  <div className="my-2 md:my-0 self-end md:self-center">
+                    <a href={vacancy.link} target="_blank" rel="noreferrer">
+                      <span className="inline-block rounded-xl font-bold bg-blue-950 hover:bg-blue-900 text-white py-2.5 px-8 transition-colors">
                         Apply
                       </span>
                     </a>
                   </div>
                 </div>
-                <hr className="w-full h-0.5 mx-auto  bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700" />
+                <hr className="w-full h-0.5 mx-auto bg-gray-200 border-0 rounded my-6" />
               </div>
             ))}
           </div>
         </div>
 
-        {/* Desctiption */}
-        <div className="w-full py-6 mt-10 bg-gradient-to-r from-defoGreen from-[-58.97%]  to-defoBlue to-50%">
-          <h1 className="flex  items-center text-center  font-semibold text-white text-4xl w-4/6  py-10 mx-auto">
-            Defo truly values work life balance. We work hard and deliver, but
+        {/* Description Banner */}
+        <div className="w-full py-12 px-4 bg-gradient-to-r from-defoGreen from-[-58.97%] to-defoBlue to-50%">
+          <p className="text-center font-semibold text-white text-2xl md:text-4xl max-w-4xl mx-auto leading-relaxed">
+            Defo truly values work-life balance. We work hard and deliver, but
             at the end of the day you can switch off.
-          </h1>
+          </p>
         </div>
 
-        {/* image */}
-        <div className="my-10">
+        {/* Illustration */}
+        <div className="my-12 px-4">
           <img
-            className="mx-auto w-4/6 md:w-2/6 lg:w-1/6"
+            className="mx-auto w-1/2 sm:w-1/3 md:w-1/4 max-w-xs"
             src={carrerimg2}
-            alt="loading"
+            alt="Work life balance illustration"
           />
         </div>
       </div>
@@ -120,4 +119,4 @@ const Carrers = () => {
   );
 };
 
-export default Carrers;
+export default Careers;

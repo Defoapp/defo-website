@@ -14,7 +14,7 @@ const ReportContent = () => {
     option1: "",
     option2: "",
     input2: "",
-    content: "",
+    contentReason: "",
     furtherDetails2: "",
   });
 
@@ -23,96 +23,85 @@ const ReportContent = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log("Input changed:", name, value);
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    });
-    console.log("Form state after input change:", formData);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Submitting form with data:", formData);
-
-    // Add your form submission logic here
-
-    // For simplicity, let's just console log a success message
-    console.log("Form submitted successfully!");
+    }));
   };
 
   const validateForm = () => {
-    const errors = {};
-    switch (currentStep) {
-      case 1:
-        if (!formData.firstName.trim()) {
-          errors.firstName = "First name is required";
-        }
-        if (!formData.lastName.trim()) {
-          errors.lastName = "Last name is required";
-        }
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!formData.email.trim()) {
-          errors.email = "Email is required";
-        } else if (!emailRegex.test(formData.email.trim())) {
-          errors.email = "Invalid email address";
-        }
-        break;
-      case 2:
-        if (!formData.option1.trim()) {
-          errors.option1 = "Any Option is required";
-        }
-        if (!formData.option2.trim()) {
-          errors.option2 = "Any Option  is required";
-        }
-        if (!formData.input2.trim()) {
-          errors.input2 = "  provide the URL of the content";
-        }
-        if (!formData.furtherDetails2.trim()) {
-          errors.furtherDetails2 = " furtherDetails2 are required";
-        }
-        break;
-      default:
-        break;
+    const newErrors = {};
+    if (currentStep === 1) {
+      if (!formData.firstName.trim()) {
+        newErrors.firstName = "First name is required";
+      }
+      if (!formData.lastName.trim()) {
+        newErrors.lastName = "Last name is required";
+      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!formData.email.trim()) {
+        newErrors.email = "Email is required";
+      } else if (!emailRegex.test(formData.email.trim())) {
+        newErrors.email = "Invalid email address";
+      }
+    } else if (currentStep === 2) {
+      if (!formData.option1.trim()) {
+        newErrors.option1 = "Claim type is required";
+      }
+      if (!formData.option2.trim()) {
+        newErrors.option2 = "Content type is required";
+      }
+      if (!formData.input2.trim()) {
+        newErrors.input2 = "Content URL is required";
+      }
+      if (!formData.furtherDetails2.trim()) {
+        newErrors.furtherDetails2 = "Further details are required";
+      }
     }
-    setErrors(errors);
-    return Object.keys(errors).length === 0;
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleNextStep = () => {
     if (validateForm()) {
-      setCurrentStep((prevStep) => prevStep + 1);
+      setCurrentStep((prev) => prev + 1);
     }
   };
 
   const handlePrevStep = () => {
-    setCurrentStep((prevStep) => prevStep - 1);
+    setCurrentStep((prev) => prev - 1);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (currentStep === 2) {
+      if (validateForm()) {
+        setCurrentStep(3);
+      }
+    }
   };
 
   return (
-    <div>
-      <Navbar />
-      <div className="w-full h-full">
-        <div className="w-5/6 md:w-4/6 lg:w-3/6 h-full my-10 mx-auto">
-          <div className="w-full h-full">
-            <form onSubmit={handleSubmit}>
-              {/* ... existing code ... */}
-              {/* First section */}
-              {currentStep === 1 && (
-                <section>
+    <div className="w-full h-full min-h-screen flex flex-col justify-between">
+      <div>
+        <Navbar />
+        <div className="w-11/12 md:w-4/6 lg:w-3/6 my-8 md:my-12 mx-auto px-2">
+          <form onSubmit={handleSubmit}>
+            {/* First section */}
+            {currentStep === 1 && (
+              <section className="space-y-4">
+                <div className="text-center mb-6">
+                  <h1 className="font-bold text-3xl md:text-4xl font-bubblegum mx-auto my-3">
+                    How to make a legal claim relating to content on Defo
+                  </h1>
+                  <p className="text-base md:text-xl font-medium text-gray-700 mx-auto">
+                    To notify Defo of an infringement or other legal claim relating to content on the Defo app, please complete the form below.
+                  </p>
+                </div>
+                <div className="w-full flex flex-col gap-y-3">
                   <div>
-                    <h1 className="font-bold text-5xl w-6/6 text-center font-bubblegum mx-auto my-5">
-                      How to make a legal claim relating to content on Defo
-                    </h1>
-                    <h1 className="my-5 text-2xl font-medium text-center mx-auto w-full">
-                      To notify Defo of an infringement or other legal claim
-                      relating to content on the Defo app ,please complete the
-                      form below.
-                    </h1>
-                  </div>
-                  <div className="w-full h-full flex flex-col gap-y-1">
-                    <label htmlFor="firstName" className="text-xl ">
-                      First Name<span className="text-red-600 mx-1">*</span>
+                    <label htmlFor="firstName" className="text-lg font-medium block mb-1">
+                      First Name<span className="text-red-600 ml-1">*</span>
                     </label>
                     <input
                       type="text"
@@ -120,16 +109,16 @@ const ReportContent = () => {
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleInputChange}
-                      className="border-2 border-black rounded-md w-full h-9 my-1 pl-3 form-input"
+                      className="border-2 border-gray-400 rounded-lg w-full py-2 px-3 focus:outline-none focus:border-black"
                     />
                     {errors.firstName && (
-                      <div className="text-red-600 text-sm">
-                        {errors.firstName}
-                      </div>
+                      <p className="text-red-600 text-sm mt-1">{errors.firstName}</p>
                     )}
+                  </div>
 
-                    <label htmlFor="lastName" className="text-xl ">
-                      Last Name<span className="text-red-600 mx-1">*</span>
+                  <div>
+                    <label htmlFor="lastName" className="text-lg font-medium block mb-1">
+                      Last Name<span className="text-red-600 ml-1">*</span>
                     </label>
                     <input
                       type="text"
@@ -137,203 +126,230 @@ const ReportContent = () => {
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleInputChange}
-                      className="border-2 border-black rounded-md w-full h-9 my-1 pl-3 form-input"
+                      className="border-2 border-gray-400 rounded-lg w-full py-2 px-3 focus:outline-none focus:border-black"
                     />
                     {errors.lastName && (
-                      <div className="text-red-600 text-sm">
-                        {errors.lastName}
-                      </div>
+                      <p className="text-red-600 text-sm mt-1">{errors.lastName}</p>
                     )}
+                  </div>
 
-                    <label className="text-xl ">Company Name</label>
-                    <input
-                      type="text"
-                      name="username"
-                      className="border-2 border-black rounded-md w-full h-9 my-1 pl-3"
-                    />
-                    <label className="text-xl ">Phone Number</label>
-                    <input
-                      type="text"
-                      name="username"
-                      className="border-2 border-black rounded-md w-full h-9 my-1 pl-3"
-                    />
-                    <label htmlFor="email" className="text-xl ">
-                      Email<span className="text-red-600 mx-1">*</span>
+                  <div>
+                    <label htmlFor="companyName" className="text-lg font-medium block mb-1">
+                      Company Name
                     </label>
                     <input
                       type="text"
+                      id="companyName"
+                      name="companyName"
+                      value={formData.companyName}
+                      onChange={handleInputChange}
+                      className="border-2 border-gray-400 rounded-lg w-full py-2 px-3 focus:outline-none focus:border-black"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="phoneNumber" className="text-lg font-medium block mb-1">
+                      Phone Number
+                    </label>
+                    <input
+                      type="text"
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      value={formData.phoneNumber}
+                      onChange={handleInputChange}
+                      className="border-2 border-gray-400 rounded-lg w-full py-2 px-3 focus:outline-none focus:border-black"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="email" className="text-lg font-medium block mb-1">
+                      Email<span className="text-red-600 ml-1">*</span>
+                    </label>
+                    <input
+                      type="email"
                       id="email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="border-2 border-black rounded-md w-full h-9 my-1 pl-3"
+                      className="border-2 border-gray-400 rounded-lg w-full py-2 px-3 focus:outline-none focus:border-black"
                     />
                     {errors.email && (
-                      <div className="text-red-600 text-sm">{errors.email}</div>
+                      <p className="text-red-600 text-sm mt-1">{errors.email}</p>
                     )}
+                  </div>
 
-                    <label className="text-xl ">Any further details</label>
+                  <div>
+                    <label htmlFor="furtherDetails" className="text-lg font-medium block mb-1">
+                      Any further details
+                    </label>
                     <textarea
-                      type="text"
-                      name="username"
-                      className="border-2 border-black rounded-md w-full h-20 my-1 pl-3"
+                      id="furtherDetails"
+                      name="furtherDetails"
+                      value={formData.furtherDetails}
+                      onChange={handleInputChange}
+                      rows={3}
+                      className="border-2 border-gray-400 rounded-lg w-full p-3 focus:outline-none focus:border-black"
                     />
                   </div>
-                </section>
-              )}
-              {/* second section */}
-              {currentStep === 2 && (
-                <section>
+                </div>
+              </section>
+            )}
+
+            {/* Second section */}
+            {currentStep === 2 && (
+              <section className="space-y-4">
+                <div className="text-center mb-6">
+                  <h1 className="font-bold text-3xl md:text-4xl font-bubblegum mx-auto my-3">
+                    Claim Details
+                  </h1>
+                  <p className="text-base md:text-lg font-medium text-gray-700">
+                    Provide details about the content you wish to report.
+                  </p>
+                </div>
+                <div className="w-full flex flex-col gap-y-3">
                   <div>
-                    <h1 className="font-bold text-4xl w-5/6 text-center   mx-auto my-5">
-                      How to make a legal claim relating to content on Defo
-                    </h1>
-                    <h1 className="my-5 text-2xl font-medium text-center mx-auto w-full">
-                      To notify Defo of an infringement or other legal claim
-                      relating to content on the Defo app ,please complete the
-                      form below.
-                    </h1>
-                  </div>
-                  <div className="w-full h-full flex flex-col gap-y-1">
-                    <label htmlFor="option1" className="text-xl">
-                      Claim type<span className="text-red-600 mx-1">*</span>
+                    <label htmlFor="option1" className="text-lg font-medium block mb-1">
+                      Claim type<span className="text-red-600 ml-1">*</span>
                     </label>
                     <select
                       id="option1"
                       name="option1"
                       value={formData.option1}
                       onChange={handleInputChange}
-                      className="border-2 border-black rounded-md font-medium w-full h-9 my-1 form-select"
+                      className="border-2 border-gray-400 rounded-lg font-medium w-full py-2 px-3 focus:outline-none focus:border-black bg-white"
                     >
-                      <option className="font-medium">Select</option>
-                      <option className="font-medium">Copyright</option>
-                      <option className="font-medium">Trademark</option>
-                      <option className="font-medium">
-                        Personal image/identity
-                      </option>
-                      <option className="font-medium">Other legal claim</option>
+                      <option value="">Select claim type</option>
+                      <option value="Copyright">Copyright</option>
+                      <option value="Trademark">Trademark</option>
+                      <option value="Personal image/identity">Personal image/identity</option>
+                      <option value="Other legal claim">Other legal claim</option>
                     </select>
                     {errors.option1 && (
-                      <div className="text-red-600 text-sm">
-                        {errors.option1}
-                      </div>
+                      <p className="text-red-600 text-sm mt-1">{errors.option1}</p>
                     )}
+                  </div>
 
-                    <label htmlFor="option2" className="text-xl">
-                      Please select the content type you’d like to report
-                      <span className="text-red-600 mx-1">*</span>
+                  <div>
+                    <label htmlFor="option2" className="text-lg font-medium block mb-1">
+                      Content type<span className="text-red-600 ml-1">*</span>
                     </label>
                     <select
-                      className="border-2 border-black rounded-md font-medium w-full h-9 my-1 form-select"
                       id="option2"
                       name="option2"
                       value={formData.option2}
                       onChange={handleInputChange}
+                      className="border-2 border-gray-400 rounded-lg font-medium w-full py-2 px-3 focus:outline-none focus:border-black bg-white"
                     >
-                      <option className="font-medium">Select</option>
-                      <option className="font-medium">Music/Audio</option>
-                      <option className="font-medium">Image</option>
-                      <option className="font-medium">Video</option>
-                      <option className="font-medium">
-                        Title & description
-                      </option>
+                      <option value="">Select content type</option>
+                      <option value="Music/Audio">Music/Audio</option>
+                      <option value="Image">Image</option>
+                      <option value="Video">Video</option>
+                      <option value="Title & description">Title & description</option>
                     </select>
                     {errors.option2 && (
-                      <div className="text-red-600 text-sm">
-                        {errors.option2}
-                      </div>
+                      <p className="text-red-600 text-sm mt-1">{errors.option2}</p>
                     )}
+                  </div>
 
-                    <label htmlFor="input2" className="text-xl ">
-                      Please provide the URL of the content you’d like to report
-                      <span className="text-red-600 mx-1">*</span>
+                  <div>
+                    <label htmlFor="input2" className="text-lg font-medium block mb-1">
+                      URL of the content<span className="text-red-600 ml-1">*</span>
                     </label>
                     <textarea
-                      type="text"
                       id="input2"
                       name="input2"
                       value={formData.input2}
                       onChange={handleInputChange}
-                      className="border-2 border-black rounded-md w-full h-20 my-1 pl-3 form-input"
+                      rows={2}
+                      placeholder="https://..."
+                      className="border-2 border-gray-400 rounded-lg w-full p-3 focus:outline-none focus:border-black"
                     />
                     {errors.input2 && (
-                      <div className="text-red-600 text-sm">
-                        {errors.input2}
-                      </div>
+                      <p className="text-red-600 text-sm mt-1">{errors.input2}</p>
                     )}
-                    <label className="text-xl ">
-                      Why are you reporting the content ?
-                    </label>
-                    <textarea
-                      type="text"
-                      className="border-2 border-black rounded-md w-full h-20 my-1 pl-3"
-                    />
+                  </div>
 
-                    <label className="text-xl ">
-                      Any further details
-                      <span className="text-red-600 mx-1">*</span>
+                  <div>
+                    <label htmlFor="contentReason" className="text-lg font-medium block mb-1">
+                      Why are you reporting this content?
                     </label>
                     <textarea
-                      type="text"
+                      id="contentReason"
+                      name="contentReason"
+                      value={formData.contentReason}
+                      onChange={handleInputChange}
+                      rows={2}
+                      className="border-2 border-gray-400 rounded-lg w-full p-3 focus:outline-none focus:border-black"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="furtherDetails2" className="text-lg font-medium block mb-1">
+                      Any further details<span className="text-red-600 ml-1">*</span>
+                    </label>
+                    <textarea
                       id="furtherDetails2"
                       name="furtherDetails2"
                       value={formData.furtherDetails2}
                       onChange={handleInputChange}
-                      className="border-2 border-black rounded-md w-full h-20 my-2 pl-3"
+                      rows={3}
+                      className="border-2 border-gray-400 rounded-lg w-full p-3 focus:outline-none focus:border-black"
                     />
                     {errors.furtherDetails2 && (
-                      <div className="text-red-600 text-sm">
-                        {errors.furtherDetails2}
-                      </div>
+                      <p className="text-red-600 text-sm mt-1">{errors.furtherDetails2}</p>
                     )}
                   </div>
-                </section>
-              )}
-              {/* final submission */}
-              {currentStep === 3 && (
-                <section>
-                  <video src={tick} autoPlay className="w-2/6 mx-auto" />
-                  <div className="bg-green-500 w-fit p-4 rounded-xl mx-auto">
-                    <h6 className=" text-white font-bold text-2xl">
-                      Submitted Successfully
-                    </h6>
-                  </div>
-                </section>
+                </div>
+              </section>
+            )}
+
+            {/* Final submission */}
+            {currentStep === 3 && (
+              <section className="text-center py-12 space-y-6">
+                <video src={tick} autoPlay muted className="w-32 md:w-44 mx-auto rounded-full" />
+                <div className="bg-green-500 w-fit px-8 py-4 rounded-xl mx-auto shadow-lg">
+                  <h2 className="text-white font-bold text-xl md:text-2xl">
+                    Submitted Successfully
+                  </h2>
+                </div>
+                <p className="text-gray-600 text-base md:text-lg">
+                  Thank you for bringing this to our attention. Our team will review your report shortly.
+                </p>
+              </section>
+            )}
+
+            {/* Navigation buttons */}
+            <div className="flex justify-between items-center mt-8">
+              {currentStep === 2 && (
+                <button
+                  type="button"
+                  onClick={handlePrevStep}
+                  className="border-2 border-black text-lg font-medium px-6 py-2 rounded-xl hover:bg-gray-100 transition-colors"
+                >
+                  Back
+                </button>
               )}
 
-              {/* Navigation buttons */}
-              <div className="flex justify-between mt-4">
-                {currentStep === 2 && (
-                  <button
-                    type="button"
-                    onClick={handlePrevStep}
-                    className="border-2 border-black text-xl font-medium w-20 h-9 rounded-xl"
-                  >
-                    Back
-                  </button>
-                )}
+              {currentStep === 1 && (
+                <button
+                  type="button"
+                  onClick={handleNextStep}
+                  className="bg-blue-950 hover:bg-blue-900 text-lg font-medium text-white px-8 py-2 rounded-xl ml-auto transition-colors"
+                >
+                  Next
+                </button>
+              )}
 
-                {currentStep === 1 && (
-                  <button
-                    type="button"
-                    onClick={handleNextStep}
-                    className="border-2 bg-blue-950 text-xl font-medium text-white w-32 h-10 rounded-xl ml-auto "
-                  >
-                    Next
-                  </button>
-                )}
-                {currentStep === 2 && (
-                  <button
-                    type="button"
-                    onClick={handleNextStep}
-                    className="border-2 bg-green-600 text-xl font-medium text-white w-32 h-10 rounded-xl ml-auto "
-                  >
-                    Submit
-                  </button>
-                )}
-              </div>
-            </form>
-          </div>
+              {currentStep === 2 && (
+                <button
+                  type="submit"
+                  className="bg-green-600 hover:bg-green-700 text-lg font-medium text-white px-8 py-2 rounded-xl ml-auto transition-colors"
+                >
+                  Submit
+                </button>
+              )}
+            </div>
+          </form>
         </div>
       </div>
       <Footer />
