@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // AOS
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-import { price } from "../constants/map";
-import { discover } from "../constants/map";
+import { price as staticPrices, discover } from "../constants/map";
 import Navbar from "../component/Navbar/mainNavbar";
 import hero from "../image/startbackground_1.webp";
 import screenshot from "../image/tp201-sasi6-presentation43-02_2.png";
@@ -22,7 +21,10 @@ import GpIcon from "../image/Google_Play-Icon-Logo.wine.svg";
 import Footer from "../component/footer/Footer";
 
 function Home() {
-  React.useEffect(() => {
+  // Start with static data so price cards always show
+  const [prices, setPrices] = useState(staticPrices);
+
+  useEffect(() => {
     AOS.init({
       offset: 100,
       duration: 600,
@@ -30,6 +32,22 @@ function Home() {
       delay: 100,
     });
     AOS.refresh();
+  }, []);
+
+  // Try to load live data from MongoDB — updates prices if successful
+  useEffect(() => {
+    fetch("http://localhost:5000/api/prices")
+      .then((res) => {
+        if (!res.ok) throw new Error("API error");
+        return res.json();
+      })
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setPrices(data);
+          console.log("Prices loaded from MongoDB:", data.length);
+        }
+      })
+      .catch((err) => console.warn("Using static prices — MongoDB unavailable:", err.message));
   }, []);
 
   return (
@@ -159,45 +177,41 @@ function Home() {
 
           {/* Cards */}
           <div className="flex justify-center gap-8 flex-wrap my-12 max-w-6xl mx-auto">
-            {price.map((priceItem) => (
-              <div
-                data-aos="flip-right"
-                data-aos-delay="300"
-                key={priceItem.id}
-                className="bg-white rounded-2xl w-80 min-h-[26rem] p-6 text-center shadow-2xl border-2 flex flex-col justify-between transition-all hover:scale-95"
-              >
-                <div>
-                  <h3 className="mt-4 font-poppins">
-                    <span className="font-bold text-4xl text-gray-900">{priceItem.rate}</span>
-                  </h3>
-                  <p className="font-medium text-gray-600 my-1">{priceItem.valid}</p>
-                  <hr className="w-5/6 mx-auto my-4" />
-                  <ul className="text-left flex flex-col gap-y-3 font-poppins text-gray-600 px-4">
-                    <li className="flex items-center">
-                      <img src={tick} alt="check" className="w-4 h-4 mr-2" />
-                      <span>{priceItem.spec1}</span>
-                    </li>
-                    <li className="flex items-center">
-                      <img src={tick} alt="check" className="w-4 h-4 mr-2" />
-                      <span>{priceItem.spec3}</span>
-                    </li>
-                    <li className="flex items-center">
-                      <img src={tick} alt="check" className="w-4 h-4 mr-2" />
-                      <span>{priceItem.spec2}</span>
-                    </li>
-                    <li className="flex items-center">
-                      <img src={tick} alt="check" className="w-4 h-4 mr-2" />
-                      <span>{priceItem.spec4}</span>
-                    </li>
-                  </ul>
-                </div>
-                <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo" target="_blank" rel="noreferrer">
-                  <div className="text-xl font-semibold bg-green-500 hover:bg-green-600 text-white w-fit px-8 py-3 rounded-xl mx-auto mt-6 transition-colors">
-                    Get Started
+            {prices.map((priceItem, index) => {
+              const specsList = Array.isArray(priceItem.specs) && priceItem.specs.length > 0
+                ? priceItem.specs
+                : [priceItem.spec1, priceItem.spec2, priceItem.spec3, priceItem.spec4].filter(Boolean);
+
+              return (
+                <div
+                  data-aos="flip-right"
+                  data-aos-delay="300"
+                  key={priceItem._id || priceItem.id || index}
+                  className="bg-white rounded-2xl w-80 min-h-[26rem] p-6 text-center shadow-2xl border-2 flex flex-col justify-between transition-all hover:scale-95"
+                >
+                  <div>
+                    <h3 className="mt-4 font-poppins">
+                      <span className="font-bold text-4xl text-gray-900">{priceItem.rate}</span>
+                    </h3>
+                    <p className="font-medium text-gray-600 my-1">{priceItem.valid}</p>
+                    <hr className="w-5/6 mx-auto my-4" />
+                    <ul className="text-left flex flex-col gap-y-3 font-poppins text-gray-600 px-4">
+                      {specsList.map((spec, sIdx) => (
+                        <li key={sIdx} className="flex items-center">
+                          <img src={tick} alt="check" className="w-4 h-4 mr-2" />
+                          <span>{spec}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </a>
-              </div>
-            ))}
+                  <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo" target="_blank" rel="noreferrer">
+                    <div className="text-xl font-semibold bg-green-500 hover:bg-green-600 text-white w-fit px-8 py-3 rounded-xl mx-auto mt-6 transition-colors">
+                      Get Started
+                    </div>
+                  </a>
+                </div>
+              );
+            })}
           </div>
         </div>
 
