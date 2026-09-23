@@ -63,27 +63,27 @@ const Navbar = () => {
       </Link>
 
       {/* Desktop Navigation */}
-      <ul className="list-none sm:flex lg:flex hidden justify-center items-center gap-x-5 py-2">
-        {navLinks.map((nav) => (
-          <li
-            key={nav.id}
-            className={`font-poppins list-none no-underline font-normal cursor-pointer text-[16px] text-white hover:bg-white hover:text-black hover:transition-[0.3s] hover:duration-[ease] hover:rounded-md py-1 px-4 ${
-              active === nav.title ? "text-white" : "text-white"
-            }`}
-            onClick={() => handleLinkClick(nav.title, nav.path)}
-          >
-            {nav.path ? <Link to={nav.path}>{nav.title}</Link> : nav.title}
-          </li>
-        ))}
-      </ul>
-      {/* Join Creator button */}
-      <ul>
-        <a href="https://creator.yesdefo.com/" target="_blank" rel="noreferrer">
-          <li className="relative sm:flex lg:flex hidden right-16 px-3 py-1.5 text-lg rounded-xl no-underline overflow-hidden bg-green-500 font-medium text-white shadow-2xl transition-all duration-300 before:absolute before:inset-0 before:border-0 before:border-white before:duration-100 before:ease-linear hover:bg-white hover:text-green-500 hover:shadow-green-500 hover:before:border-[25px]">
-            <span className="relative z-10">Join Creator</span>
-          </li>
+      <div className="hidden sm:flex items-center gap-x-2 md:gap-x-4 mr-4 lg:mr-8">
+        <ul className="list-none flex justify-center items-center gap-x-1 md:gap-x-3 py-2">
+          {navLinks.map((nav) => (
+            <li
+              key={nav.id}
+              className={`font-poppins list-none no-underline font-normal cursor-pointer text-xs md:text-sm lg:text-[16px] text-white hover:bg-white hover:text-black hover:transition-[0.3s] hover:duration-[ease] hover:rounded-md py-1 px-2 md:px-3 lg:px-4 whitespace-nowrap ${
+                active === nav.title ? "text-white" : "text-white"
+              }`}
+              onClick={() => handleLinkClick(nav.title, nav.path)}
+            >
+              {nav.path ? <Link to={nav.path}>{nav.title}</Link> : nav.title}
+            </li>
+          ))}
+        </ul>
+        {/* Join Creator button */}
+        <a href="https://creator.yesdefo.com/" target="_blank" rel="noreferrer" className="shrink-0 ml-1 md:ml-3">
+          <div className="px-3 md:px-4 py-1.5 text-xs md:text-sm lg:text-base rounded-xl no-underline bg-green-500 font-medium text-white shadow-xl transition-all duration-300 hover:bg-white hover:text-green-500 cursor-pointer whitespace-nowrap">
+            <span>Join Creator</span>
+          </div>
         </a>
-      </ul>
+      </div>
 
       {/* Mobile Navigation */}
       <div className="sm:hidden mr-4 my-2 flex flex-1 justify-end items-center">

@@ -4,10 +4,12 @@ import React, { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-import { price as staticPrices, discover } from "../constants/map";
+import { price as staticPrices } from "../constants/map";
 import Navbar from "../component/Navbar/mainNavbar";
-import hero from "../image/startbackground_1.webp";
-import screenshot from "../image/tp201-sasi6-presentation43-02_2.png";
+import HeroSection from "./Hero/HeroSection";
+import RotatingShowcase from "./Showcase/RotatingShowcase";
+import CategoriesSection from "./Categories/CategoriesSection";
+import { MOCK_MONGODB_DATA } from "../data/screensData";
 
 import tick from "../image/price_box/Vector.svg";
 
@@ -50,121 +52,65 @@ function Home() {
       .catch((err) => console.warn("Using static prices — MongoDB unavailable:", err.message));
   }, []);
 
+  const scrollToShowcase = () => {
+    const el = document.getElementById("showcase-section");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="relative w-full h-full">
       {/* ------------Navbar------------------ */}
       <div className=" w-full mx-auto">
         <Navbar />
         {/* Hero section */}
-        <div className="relative w-full min-h-[calc(100vh-4rem)] flex items-center bg-black">
-          {/* Background Hero Image */}
-          <img
-            className="absolute inset-0 w-full h-full object-cover opacity-80"
-            src={hero}
-            alt="Defo hero background"
+        <HeroSection onExploreClick={scrollToShowcase} />
+
+        {/* 2. 3D Rotating Phone Showcase Section */}
+        <section 
+          id="showcase-section"
+          className="relative z-10 w-full bg-[#07090e] flex flex-col items-center justify-center pt-16 sm:pt-20 pb-16 px-3 sm:px-6"
+        >
+          {/* Section title */}
+          <div className="text-center mb-8">
+            <h2 
+              className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight"
+              style={{ fontFamily: 'Outfit, sans-serif' }}
+            >
+              Explore Entertainment in Motion
+            </h2>
+            <p className="text-xs sm:text-base text-slate-400 max-w-lg mx-auto mt-2 font-poppins">
+              Experience our 3D hardware-accelerated carousel. Swipe or click on any phone to rotate perspective.
+            </p>
+          </div>
+
+          {/* 3D Rotating Phones with auto-rotation */}
+          <RotatingShowcase 
+            items={MOCK_MONGODB_DATA} 
+            initialSpeed={2000}
           />
 
-          {/* Overlay Content */}
-          <div className="relative z-10 w-full text-white px-6 md:px-20 lg:px-40 py-16">
-            <h1
-              data-aos="fade-up"
-              data-aos-delay="400"
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-bubblegum tracking-wide text-center md:text-left"
-            >
-              Information
-              <br />
-              with
-              <br />
-              Entertainment
-            </h1>
-            <p
-              data-aos="fade-up"
-              data-aos-delay="600"
-              className="font-bubblegum text-xl sm:text-2xl lg:text-3xl font-medium text-center md:text-left mt-4"
-            >
-              Are you looking to have fun and learn at the same time?
-            </p>
-            <div
-              data-aos="fade-up"
-              data-aos-delay="800"
-              className="w-full flex gap-6 my-8 flex-col sm:flex-row justify-center md:justify-start items-center"
-            >
-              <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1" target="_blank" rel="noreferrer">
-                <img
-                  className="w-44 lg:w-40 transition-all hover:scale-95"
-                  src={playstore}
-                  alt="Google Play Store badge"
-                />
-              </a>
-              <img
-                className="w-44 lg:w-40 transition-all hover:scale-95"
-                src={appstore}
-                alt="Apple App Store badge"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* screenshot section */}
-        <div className="w-full min-h-fit py-16 flex justify-center items-center flex-col px-4">
-          <img className="w-11/12 md:w-4/5 lg:w-3/5 object-contain" src={screenshot} alt="Defo app presentation screenshot" />
+          {/* Download App CTA */}
           <a
             href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1"
             target="_blank"
             rel="noreferrer"
+            className="mt-8"
           >
-            <div className="flex items-center gap-3 bg-black w-fit px-6 py-3 mt-10 rounded-full transition-all hover:scale-95 shadow-lg">
+            <div className="flex items-center gap-3 bg-black hover:bg-neutral-900 border border-white/15 px-8 py-3.5 rounded-full transition-all hover:scale-105 shadow-[0_10px_30px_rgba(0,0,0,0.8)] cursor-pointer group">
               <img className="w-8 h-8" src={GpIcon} alt="Google Play icon" />
-              <h2 className="text-white text-lg font-bold">
+              <h2 className="text-white text-lg font-bold group-hover:text-[#00f298] transition-colors">
                 Download The App
               </h2>
             </div>
           </a>
-        </div>
+        </section>
 
-        {/* Description lines */}
-        <div className="w-full flex justify-center bg-gradient-to-r from-defoGreen from-[-58.97%] to-defoBlue to-50% py-8 px-4">
-          <p className="text-white font-bold text-center w-11/12 sm:w-3/4 md:w-2/3 text-lg sm:text-xl font-poppins">
-            "A short video app with a subscription model can offer high-quality
-            content and attract a loyal audience."
-          </p>
-        </div>
-
-        {/* Discover section */}
-        <div className="w-full py-16 px-4">
-          <h2 className="text-center text-2xl md:text-4xl font-bold">
-            Discover, Like and Save the useful videos.
-          </h2>
-          <p className="text-black text-center my-2 text-lg md:text-2xl font-medium font-poppins">
-            Discover a new way to learn and have fun at the same time!
-          </p>
-
-          {/* Discover Grid Section */}
-          <div className="place-items-center grid gap-8 m-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-6xl py-10 text-center">
-            {discover.map((item) => (
-              <div
-                data-aos="zoom-in-up"
-                data-aos-delay="50"
-                key={item.id}
-                className="w-56 py-4 flex flex-col items-center"
-              >
-                <img
-                  className="mx-auto w-24 h-24 object-contain"
-                  src={item.image}
-                  alt={item.title}
-                />
-                <h3 className="font-medium lg:text-xl pt-4">
-                  {item.title}
-                </h3>
-                <p className="text-gray-500 font-medium font-poppins text-sm md:text-base mt-1">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-          {/* price card scroll id */}
-          <div id="price"></div>
-        </div>
+        {/* 3. 3D Categories Section: Discover, Like and Save */}
+        <CategoriesSection />
+        {/* price card scroll anchor */}
+        <div id="price"></div>
 
         {/* Price Section */}
         <div className="w-full bg-gradient-to-r from-defoGreen from-[-58.97%] to-defoBlue to-50% py-12 px-4">
@@ -187,7 +133,7 @@ function Home() {
                   data-aos="flip-right"
                   data-aos-delay="300"
                   key={priceItem._id || priceItem.id || index}
-                  className="bg-white rounded-2xl w-80 min-h-[26rem] p-6 text-center shadow-2xl border-2 flex flex-col justify-between transition-all hover:scale-95"
+                  className="bg-white rounded-2xl w-full max-w-[20rem] min-h-[26rem] p-6 text-center shadow-2xl border-2 flex flex-col justify-between transition-all hover:scale-95 mx-auto"
                 >
                   <div>
                     <h3 className="mt-4 font-poppins">
@@ -221,24 +167,24 @@ function Home() {
             <h2
               data-aos="zoom-in"
               data-aos-delay="400"
-              className="font-bold text-3xl md:text-4xl lg:text-5xl"
+              className="font-bold text-2xl xs:text-3xl sm:text-4xl lg:text-5xl"
             >
               Get the app now!
             </h2>
             <div
               data-aos="zoom-in"
               data-aos-delay="400"
-              className="flex gap-5 flex-col sm:flex-row justify-center items-center my-8"
+              className="flex gap-4 sm:gap-5 flex-col xs:flex-row justify-center items-center my-8"
             >
               <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1" target="_blank" rel="noreferrer">
                 <img
-                  className="w-44 lg:w-40 transition-all hover:scale-95"
+                  className="w-36 xs:w-40 sm:w-44 transition-all hover:scale-95"
                   src={playstore}
                   alt="Google Play Store badge"
                 />
               </a>
               <img
-                className="w-44 lg:w-40 transition-all hover:scale-95"
+                className="w-36 xs:w-40 sm:w-44 transition-all hover:scale-95"
                 src={appstore}
                 alt="Apple App Store badge"
               />
