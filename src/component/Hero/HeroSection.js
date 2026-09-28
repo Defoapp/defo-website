@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { HERO_COLUMNS_DATA } from '../../data/heroData';
+import FlippingHeroCard from './FlippingHeroCard';
 
 export default function HeroSection({ onExploreClick }) {
   
@@ -61,7 +62,7 @@ export default function HeroSection({ onExploreClick }) {
       {/* ================================================================== */}
       {/* BACKGROUND JUMBLED MASONRY COLUMNS (EXACT SIZES FROM FIGMA)        */}
       {/* ================================================================== */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-80">
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-90">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-3.5 h-full w-[110%] -left-[5%] -top-[10%]">
           {HERO_COLUMNS_DATA.map((colCards, colIdx) => {
             const config = columnConfigs[colIdx % columnConfigs.length];
@@ -82,29 +83,12 @@ export default function HeroSection({ onExploreClick }) {
                   }}
                 >
                   {loopCards.map((card, cardIdx) => (
-                    <div
+                    <FlippingHeroCard
                       key={`${card.id}-${cardIdx}`}
-                      style={{ height: `${card.height}px` }}
-                      className="relative w-full rounded-2xl overflow-hidden shrink-0 border border-white/10 shadow-2xl group"
-                    >
-                      {/* Image */}
-                      <img
-                        src={card.imageUrl}
-                        alt={card.title}
-                        loading="lazy"
-                        className="w-full h-full object-cover object-center filter brightness-[0.78] contrast-[1.08] transition-transform duration-700 group-hover:scale-105"
-                      />
-
-                      {/* Card gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
-
-                      {/* Stylized Category Title matching Figma reference */}
-                      <div className="absolute bottom-3 left-3 right-3">
-                        <span className={`block drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] ${card.fontStyle}`}>
-                          {card.title}
-                        </span>
-                      </div>
-                    </div>
+                      card={card}
+                      cardIdx={cardIdx}
+                      colIdx={colIdx}
+                    />
                   ))}
                 </div>
               </div>
@@ -119,7 +103,7 @@ export default function HeroSection({ onExploreClick }) {
       <div 
         className="absolute inset-0 z-10 pointer-events-none"
         style={{
-          background: 'radial-gradient(circle at center, rgba(10, 13, 20, 0.45) 0%, rgba(10, 13, 20, 0.78) 58%, rgba(10, 13, 20, 0.98) 100%)'
+          background: 'radial-gradient(circle at center, rgba(10, 13, 20, 0.32) 0%, rgba(10, 13, 20, 0.65) 55%, rgba(10, 13, 20, 0.95) 100%)'
         }}
       />
       {/* Top & Bottom gradient soft fades */}

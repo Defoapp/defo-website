@@ -56,6 +56,9 @@ const Price = mongoose.model('Price', PriceSchema, 'prices');
 
 // 4. API Routes
 app.get('/api/items', async (req, res) => {
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(503).json({ message: 'Database connection not ready' });
+  }
   try {
     const items = await Item.find();
     res.json(items);
@@ -65,6 +68,9 @@ app.get('/api/items', async (req, res) => {
 });
 
 app.get('/api/prices', async (req, res) => {
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(503).json({ message: 'Database connection not ready' });
+  }
   try {
     const prices = await Price.find();
     res.json(prices);

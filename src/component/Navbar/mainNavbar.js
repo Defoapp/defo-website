@@ -3,6 +3,8 @@ import close from "../Navbar/image/close.svg";
 import menu from "../Navbar/image/menu.svg";
 import logo from "../Navbar/image/Logo.png";
 import { Link } from "react-router-dom";
+import ThemeToggle from "./ThemeToggle";
+import { useTheme } from "../../context/ThemeContext";
 
 export const navLinks = [
   {
@@ -31,9 +33,16 @@ export const navLinks = [
     title: "Careers",
     path: "/careers",
   },
+  {
+    id: "7",
+    title: "Learn",
+    path: "/learn",
+  },
 ];
 
 const Navbar = () => {
+  const { isDark } = useTheme();
+
   const scrollToContainer = (id) => {
     const container = document.getElementById(id);
     if (container) {
@@ -56,10 +65,16 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 bg-black w-full flex py-2 justify-between items-center z-50">
+    <nav
+      className={`sticky top-0 w-full flex py-2 justify-between items-center z-50 transition-colors duration-300 ${
+        isDark
+          ? "bg-black/95 text-white border-b border-white/10"
+          : "bg-white/95 text-slate-800 border-b border-slate-200/90 shadow-sm backdrop-blur-md"
+      }`}
+    >
       {/* Logo */}
-      <Link to="/">
-        <img className=" ml-4 w-15 h-7" src={logo} alt="logo" />
+      <Link to="/" className="flex items-center">
+        <img className="ml-4 w-15 h-7" src={logo} alt="logo" />
       </Link>
 
       {/* Desktop Navigation */}
@@ -68,17 +83,25 @@ const Navbar = () => {
           {navLinks.map((nav) => (
             <li
               key={nav.id}
-              className={`font-poppins list-none no-underline font-normal cursor-pointer text-xs md:text-sm lg:text-[16px] text-white hover:bg-white hover:text-black hover:transition-[0.3s] hover:duration-[ease] hover:rounded-md py-1 px-2 md:px-3 lg:px-4 whitespace-nowrap ${
-                active === nav.title ? "text-white" : "text-white"
-              }`}
+              className={`font-poppins list-none no-underline font-normal cursor-pointer text-xs md:text-sm lg:text-[16px] py-1 px-2 md:px-3 lg:px-4 rounded-md whitespace-nowrap transition-all duration-200 ${
+                isDark
+                  ? "text-white hover:bg-white hover:text-black"
+                  : "text-slate-700 hover:bg-slate-100 hover:text-black"
+              } ${active === nav.title ? "font-semibold" : ""}`}
               onClick={() => handleLinkClick(nav.title, nav.path)}
             >
               {nav.path ? <Link to={nav.path}>{nav.title}</Link> : nav.title}
             </li>
           ))}
         </ul>
+
+        {/* Theme Changer Toggle Button */}
+        <div className="shrink-0">
+          <ThemeToggle />
+        </div>
+
         {/* Join Creator button */}
-        <a href="https://creator.yesdefo.com/" target="_blank" rel="noreferrer" className="shrink-0 ml-1 md:ml-3">
+        <a href="https://creator.yesdefo.com/" target="_blank" rel="noreferrer" className="shrink-0 ml-1 md:ml-2">
           <div className="px-3 md:px-4 py-1.5 text-xs md:text-sm lg:text-base rounded-xl no-underline bg-green-500 font-medium text-white shadow-xl transition-all duration-300 hover:bg-white hover:text-green-500 cursor-pointer whitespace-nowrap">
             <span>Join Creator</span>
           </div>
@@ -86,11 +109,14 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="sm:hidden mr-4 my-2 flex flex-1 justify-end items-center">
+      <div className="sm:hidden mr-4 my-2 flex flex-1 justify-end items-center gap-2">
+        <ThemeToggle />
         <img
           src={toggle ? close : menu}
           alt="menu"
-          className="w-[28px] h-[28px] text-black object-contain cursor-pointer"
+          className={`w-[28px] h-[28px] object-contain cursor-pointer transition-all ${
+            isDark ? "" : "filter invert brightness-0"
+          }`}
           onClick={() => setToggle(!toggle)}
         />
 
@@ -98,15 +124,19 @@ const Navbar = () => {
         <div
           className={`${
             !toggle ? "hidden" : "flex"
-          } z-40 p-6 bg-black absolute top-16 right-0 mx-2 w-[calc(100vw-2rem)] max-w-xs rounded-xl sidebar shadow-xl`}
+          } z-40 p-6 absolute top-16 right-0 mx-2 w-[calc(100vw-2rem)] max-w-xs rounded-2xl sidebar shadow-2xl transition-colors duration-300 ${
+            isDark
+              ? "bg-black/95 text-white border border-white/10"
+              : "bg-white text-slate-900 border border-slate-200"
+          }`}
         >
           <ul className="list-none text-center flex flex-1 flex-col">
             {navLinks.map((nav, index) => (
               <li
                 key={nav.id}
-                className={`font-poppins list-none text-center no-underline font-medium mx-4 cursor-pointer text-[16px] text-white ${
-                  index === navLinks.length - 1 ? "mb-0" : "mb-4"
-                }`}
+                className={`font-poppins list-none text-center no-underline font-medium mx-4 cursor-pointer text-[16px] ${
+                  isDark ? "text-white hover:text-cyan-400" : "text-slate-800 hover:text-emerald-600"
+                } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
                 onClick={() => {
                   handleLinkClick(nav.title, nav.path);
                   setToggle(false);
@@ -115,10 +145,14 @@ const Navbar = () => {
                 {nav.path ? <Link to={nav.path}>{nav.title}</Link> : nav.title}
               </li>
             ))}
+
+            {/* Mobile Theme Selector */}
+            <ThemeToggle isMobile={true} />
+
             <a href="https://creator.yesdefo.com/" target="_blank" rel="noreferrer">
               <li
                 onClick={() => setToggle(false)}
-                className="font-poppins list-none no-underline font-medium cursor-pointer text-[16px] text-white bg-green-500 p-1.5 rounded-xl mt-4"
+                className="font-poppins list-none no-underline font-medium cursor-pointer text-[16px] text-white bg-green-500 p-2 rounded-xl mt-2"
               >
                 Join Creator
               </li>

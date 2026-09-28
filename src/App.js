@@ -13,26 +13,34 @@ import Careers from "../src/component/Careers";
 import Faq from "../src/component/Faq";
 import ReportContent from "./component/ReportContent";
 import Topics from "./component/Topics";
+import Learn from "./component/Learn/Learn";
+import ScrollToTop from "./component/ScrollToTop";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/OurStory" element={<OurStory />} />
-        <Route path="/OurCreators" element={<OurCreators />} />
-        <Route path="/OurTeams" element={<OurTeams />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/terms" element={<Term />} />
-        <Route path="/careers" element={<Careers/>}/>
-        <Route path="/faq" element={<Faq/>}/>
-        <Route path="/reportContent" element={<ReportContent/>}/>
-        <Route path="/topics" element={<Topics/>}/>
-        {/* <Route path="" element={}/> */}
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/OurStory" element={<OurStory />} />
+          <Route path="/OurCreators" element={<OurCreators />} />
+          <Route path="/OurTeams" element={<OurTeams />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Term />} />
+          <Route path="/careers" element={<Careers/>}/>
+          <Route path="/faq" element={<Faq/>}/>
+          <Route path="/reportContent" element={<ReportContent/>}/>
+          <Route path="/topics" element={<Topics/>}/>
+          <Route path="/learn" element={<Learn/>}/>
+          <Route path="/Learn" element={<Learn/>}/>
+          {/* <Route path="" element={}/> */}
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 export default App;
