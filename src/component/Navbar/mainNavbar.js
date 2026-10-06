@@ -33,11 +33,6 @@ export const navLinks = [
     title: "Careers",
     path: "/careers",
   },
-  {
-    id: "7",
-    title: "Learn",
-    path: "/learn",
-  },
 ];
 
 const Navbar = () => {

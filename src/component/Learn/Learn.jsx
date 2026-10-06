@@ -5,7 +5,6 @@ import { LEARN_ARTICLES, ROADMAP_TRACKS } from "./learnData";
 import LearnArticleModal from "./LearnArticleModal";
 import LiveCssPlayground from "./LiveCssPlayground";
 import CodeRunnerSandbox from "./CodeRunnerSandbox";
-import AppleStoreHero from "./AppleStoreHero";
 import { useTheme } from "../../context/ThemeContext";
 
 const Learn = () => {
@@ -14,11 +13,26 @@ const Learn = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeModalArticle, setActiveModalArticle] = useState(null);
   const [copiedSnippetId, setCopiedSnippetId] = useState(null);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
-  // Auto scroll to top on mount
+  // Auto scroll to top on mount & scroll listener for scroll-up button
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   const categories = [
     { id: "all", label: "All Topics" },
@@ -74,12 +88,6 @@ const Learn = () => {
     >
       {/* Universal Fixed Navbar */}
       <Navbar />
-
-      {/* 3D Apple App Store Style Canopy Header */}
-      <AppleStoreHero
-        onSelectCategory={setSelectedCategory}
-        onScrollToSection={scrollToSection}
-      />
 
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 relative">
         {/* Background ambient radial gradients */}
@@ -548,6 +556,32 @@ const Learn = () => {
 
       {/* Universal Footer */}
       <Footer />
+
+      {/* Floating Scroll Up Button */}
+      <button
+        onClick={scrollToTop}
+        aria-label="Scroll to top"
+        title="Scroll to top"
+        className={`fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-40 p-3.5 sm:p-4 rounded-full shadow-2xl backdrop-blur-xl transition-all duration-300 flex items-center justify-center group cursor-pointer ${
+          showScrollTop
+            ? "opacity-100 translate-y-0 scale-100 pointer-events-auto"
+            : "opacity-0 translate-y-6 scale-75 pointer-events-none"
+        } ${
+          isDark
+            ? "bg-[#0f172a]/90 hover:bg-emerald-500 text-emerald-400 hover:text-black border border-emerald-500/30 hover:border-emerald-400 shadow-emerald-950/50"
+            : "bg-white/95 hover:bg-emerald-500 text-slate-700 hover:text-white border border-slate-200 shadow-xl shadow-emerald-500/15"
+        } hover:shadow-emerald-500/40 hover:-translate-y-1 active:scale-90`}
+      >
+        <svg
+          className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-300 group-hover:-translate-y-1"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 19V5m0 0l-7 7m7-7l7 7" />
+        </svg>
+      </button>
     </div>
   );
 };

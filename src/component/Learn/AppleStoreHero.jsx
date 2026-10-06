@@ -123,74 +123,11 @@ const AppleStoreHero = ({ onSelectCategory, onScrollToSection }) => {
       ref={heroRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`relative w-full overflow-hidden transition-colors duration-500 pt-0 pb-12 sm:pb-16 ${
+      className={`relative w-full overflow-hidden transition-colors duration-500 pt-6 sm:pt-10 pb-12 sm:pb-16 ${
         isDark ? "bg-[#06080e]" : "bg-gradient-to-b from-[#f5f5f7] via-[#fafafa] to-white"
       }`}
       style={{ perspective: "1400px" }}
     >
-      {/* 1. Apple-Style Top Sub-Navigation Header Bar (Like Apple's App Store header in the reference image) */}
-      <div
-        className={`w-full py-2.5 px-4 sm:px-8 border-b backdrop-blur-md transition-colors duration-300 z-30 relative ${
-          isDark
-            ? "bg-black/60 border-white/10 text-slate-300"
-            : "bg-white/80 border-slate-200/80 text-slate-700 shadow-sm"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span
-              className="text-base sm:text-lg font-bold tracking-tight bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent"
-              style={{ fontFamily: "Outfit, sans-serif" }}
-            >
-              Defo Learn
-            </span>
-            <span
-              className={`hidden sm:inline-block text-[11px] font-mono px-2 py-0.5 rounded-full border ${
-                isDark
-                  ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
-                  : "bg-emerald-50 border-emerald-200 text-emerald-700"
-              }`}
-            >
-              Apple-Style 3D Canopy
-            </span>
-          </div>
-
-          <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm font-medium">
-            <button
-              onClick={() => onScrollToSection("articles-grid")}
-              className={`hover:text-emerald-500 transition-colors ${
-                isDark ? "text-slate-300" : "text-slate-600"
-              }`}
-            >
-              All Articles
-            </button>
-            <button
-              onClick={() => onScrollToSection("css-playground")}
-              className={`hover:text-cyan-500 transition-colors ${
-                isDark ? "text-slate-300" : "text-slate-600"
-              }`}
-            >
-              Live CSS Lab
-            </button>
-            <button
-              onClick={() => onScrollToSection("code-sandbox")}
-              className={`hover:text-emerald-500 transition-colors ${
-                isDark ? "text-slate-300" : "text-slate-600"
-              }`}
-            >
-              Code Sandbox
-            </button>
-            <button
-              onClick={() => onScrollToSection("roadmap-tracks")}
-              className={`hidden md:inline-block hover:text-emerald-500 transition-colors ${
-                isDark ? "text-slate-300" : "text-slate-600"
-              }`}
-            >
-              Roadmaps
-            </button>
-          </div>
-        </div>
-      </div>
 
       {/* Ambient background glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-b from-cyan-500/10 via-emerald-500/10 to-transparent blur-[120px] pointer-events-none -z-10" />

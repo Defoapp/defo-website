@@ -102,16 +102,9 @@ function Footer() {
         {/* Resource section */}
         <div>
           <h2 className={titleStyle}>Resources</h2>
-          <div className="mt-2 flex flex-col items-start">
-            <Link
-              to="/learn"
-              className="group inline-flex items-center gap-2 px-3.5 py-1.5 my-1.5 rounded-xl bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 text-black font-semibold text-sm shadow-md shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-105 active:scale-95 transition-all duration-300"
-            >
-              <span className="w-2 h-2 rounded-full bg-black group-hover:scale-125 transition-transform" />
-              <span>Learn</span>
-              <span className="text-[10px] px-1.5 py-0.5 rounded bg-black/20 font-bold uppercase tracking-wider">
-                Hub
-              </span>
+          <div className="mt-2 flex flex-col">
+            <Link to="/learn" className={subHeadingStyle}>
+              Learn
             </Link>
             <a href="https://creator.yesdefo.com/" target="_blank" rel="noreferrer" className={subHeadingStyle}>
               Join Creator
