@@ -15,10 +15,8 @@ const Learn = () => {
   const [copiedSnippetId, setCopiedSnippetId] = useState(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  // Auto scroll to top on mount & scroll listener for scroll-up button
+  // Scroll listener for scroll-up button
   useEffect(() => {
-    window.scrollTo(0, 0);
-
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300);
     };

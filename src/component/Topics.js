@@ -1,4 +1,4 @@
-import React, { useRef, useState, useMemo, useEffect } from "react";
+import React, { useRef, useState, useMemo } from "react";
 import Navbar from "../component/Navbar/Navbar";
 import Footer from "../component/footer/Footer";
 import { TOPICS_DATA, TOPICS_CATEGORIES } from "../data/topicsData";
@@ -14,10 +14,6 @@ const Topics = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activePreview, setActivePreview] = useState(null);
 
-  // Auto scroll to top on mount
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   // Filter topics by category and search
   const filteredTopics = useMemo(() => {

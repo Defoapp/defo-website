@@ -45,11 +45,11 @@ function Footer() {
     },
   ];
 
-  const titleStyle = "text-white font-semibold text-xl md:text-2xl py-2 md:py-4 block";
-  const subHeadingStyle = "text-lg md:text-xl font-light text-white my-1 block hover:pl-2 duration-300";
+  const titleStyle = "text-white stay-white footer-title font-bold text-xl md:text-2xl py-2 md:py-4 block tracking-wide";
+  const subHeadingStyle = "footer-link text-base md:text-lg font-normal text-slate-300 hover:text-white my-1.5 block hover:pl-2 duration-200 transition-all";
 
   return (
-    <footer className="w-full bg-black py-14">
+    <footer className="w-full bg-black py-14" style={{ backgroundColor: '#000000' }}>
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
         {/* socialmedia */}
         <div>
@@ -64,7 +64,7 @@ function Footer() {
                   href={container.link}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex gap-2 items-center text-white"
+                  className="footer-link flex gap-2 items-center text-slate-300 hover:text-white transition-colors duration-200"
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 >

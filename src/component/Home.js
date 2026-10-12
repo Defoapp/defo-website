@@ -11,8 +11,7 @@ import AppFunnelSection from "./AppFunnel/AppFunnelSection";
 import RotatingShowcase from "./Showcase/RotatingShowcase";
 import { MOCK_MONGODB_DATA } from "../data/screensData";
 import CategoriesSection from "./Categories/CategoriesSection";
-
-import tick from "../image/price_box/Vector.svg";
+import PricingSection from "./Pricing/PricingSection";
 
 // ---------------Discover------------------
 import playstore from "../image/google-play-badge.svg";
@@ -116,54 +115,8 @@ function Home() {
         {/* price card scroll anchor */}
         <div id="price"></div>
 
-        {/* Price Section */}
-        <div className="w-full bg-gradient-to-r from-defoGreen from-[-58.97%] to-defoBlue to-50% py-12 px-4 price-section-banner">
-          <h2 className="!text-white text-2xl sm:text-4xl font-bold text-center tracking-tight drop-shadow-sm">
-            Ready to get started?
-          </h2>
-          <p className="text-lg md:text-2xl text-center font-medium !text-emerald-100 font-poppins my-2 drop-shadow-sm">
-            The only app you need for complete Entertainment
-          </p>
-
-          {/* Cards */}
-          <div className="flex justify-center gap-8 flex-wrap my-12 max-w-6xl mx-auto">
-            {prices.map((priceItem, index) => {
-              const specsList = Array.isArray(priceItem.specs) && priceItem.specs.length > 0
-                ? priceItem.specs
-                : [priceItem.spec1, priceItem.spec2, priceItem.spec3, priceItem.spec4].filter(Boolean);
-
-              return (
-                <div
-                  data-aos="flip-right"
-                  data-aos-delay="300"
-                  key={priceItem._id || priceItem.id || index}
-                  className="bg-white rounded-2xl w-full max-w-[20rem] min-h-[26rem] p-6 text-center shadow-2xl border-2 flex flex-col justify-between transition-all hover:scale-95 mx-auto"
-                >
-                  <div>
-                    <h3 className="mt-4 font-poppins">
-                      <span className="font-bold text-4xl text-gray-900">{priceItem.rate}</span>
-                    </h3>
-                    <p className="font-medium text-gray-600 my-1">{priceItem.valid}</p>
-                    <hr className="w-5/6 mx-auto my-4" />
-                    <ul className="text-left flex flex-col gap-y-3 font-poppins text-gray-600 px-4">
-                      {specsList.map((spec, sIdx) => (
-                        <li key={sIdx} className="flex items-center">
-                          <img src={tick} alt="check" className="w-4 h-4 mr-2" />
-                          <span>{spec}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo" target="_blank" rel="noreferrer">
-                    <div className="text-xl font-semibold bg-green-500 hover:bg-green-600 text-white w-fit px-8 py-3 rounded-xl mx-auto mt-6 transition-colors">
-                      Get Started
-                    </div>
-                  </a>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        {/* 5. 3D Pricing Section with Scroll Effects & "Get Started" emerging from down */}
+        <PricingSection prices={prices} />
 
         {/* store links */}
         <div className="w-full flex justify-center py-16 px-4">

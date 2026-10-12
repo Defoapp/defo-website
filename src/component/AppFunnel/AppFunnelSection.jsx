@@ -245,7 +245,12 @@ export default function AppFunnelSection() {
               Defo
             </h3>
             <p className="text-sm sm:text-base font-semibold text-emerald-600 dark:text-[#00f298] mt-1 font-poppins">
-              Information with Entertainment
+              <span className="group/radium-funnel relative inline-block cursor-pointer">
+                <span className="transition-all duration-300 group-hover/radium-funnel:text-white group-hover/radium-funnel:[text-shadow:0_0_2px_#00ff88,0_0_6px_#00f298]">
+                  Information
+                </span>
+              </span>{' '}
+              with Entertainment
             </p>
           </motion.div>
 

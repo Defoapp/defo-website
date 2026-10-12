@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { HERO_COLUMNS_DATA } from '../../data/heroData';
 import FlippingHeroCard from './FlippingHeroCard';
 
@@ -7,6 +7,45 @@ export default function HeroSection({ onExploreClick }) {
   // Interactive 3D tilt state for the center hero typography card
   const heroCardRef = useRef(null);
   const [headlineTilt, setHeadlineTilt] = useState({ rotateX: 0, rotateY: 0 });
+
+  // Kinetic Typewriter effect with shake on load
+  const fullInformationText = "Information";
+  const [typedCount, setTypedCount] = useState(0);
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [replayKey, setReplayKey] = useState(0);
+  const typingTimerRef = useRef(null);
+
+  const startTyping = () => {
+    if (typingTimerRef.current) {
+      clearInterval(typingTimerRef.current);
+    }
+    setReplayKey((k) => k + 1);
+    setTypedCount(0);
+    setIsTypingComplete(false);
+    let current = 0;
+    typingTimerRef.current = setInterval(() => {
+      current += 1;
+      setTypedCount(current);
+      if (current >= fullInformationText.length) {
+        clearInterval(typingTimerRef.current);
+        typingTimerRef.current = null;
+        setTimeout(() => setIsTypingComplete(true), 350);
+      }
+    }, 130);
+  };
+
+  useEffect(() => {
+    const initialDelay = setTimeout(() => {
+      startTyping();
+    }, 300);
+
+    return () => {
+      clearTimeout(initialDelay);
+      if (typingTimerRef.current) {
+        clearInterval(typingTimerRef.current);
+      }
+    };
+  }, []);
 
   const handleHeroMouseMove = (e) => {
     if (!heroCardRef.current) return;
@@ -135,7 +174,48 @@ export default function HeroSection({ onExploreClick }) {
               transform: 'translateZ(45px)'
             }}
           >
-            <span className="inline-block hover:text-[#00f298] transition-colors duration-300">Information</span> <br />
+            {/* "Information" with Radium Edge Light on Hover (Letters remain razor-sharp white) */}
+            <span
+              className="group/radium relative inline-block cursor-pointer select-none"
+              onClick={() => startTyping()}
+              title="Click to replay typing animation"
+            >
+
+              {/* Typography Face with Radium Luminescence on Hover */}
+              {isTypingComplete ? (
+                /* Exact presentation with radium hover text glow */
+                <span className="inline-block group-hover-radium-text transition-colors duration-300">
+                  Information
+                </span>
+              ) : (
+                /* Kinetic typewriter loading sequence with letter-by-letter shake */
+                <span className="relative inline-block group-hover-radium-text transition-colors duration-300">
+                  {fullInformationText.slice(0, typedCount).split('').map((char, index) => {
+                    const isLatest = index === typedCount - 1;
+                    return (
+                      <span
+                        key={`${replayKey}-${index}`}
+                        className={`inline-block ${isLatest ? 'animate-letter-shake text-[#00f298]' : ''}`}
+                      >{char}</span>
+                    );
+                  })}
+                  <span
+                    aria-hidden="true"
+                    className="inline-block font-mono font-light text-[#00f298] ml-0.5 animate-pulse select-none"
+                    style={{
+                      textShadow: '0 0 12px #00f298, 0 0 24px rgba(0, 242, 152, 0.75)',
+                    }}
+                  >
+                    |
+                  </span>
+                  <span 
+                    aria-hidden="true" 
+                    className="opacity-0 select-none pointer-events-none inline-block overflow-hidden"
+                    style={{ textShadow: 'none' }}
+                  >{fullInformationText.slice(typedCount)}</span>
+                </span>
+              )}
+            </span> <br />
             <span className="inline-block text-slate-300 text-2xl xs:text-3xl sm:text-5xl md:text-6xl font-light italic opacity-90 my-1">with</span> <br />
             <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-[#00f298] drop-shadow-[0_10px_25px_rgba(0,242,152,0.3)]">Entertainment</span>
           </h1>
