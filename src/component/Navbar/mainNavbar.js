@@ -72,31 +72,32 @@ const Navbar = () => {
         <img className="ml-4 w-15 h-7" src={logo} alt="logo" />
       </Link>
 
-      {/* Desktop Navigation */}
-      <div className="hidden sm:flex items-center gap-x-2 md:gap-x-4 mr-4 lg:mr-8">
-        <ul className="list-none flex justify-center items-center gap-x-1 md:gap-x-3 py-2">
-          {navLinks.map((nav) => (
-            <li
-              key={nav.id}
-              className={`font-poppins list-none no-underline font-normal cursor-pointer text-xs md:text-sm lg:text-[16px] py-1 px-2 md:px-3 lg:px-4 rounded-md whitespace-nowrap transition-all duration-200 ${
-                isDark
-                  ? "text-white hover:bg-white hover:text-black"
-                  : "text-slate-700 hover:bg-slate-100 hover:text-black"
-              } ${active === nav.title ? "font-semibold" : ""}`}
-              onClick={() => handleLinkClick(nav.title, nav.path)}
-            >
-              {nav.path ? <Link to={nav.path}>{nav.title}</Link> : nav.title}
-            </li>
-          ))}
-        </ul>
+      {/* Desktop Navigation (Centered) */}
+      <ul className="list-none sm:flex lg:flex hidden justify-center items-center flex-1 gap-x-1 md:gap-x-2 lg:gap-x-3 py-1">
+        {navLinks.map((nav) => (
+          <li
+            key={nav.id}
+            className={`font-poppins list-none no-underline font-normal cursor-pointer text-xs md:text-sm lg:text-[16px] py-1 px-2 md:px-3 lg:px-4 rounded-md whitespace-nowrap transition-all duration-200 ${
+              isDark
+                ? "text-white hover:bg-white hover:text-black"
+                : "text-slate-700 hover:bg-slate-100 hover:text-black"
+            } ${active === nav.title ? "font-semibold" : ""}`}
+            onClick={() => handleLinkClick(nav.title, nav.path)}
+          >
+            {nav.path ? <Link to={nav.path}>{nav.title}</Link> : nav.title}
+          </li>
+        ))}
+      </ul>
 
+      {/* Desktop Actions (Right Side) */}
+      <div className="hidden sm:flex items-center gap-2 md:gap-3 mr-4 lg:mr-8 shrink-0">
         {/* Theme Changer Toggle Button */}
         <div className="shrink-0">
           <ThemeToggle />
         </div>
 
         {/* Join Creator button */}
-        <a href="https://creator.yesdefo.com/" target="_blank" rel="noreferrer" className="shrink-0 ml-1 md:ml-2">
+        <a href="https://creator.yesdefo.com/" target="_blank" rel="noreferrer" className="shrink-0 ml-1">
           <div className="px-3 md:px-4 py-1.5 text-xs md:text-sm lg:text-base rounded-xl no-underline bg-green-500 font-medium text-white shadow-xl transition-all duration-300 hover:bg-white hover:text-green-500 cursor-pointer whitespace-nowrap">
             <span>Join Creator</span>
           </div>

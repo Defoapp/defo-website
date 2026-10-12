@@ -7,17 +7,18 @@ import "aos/dist/aos.css";
 import { price as staticPrices } from "../constants/map";
 import Navbar from "../component/Navbar/mainNavbar";
 import HeroSection from "./Hero/HeroSection";
+import AppFunnelSection from "./AppFunnel/AppFunnelSection";
 import RotatingShowcase from "./Showcase/RotatingShowcase";
-import CategoriesSection from "./Categories/CategoriesSection";
 import { MOCK_MONGODB_DATA } from "../data/screensData";
+import CategoriesSection from "./Categories/CategoriesSection";
 
 import tick from "../image/price_box/Vector.svg";
 
 // ---------------Discover------------------
 import playstore from "../image/google-play-badge.svg";
 import appstore from "../image/app-store-badge.svg";
-
 import GpIcon from "../image/Google_Play-Icon-Logo.wine.svg";
+
 
 // -----------------------Footer-------------
 import Footer from "../component/footer/Footer";
@@ -53,7 +54,7 @@ function Home() {
   }, []);
 
   const scrollToShowcase = () => {
-    const el = document.getElementById("showcase-section");
+    const el = document.getElementById("funnel-section") || document.getElementById("showcase-section");
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
     }
@@ -67,7 +68,10 @@ function Home() {
         {/* Hero section */}
         <HeroSection onExploreClick={scrollToShowcase} />
 
-        {/* 2. 3D Rotating Phone Showcase Section */}
+        {/* 2. Apple App Store Style Inverted Pyramid Funnel Showcase */}
+        <AppFunnelSection />
+
+        {/* 3. 3D Rotating Phone Showcase Section */}
         <section 
           id="showcase-section"
           className="relative z-10 w-full bg-[#07090e] flex flex-col items-center justify-center pt-16 sm:pt-20 pb-16 px-3 sm:px-6"
@@ -96,28 +100,28 @@ function Home() {
             href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1"
             target="_blank"
             rel="noreferrer"
-            className="mt-8"
+            className="mt-8 inline-block"
           >
-            <div className="flex items-center gap-3 bg-black hover:bg-neutral-900 border border-white/15 px-8 py-3.5 rounded-full transition-all hover:scale-105 shadow-[0_10px_30px_rgba(0,0,0,0.8)] cursor-pointer group">
-              <img className="w-8 h-8" src={GpIcon} alt="Google Play icon" />
-              <h2 className="text-white text-lg font-bold group-hover:text-[#00f298] transition-colors">
+            <div className="flex items-center gap-3 bg-neutral-950 hover:bg-black border border-white/20 hover:border-[#00f298]/60 px-8 py-3.5 rounded-full transition-all duration-300 hover:scale-105 shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_12px_35px_rgba(0,242,152,0.25)] cursor-pointer group">
+              <img className="w-7 h-7 sm:w-8 sm:h-8 object-contain" src={GpIcon} alt="Google Play icon" />
+              <span className="!text-white text-base sm:text-lg font-bold tracking-wide group-hover:!text-[#00f298] transition-colors whitespace-nowrap">
                 Download The App
-              </h2>
+              </span>
             </div>
           </a>
         </section>
 
-        {/* 3. 3D Categories Section: Discover, Like and Save */}
+        {/* 4. 3D Categories Section: Discover, Like and Save */}
         <CategoriesSection />
         {/* price card scroll anchor */}
         <div id="price"></div>
 
         {/* Price Section */}
-        <div className="w-full bg-gradient-to-r from-defoGreen from-[-58.97%] to-defoBlue to-50% py-12 px-4">
-          <h2 className="text-white text-2xl sm:text-4xl font-medium text-center">
+        <div className="w-full bg-gradient-to-r from-defoGreen from-[-58.97%] to-defoBlue to-50% py-12 px-4 price-section-banner">
+          <h2 className="!text-white text-2xl sm:text-4xl font-bold text-center tracking-tight drop-shadow-sm">
             Ready to get started?
           </h2>
-          <p className="text-lg md:text-2xl text-center font-medium text-gray-200 font-poppins my-2">
+          <p className="text-lg md:text-2xl text-center font-medium !text-emerald-100 font-poppins my-2 drop-shadow-sm">
             The only app you need for complete Entertainment
           </p>
 

@@ -297,11 +297,34 @@ html.light .border-white\/30 {
 
 /* Headings and body copy in Light Mode */
 html.light h1.text-white:not(.text-3d-hero),
-html.light h2.text-white,
-html.light h3.text-white,
-html.light h4.text-white,
-html.light h5.text-white {
+html.light h2.text-white:not(.stay-white),
+html.light h3.text-white:not(.stay-white),
+html.light h4.text-white:not(.stay-white),
+html.light h5.text-white:not(.stay-white) {
   color: #0f172a !important;
+}
+
+/* Ensure text on black or dark pill buttons remains bright white in light mode */
+html.light .bg-black *,
+html.light .bg-neutral-900 *,
+html.light .bg-neutral-950 * {
+  color: #ffffff !important;
+}
+
+html.light .bg-black:hover *,
+html.light .bg-neutral-900:hover *,
+html.light .bg-neutral-950:hover * {
+  color: #00f298 !important;
+}
+
+/* Price Section and dark gradient sections preserve crisp white text */
+.price-section-banner h2,
+.price-section-banner p,
+html.light .price-section-banner h2,
+html.light .price-section-banner p,
+html.light [class*="to-defoBlue"] h2,
+html.light [class*="to-defoBlue"] p {
+  color: #ffffff !important;
 }
 
 html.light p.text-slate-300,
