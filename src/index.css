@@ -53,38 +53,35 @@ body {
 
 /* 3D Apple Squircle Ambient Floating Animation */
 @keyframes appleSquircleFloat {
-  0% {
-    transform: translateY(0px) translateZ(0px);
+  0%, 100% {
+    transform: translate3d(0, 0px, 0);
   }
   50% {
-    transform: translateY(-5px) translateZ(6px);
-  }
-  100% {
-    transform: translateY(0px) translateZ(0px);
+    transform: translate3d(0, -5px, 0);
   }
 }
 
 .animate-squircle-3d {
-  animation: appleSquircleFloat 4s ease-in-out infinite;
+  transform: translate3d(0, 0, 0);
 }
 
 /* Kinetic Typewriter Shake on Letter Entry */
 @keyframes letterShake {
   0% {
-    transform: translateY(-8px) scale(1.22);
+    transform: translate3d(0, -8px, 0) scale(1.22);
     color: #00f298;
   }
   25% {
-    transform: translateY(3px) translateX(-2px) rotate(2deg);
+    transform: translate3d(-2px, 3px, 0) rotate(2deg);
   }
   50% {
-    transform: translateY(-2px) translateX(2px) rotate(-1.5deg);
+    transform: translate3d(2px, -2px, 0) rotate(-1.5deg);
   }
   75% {
-    transform: translateY(1px) translateX(-1px) rotate(0.5deg);
+    transform: translate3d(-1px, 1px, 0) rotate(0.5deg);
   }
   100% {
-    transform: translateY(0) translateX(0) scale(1) rotate(0deg);
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
   }
 }
 
@@ -142,30 +139,38 @@ body {
 /* Infinite Smooth Vertical Marquee for Hero Background */
 @keyframes marqueeUp {
   0% {
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateY(-50%);
+    transform: translate3d(0, -50%, 0);
   }
 }
 
 @keyframes marqueeDown {
   0% {
-    transform: translateY(-50%);
+    transform: translate3d(0, -50%, 0);
   }
   100% {
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 .animate-marquee-up {
   animation: marqueeUp var(--scroll-duration, 35s) linear infinite;
+  contain: layout paint;
   will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
 }
 
 .animate-marquee-down {
   animation: marqueeDown var(--scroll-duration, 35s) linear infinite;
+  contain: layout paint;
   will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
 }
 
 /* ========================================================================== */
@@ -176,36 +181,31 @@ body {
 .slot-center-active {
   transform: translateX(0px) translateZ(20px) rotateY(0deg) scale(1.02);
   opacity: 1;
-  filter: brightness(1);
   z-index: 30;
   cursor: default;
 }
 
 .slot-near-left {
   transform: translateX(-82px) translateZ(-35px) rotateY(18deg) scale(0.82);
-  opacity: 0.85;
-  filter: brightness(0.9);
+  opacity: 0.82;
   z-index: 18;
 }
 
 .slot-near-right {
   transform: translateX(82px) translateZ(-35px) rotateY(-18deg) scale(0.82);
-  opacity: 0.85;
-  filter: brightness(0.9);
+  opacity: 0.82;
   z-index: 18;
 }
 
 .slot-far-left {
   transform: translateX(-145px) translateZ(-85px) rotateY(28deg) scale(0.68);
-  opacity: 0.4;
-  filter: brightness(0.7);
+  opacity: 0.38;
   z-index: 8;
 }
 
 .slot-far-right {
   transform: translateX(145px) translateZ(-85px) rotateY(-28deg) scale(0.68);
-  opacity: 0.4;
-  filter: brightness(0.7);
+  opacity: 0.38;
   z-index: 8;
 }
 
@@ -213,26 +213,22 @@ body {
 @media (min-width: 640px) {
   .slot-near-left {
     transform: translateX(-145px) translateZ(-50px) rotateY(15deg) scale(0.9);
-    opacity: 0.9;
-    filter: brightness(0.94);
+    opacity: 0.88;
   }
 
   .slot-near-right {
     transform: translateX(145px) translateZ(-50px) rotateY(-15deg) scale(0.9);
-    opacity: 0.9;
-    filter: brightness(0.94);
+    opacity: 0.88;
   }
 
   .slot-far-left {
     transform: translateX(-260px) translateZ(-120px) rotateY(25deg) scale(0.76);
-    opacity: 0.58;
-    filter: brightness(0.8);
+    opacity: 0.52;
   }
 
   .slot-far-right {
     transform: translateX(260px) translateZ(-120px) rotateY(-25deg) scale(0.76);
-    opacity: 0.58;
-    filter: brightness(0.8);
+    opacity: 0.52;
   }
 }
 
@@ -244,26 +240,22 @@ body {
 
   .slot-near-left {
     transform: translateX(-185px) translateZ(-50px) rotateY(14deg) scale(0.92);
-    opacity: 0.92;
-    filter: brightness(0.95);
+    opacity: 0.90;
   }
 
   .slot-near-right {
     transform: translateX(185px) translateZ(-50px) rotateY(-14deg) scale(0.92);
-    opacity: 0.92;
-    filter: brightness(0.95);
+    opacity: 0.90;
   }
 
   .slot-far-left {
     transform: translateX(-350px) translateZ(-130px) rotateY(26deg) scale(0.8);
-    opacity: 0.65;
-    filter: brightness(0.85);
+    opacity: 0.60;
   }
 
   .slot-far-right {
     transform: translateX(350px) translateZ(-130px) rotateY(-26deg) scale(0.8);
-    opacity: 0.65;
-    filter: brightness(0.85);
+    opacity: 0.60;
   }
 }
 
@@ -273,6 +265,34 @@ body {
   opacity: 0;
   pointer-events: none;
   z-index: 1;
+}
+
+/* ========================================================================== */
+/* SHOWCASE 3D CAROUSEL SECTION BACKGROUND                                     */
+/* ========================================================================== */
+.showcase-section-bg {
+  position: relative;
+  /* Light Mode (Bright theme): Multi-color light mesh stage with soft ambient hues */
+  background:
+    radial-gradient(ellipse 65% 55% at 50% 25%, rgba(0, 242, 152, 0.22) 0%, transparent 68%),
+    radial-gradient(ellipse 55% 50% at 8% 40%, rgba(56, 189, 248, 0.26) 0%, transparent 62%),
+    radial-gradient(ellipse 55% 50% at 92% 40%, rgba(192, 132, 252, 0.26) 0%, transparent 62%),
+    radial-gradient(ellipse 60% 50% at 50% 75%, rgba(251, 191, 36, 0.20) 0%, transparent 68%),
+    radial-gradient(ellipse 50% 45% at 88% 85%, rgba(244, 114, 182, 0.20) 0%, transparent 62%),
+    radial-gradient(ellipse 50% 45% at 12% 85%, rgba(52, 211, 153, 0.20) 0%, transparent 62%),
+    linear-gradient(180deg, #ecfbf5 0%, #f0f7fe 30%, #f6f3ff 65%, #fdf2f8 85%, #edf4fc 100%);
+  color: #0f172a;
+}
+
+/* Dark Mode: Deep cosmic obsidian with neon emerald/cyan glows */
+html.dark .showcase-section-bg,
+html[data-theme="dark"] .showcase-section-bg {
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 35%, rgba(0, 242, 152, 0.16) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 45% at 15% 45%, rgba(14, 165, 233, 0.16) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 45% at 85% 45%, rgba(147, 51, 234, 0.16) 0%, transparent 65%),
+    #07090e;
+  color: #ffffff;
 }
 
 /* ========================================================================== */
@@ -305,14 +325,12 @@ html.light body {
   color: #0f172a;
 }
 
-/* Global transitions between themes */
-html,
+/* Smooth transitions when switching themes */
 body,
 nav,
-main,
-section,
+footer,
 .sidebar {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
 /* Light Theme Component Overrides */

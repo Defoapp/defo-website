@@ -67,15 +67,36 @@ app.get('/api/items', async (req, res) => {
   }
 });
 
+const FALLBACK_PRICES = [
+  {
+    _id: "1",
+    rate: "49",
+    valid: "month",
+    specs: ["Ad-free entertainment", "HD Streaming", "Multiple devices"],
+  },
+  {
+    _id: "2",
+    rate: "129",
+    valid: "3 months",
+    specs: ["Ad-free entertainment", "Full HD Streaming", "All devices supported"],
+  },
+  {
+    _id: "3",
+    rate: "499",
+    valid: "year",
+    specs: ["VIP Access", "Ultra HD 4K", "Priority Customer Support"],
+  },
+];
+
 app.get('/api/prices', async (req, res) => {
   if (mongoose.connection.readyState !== 1) {
-    return res.status(503).json({ message: 'Database connection not ready' });
+    return res.json(FALLBACK_PRICES);
   }
   try {
     const prices = await Price.find();
-    res.json(prices);
+    res.json(prices.length > 0 ? prices : FALLBACK_PRICES);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching prices', error });
+    res.json(FALLBACK_PRICES);
   }
 });
 

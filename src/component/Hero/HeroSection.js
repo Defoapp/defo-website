@@ -1,11 +1,62 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, memo } from 'react';
 import { HERO_COLUMNS_DATA } from '../../data/heroData';
 import FlippingHeroCard from './FlippingHeroCard';
 
+// Alternating scroll directions and speeds for natural, organic jumbled motion
+const COLUMN_CONFIGS = [
+  { direction: 'up', duration: '32s' },
+  { direction: 'down', duration: '38s' },
+  { direction: 'up', duration: '28s' },
+  { direction: 'down', duration: '35s' },
+  { direction: 'up', duration: '30s' },
+];
+
+// Pre-computed duplicated loop cards for seamless infinite marquee without recreation on render
+const PRECOMPUTED_COLUMNS = HERO_COLUMNS_DATA.map((colCards) => [...colCards, ...colCards]);
+
+// Memoized background columns component — isolated from headline typing & tilt state
+const HeroBackgroundColumns = memo(function HeroBackgroundColumns() {
+  return (
+    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-3.5 h-full w-[110%] -left-[5%] -top-[10%]">
+        {PRECOMPUTED_COLUMNS.map((loopCards, colIdx) => {
+          const config = COLUMN_CONFIGS[colIdx % COLUMN_CONFIGS.length];
+
+          return (
+            <div 
+              key={colIdx} 
+              className={`relative overflow-hidden h-[125%] ${colIdx >= 2 ? 'hidden sm:block' : ''} ${colIdx >= 3 ? 'hidden md:block' : ''} ${colIdx >= 4 ? 'hidden lg:block' : ''}`}
+            >
+              <div
+                className={`flex flex-col gap-3 sm:gap-3.5 ${
+                  config.direction === 'up' ? 'animate-marquee-up' : 'animate-marquee-down'
+                }`}
+                style={{
+                  '--scroll-duration': config.duration,
+                }}
+              >
+                {loopCards.map((card, cardIdx) => (
+                  <FlippingHeroCard
+                    key={`${card.id}-${cardIdx}`}
+                    card={card}
+                    cardIdx={cardIdx}
+                    colIdx={colIdx}
+                  />
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+});
+
 export default function HeroSection({ onExploreClick }) {
-  
   // Interactive 3D tilt state for the center hero typography card
   const heroCardRef = useRef(null);
+  const heroRectRef = useRef(null);
+  const rafIdRef = useRef(null);
   const [headlineTilt, setHeadlineTilt] = useState({ rotateX: 0, rotateY: 0 });
 
   // Kinetic Typewriter effect with shake on load
@@ -44,29 +95,53 @@ export default function HeroSection({ onExploreClick }) {
       if (typingTimerRef.current) {
         clearInterval(typingTimerRef.current);
       }
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
     };
   }, []);
 
+  const handleHeroMouseEnter = () => {
+    if (heroCardRef.current) {
+      heroRectRef.current = heroCardRef.current.getBoundingClientRect();
+    }
+  };
+
   const handleHeroMouseMove = (e) => {
-    if (!heroCardRef.current) return;
-    const rect = heroCardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    if (rafIdRef.current) return;
+    const clientX = e.clientX;
+    const clientY = e.clientY;
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+    rafIdRef.current = requestAnimationFrame(() => {
+      rafIdRef.current = null;
+      if (!heroRectRef.current && heroCardRef.current) {
+        heroRectRef.current = heroCardRef.current.getBoundingClientRect();
+      }
+      if (!heroRectRef.current) return;
+      const rect = heroRectRef.current;
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
 
-    // Gentle 3D parallax tilt (max 8 deg)
-    const rotateX = ((y - centerY) / centerY) * -8;
-    const rotateY = ((x - centerX) / centerX) * 8;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
 
-    setHeadlineTilt({
-      rotateX: Number(rotateX.toFixed(2)),
-      rotateY: Number(rotateY.toFixed(2)),
+      // Snappy, subtle 3D parallax tilt (max 7 deg)
+      const rotateX = ((y - centerY) / centerY) * -7;
+      const rotateY = ((x - centerX) / centerX) * 7;
+
+      setHeadlineTilt({
+        rotateX: Math.round(rotateX * 10) / 10,
+        rotateY: Math.round(rotateY * 10) / 10,
+      });
     });
   };
 
   const handleHeroMouseLeave = () => {
+    if (rafIdRef.current) {
+      cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+    }
+    heroRectRef.current = null;
     setHeadlineTilt({ rotateX: 0, rotateY: 0 });
   };
 
@@ -81,60 +156,19 @@ export default function HeroSection({ onExploreClick }) {
     }
   };
 
-  // Alternating scroll directions and speeds for natural, organic jumbled motion
-  const columnConfigs = [
-    { direction: 'up', duration: '32s' },
-    { direction: 'down', duration: '38s' },
-    { direction: 'up', duration: '28s' },
-    { direction: 'down', duration: '35s' },
-    { direction: 'up', duration: '30s' },
-  ];
-
   return (
     <div 
       id="home"
+      onMouseEnter={handleHeroMouseEnter}
       onMouseMove={handleHeroMouseMove}
       onMouseLeave={handleHeroMouseLeave}
       className="relative w-full min-h-[720px] lg:h-screen lg:max-h-[980px] overflow-hidden bg-[#0a0d14] text-white flex flex-col justify-between select-none"
     >
       
       {/* ================================================================== */}
-      {/* BACKGROUND JUMBLED MASONRY COLUMNS (EXACT SIZES FROM FIGMA)        */}
+      {/* BACKGROUND JUMBLED MASONRY COLUMNS (MEMOIZED INDEPENDENT LAYER)    */}
       {/* ================================================================== */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-90">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-3.5 h-full w-[110%] -left-[5%] -top-[10%]">
-          {HERO_COLUMNS_DATA.map((colCards, colIdx) => {
-            const config = columnConfigs[colIdx % columnConfigs.length];
-            // Duplicate array for mathematically seamless vertical loop
-            const loopCards = [...colCards, ...colCards];
-
-            return (
-              <div 
-                key={colIdx} 
-                className={`relative overflow-hidden h-[125%] ${colIdx >= 2 ? 'hidden sm:block' : ''} ${colIdx >= 3 ? 'hidden md:block' : ''} ${colIdx >= 4 ? 'hidden lg:block' : ''}`}
-              >
-                <div
-                  className={`flex flex-col gap-3 sm:gap-3.5 ${
-                    config.direction === 'up' ? 'animate-marquee-up' : 'animate-marquee-down'
-                  }`}
-                  style={{
-                    '--scroll-duration': config.duration,
-                  }}
-                >
-                  {loopCards.map((card, cardIdx) => (
-                    <FlippingHeroCard
-                      key={`${card.id}-${cardIdx}`}
-                      card={card}
-                      cardIdx={cardIdx}
-                      colIdx={colIdx}
-                    />
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      <HeroBackgroundColumns />
 
       {/* ================================================================== */}
       {/* DARK CINEMATIC VIGNETTE OVERLAY                                    */}
@@ -161,7 +195,7 @@ export default function HeroSection({ onExploreClick }) {
         className="relative z-20 w-full max-w-4xl mx-auto px-4 sm:px-6 text-center my-auto py-8 sm:py-12"
       >
         <div
-          className="preserve-3d transition-transform duration-200 ease-out"
+          className="preserve-3d transition-transform duration-75 ease-out"
           style={{
             transform: `rotateX(${headlineTilt.rotateX}deg) rotateY(${headlineTilt.rotateY}deg)`,
           }}

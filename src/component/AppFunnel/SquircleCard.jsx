@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import SquircleIcon from './SquircleIcons';
 
-export default function SquircleCard({
+function SquircleCard({
   item,
   isDimmed = false,
   isHighlighted = false,
+  isVisible = true,
   onCardClick,
 }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -20,11 +21,7 @@ export default function SquircleCard({
       {/* SQUIRCLE BODY (AUTHENTIC CONTINUOUS APPLE CURVATURE)                */}
       {/* =================================================================== */}
       <div
-        style={{
-          animationDuration: item.floatDuration || '4.8s',
-          animationDelay: item.floatDelay || '0s',
-        }}
-        className={`w-full h-full animate-squircle-3d transition-all duration-300 ease-out cursor-pointer ${
+        className={`w-full h-full transition-transform duration-300 ease-out cursor-pointer ${
           isDimmed ? 'opacity-25 grayscale-[60%] scale-95' : 'opacity-100'
         } ${isHighlighted ? 'scale-110' : ''}`}
       >
@@ -64,3 +61,5 @@ export default function SquircleCard({
     </div>
   );
 }
+
+export default memo(SquircleCard);

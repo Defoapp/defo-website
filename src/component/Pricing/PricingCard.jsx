@@ -1,32 +1,55 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, memo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import tick from '../../image/price_box/Vector.svg';
 
-export default function PricingCard({ priceItem, index = 0 }) {
+function PricingCard({ priceItem, index = 0 }) {
   const cardRef = useRef(null);
-  const isInView = useInView(cardRef, { once: false, amount: 0.2 });
+  const cardRectRef = useRef(null);
+  const rafIdRef = useRef(null);
+  const isInView = useInView(cardRef, { once: true, amount: 0.15 });
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0, isHovered: false });
 
-  // 3D tactile tilt on hover
+  const handleMouseEnter = () => {
+    if (cardRef.current) {
+      cardRectRef.current = cardRef.current.getBoundingClientRect();
+    }
+  };
+
+  // Smooth RAF-throttled 3D tactile tilt on hover
   const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+    if (rafIdRef.current) return;
+    const clientX = e.clientX;
+    const clientY = e.clientY;
 
-    const rotateX = ((y - centerY) / centerY) * -8;
-    const rotateY = ((x - centerX) / centerX) * 8;
+    rafIdRef.current = requestAnimationFrame(() => {
+      rafIdRef.current = null;
+      if (!cardRectRef.current && cardRef.current) {
+        cardRectRef.current = cardRef.current.getBoundingClientRect();
+      }
+      if (!cardRectRef.current) return;
+      const rect = cardRectRef.current;
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
 
-    setTilt({
-      rotateX: Number(rotateX.toFixed(2)),
-      rotateY: Number(rotateY.toFixed(2)),
-      isHovered: true,
+      const rotateX = ((y - centerY) / centerY) * -8;
+      const rotateY = ((x - centerX) / centerX) * 8;
+
+      setTilt({
+        rotateX: Math.round(rotateX * 10) / 10,
+        rotateY: Math.round(rotateY * 10) / 10,
+        isHovered: true,
+      });
     });
   };
 
   const handleMouseLeave = () => {
+    if (rafIdRef.current) {
+      cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+    }
+    cardRectRef.current = null;
     setTilt({ rotateX: 0, rotateY: 0, isHovered: false });
   };
 
@@ -39,6 +62,7 @@ export default function PricingCard({ priceItem, index = 0 }) {
   return (
     <div
       ref={cardRef}
+      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ perspective: '1200px' }}
@@ -59,37 +83,41 @@ export default function PricingCard({ priceItem, index = 0 }) {
         </motion.div>
       )}
 
-      {/* Main 3D Animated Card Container */}
+      {/* Main Entrance Animated Container */}
       <motion.div
-        initial={{ y: 70, opacity: 0, scale: 0.93 }}
+        initial={{ y: 50, opacity: 0, scale: 0.94 }}
         animate={
           isInView
             ? { y: 0, opacity: 1, scale: 1 }
-            : { y: 70, opacity: 0, scale: 0.93 }
+            : { y: 50, opacity: 0, scale: 0.94 }
         }
         transition={{
-          duration: 0.85,
-          delay: index * 0.15,
+          duration: 0.7,
+          delay: index * 0.12,
           ease: [0.16, 1, 0.3, 1],
         }}
-        style={{
-          transform: tilt.isHovered
-            ? `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg) translateY(-10px) scale(1.02)`
-            : 'rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)',
-          boxShadow: isPopular
-            ? tilt.isHovered
-              ? '0 30px 60px -12px rgba(0, 242, 152, 0.3), 0 10px 25px rgba(15, 23, 42, 0.12)'
-              : '0 20px 45px -10px rgba(0, 242, 152, 0.22), 0 6px 18px rgba(15, 23, 42, 0.08)'
-            : tilt.isHovered
-              ? '0 30px 60px -12px rgba(15, 23, 42, 0.25), 0 8px 20px rgba(0, 0, 0, 0.08)'
-              : '0 16px 36px -10px rgba(15, 23, 42, 0.15), 0 4px 12px rgba(0, 0, 0, 0.04)',
-        }}
-        className={`relative flex-1 bg-white rounded-3xl p-7 text-center flex flex-col justify-between transition-all duration-300 ease-out border ${
-          isPopular
-            ? 'border-[#00f298]/80 ring-2 ring-[#00f298]/20'
-            : 'border-slate-100 hover:border-slate-200'
-        } min-h-[27rem]`}
+        className="relative flex-1 flex flex-col"
       >
+        {/* Interactive 3D Card Container */}
+        <div
+          style={{
+            transform: tilt.isHovered
+              ? `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg) translateY(-8px) scale(1.02)`
+              : 'rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)',
+            boxShadow: isPopular
+              ? tilt.isHovered
+                ? '0 30px 60px -12px rgba(0, 242, 152, 0.3), 0 10px 25px rgba(15, 23, 42, 0.12)'
+                : '0 20px 45px -10px rgba(0, 242, 152, 0.22), 0 6px 18px rgba(15, 23, 42, 0.08)'
+              : tilt.isHovered
+                ? '0 30px 60px -12px rgba(15, 23, 42, 0.25), 0 8px 20px rgba(0, 0, 0, 0.08)'
+                : '0 16px 36px -10px rgba(15, 23, 42, 0.15), 0 4px 12px rgba(0, 0, 0, 0.04)',
+          }}
+          className={`relative flex-1 bg-white rounded-3xl p-7 text-center flex flex-col justify-between transition-[transform,box-shadow] duration-200 ease-out border ${
+            isPopular
+              ? 'border-[#00f298]/80 ring-2 ring-[#00f298]/20'
+              : 'border-slate-100 hover:border-slate-200'
+          } min-h-[27rem]`}
+        >
         {/* Subtle top ambient corner glow */}
         <div
           className={`absolute top-0 left-0 right-0 h-32 rounded-t-3xl pointer-events-none transition-opacity duration-300 ${
@@ -195,7 +223,10 @@ export default function PricingCard({ priceItem, index = 0 }) {
           </motion.div>
         </div>
 
+        </div>
       </motion.div>
     </div>
   );
 }
+
+export default memo(PricingCard);

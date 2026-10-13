@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 
-export default function PhoneMockup({ item, slotPosition, isActive, onClick }) {
+function PhoneMockup({ item, slotPosition, isActive, onClick }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
@@ -22,8 +22,8 @@ export default function PhoneMockup({ item, slotPosition, isActive, onClick }) {
 
   return (
     <div 
-      className={`absolute top-0 left-0 w-[185px] h-[375px] sm:w-[215px] sm:h-[435px] md:w-[236px] md:h-[480px] preserve-3d cursor-pointer select-none transition-all duration-[850ms] [transition-timing-function:cubic-bezier(0.25,1,0.35,1)] will-change-transform ${slotClass} ${
-        !isActive ? 'hover:brightness-100 hover:contrast-105 hover:opacity-100' : 'cursor-default'
+      className={`absolute top-0 left-0 w-[185px] h-[375px] sm:w-[215px] sm:h-[435px] md:w-[236px] md:h-[480px] preserve-3d cursor-pointer select-none transition-[transform,opacity] duration-600 [transition-timing-function:cubic-bezier(0.25,1,0.35,1)] will-change-transform ${slotClass} ${
+        !isActive ? 'hover:opacity-100' : 'cursor-default'
       }`}
       onClick={onClick}
       role="button"
@@ -37,7 +37,7 @@ export default function PhoneMockup({ item, slotPosition, isActive, onClick }) {
     >
       {/* Phone Hardware Chassis */}
       <div 
-        className={`relative w-full h-full bg-black rounded-[34px] sm:rounded-[40px] md:rounded-[42px] overflow-hidden flex flex-col transition-all duration-500 ${
+        className={`relative w-full h-full bg-black rounded-[34px] sm:rounded-[40px] md:rounded-[42px] overflow-hidden flex flex-col transition-shadow duration-400 ${
           isActive 
             ? 'shadow-[inset_0_0_0_2px_rgba(0,242,152,0.45),0_0_0_4px_#1d2524,0_0_0_6px_#0d1314,0_25px_65px_rgba(0,0,0,0.95),0_0_40px_rgba(0,242,152,0.25)]' 
             : 'shadow-[inset_0_0_0_2px_rgba(255,255,255,0.12),0_0_0_4px_#191b22,0_0_0_6px_#0d0f15,0_20px_50px_rgba(0,0,0,0.9)]'
@@ -89,6 +89,7 @@ export default function PhoneMockup({ item, slotPosition, isActive, onClick }) {
                 imageLoaded ? 'opacity-100' : 'opacity-0'
               }`}
               loading="lazy"
+              decoding="async"
             />
           ) : (
             /* Fallback Card if image URL fails or is empty */
@@ -127,3 +128,5 @@ export default function PhoneMockup({ item, slotPosition, isActive, onClick }) {
     </div>
   );
 }
+
+export default memo(PhoneMockup);

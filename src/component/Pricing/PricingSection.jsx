@@ -4,7 +4,7 @@ import PricingCard from './PricingCard';
 
 export default function PricingSection({ prices = [] }) {
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: false, amount: 0.15 });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   return (
     <div

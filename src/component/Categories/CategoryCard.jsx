@@ -1,32 +1,55 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, memo } from 'react';
 import CategoryIcon from './CategoryIcons';
 
-export default function CategoryCard({ item, index = 0 }) {
+function CategoryCard({ item, index = 0 }) {
   const cardRef = useRef(null);
+  const cardRectRef = useRef(null);
+  const rafIdRef = useRef(null);
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0, isHovered: false });
 
-  // Smooth 3D card tilt on cursor movement
+  const handleMouseEnter = () => {
+    if (cardRef.current) {
+      cardRectRef.current = cardRef.current.getBoundingClientRect();
+    }
+  };
+
+  // Smooth RAF-throttled 3D card tilt on cursor movement
   const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    if (rafIdRef.current) return;
+    const clientX = e.clientX;
+    const clientY = e.clientY;
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+    rafIdRef.current = requestAnimationFrame(() => {
+      rafIdRef.current = null;
+      if (!cardRectRef.current && cardRef.current) {
+        cardRectRef.current = cardRef.current.getBoundingClientRect();
+      }
+      if (!cardRectRef.current) return;
+      const rect = cardRectRef.current;
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
 
-    // Gentle 10-degree tilt for subtle, tactile 3D responsiveness
-    const rotateX = ((y - centerY) / centerY) * -10;
-    const rotateY = ((x - centerX) / centerX) * 10;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
 
-    setTilt({
-      rotateX: Number(rotateX.toFixed(2)),
-      rotateY: Number(rotateY.toFixed(2)),
-      isHovered: true,
+      // Gentle 10-degree tilt for subtle, tactile 3D responsiveness
+      const rotateX = ((y - centerY) / centerY) * -10;
+      const rotateY = ((x - centerX) / centerX) * 10;
+
+      setTilt({
+        rotateX: Math.round(rotateX * 10) / 10,
+        rotateY: Math.round(rotateY * 10) / 10,
+        isHovered: true,
+      });
     });
   };
 
   const handleMouseLeave = () => {
+    if (rafIdRef.current) {
+      cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+    }
+    cardRectRef.current = null;
     setTilt({
       rotateX: 0,
       rotateY: 0,
@@ -37,16 +60,17 @@ export default function CategoryCard({ item, index = 0 }) {
   return (
     <div
       ref={cardRef}
+      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
         perspective: '1000px',
       }}
-      className="group relative h-full flex flex-col cursor-pointer select-none transition-all duration-300 active:scale-[0.98]"
+      className="group relative h-full flex flex-col cursor-pointer select-none active:scale-[0.98]"
     >
       {/* 3D Transform Card Container - Clean, Crisp White with Natural Depth */}
       <div
-        className="relative flex-1 flex flex-col items-center text-center p-5 sm:p-7 lg:p-8 rounded-3xl transition-all duration-300 ease-out preserve-3d bg-white"
+        className="relative flex-1 flex flex-col items-center text-center p-5 sm:p-7 lg:p-8 rounded-3xl transition-[transform,box-shadow] duration-200 ease-out preserve-3d bg-white"
         style={{
           transform: tilt.isHovered
             ? `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg) translateY(-8px) scale(1.02)`
@@ -96,3 +120,5 @@ export default function CategoryCard({ item, index = 0 }) {
     </div>
   );
 }
+
+export default memo(CategoryCard);

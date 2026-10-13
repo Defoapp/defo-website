@@ -38,8 +38,7 @@ export default function RotatingShowcase({
   const [direction] = useState(1); // 1: next, -1: prev
   const [isHovered, setIsHovered] = useState(false);
 
-  const progressStartTimeRef = useRef(Date.now());
-  const animationFrameRef = useRef(null);
+
 
   // Touch gesture state for mobile swiping
   const touchStartX = useRef(0);
@@ -56,18 +55,15 @@ export default function RotatingShowcase({
   const handleNext = useCallback(() => {
     if (total === 0) return;
     setActiveIndex((prev) => (prev + 1) % total);
-    progressStartTimeRef.current = Date.now();
   }, [total]);
 
   const handlePrev = useCallback(() => {
     if (total === 0) return;
     setActiveIndex((prev) => (prev - 1 + total) % total);
-    progressStartTimeRef.current = Date.now();
   }, [total]);
 
   const handleSelect = (index) => {
     setActiveIndex(index);
-    progressStartTimeRef.current = Date.now();
   };
 
   // Touch swipe handlers
@@ -92,35 +88,36 @@ export default function RotatingShowcase({
     touchEndX.current = 0;
   };
 
-  // Automatic smooth 2-second rotation loop
+  const containerRef = useRef(null);
+  const [isInView, setIsInView] = useState(false);
+
+  // Only run rotation when showcase is actually visible in viewport
   useEffect(() => {
-    if (isHovered || total <= 1) {
-      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
-      return;
-    }
+    if (!containerRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
-    const checkAutoRotate = () => {
-      const now = Date.now();
-      const elapsed = now - progressStartTimeRef.current;
+  // Automatic smooth rotation loop — pauses when offscreen or hovered
+  useEffect(() => {
+    if (!isInView || isHovered || total <= 1) return;
 
-      if (elapsed >= rotationSpeed) {
-        if (direction === 1) {
-          handleNext();
-        } else {
-          handlePrev();
-        }
-        progressStartTimeRef.current = now;
+    const interval = setInterval(() => {
+      if (direction === 1) {
+        handleNext();
+      } else {
+        handlePrev();
       }
+    }, rotationSpeed);
 
-      animationFrameRef.current = requestAnimationFrame(checkAutoRotate);
-    };
-
-    animationFrameRef.current = requestAnimationFrame(checkAutoRotate);
-
-    return () => {
-      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
-    };
-  }, [isHovered, rotationSpeed, direction, total, handleNext, handlePrev]);
+    return () => clearInterval(interval);
+  }, [isInView, isHovered, rotationSpeed, direction, total, handleNext, handlePrev]);
 
   // Compute 3D slot relative to activeIndex
   const getSlotPosition = (index) => {
@@ -134,6 +131,7 @@ export default function RotatingShowcase({
 
   return (
     <div 
+      ref={containerRef}
       className="relative flex flex-col items-center w-full max-w-5xl mx-auto py-2 select-none overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

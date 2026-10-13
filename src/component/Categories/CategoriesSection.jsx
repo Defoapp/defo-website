@@ -17,8 +17,8 @@ function CategoryRow({
 }) {
   const rowRef = useRef(null);
   
-  // Trigger this row ONLY when the user actually scrolls down to it (amount: 0.22)
-  const inView = useInView(rowRef, { once: true, amount: 0.22 });
+  // Trigger this row when the user scrolls to it (amount: 0.1 for instant response)
+  const inView = useInView(rowRef, { once: true, amount: 0.1 });
   
   const [isDealt, setIsDealt] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
@@ -106,27 +106,23 @@ function CategoryRow({
     setIsDealt(false);
     setIsComplete(false);
 
-    const rafId = requestAnimationFrame(() => {
-      measureOffsets();
+    measureOffsets();
 
-      const delayStart = forceDealAll ? forceDelayOffset : 50;
-      const dealTimer = setTimeout(() => {
-        setIsDealt(true);
-      }, delayStart);
+    const delayStart = forceDealAll ? forceDelayOffset : 20;
+    const dealTimer = setTimeout(() => {
+      setIsDealt(true);
+    }, delayStart);
 
-      // Pacing: slow and graceful (350ms stagger per card + 1200ms flight duration)
-      const totalRowDuration = delayStart + rowItems.length * 350 + 1250;
-      const doneTimer = setTimeout(() => {
-        setIsComplete(true);
-      }, totalRowDuration);
+    // Fast, crisp dealing interval (120ms stagger per card + 800ms flight duration)
+    const totalRowDuration = delayStart + rowItems.length * 120 + 850;
+    const doneTimer = setTimeout(() => {
+      setIsComplete(true);
+    }, totalRowDuration);
 
-      return () => {
-        clearTimeout(dealTimer);
-        clearTimeout(doneTimer);
-      };
-    });
-
-    return () => cancelAnimationFrame(rafId);
+    return () => {
+      clearTimeout(dealTimer);
+      clearTimeout(doneTimer);
+    };
   }, [inView, forceDealAll, forceDelayOffset, dealKey, rowItems.length, measureOffsets]);
 
   return (
@@ -140,8 +136,8 @@ function CategoryRow({
         const stackRot = getStackRotation(colRank);
         const offset = offsets[colIdx] || getFallbackOffset(colIdx);
         
-        // Slower, graceful, luxurious deal interval (350ms between each card)
-        const delay = colRank * 0.35;
+        // Crisp, natural deal interval (120ms between each card)
+        const delay = colRank * 0.12;
         const globalZIndex = isComplete ? 1 : isDealt ? 60 - (rowIndex * 4 + colRank) : 0;
 
         return (
@@ -153,13 +149,13 @@ function CategoryRow({
             <motion.div
               className="relative h-full w-full"
               style={{
-                willChange: 'transform, opacity',
+                willChange: isComplete ? 'auto' : 'transform, opacity',
                 pointerEvents: isComplete ? 'auto' : 'none',
               }}
               initial={{
                 x: offset.deltaX,
                 y: offset.deltaY,
-                scale: 0.58,
+                scale: 0.65,
                 rotate: stackRot,
                 opacity: 0,
               }}
@@ -168,48 +164,48 @@ function CategoryRow({
                   ? {
                       x: 0,
                       y: 0,
-                      scale: [0.58, 1.04, 1.0],
+                      scale: [0.65, 1.03, 1.0],
                       rotate: [stackRot, flightRot, 0],
                       opacity: 1,
                     }
                   : {
                       x: offset.deltaX,
                       y: offset.deltaY,
-                      scale: 0.58,
+                      scale: 0.65,
                       rotate: stackRot,
-                      opacity: 0, // Never visible before being dealt
+                      opacity: 0,
                     }
               }
               transition={{
                 x: {
                   type: 'spring',
-                  stiffness: 55, // Silky smooth, floating trajectory
-                  damping: 14,
-                  mass: 0.95,
+                  stiffness: 95,
+                  damping: 16,
+                  mass: 0.85,
                   delay: delay,
                 },
                 y: {
                   type: 'spring',
-                  stiffness: 55,
-                  damping: 14,
-                  mass: 0.95,
+                  stiffness: 95,
+                  damping: 16,
+                  mass: 0.85,
                   delay: delay,
                 },
                 scale: {
-                  duration: 1.0,
+                  duration: 0.75,
                   delay: delay,
                   times: [0, 0.55, 1],
                   ease: [0.22, 1, 0.36, 1],
                 },
                 rotate: {
-                  duration: 1.15,
+                  duration: 0.8,
                   delay: delay,
                   times: [0, 0.45, 1],
                   ease: [0.16, 1, 0.3, 1],
                 },
                 opacity: {
-                  duration: 0.25,
-                  delay: Math.max(0, delay - 0.05),
+                  duration: 0.2,
+                  delay: Math.max(0, delay - 0.02),
                 },
               }}
             >
@@ -274,10 +270,10 @@ export default function CategoriesSection() {
     <section
       ref={sectionRef}
       id="categories"
-      className="relative z-10 w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#07090e] via-[#f4f7fc] to-[#edf2f9] text-slate-900 transition-colors overflow-hidden"
+      className="relative z-10 w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#edf4fc] dark:from-[#07090e] via-[#f4f7fc] to-[#edf2f9] text-slate-900 transition-colors overflow-hidden"
     >
-      {/* Top transition curved glow divider */}
-      <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-[#07090e] to-transparent pointer-events-none" />
+      {/* Top transition curved glow divider in dark mode */}
+      <div className="absolute top-0 left-0 right-0 h-28 hidden dark:block bg-gradient-to-b from-[#07090e] to-transparent pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto flex flex-col items-center">
         
