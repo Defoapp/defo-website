@@ -138,39 +138,46 @@ body {
 
 /* Infinite Smooth Vertical Marquee for Hero Background */
 @keyframes marqueeUp {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(0, -50%, 0);
-  }
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(0, -50%, 0); }
 }
 
 @keyframes marqueeDown {
-  0% {
-    transform: translate3d(0, -50%, 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
+  from { transform: translate3d(0, -50%, 0); }
+  to   { transform: translate3d(0, 0, 0); }
 }
 
+/*
+  GPU-composited marquee tracks.
+  Key perf principles:
+  - will-change:transform promotes the element to its own compositor layer
+  - backface-visibility:hidden prevents unnecessary compositing repaints
+  - transform-style:flat avoids 3D hierarchy overhead for 2D scroll
+  - contain:strict boxes layout/paint/style inside so card repaints don't bubble
+*/
 .animate-marquee-up {
   animation: marqueeUp var(--scroll-duration, 35s) linear infinite;
-  contain: layout paint;
   will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
+  transform-style: flat;
+  contain: layout style paint;
 }
 
 .animate-marquee-down {
   animation: marqueeDown var(--scroll-duration, 35s) linear infinite;
-  contain: layout paint;
   will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
+  transform-style: flat;
+  contain: layout style paint;
+}
+
+/* Column wrapper: own stacking context keeps card flips isolated from the marquee track */
+.hero-col-wrapper {
+  isolation: isolate;
+  contain: layout style;
+  transform: translateZ(0);
 }
 
 /* ========================================================================== */
@@ -291,6 +298,34 @@ html[data-theme="dark"] .showcase-section-bg {
     radial-gradient(ellipse 70% 55% at 50% 35%, rgba(0, 242, 152, 0.16) 0%, transparent 70%),
     radial-gradient(ellipse 55% 45% at 15% 45%, rgba(14, 165, 233, 0.16) 0%, transparent 65%),
     radial-gradient(ellipse 55% 45% at 85% 45%, rgba(147, 51, 234, 0.16) 0%, transparent 65%),
+    #07090e;
+  color: #ffffff;
+}
+
+/* ========================================================================== */
+/* CATEGORIES SECTION BACKGROUND (CONTINUOUS HARMONIC MULTI-COLOR MESH)       */
+/* ========================================================================== */
+.categories-section-bg {
+  position: relative;
+  /* Light Mode (Bright theme): Multi-color light mesh stage with soft ambient hues */
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 12%, rgba(0, 242, 152, 0.20) 0%, transparent 68%),
+    radial-gradient(ellipse 55% 50% at 8% 30%, rgba(56, 189, 248, 0.24) 0%, transparent 62%),
+    radial-gradient(ellipse 55% 50% at 92% 30%, rgba(192, 132, 252, 0.24) 0%, transparent 62%),
+    radial-gradient(ellipse 60% 50% at 50% 65%, rgba(251, 191, 36, 0.20) 0%, transparent 68%),
+    radial-gradient(ellipse 50% 45% at 88% 85%, rgba(244, 114, 182, 0.20) 0%, transparent 62%),
+    radial-gradient(ellipse 50% 45% at 12% 85%, rgba(52, 211, 153, 0.20) 0%, transparent 62%),
+    linear-gradient(180deg, #edf4fc 0%, #ecfbf5 20%, #f0f7fe 45%, #f6f3ff 72%, #fdf2f8 90%, #edf4fc 100%);
+  color: #0f172a;
+}
+
+/* Dark Mode: Deep cosmic obsidian with neon emerald/cyan glows */
+html.dark .categories-section-bg,
+html[data-theme="dark"] .categories-section-bg {
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 20%, rgba(0, 242, 152, 0.16) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 45% at 15% 40%, rgba(14, 165, 233, 0.16) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 45% at 85% 40%, rgba(147, 51, 234, 0.16) 0%, transparent 65%),
     #07090e;
   color: #ffffff;
 }

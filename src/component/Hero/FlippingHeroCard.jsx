@@ -125,22 +125,31 @@ function FlippingHeroCard({ card, cardIdx, colIdx }) {
       style={{
         height: `${card.height}px`,
         perspective: '1400px',
-        zIndex: isFlipped ? 25 : 1,
+        // z-index removed from JS — managed via CSS so no compositor invalidation
       }}
       className="relative w-full rounded-2xl shrink-0 select-none"
     >
       {/* 3D Flippable Inner Container */}
+      {/*
+        Perf notes:
+        - will-change:transform only on cards that CAN flip, so inactive cards skip GPU promotion
+        - border & shadow use opacity/var transition, not class switching (avoids style recalc mid-flip)
+        - transform transition uses cubic-bezier without box-shadow transition to keep it compositor-only
+      */}
       <div
         style={{
           transform: flipTransform,
           transformStyle: 'preserve-3d',
-          transition: 'transform 0.85s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, border-color 0.4s ease',
+          transition: 'transform 0.85s cubic-bezier(0.34, 1.56, 0.64, 1)',
+          willChange: canFlip ? 'transform' : 'auto',
+          borderWidth: '1.5px',
+          borderStyle: 'solid',
+          borderColor: isFlipped ? 'rgba(62,207,122,0.9)' : 'rgba(255,255,255,0.1)',
+          boxShadow: isFlipped
+            ? '0 15px 40px rgba(62,207,122,0.35)'
+            : '0 2px 8px rgba(0,0,0,0.4)',
         }}
-        className={`relative w-full h-full rounded-2xl ${
-          isFlipped
-            ? 'border-2 border-[#3ECF7A] shadow-[0_15px_40px_rgba(62,207,122,0.45)]'
-            : 'border border-white/10 hover:border-white/20 shadow-md'
-        }`}
+        className="relative w-full h-full rounded-2xl"
       >
         {/* ============================================================== */}
         {/* FRONT FACE                                                     */}

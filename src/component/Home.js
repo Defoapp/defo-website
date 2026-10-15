@@ -12,6 +12,7 @@ import RotatingShowcase from "./Showcase/RotatingShowcase";
 import { MOCK_MONGODB_DATA } from "../data/screensData";
 import CategoriesSection from "./Categories/CategoriesSection";
 import PricingSection from "./Pricing/PricingSection";
+import AmbientDecorations from "./Common/AmbientDecorations";
 
 // ---------------Discover------------------
 import playstore from "../image/google-play-badge.svg";
@@ -116,6 +117,9 @@ function Home() {
               }}
             />
           </div>
+
+          {/* Interactive Responsive Colorful Designs & Parallax Elements */}
+          <AmbientDecorations variant="showcase" />
 
           {/* Section title */}
           <div className="relative z-10 text-center mb-8">

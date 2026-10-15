@@ -25,7 +25,7 @@ const HeroBackgroundColumns = memo(function HeroBackgroundColumns() {
           return (
             <div 
               key={colIdx} 
-              className={`relative overflow-hidden h-[125%] ${colIdx >= 2 ? 'hidden sm:block' : ''} ${colIdx >= 3 ? 'hidden md:block' : ''} ${colIdx >= 4 ? 'hidden lg:block' : ''}`}
+              className={`hero-col-wrapper relative overflow-hidden h-[125%] ${colIdx >= 2 ? 'hidden sm:block' : ''} ${colIdx >= 3 ? 'hidden md:block' : ''} ${colIdx >= 4 ? 'hidden lg:block' : ''}`}
             >
               <div
                 className={`flex flex-col gap-3 sm:gap-3.5 ${
@@ -181,7 +181,7 @@ export default function HeroSection({ onExploreClick }) {
       />
       {/* Top & Bottom gradient soft fades */}
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black/95 to-transparent z-10 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#07090e] via-[#07090e]/80 to-transparent z-10 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/80 to-transparent z-10 pointer-events-none" />
 
       {/* Top spacer to provide headroom for the fixed universal Navbar */}
       <div className="relative z-20 w-full h-20 sm:h-24 pointer-events-none shrink-0" />
@@ -316,7 +316,7 @@ export default function HeroSection({ onExploreClick }) {
       {/* ================================================================== */}
       {/* BOTTOM SCROLL CUE TO NEXT SECTION                                  */}
       {/* ================================================================== */}
-      <div className="relative z-20 pb-6 flex flex-col items-center">
+      <div className="relative z-20 pb-10 sm:pb-14 flex flex-col items-center">
         <button
           type="button"
           onClick={defaultExploreClick}
@@ -330,6 +330,14 @@ export default function HeroSection({ onExploreClick }) {
           </svg>
         </button>
       </div>
+
+      {/* Atmospheric Seamless Bottom Fade merging into Funnel Section */}
+      <div 
+        className="absolute bottom-0 inset-x-0 h-28 sm:h-36 pointer-events-none z-10"
+        style={{
+          background: 'linear-gradient(to bottom, transparent 0%, rgba(10, 13, 20, 0.4) 40%, rgba(10, 13, 20, 0.85) 75%, #0a0d14 100%)'
+        }}
+      />
     </div>
   );
 }

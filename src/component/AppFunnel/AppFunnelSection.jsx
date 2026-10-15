@@ -6,6 +6,7 @@ import defoIcon from '../../image/favicon.png';
 import playstore from '../../image/google-play-badge.svg';
 import appstore from '../../image/app-store-badge.svg';
 import GpIcon from '../../image/Google_Play-Icon-Logo.wine.svg';
+import AmbientDecorations from '../Common/AmbientDecorations';
 
 export default function AppFunnelSection() {
   const sectionRef = useRef(null);
@@ -42,19 +43,19 @@ export default function AppFunnelSection() {
     <section
       ref={sectionRef}
       id="funnel-section"
-      className="relative z-10 w-full overflow-hidden apple-funnel-bg transition-colors duration-500 pt-8 pb-20 sm:pt-14 sm:pb-28"
+      className="relative z-10 w-full overflow-hidden apple-funnel-bg transition-colors duration-500 pb-20 sm:pb-28"
     >
       <style>{`
         /* Vibrant Multi-Color Light Mesh Background */
         .apple-funnel-bg {
           background: 
-            radial-gradient(ellipse 70% 60% at 50% 12%, rgba(0, 242, 152, 0.22) 0%, transparent 68%),
-            radial-gradient(ellipse 55% 50% at 8% 28%, rgba(56, 189, 248, 0.26) 0%, transparent 62%),
-            radial-gradient(ellipse 55% 50% at 92% 28%, rgba(192, 132, 252, 0.26) 0%, transparent 62%),
+            radial-gradient(ellipse 70% 60% at 50% 18%, rgba(0, 242, 152, 0.22) 0%, transparent 68%),
+            radial-gradient(ellipse 55% 50% at 8% 32%, rgba(56, 189, 248, 0.26) 0%, transparent 62%),
+            radial-gradient(ellipse 55% 50% at 92% 32%, rgba(192, 132, 252, 0.26) 0%, transparent 62%),
             radial-gradient(ellipse 60% 50% at 50% 68%, rgba(251, 191, 36, 0.22) 0%, transparent 68%),
             radial-gradient(ellipse 50% 45% at 88% 78%, rgba(244, 114, 182, 0.22) 0%, transparent 62%),
             radial-gradient(ellipse 50% 45% at 12% 78%, rgba(52, 211, 153, 0.22) 0%, transparent 62%),
-            linear-gradient(180deg, #ecfbf5 0%, #f0f7fe 28%, #f6f3ff 62%, #fff5f2 85%, #f1f5f9 100%);
+            linear-gradient(180deg, #0a0d14 0%, #0c141c 5%, #112325 12%, #193836 20%, #ecfbf5 36%, #f0f7fe 55%, #f6f3ff 72%, #fff5f2 88%, #f1f5f9 100%);
         }
 
         /* Dark Mode: Deep Cosmic Tone with Neon Beams */
@@ -69,8 +70,8 @@ export default function AppFunnelSection() {
 
         /* Authentic Apple App Store 19-Column CSS Grid Specification */
         .apple-chiclets-grid {
-          --chiclet-size: 96px;
-          --chiclet-gap: 22px;
+          --chiclet-size: 86px;
+          --chiclet-gap: 20px;
           display: grid;
           gap: var(--chiclet-gap);
           grid-template-rows: repeat(5, var(--chiclet-size));
@@ -85,36 +86,36 @@ export default function AppFunnelSection() {
 
         @media (max-width: 1536px) {
           .apple-chiclets-grid {
-            --chiclet-size: 82px;
-            --chiclet-gap: 18px;
+            --chiclet-size: 74px;
+            --chiclet-gap: 16px;
           }
         }
 
         @media (max-width: 1280px) {
           .apple-chiclets-grid {
-            --chiclet-size: 70px;
-            --chiclet-gap: 15px;
+            --chiclet-size: 63px;
+            --chiclet-gap: 14px;
           }
         }
 
         @media (max-width: 1024px) {
           .apple-chiclets-grid {
-            --chiclet-size: 58px;
-            --chiclet-gap: 12px;
+            --chiclet-size: 52px;
+            --chiclet-gap: 11px;
           }
         }
 
         @media (max-width: 768px) {
           .apple-chiclets-grid {
-            --chiclet-size: 46px;
-            --chiclet-gap: 10px;
+            --chiclet-size: 41px;
+            --chiclet-gap: 9px;
           }
         }
 
         @media (max-width: 480px) {
           .apple-chiclets-grid {
-            --chiclet-size: 38px;
-            --chiclet-gap: 8px;
+            --chiclet-size: 34px;
+            --chiclet-gap: 7px;
           }
         }
       `}</style>
@@ -154,26 +155,43 @@ export default function AppFunnelSection() {
         />
       </div>
 
-      {/* Top soft blend from Hero */}
-      <div className="absolute top-0 inset-x-0 h-14 sm:h-18 bg-gradient-to-b from-black/25 via-black/5 to-transparent pointer-events-none z-20" />
+      {/* Interactive Responsive Colorful Designs & Parallax Elements */}
+      <AmbientDecorations variant="funnel" />
+
+      {/* Deep Atmospheric Seamless Blend directly from Hero #0a0d14 */}
+      <div 
+        className="absolute top-0 inset-x-0 h-44 sm:h-64 pointer-events-none z-25"
+        style={{
+          background: 'linear-gradient(180deg, #0a0d14 0%, rgba(10, 13, 20, 0.95) 18%, rgba(10, 13, 20, 0.68) 42%, rgba(10, 13, 20, 0.28) 68%, rgba(10, 13, 20, 0.05) 88%, transparent 100%)'
+        }}
+      />
+
 
       {/* Bottom soft blend: deep cosmic fade in dark mode, seamless continuous light gradient in light mode */}
       <div className="absolute bottom-0 inset-x-0 h-20 sm:h-28 hidden dark:block bg-gradient-to-t from-[#07090e] via-[#07090e]/70 to-transparent pointer-events-none z-20" />
 
-      <div className="relative w-full flex flex-col items-center">
+      <div className="relative z-20 w-full flex flex-col items-center pt-8 sm:pt-14">
 
         {/* ================================================================= */}
         {/* 19-COLUMN V-FUNNEL CHICLETS GRID (APPLE APP STORE REPLICA)        */}
         {/* ================================================================= */}
-        {/* Padding-top ensures offset cards (-63px) stay smoothly within frame */}
+        {/* Padding-top ensures offset cards stay smoothly within frame */}
         <div 
-          className="w-full overflow-hidden relative pt-16 sm:pt-20 pb-4"
+          className="w-full overflow-hidden relative pt-12 sm:pt-16 pb-4"
           style={{
             WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)',
             maskImage: 'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)',
           }}
         >
-          <div className="apple-chiclets-grid">
+          {/* Vertical soft top feathering mask so cards emerge smoothly from the dark hero */}
+          <div
+            className="w-full"
+            style={{
+              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 5%, black 18%, black 100%)',
+              maskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 5%, black 18%, black 100%)',
+            }}
+          >
+            <div className="apple-chiclets-grid">
             {APPLE_HERO_56_CHICLETS.map((card) => {
               return (
                 <div
@@ -219,6 +237,7 @@ export default function AppFunnelSection() {
               );
             })}
           </div>
+          </div>
         </div>
 
         {/* =================================================================== */}
@@ -243,10 +262,10 @@ export default function AppFunnelSection() {
               delay: 1.70,
               ease: 'easeOut',
             }}
-            className="absolute -top-3 w-48 sm:w-64 h-48 sm:h-64 rounded-full bg-[#00f298] blur-[60px] pointer-events-none opacity-40"
+            className="absolute -top-3 w-44 sm:w-56 h-44 sm:h-56 rounded-full bg-[#00f298] blur-[55px] pointer-events-none opacity-35"
           />
 
-          {/* Grand Defo App Squircle Icon matching Apple App Store hero size (146px) */}
+          {/* Grand Defo App Squircle Icon matching Apple App Store hero size (10% reduced to 128px) */}
           <motion.div
             initial={{ scale: 0.35, y: -24, opacity: 0 }}
             animate={
@@ -265,13 +284,13 @@ export default function AppFunnelSection() {
             className="relative group cursor-pointer"
           >
             <div 
-              className="relative w-28 h-28 xs:w-32 xs:h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-[22.5%] bg-gradient-to-br from-[#00f298] via-[#00d284] to-[#00a862] p-1 shadow-[0_20px_45px_rgba(0,242,152,0.38)] flex items-center justify-center overflow-hidden border border-white/50"
+              className="relative w-[86px] h-[86px] xs:w-24 xs:h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-[22.5%] bg-gradient-to-br from-[#00f298] via-[#00d284] to-[#00a862] p-1 shadow-[0_20px_45px_rgba(0,242,152,0.38)] flex items-center justify-center overflow-hidden border border-white/50"
             >
               {/* Top specular reflection gloss (Apple squircle aesthetic) */}
               <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/45 via-white/15 to-transparent rounded-t-[22.5%] pointer-events-none" />
               
               {/* Defo Play Icon Logo */}
-              <div className="relative z-10 w-18 h-18 xs:w-20 xs:h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 flex items-center justify-center drop-shadow-xl">
+              <div className="relative z-10 w-14 h-14 xs:w-16 xs:h-16 sm:w-[72px] sm:h-[72px] md:w-[86px] md:h-[86px] flex items-center justify-center drop-shadow-xl">
                 <img
                   src={defoIcon}
                   alt="Defo App Icon"

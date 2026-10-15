@@ -70,7 +70,7 @@ function CategoryCard({ item, index = 0 }) {
     >
       {/* 3D Transform Card Container - Clean, Crisp White with Natural Depth */}
       <div
-        className="relative flex-1 flex flex-col items-center text-center p-5 sm:p-7 lg:p-8 rounded-3xl transition-[transform,box-shadow] duration-200 ease-out preserve-3d bg-white"
+        className="relative flex-1 flex flex-col items-center text-center p-5 sm:p-7 lg:p-8 rounded-3xl transition-[transform,box-shadow] duration-200 ease-out preserve-3d bg-white/95 dark:bg-[#111625]/95 backdrop-blur-sm"
         style={{
           transform: tilt.isHovered
             ? `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg) translateY(-8px) scale(1.02)`
@@ -79,8 +79,8 @@ function CategoryCard({ item, index = 0 }) {
             ? '0 25px 45px -12px rgba(15, 23, 42, 0.14), 0 2px 6px rgba(0, 0, 0, 0.04)'
             : '0 8px 24px -8px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(0, 0, 0, 0.03)',
           border: tilt.isHovered
-            ? '1.5px solid rgba(203, 213, 225, 0.9)'
-            : '1.5px solid rgba(241, 245, 249, 1)',
+            ? '1.5px solid rgba(0, 242, 152, 0.5)'
+            : '1.5px solid rgba(226, 232, 240, 0.9)',
         }}
       >
         {/* Big Interactive Vector Image - Sharp, Crisp, Fully Saturated & Elevated */}
@@ -100,7 +100,7 @@ function CategoryCard({ item, index = 0 }) {
 
         {/* Title - Crisp, High-Contrast Dark Navy matching screenshot */}
         <h3
-          className="text-lg sm:text-xl font-bold tracking-tight text-[#191e38] group-hover:text-black mb-2.5 transition-colors duration-200 preserve-3d"
+          className="text-lg sm:text-xl font-bold tracking-tight text-[#191e38] dark:text-white group-hover:text-black dark:group-hover:text-[#00f298] mb-2.5 transition-colors duration-200 preserve-3d"
           style={{
             fontFamily: 'Outfit, var(--font-display), sans-serif',
             transform: tilt.isHovered ? 'translateZ(26px)' : 'translateZ(10px)',
@@ -111,7 +111,7 @@ function CategoryCard({ item, index = 0 }) {
 
         {/* Description - Clean, readable neutral text matching screenshot */}
         <p
-          className="text-xs sm:text-sm text-slate-500 group-hover:text-slate-700 leading-relaxed font-normal max-w-[260px] preserve-3d transition-colors duration-200"
+          className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-200 leading-relaxed font-normal max-w-[260px] preserve-3d transition-colors duration-200"
           style={{ transform: tilt.isHovered ? 'translateZ(18px)' : 'translateZ(5px)' }}
         >
           {item.description}

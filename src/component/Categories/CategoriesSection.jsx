@@ -2,6 +2,7 @@ import React, { useState, useMemo, useRef, useEffect, useCallback } from 'react'
 import { motion, useInView } from 'framer-motion';
 import { CATEGORIES_DATA, CATEGORY_FILTERS } from '../../data/categoriesData';
 import CategoryCard from './CategoryCard';
+import AmbientDecorations from '../Common/AmbientDecorations';
 
 // ============================================================================
 // INDIVIDUAL CATEGORY ROW WITH DEDICATED SCROLL-TRIGGERED STEP-BY-STEP DEALING
@@ -270,25 +271,60 @@ export default function CategoriesSection() {
     <section
       ref={sectionRef}
       id="categories"
-      className="relative z-10 w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#edf4fc] dark:from-[#07090e] via-[#f4f7fc] to-[#edf2f9] text-slate-900 transition-colors overflow-hidden"
+      className="relative z-10 w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8 categories-section-bg transition-colors duration-500 overflow-hidden"
     >
-      {/* Top transition curved glow divider in dark mode */}
-      <div className="absolute top-0 left-0 right-0 h-28 hidden dark:block bg-gradient-to-b from-[#07090e] to-transparent pointer-events-none" />
+      {/* Top transition soft fade from previous section */}
+      <div className="absolute top-0 inset-x-0 h-16 sm:h-20 bg-gradient-to-b from-[#edf4fc] dark:from-[#07090e] to-transparent pointer-events-none z-10" />
 
-      <div className="relative max-w-7xl mx-auto flex flex-col items-center">
+      {/* Ambient Colorful Light Aurora Blobs behind categories stage */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Top-Center Emerald Brand Halo */}
+        <div 
+          className="absolute -top-12 left-1/2 -translate-x-1/2 w-[550px] sm:w-[900px] h-[400px] sm:h-[550px] rounded-full blur-[110px] sm:blur-[140px] opacity-75 dark:opacity-30"
+          style={{ background: 'radial-gradient(circle, rgba(0,242,152,0.42) 0%, rgba(52,211,153,0.22) 50%, transparent 75%)' }}
+        />
+        {/* Left Flank Sky Blue / Cyan Aura */}
+        <div 
+          className="absolute top-1/4 -left-20 sm:left-[3%] w-[450px] sm:w-[650px] h-[450px] sm:h-[600px] rounded-full blur-[100px] sm:blur-[130px] opacity-75 dark:opacity-35"
+          style={{ background: 'radial-gradient(circle, rgba(56,189,248,0.42) 0%, rgba(14,165,233,0.20) 50%, transparent 75%)' }}
+        />
+        {/* Right Flank Violet / Magenta Aura */}
+        <div 
+          className="absolute top-1/4 -right-20 sm:right-[3%] w-[450px] sm:w-[650px] h-[450px] sm:h-[600px] rounded-full blur-[100px] sm:blur-[130px] opacity-75 dark:opacity-35"
+          style={{ background: 'radial-gradient(circle, rgba(192,132,252,0.42) 0%, rgba(236,72,153,0.20) 50%, transparent 75%)' }}
+        />
+        {/* Lower Ambient Amber / Rose Glow */}
+        <div 
+          className="absolute bottom-20 left-1/2 -translate-x-1/2 w-[600px] sm:w-[850px] h-[350px] sm:h-[450px] rounded-full blur-[100px] sm:blur-[130px] opacity-65 dark:opacity-25"
+          style={{ background: 'radial-gradient(circle, rgba(251,191,36,0.32) 0%, rgba(244,114,182,0.20) 50%, transparent 75%)' }}
+        />
+        {/* Delicate Modern Mesh Dots Grid Overlay */}
+        <div 
+          className="absolute inset-0 opacity-[0.035] dark:opacity-[0.03]"
+          style={{
+            backgroundImage: 'radial-gradient(rgba(15, 23, 42, 0.8) 1px, transparent 1px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
+      </div>
+
+      {/* Interactive Responsive Colorful Designs & Parallax Elements */}
+      <AmbientDecorations variant="categories" />
+
+      <div className="relative z-10 max-w-7xl mx-auto flex flex-col items-center">
         
         {/* ================================================================== */}
         {/* SECTION HEADER (EXACT TITLE & SUBTITLE FROM SCREENSHOT)            */}
         {/* ================================================================== */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <h2 
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#191e38] tracking-tight mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#191e38] dark:text-white tracking-tight mb-4"
             style={{ fontFamily: 'Outfit, var(--font-display), sans-serif' }}
           >
             Discover, Like and Save the useful videos.
           </h2>
 
-          <p className="text-base sm:text-lg md:text-xl text-slate-600 font-normal max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 font-normal max-w-2xl mx-auto leading-relaxed">
             Discover a new way to learn and have fun at the same time!
           </p>
         </div>
@@ -309,8 +345,8 @@ export default function CategoriesSection() {
                   onClick={() => handleFilterClick(tab.id)}
                   className={`px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                     isActive
-                      ? 'bg-[#191e38] text-white shadow-lg shadow-slate-900/15 scale-105'
-                      : 'bg-white/80 text-slate-600 hover:bg-white hover:text-slate-900 border border-slate-200 shadow-sm'
+                      ? 'bg-[#191e38] dark:bg-[#00f298] text-white dark:text-slate-900 shadow-lg shadow-slate-900/15 dark:shadow-[0_4px_16px_rgba(0,242,152,0.35)] scale-105'
+                      : 'bg-white/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white border border-slate-200/80 dark:border-white/10 shadow-sm backdrop-blur-sm'
                   }`}
                 >
                   {tab.label}
@@ -335,7 +371,7 @@ export default function CategoriesSection() {
                   setForceDealAll(true);
                 }}
                 placeholder="Search 12+ categories..."
-                className="w-full pl-10 pr-8 py-2 rounded-full text-xs sm:text-sm bg-white border border-slate-200 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 shadow-sm transition-all"
+                className="w-full pl-10 pr-8 py-2 rounded-full text-xs sm:text-sm bg-white/90 dark:bg-slate-800/90 border border-slate-200/80 dark:border-white/10 text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#00f298]/30 focus:border-[#00f298] shadow-sm backdrop-blur-sm transition-all"
               />
               {searchQuery && (
                 <button
@@ -345,7 +381,7 @@ export default function CategoriesSection() {
                     setDealKey((k) => k + 1);
                     setForceDealAll(true);
                   }}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs cursor-pointer font-bold"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-white text-xs cursor-pointer font-bold"
                 >
                   ✕
                 </button>
@@ -357,7 +393,7 @@ export default function CategoriesSection() {
               type="button"
               onClick={handleRedeal}
               title="Replay card distribution dealing animation"
-              className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold bg-white/90 hover:bg-white text-slate-700 hover:text-[#191e38] border border-slate-200/80 shadow-sm transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer whitespace-nowrap"
+              className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold bg-white/90 hover:bg-white dark:bg-slate-800/90 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 hover:text-[#191e38] dark:hover:text-white border border-slate-200/80 dark:border-white/10 shadow-sm backdrop-blur-sm transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer whitespace-nowrap"
             >
               <span className="text-sm">🂠</span>
               <span>Redeal</span>
