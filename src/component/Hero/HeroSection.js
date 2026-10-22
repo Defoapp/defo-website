@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, memo } from 'react';
 import { HERO_COLUMNS_DATA } from '../../data/heroData';
 import FlippingHeroCard from './FlippingHeroCard';
+import AmbientDecorations from '../Common/AmbientDecorations';
 
 // Alternating scroll directions and speeds for natural, organic jumbled motion
 const COLUMN_CONFIGS = [
@@ -182,6 +183,9 @@ export default function HeroSection({ onExploreClick }) {
       {/* Top & Bottom gradient soft fades */}
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black/95 to-transparent z-10 pointer-events-none" />
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/80 to-transparent z-10 pointer-events-none" />
+
+      {/* Cute Interactive Ambient & Cursor-Moving Particles */}
+      <AmbientDecorations variant="hero" />
 
       {/* Top spacer to provide headroom for the fixed universal Navbar */}
       <div className="relative z-20 w-full h-20 sm:h-24 pointer-events-none shrink-0" />

@@ -1,12 +1,16 @@
 import React, { useEffect, useRef } from 'react';
+import CuteCursorParticles from './CuteCursorParticles';
 
 /**
  * AmbientDecorations
- * Lightweight, colorful floating ambient design elements (sparkles, glowing dots, subtle crosses).
+ * Lightweight, colorful, cute floating ambient design elements (sparkle stars ✨, glowing bubbles 🫧, 
+ * hearts ♡, subtle plus crosses, and bokeh fireflies).
+ * Combined with an interactive CuteCursorParticles canvas for mouse tracking, dynamic trail,
+ * and cursor repulsion.
  * Strictly rendered in the background layer (z-0) with ZERO backdrop-blur, so they
  * never shade, blur, or obscure any icons or content.
  *
- * @param {'funnel' | 'showcase'} variant - Layout preset for the section
+ * @param {'funnel' | 'showcase' | 'categories' | 'hero'} variant - Layout preset for the section
  * @param {string} className - Optional container styling
  */
 export default function AmbientDecorations({ variant = 'funnel', className = '' }) {
@@ -32,7 +36,7 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
       // Normalize mouse position from -1 to +1
       targetX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
       targetY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-      
+
       if (!isTracking) {
         isTracking = true;
         render();
@@ -84,6 +88,9 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
         '--mouse-y': 0,
       }}
     >
+      {/* Interactive Cursor Particle Canvas (Swirling, Moving, Fairy Dust Trail & Burst) */}
+      <CuteCursorParticles variant={variant} density="high" />
+
       <style>{`
         /* ========================================================== */
         /* CRISP, DELICATE FLOATING & TWINKLING KEYFRAMES (NO BLURS)  */
@@ -94,7 +101,7 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             opacity: 0.35;
           }
           50% {
-            transform: scale(1.15) rotate(180deg);
+            transform: scale(1.2) rotate(180deg);
             opacity: 0.95;
           }
         }
@@ -105,23 +112,46 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             opacity: 0.35;
           }
           50% {
-            transform: translate3d(4px, -12px, 0) scale(1.15);
+            transform: translate3d(5px, -14px, 0) scale(1.15);
             opacity: 0.85;
           }
           100% {
-            transform: translate3d(-3px, -24px, 0) scale(0.8);
+            transform: translate3d(-4px, -26px, 0) scale(0.8);
             opacity: 0.25;
           }
         }
 
         @keyframes ambientPulseGlow {
           0%, 100% {
-            transform: scale(0.9);
+            transform: scale(0.88);
             opacity: 0.35;
           }
           50% {
-            transform: scale(1.1);
-            opacity: 0.75;
+            transform: scale(1.15);
+            opacity: 0.85;
+          }
+        }
+
+        @keyframes cuteBubbleFloat {
+          0%, 100% {
+            transform: translate3d(0, 0, 0) scale(1);
+          }
+          33% {
+            transform: translate3d(4px, -8px, 0) scale(1.08);
+          }
+          66% {
+            transform: translate3d(-3px, -15px, 0) scale(0.95);
+          }
+        }
+
+        @keyframes cuteHeartFloat {
+          0%, 100% {
+            transform: translate3d(0, 0, 0) rotate(-4deg) scale(0.9);
+            opacity: 0.45;
+          }
+          50% {
+            transform: translate3d(3px, -12px, 0) rotate(5deg) scale(1.12);
+            opacity: 0.85;
           }
         }
 
@@ -132,27 +162,44 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
       `}</style>
 
       {/* ============================================================== */}
-      {/* SECTION PRESET 1: FUNNEL SECTION (OUTER NEGATIVE MARGINS ONLY) */}
+      {/* SECTION PRESET 1: FUNNEL SECTION                               */}
       {/* ============================================================== */}
       {variant === 'funnel' && (
         <>
-          {/* --- LEFT OUTER PERIMETER ACCENTS (OUTSIDE THE CHICLET GRID) --- */}
+          {/* --- LEFT OUTER PERIMETER ACCENTS --- */}
           {/* Emerald Sparkle Star ✨ (Far Left Top) */}
           <div
             className="absolute ambient-item"
             style={{
               left: '2.5%',
-              top: '20%',
-              transform: 'translate3d(calc(var(--mouse-x) * 14px), calc(var(--mouse-y) * 12px), 0)',
+              top: '18%',
+              transform: 'translate3d(calc(var(--mouse-x) * 16px), calc(var(--mouse-y) * 14px), 0)',
             }}
           >
             <div
-              className="w-4 h-4 text-emerald-400 dark:text-[#00f298] drop-shadow-[0_0_6px_rgba(0,242,152,0.65)]"
-              style={{ animation: 'ambientSparkleTwinkle 5s ease-in-out infinite' }}
+              className="w-4 h-4 text-emerald-400 dark:text-[#00f298] drop-shadow-[0_0_8px_rgba(0,242,152,0.7)]"
+              style={{ animation: 'ambientSparkleTwinkle 4.5s ease-in-out infinite' }}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" />
               </svg>
+            </div>
+          </div>
+
+          {/* Cute Glass Bubble 🫧 (Left Upper) */}
+          <div
+            className="absolute ambient-item"
+            style={{
+              left: '7%',
+              top: '28%',
+              transform: 'translate3d(calc(var(--mouse-x) * 12px), calc(var(--mouse-y) * 10px), 0)',
+            }}
+          >
+            <div
+              className="relative w-4 h-4 rounded-full border border-sky-400/60 bg-sky-300/25 shadow-[0_0_10px_rgba(56,189,248,0.5)]"
+              style={{ animation: 'cuteBubbleFloat 6s ease-in-out infinite' }}
+            >
+              <div className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/90" />
             </div>
           </div>
 
@@ -161,13 +208,13 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             className="absolute ambient-item"
             style={{
               left: '3.5%',
-              top: '52%',
-              transform: 'translate3d(calc(var(--mouse-x) * 12px), calc(var(--mouse-y) * 10px), 0)',
+              top: '48%',
+              transform: 'translate3d(calc(var(--mouse-x) * 14px), calc(var(--mouse-y) * 12px), 0)',
             }}
           >
             <div
-              className="w-3.5 h-3.5 text-sky-400 drop-shadow-[0_0_6px_rgba(56,189,248,0.65)]"
-              style={{ animation: 'ambientSparkleTwinkle 6.5s ease-in-out 1.2s infinite' }}
+              className="w-3.5 h-3.5 text-sky-400 drop-shadow-[0_0_8px_rgba(56,189,248,0.7)]"
+              style={{ animation: 'ambientSparkleTwinkle 5.8s ease-in-out 1.2s infinite' }}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" />
@@ -175,16 +222,35 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             </div>
           </div>
 
+          {/* Cute Pastel Pink Heart ♡ (Mid Left) */}
+          <div
+            className="absolute ambient-item hidden sm:block"
+            style={{
+              left: '9%',
+              top: '58%',
+              transform: 'translate3d(calc(var(--mouse-x) * 10px), calc(var(--mouse-y) * 8px), 0)',
+            }}
+          >
+            <div
+              className="w-3.5 h-3.5 text-pink-400 drop-shadow-[0_0_6px_rgba(244,114,182,0.6)]"
+              style={{ animation: 'cuteHeartFloat 6.5s ease-in-out 0.8s infinite' }}
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+              </svg>
+            </div>
+          </div>
+
           {/* Minimalist Cyan Plus (+) */}
           <div
-            className="absolute ambient-item hidden sm:block opacity-50 dark:opacity-40"
+            className="absolute ambient-item hidden sm:block opacity-60 dark:opacity-40"
             style={{
               left: '5%',
               top: '36%',
               transform: 'translate3d(calc(var(--mouse-x) * -8px), calc(var(--mouse-y) * -6px), 0)',
             }}
           >
-            <span className="text-cyan-400 font-light text-sm select-none" style={{ animation: 'ambientPulseGlow 6s ease-in-out infinite' }}>
+            <span className="text-cyan-400 font-light text-base select-none" style={{ animation: 'ambientPulseGlow 6s ease-in-out infinite' }}>
               +
             </span>
           </div>
@@ -194,11 +260,11 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             className="absolute ambient-item rounded-full bg-emerald-400"
             style={{
               left: '6%',
-              top: '26%',
-              width: '5px',
-              height: '5px',
-              boxShadow: '0 0 8px 1.5px rgba(0,242,152,0.7)',
-              transform: 'translate3d(calc(var(--mouse-x) * 16px), calc(var(--mouse-y) * 14px), 0)',
+              top: '24%',
+              width: '6px',
+              height: '6px',
+              boxShadow: '0 0 10px 2px rgba(0,242,152,0.75)',
+              transform: 'translate3d(calc(var(--mouse-x) * 18px), calc(var(--mouse-y) * 16px), 0)',
               animation: 'ambientFloatBokeh 7.5s ease-in-out infinite',
             }}
           />
@@ -208,32 +274,49 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             className="absolute ambient-item rounded-full bg-sky-400"
             style={{
               left: '4%',
-              top: '68%',
+              top: '72%',
               width: '5px',
               height: '5px',
-              boxShadow: '0 0 8px 1.5px rgba(56,189,248,0.7)',
-              transform: 'translate3d(calc(var(--mouse-x) * 14px), calc(var(--mouse-y) * 12px), 0)',
+              boxShadow: '0 0 8px 2px rgba(56,189,248,0.75)',
+              transform: 'translate3d(calc(var(--mouse-x) * 16px), calc(var(--mouse-y) * 14px), 0)',
               animation: 'ambientFloatBokeh 9s ease-in-out 1.8s infinite',
             }}
           />
 
-          {/* --- RIGHT OUTER PERIMETER ACCENTS (OUTSIDE THE CHICLET GRID) --- */}
+          {/* --- RIGHT OUTER PERIMETER ACCENTS --- */}
           {/* Violet Sparkle Star ✨ (Far Right Top) */}
           <div
             className="absolute ambient-item"
             style={{
               right: '2.5%',
-              top: '22%',
-              transform: 'translate3d(calc(var(--mouse-x) * -14px), calc(var(--mouse-y) * 12px), 0)',
+              top: '20%',
+              transform: 'translate3d(calc(var(--mouse-x) * -16px), calc(var(--mouse-y) * 14px), 0)',
             }}
           >
             <div
-              className="w-4 h-4 text-purple-400 drop-shadow-[0_0_6px_rgba(192,132,252,0.65)]"
-              style={{ animation: 'ambientSparkleTwinkle 5.8s ease-in-out 0.8s infinite' }}
+              className="w-4 h-4 text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.7)]"
+              style={{ animation: 'ambientSparkleTwinkle 5.2s ease-in-out 0.8s infinite' }}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" />
               </svg>
+            </div>
+          </div>
+
+          {/* Cute Lavender Bubble 🫧 (Right Upper) */}
+          <div
+            className="absolute ambient-item"
+            style={{
+              right: '7%',
+              top: '30%',
+              transform: 'translate3d(calc(var(--mouse-x) * -12px), calc(var(--mouse-y) * 10px), 0)',
+            }}
+          >
+            <div
+              className="relative w-4 h-4 rounded-full border border-purple-400/60 bg-purple-300/25 shadow-[0_0_10px_rgba(192,132,252,0.5)]"
+              style={{ animation: 'cuteBubbleFloat 6.8s ease-in-out 1s infinite' }}
+            >
+              <div className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/90" />
             </div>
           </div>
 
@@ -242,13 +325,13 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             className="absolute ambient-item"
             style={{
               right: '3.5%',
-              top: '54%',
-              transform: 'translate3d(calc(var(--mouse-x) * -12px), calc(var(--mouse-y) * 10px), 0)',
+              top: '52%',
+              transform: 'translate3d(calc(var(--mouse-x) * -14px), calc(var(--mouse-y) * 12px), 0)',
             }}
           >
             <div
-              className="w-3.5 h-3.5 text-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.65)]"
-              style={{ animation: 'ambientSparkleTwinkle 6.2s ease-in-out 2s infinite' }}
+              className="w-4 h-4 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.7)]"
+              style={{ animation: 'ambientSparkleTwinkle 6s ease-in-out 2s infinite' }}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" />
@@ -256,16 +339,33 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             </div>
           </div>
 
+          {/* Cute Emerald Bubble 🫧 (Mid Right) */}
+          <div
+            className="absolute ambient-item hidden sm:block"
+            style={{
+              right: '9%',
+              top: '64%',
+              transform: 'translate3d(calc(var(--mouse-x) * -10px), calc(var(--mouse-y) * 8px), 0)',
+            }}
+          >
+            <div
+              className="relative w-3.5 h-3.5 rounded-full border border-emerald-400/60 bg-emerald-300/25 shadow-[0_0_10px_rgba(0,242,152,0.5)]"
+              style={{ animation: 'cuteBubbleFloat 5.5s ease-in-out 2s infinite' }}
+            >
+              <div className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/90" />
+            </div>
+          </div>
+
           {/* Minimalist Violet Plus (+) */}
           <div
-            className="absolute ambient-item hidden sm:block opacity-50 dark:opacity-40"
+            className="absolute ambient-item hidden sm:block opacity-60 dark:opacity-40"
             style={{
               right: '5%',
-              top: '38%',
+              top: '40%',
               transform: 'translate3d(calc(var(--mouse-x) * 8px), calc(var(--mouse-y) * -6px), 0)',
             }}
           >
-            <span className="text-purple-400 font-light text-sm select-none" style={{ animation: 'ambientPulseGlow 6.5s ease-in-out infinite' }}>
+            <span className="text-purple-400 font-light text-base select-none" style={{ animation: 'ambientPulseGlow 6.5s ease-in-out infinite' }}>
               +
             </span>
           </div>
@@ -275,11 +375,11 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             className="absolute ambient-item rounded-full bg-purple-400"
             style={{
               right: '6%',
-              top: '28%',
-              width: '5px',
-              height: '5px',
-              boxShadow: '0 0 8px 1.5px rgba(192,132,252,0.7)',
-              transform: 'translate3d(calc(var(--mouse-x) * -16px), calc(var(--mouse-y) * 14px), 0)',
+              top: '26%',
+              width: '6px',
+              height: '6px',
+              boxShadow: '0 0 10px 2px rgba(192,132,252,0.75)',
+              transform: 'translate3d(calc(var(--mouse-x) * -18px), calc(var(--mouse-y) * 16px), 0)',
               animation: 'ambientFloatBokeh 8s ease-in-out 0.9s infinite',
             }}
           />
@@ -289,37 +389,37 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             className="absolute ambient-item rounded-full bg-pink-400"
             style={{
               right: '4%',
-              top: '70%',
+              top: '74%',
               width: '5px',
               height: '5px',
-              boxShadow: '0 0 8px 1.5px rgba(244,114,182,0.7)',
-              transform: 'translate3d(calc(var(--mouse-x) * -14px), calc(var(--mouse-y) * 12px), 0)',
+              boxShadow: '0 0 8px 2px rgba(244,114,182,0.75)',
+              transform: 'translate3d(calc(var(--mouse-x) * -16px), calc(var(--mouse-y) * 14px), 0)',
               animation: 'ambientFloatBokeh 9.5s ease-in-out 2.5s infinite',
             }}
           />
 
-          {/* --- BOTTOM BASE CORNERS (AWAY FROM DEFO & BUTTONS) --- */}
+          {/* --- BOTTOM BASE CORNERS --- */}
           <div
             className="absolute ambient-item rounded-full bg-amber-400"
             style={{
-              left: '20%',
+              left: '18%',
               bottom: '8%',
-              width: '4px',
-              height: '4px',
-              boxShadow: '0 0 6px 1px rgba(251,191,36,0.65)',
-              transform: 'translate3d(calc(var(--mouse-x) * 10px), calc(var(--mouse-y) * 8px), 0)',
+              width: '5px',
+              height: '5px',
+              boxShadow: '0 0 8px 1.5px rgba(251,191,36,0.7)',
+              transform: 'translate3d(calc(var(--mouse-x) * 12px), calc(var(--mouse-y) * 10px), 0)',
               animation: 'ambientFloatBokeh 7s ease-in-out 1s infinite',
             }}
           />
           <div
             className="absolute ambient-item rounded-full bg-emerald-400"
             style={{
-              right: '20%',
+              right: '18%',
               bottom: '8%',
-              width: '4px',
-              height: '4px',
-              boxShadow: '0 0 6px 1px rgba(0,242,152,0.65)',
-              transform: 'translate3d(calc(var(--mouse-x) * -10px), calc(var(--mouse-y) * 8px), 0)',
+              width: '5px',
+              height: '5px',
+              boxShadow: '0 0 8px 1.5px rgba(0,242,152,0.7)',
+              transform: 'translate3d(calc(var(--mouse-x) * -12px), calc(var(--mouse-y) * 10px), 0)',
               animation: 'ambientFloatBokeh 7.5s ease-in-out 0.4s infinite',
             }}
           />
@@ -331,19 +431,18 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
       {/* ============================================================== */}
       {variant === 'showcase' && (
         <>
-          {/* --- TOP HEADER ACCENTS --- */}
-          {/* Emerald Sparkle Star ✨ near Title Left */}
+          {/* Header Left Emerald Sparkle Star ✨ */}
           <div
             className="absolute ambient-item hidden sm:block"
             style={{
               left: '12%',
-              top: '12%',
+              top: '10%',
               transform: 'translate3d(calc(var(--mouse-x) * 14px), calc(var(--mouse-y) * 10px), 0)',
             }}
           >
             <div
-              className="w-4 h-4 text-emerald-400 drop-shadow-[0_0_6px_rgba(0,242,152,0.65)]"
-              style={{ animation: 'ambientSparkleTwinkle 5s ease-in-out infinite' }}
+              className="w-4 h-4 text-emerald-400 drop-shadow-[0_0_8px_rgba(0,242,152,0.7)]"
+              style={{ animation: 'ambientSparkleTwinkle 4.8s ease-in-out infinite' }}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" />
@@ -351,18 +450,18 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             </div>
           </div>
 
-          {/* Violet Sparkle Star ✨ near Title Right */}
+          {/* Header Right Violet Sparkle Star ✨ */}
           <div
             className="absolute ambient-item hidden sm:block"
             style={{
               right: '12%',
-              top: '12%',
+              top: '10%',
               transform: 'translate3d(calc(var(--mouse-x) * -14px), calc(var(--mouse-y) * 10px), 0)',
             }}
           >
             <div
-              className="w-4 h-4 text-purple-400 drop-shadow-[0_0_6px_rgba(192,132,252,0.65)]"
-              style={{ animation: 'ambientSparkleTwinkle 6s ease-in-out 1.5s infinite' }}
+              className="w-4 h-4 text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.7)]"
+              style={{ animation: 'ambientSparkleTwinkle 5.5s ease-in-out 1.5s infinite' }}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" />
@@ -370,8 +469,24 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             </div>
           </div>
 
-          {/* --- FAR LEFT FLANK (SAFELY OUTSIDE PHONES STAGE) --- */}
-          {/* Cyan Sparkle Star ✨ */}
+          {/* Cute Glass Bubble 🫧 (Showcase Left) */}
+          <div
+            className="absolute ambient-item"
+            style={{
+              left: '5%',
+              top: '28%',
+              transform: 'translate3d(calc(var(--mouse-x) * 12px), calc(var(--mouse-y) * 10px), 0)',
+            }}
+          >
+            <div
+              className="relative w-4 h-4 rounded-full border border-cyan-400/60 bg-cyan-300/25 shadow-[0_0_10px_rgba(56,189,248,0.5)]"
+              style={{ animation: 'cuteBubbleFloat 6.2s ease-in-out infinite' }}
+            >
+              <div className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/90" />
+            </div>
+          </div>
+
+          {/* Cyan Sparkle Star ✨ (Left) */}
           <div
             className="absolute ambient-item"
             style={{
@@ -381,8 +496,8 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             }}
           >
             <div
-              className="w-4 h-4 text-cyan-400 drop-shadow-[0_0_6px_rgba(56,189,248,0.7)]"
-              style={{ animation: 'ambientSparkleTwinkle 5.8s ease-in-out 0.6s infinite' }}
+              className="w-4 h-4 text-cyan-400 drop-shadow-[0_0_8px_rgba(56,189,248,0.75)]"
+              style={{ animation: 'ambientSparkleTwinkle 5.5s ease-in-out 0.6s infinite' }}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" />
@@ -390,48 +505,24 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             </div>
           </div>
 
-          {/* Cyan Plus (+) */}
+          {/* Cute Glass Bubble 🫧 (Showcase Right) */}
           <div
-            className="absolute ambient-item hidden sm:block opacity-50 dark:opacity-40"
+            className="absolute ambient-item"
             style={{
-              left: '5%',
-              top: '34%',
-              transform: 'translate3d(calc(var(--mouse-x) * -8px), calc(var(--mouse-y) * -6px), 0)',
+              right: '5%',
+              top: '30%',
+              transform: 'translate3d(calc(var(--mouse-x) * -12px), calc(var(--mouse-y) * 10px), 0)',
             }}
           >
-            <span className="text-cyan-400 font-light text-base select-none" style={{ animation: 'ambientPulseGlow 7s ease-in-out infinite' }}>
-              +
-            </span>
+            <div
+              className="relative w-4 h-4 rounded-full border border-pink-400/60 bg-pink-300/25 shadow-[0_0_10px_rgba(244,114,182,0.5)]"
+              style={{ animation: 'cuteBubbleFloat 6.5s ease-in-out 1.2s infinite' }}
+            >
+              <div className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/90" />
+            </div>
           </div>
 
-          {/* Bokeh Dots (Far Left) */}
-          <div
-            className="absolute ambient-item rounded-full bg-cyan-400"
-            style={{
-              left: '4%',
-              top: '60%',
-              width: '5px',
-              height: '5px',
-              boxShadow: '0 0 8px 1.5px rgba(56,189,248,0.7)',
-              transform: 'translate3d(calc(var(--mouse-x) * 18px), calc(var(--mouse-y) * 14px), 0)',
-              animation: 'ambientFloatBokeh 8.5s ease-in-out infinite',
-            }}
-          />
-          <div
-            className="absolute ambient-item rounded-full bg-emerald-400"
-            style={{
-              left: '6%',
-              top: '72%',
-              width: '5px',
-              height: '5px',
-              boxShadow: '0 0 8px 1.5px rgba(0,242,152,0.7)',
-              transform: 'translate3d(calc(var(--mouse-x) * 12px), calc(var(--mouse-y) * 10px), 0)',
-              animation: 'ambientFloatBokeh 10s ease-in-out 2s infinite',
-            }}
-          />
-
-          {/* --- FAR RIGHT FLANK (SAFELY OUTSIDE PHONES STAGE) --- */}
-          {/* Violet Sparkle Star ✨ */}
+          {/* Violet Sparkle Star ✨ (Right) */}
           <div
             className="absolute ambient-item"
             style={{
@@ -441,7 +532,7 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             }}
           >
             <div
-              className="w-4 h-4 text-purple-400 drop-shadow-[0_0_6px_rgba(192,132,252,0.7)]"
+              className="w-4 h-4 text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.75)]"
               style={{ animation: 'ambientSparkleTwinkle 6.2s ease-in-out 1s infinite' }}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -450,50 +541,36 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             </div>
           </div>
 
-          {/* Violet Plus (+) */}
+          {/* Bokeh Dots */}
           <div
-            className="absolute ambient-item hidden sm:block opacity-50 dark:opacity-40"
+            className="absolute ambient-item rounded-full bg-cyan-400"
             style={{
-              right: '5%',
-              top: '36%',
-              transform: 'translate3d(calc(var(--mouse-x) * 8px), calc(var(--mouse-y) * -6px), 0)',
+              left: '4%',
+              top: '64%',
+              width: '6px',
+              height: '6px',
+              boxShadow: '0 0 10px 2px rgba(56,189,248,0.75)',
+              transform: 'translate3d(calc(var(--mouse-x) * 18px), calc(var(--mouse-y) * 14px), 0)',
+              animation: 'ambientFloatBokeh 8.5s ease-in-out infinite',
             }}
-          >
-            <span className="text-purple-400 font-light text-base select-none" style={{ animation: 'ambientPulseGlow 6.8s ease-in-out infinite' }}>
-              +
-            </span>
-          </div>
-
-          {/* Bokeh Dots (Far Right) */}
+          />
           <div
             className="absolute ambient-item rounded-full bg-purple-400"
             style={{
               right: '4%',
-              top: '62%',
-              width: '5px',
-              height: '5px',
-              boxShadow: '0 0 8px 1.5px rgba(192,132,252,0.7)',
+              top: '66%',
+              width: '6px',
+              height: '6px',
+              boxShadow: '0 0 10px 2px rgba(192,132,252,0.75)',
               transform: 'translate3d(calc(var(--mouse-x) * -18px), calc(var(--mouse-y) * 14px), 0)',
               animation: 'ambientFloatBokeh 9s ease-in-out 1.2s infinite',
-            }}
-          />
-          <div
-            className="absolute ambient-item rounded-full bg-pink-400"
-            style={{
-              right: '6%',
-              top: '74%',
-              width: '5px',
-              height: '5px',
-              boxShadow: '0 0 8px 1.5px rgba(244,114,182,0.7)',
-              transform: 'translate3d(calc(var(--mouse-x) * -12px), calc(var(--mouse-y) * 10px), 0)',
-              animation: 'ambientFloatBokeh 10.5s ease-in-out 2.5s infinite',
             }}
           />
         </>
       )}
 
       {/* ============================================================== */}
-      {/* SECTION PRESET 3: CATEGORIES SECTION (DISCOVER & LIKE)         */}
+      {/* SECTION PRESET 3: CATEGORIES SECTION                           */}
       {/* ============================================================== */}
       {variant === 'categories' && (
         <>
@@ -507,7 +584,7 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             }}
           >
             <div
-              className="w-4 h-4 text-emerald-400 drop-shadow-[0_0_6px_rgba(0,242,152,0.65)]"
+              className="w-4 h-4 text-emerald-400 drop-shadow-[0_0_8px_rgba(0,242,152,0.7)]"
               style={{ animation: 'ambientSparkleTwinkle 5.2s ease-in-out infinite' }}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -526,7 +603,7 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             }}
           >
             <div
-              className="w-4 h-4 text-purple-400 drop-shadow-[0_0_6px_rgba(192,132,252,0.65)]"
+              className="w-4 h-4 text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.7)]"
               style={{ animation: 'ambientSparkleTwinkle 6.2s ease-in-out 1.2s infinite' }}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -535,8 +612,7 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             </div>
           </div>
 
-          {/* --- FAR LEFT FLANK (OUTSIDE 4-COLUMN CARDS GRID) --- */}
-          {/* Cyan Sparkle Star ✨ */}
+          {/* Left Sparkle Star */}
           <div
             className="absolute ambient-item"
             style={{
@@ -546,7 +622,7 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             }}
           >
             <div
-              className="w-4 h-4 text-cyan-400 drop-shadow-[0_0_6px_rgba(56,189,248,0.7)]"
+              className="w-4 h-4 text-cyan-400 drop-shadow-[0_0_8px_rgba(56,189,248,0.75)]"
               style={{ animation: 'ambientSparkleTwinkle 5.5s ease-in-out 0.5s infinite' }}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -555,48 +631,7 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             </div>
           </div>
 
-          {/* Plus (+) Left */}
-          <div
-            className="absolute ambient-item hidden sm:block opacity-50 dark:opacity-40"
-            style={{
-              left: '4%',
-              top: '42%',
-              transform: 'translate3d(calc(var(--mouse-x) * -8px), calc(var(--mouse-y) * -6px), 0)',
-            }}
-          >
-            <span className="text-cyan-400 font-light text-base select-none" style={{ animation: 'ambientPulseGlow 7s ease-in-out infinite' }}>
-              +
-            </span>
-          </div>
-
-          {/* Left Bokeh Dots */}
-          <div
-            className="absolute ambient-item rounded-full bg-cyan-400"
-            style={{
-              left: '3.5%',
-              top: '56%',
-              width: '5px',
-              height: '5px',
-              boxShadow: '0 0 8px 1.5px rgba(56,189,248,0.7)',
-              transform: 'translate3d(calc(var(--mouse-x) * 18px), calc(var(--mouse-y) * 14px), 0)',
-              animation: 'ambientFloatBokeh 8s ease-in-out infinite',
-            }}
-          />
-          <div
-            className="absolute ambient-item rounded-full bg-emerald-400"
-            style={{
-              left: '2%',
-              top: '76%',
-              width: '5px',
-              height: '5px',
-              boxShadow: '0 0 8px 1.5px rgba(0,242,152,0.7)',
-              transform: 'translate3d(calc(var(--mouse-x) * 14px), calc(var(--mouse-y) * 10px), 0)',
-              animation: 'ambientFloatBokeh 10s ease-in-out 2s infinite',
-            }}
-          />
-
-          {/* --- FAR RIGHT FLANK (OUTSIDE 4-COLUMN CARDS GRID) --- */}
-          {/* Violet Sparkle Star ✨ */}
+          {/* Right Sparkle Star */}
           <div
             className="absolute ambient-item"
             style={{
@@ -606,7 +641,7 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
             }}
           >
             <div
-              className="w-4 h-4 text-purple-400 drop-shadow-[0_0_6px_rgba(192,132,252,0.7)]"
+              className="w-4 h-4 text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.75)]"
               style={{ animation: 'ambientSparkleTwinkle 6s ease-in-out 1s infinite' }}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -614,46 +649,49 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
               </svg>
             </div>
           </div>
+        </>
+      )}
 
-          {/* Plus (+) Right */}
+      {/* ============================================================== */}
+      {/* SECTION PRESET 4: HERO SECTION                                 */}
+      {/* ============================================================== */}
+      {variant === 'hero' && (
+        <>
           <div
-            className="absolute ambient-item hidden sm:block opacity-50 dark:opacity-40"
+            className="absolute ambient-item hidden sm:block"
             style={{
-              right: '4%',
-              top: '44%',
-              transform: 'translate3d(calc(var(--mouse-x) * 8px), calc(var(--mouse-y) * -6px), 0)',
+              left: '8%',
+              top: '25%',
+              transform: 'translate3d(calc(var(--mouse-x) * 16px), calc(var(--mouse-y) * 14px), 0)',
             }}
           >
-            <span className="text-purple-400 font-light text-base select-none" style={{ animation: 'ambientPulseGlow 6.8s ease-in-out infinite' }}>
-              +
-            </span>
+            <div
+              className="w-4 h-4 text-[#00f298] drop-shadow-[0_0_10px_rgba(0,242,152,0.8)]"
+              style={{ animation: 'ambientSparkleTwinkle 4.5s ease-in-out infinite' }}
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" />
+              </svg>
+            </div>
           </div>
 
-          {/* Right Bokeh Dots */}
           <div
-            className="absolute ambient-item rounded-full bg-amber-400"
+            className="absolute ambient-item hidden sm:block"
             style={{
-              right: '3.5%',
-              top: '58%',
-              width: '5px',
-              height: '5px',
-              boxShadow: '0 0 8px 1.5px rgba(251,191,36,0.7)',
-              transform: 'translate3d(calc(var(--mouse-x) * -18px), calc(var(--mouse-y) * 14px), 0)',
-              animation: 'ambientFloatBokeh 9s ease-in-out 1.5s infinite',
+              right: '8%',
+              top: '28%',
+              transform: 'translate3d(calc(var(--mouse-x) * -16px), calc(var(--mouse-y) * 14px), 0)',
             }}
-          />
-          <div
-            className="absolute ambient-item rounded-full bg-pink-400"
-            style={{
-              right: '2%',
-              top: '78%',
-              width: '5px',
-              height: '5px',
-              boxShadow: '0 0 8px 1.5px rgba(244,114,182,0.7)',
-              transform: 'translate3d(calc(var(--mouse-x) * -14px), calc(var(--mouse-y) * 10px), 0)',
-              animation: 'ambientFloatBokeh 11s ease-in-out 2.8s infinite',
-            }}
-          />
+          >
+            <div
+              className="w-4 h-4 text-cyan-400 drop-shadow-[0_0_10px_rgba(56,189,248,0.8)]"
+              style={{ animation: 'ambientSparkleTwinkle 5s ease-in-out 1s infinite' }}
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" />
+              </svg>
+            </div>
+          </div>
         </>
       )}
     </div>

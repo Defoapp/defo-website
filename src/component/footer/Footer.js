@@ -49,7 +49,7 @@ function Footer() {
   const subHeadingStyle = "footer-link text-base md:text-lg font-normal text-slate-300 hover:text-white my-1.5 block hover:pl-2 duration-200 transition-all";
 
   return (
-    <footer className="w-full bg-black py-14" style={{ backgroundColor: '#000000' }}>
+    <footer className="relative z-30 w-full bg-black py-14 text-white overflow-hidden" style={{ backgroundColor: '#000000', isolation: 'isolate' }}>
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
         {/* socialmedia */}
         <div>
