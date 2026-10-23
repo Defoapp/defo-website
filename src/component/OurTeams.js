@@ -28,7 +28,7 @@ const OurTeams = () => {
   }, [selectedCategory]);
 
   return (
-    <div className="relative w-full min-h-screen bg-[#f8fafc] dark:bg-[#080b11] text-slate-900 dark:text-white transition-colors duration-500 flex flex-col justify-between overflow-x-hidden">
+    <div className="relative w-full min-h-screen bg-[#e9eef5] dark:bg-[#080b11] text-slate-900 dark:text-white transition-colors duration-500 flex flex-col justify-between overflow-x-hidden">
       
       {/* Universal Fixed Navbar */}
       <Navbar />
@@ -75,16 +75,6 @@ const OurTeams = () => {
         {/* =================================================================== */}
         <div className="text-center max-w-4xl mx-auto mb-16 sm:mb-20">
           
-          {/* Trendy Pill Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/30 text-emerald-600 dark:text-[#00f298] text-xs sm:text-sm font-bold tracking-wide uppercase mb-6 shadow-sm"
-          >
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#00f298]" />
-            <span>The Minds Behind Defo</span>
-          </motion.div>
 
           {/* Main 3D Title */}
           <motion.h1
@@ -163,7 +153,7 @@ const OurTeams = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 max-w-6xl mx-auto justify-items-center"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 max-w-6xl mx-auto justify-items-center items-start"
             >
               {filteredMembers.map((member, idx) => (
                 <TeamMemberCard
