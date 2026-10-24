@@ -2,22 +2,29 @@ import React, { useEffect } from "react";
 import Footer from "../component/footer/Footer";
 import term from "../image/illustrations/terms and condition.svg";
 import Navbar from "../component/Navbar/Navbar";
+import { useTheme } from "../context/ThemeContext";
 
 const Term = () => {
+  const { isDark } = useTheme();
+
   useEffect(() => {
     document.title = "Defo - Terms of use";
   }, []);
 
+  const headingStyle = `font-bold pt-6 text-xl md:text-3xl ${isDark ? "text-white" : "text-gray-900"}`;
+
   return (
-    <div className="w-full h-full min-h-screen flex flex-col justify-between">
+    <div className={`w-full h-full min-h-screen flex flex-col justify-between transition-colors duration-300 ${isDark ? "bg-[#06080e] text-white" : "bg-white text-slate-900"}`}>
       <div>
         <Navbar />
         <div className="mx-auto pb-10 mt-8 md:mt-12 w-11/12 max-w-4xl px-4">
           <div className="w-full mb-8 flex items-center justify-center">
             <img src={term} alt="Terms and Conditions illustration" className="w-full max-w-md mx-auto" />
           </div>
-          <h1 className="font-bold pt-2 text-2xl md:text-4xl text-gray-900 mb-4">Terms & Conditions</h1>
-          <div className="space-y-4 text-base md:text-lg text-gray-700 leading-relaxed">
+          <h1 className={`font-bold pt-2 text-2xl md:text-4xl mb-4 ${isDark ? "text-white" : "text-gray-900"}`}>
+            Terms & Conditions
+          </h1>
+          <div className={`space-y-4 text-base md:text-lg leading-relaxed ${isDark ? "text-slate-300" : "text-gray-700"}`}>
             <p>
               By downloading or using the app, these terms will automatically apply
               to you – you should make sure therefore that you read them carefully
@@ -49,7 +56,7 @@ const Term = () => {
               the app:
             </p>
 
-            <ul className="my-6 list-disc ml-6 space-y-2 text-blue-600">
+            <ul className={`my-6 list-disc ml-6 space-y-2 ${isDark ? "text-cyan-400" : "text-blue-600"}`}>
               <li>
                 <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="hover:underline">
                   Google Play Services
@@ -99,22 +106,22 @@ const Term = () => {
               it available to you.
             </p>
 
-            <h2 className="font-bold pt-6 text-xl md:text-3xl text-gray-900">
+            <h2 className={headingStyle}>
               Changes to Terms and Conditions
             </h2>
             <p>
               We may update our Terms and Conditions from time to time. Thus, you
               are advised to review this page periodically for any changes.
             </p>
-            <p className="font-medium text-gray-900 pt-2">
+            <p className={`font-medium pt-2 ${isDark ? "text-slate-200" : "text-gray-900"}`}>
               These terms and conditions are effective as of 2023-01-16
             </p>
 
-            <h2 className="font-bold pt-6 text-xl md:text-2xl text-gray-900">Contact Us</h2>
+            <h2 className={`font-bold pt-6 text-xl md:text-2xl ${isDark ? "text-white" : "text-gray-900"}`}>Contact Us</h2>
             <p>
               If you have any questions or suggestions about our Terms and
               Conditions, do not hesitate to contact us at{" "}
-              <a href="mailto:support@yesdefo.com" className="text-blue-600 hover:underline font-medium">
+              <a href="mailto:support@yesdefo.com" className={`${isDark ? "text-cyan-400" : "text-blue-600"} hover:underline font-medium`}>
                 support@yesdefo.com
               </a>.
             </p>

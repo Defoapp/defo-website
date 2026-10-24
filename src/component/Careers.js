@@ -7,8 +7,11 @@ import { Vacancies } from "../constants/map";
 import arrow from "../image/careers/formkit_arrowdown.svg";
 import location from "../image/careers/location.svg";
 import time from "../image/careers/carbon_time.svg";
+import { useTheme } from "../context/ThemeContext";
 
 const Careers = () => {
+  const { isDark } = useTheme();
+
   const scrollToContainer = () => {
     const container = document.getElementById("container");
     if (container) {
@@ -17,29 +20,29 @@ const Careers = () => {
   };
 
   return (
-    <div className="relative w-full h-full">
+    <div className={`relative w-full h-full min-h-screen transition-colors duration-300 ${isDark ? "bg-[#06080e] text-white" : "bg-white text-slate-900"}`}>
       <Navbar />
       <div className="w-full h-full">
         {/* hero section */}
         <div className="w-11/12 md:w-5/6 mx-auto min-h-fit py-12 md:py-20 flex items-center justify-between flex-col md:flex-row gap-8">
           <div className="w-full md:w-1/2">
-            <span className="inline-block border-black border-2 py-1 px-4 rounded-lg mb-4 font-semibold text-sm">
+            <span className={`inline-block border-2 py-1 px-4 rounded-lg mb-4 font-semibold text-sm ${isDark ? "border-emerald-400 text-emerald-300 bg-emerald-500/10" : "border-slate-800 text-slate-800 bg-slate-100"}`}>
               We're Hiring!
             </span>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-4">
+            <h1 className={`text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 ${isDark ? "text-white" : "text-slate-900"}`}>
               Be part of our mission
             </h1>
-            <p className="text-black text-left text-base md:text-lg leading-relaxed mb-6">
+            <p className={`text-left text-base md:text-lg leading-relaxed mb-6 ${isDark ? "text-slate-300" : "text-slate-700"}`}>
               We are looking for passionate people to join us on our mission. We
               value flat hierarchies, clear communication, and full ownership and
               responsibility.
             </p>
             <button
               onClick={scrollToContainer}
-              className="flex items-center gap-x-2 border-black border-2 rounded-3xl py-2 px-5 font-semibold cursor-pointer transition-all hover:scale-95 bg-transparent"
+              className={`flex items-center gap-x-2 border-2 rounded-3xl py-2 px-5 font-semibold cursor-pointer transition-all hover:scale-95 bg-transparent ${isDark ? "border-white/40 text-white hover:border-white hover:bg-white/10" : "border-slate-800 text-slate-800 hover:bg-slate-100"}`}
             >
               <span>View Openings</span>
-              <img className="w-3 h-4 object-contain" src={arrow} alt="arrow down" />
+              <img className={`w-3 h-4 object-contain ${isDark ? "invert brightness-200" : ""}`} src={arrow} alt="arrow down" />
             </button>
           </div>
 
@@ -52,7 +55,7 @@ const Careers = () => {
         {/* Vacancies */}
         <div className="w-full h-full py-6">
           <div className="w-11/12 md:w-5/6 mx-auto">
-            <hr className="w-full h-0.5 mx-auto bg-gray-200 border-0 rounded my-6" />
+            <hr className={`w-full h-0.5 mx-auto border-0 rounded my-6 ${isDark ? "bg-white/10" : "bg-gray-200"}`} />
 
             {Vacancies.map((vacancy) => (
               <div key={vacancy.id}>
@@ -64,19 +67,19 @@ const Careers = () => {
                       alt={vacancy.title}
                     />
                     <div>
-                      <h2 className="font-bold text-xl md:text-2xl text-left">
+                      <h2 className={`font-bold text-xl md:text-2xl text-left ${isDark ? "text-white" : "text-slate-900"}`}>
                         {vacancy.title}
                       </h2>
-                      <p className="text-gray-700 text-base md:text-lg text-left my-1">
+                      <p className={`text-base md:text-lg text-left my-1 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
                         {vacancy.desc}
                       </p>
                       <div className="flex flex-wrap gap-3 my-2">
-                        <span className="border-2 border-black rounded-3xl flex items-center gap-2 px-3 py-1 font-medium">
-                          <img className="w-3 h-3" src={location} alt="location icon" />
+                        <span className={`border rounded-3xl flex items-center gap-2 px-3 py-1 font-medium ${isDark ? "border-white/20 text-slate-200 bg-white/5" : "border-slate-300 text-slate-700 bg-slate-50"}`}>
+                          <img className={`w-3 h-3 ${isDark ? "invert brightness-200" : ""}`} src={location} alt="location icon" />
                           <span className="text-xs md:text-sm">{vacancy.location}</span>
                         </span>
-                        <span className="border-2 border-black rounded-3xl flex items-center gap-2 px-3 py-1 font-medium">
-                          <img className="w-3 h-3" src={time} alt="time icon" />
+                        <span className={`border rounded-3xl flex items-center gap-2 px-3 py-1 font-medium ${isDark ? "border-white/20 text-slate-200 bg-white/5" : "border-slate-300 text-slate-700 bg-slate-50"}`}>
+                          <img className={`w-3 h-3 ${isDark ? "invert brightness-200" : ""}`} src={time} alt="time icon" />
                           <span className="text-xs md:text-sm">{vacancy.jobType}</span>
                         </span>
                       </div>
@@ -85,13 +88,13 @@ const Careers = () => {
 
                   <div className="my-2 md:my-0 self-end md:self-center">
                     <a href={vacancy.link} target="_blank" rel="noreferrer">
-                      <span className="inline-block rounded-xl font-bold bg-blue-950 hover:bg-blue-900 text-white py-2.5 px-8 transition-colors">
+                      <span className="inline-block rounded-xl font-bold bg-blue-600 hover:bg-blue-500 text-white py-2.5 px-8 transition-colors shadow-md">
                         Apply
                       </span>
                     </a>
                   </div>
                 </div>
-                <hr className="w-full h-0.5 mx-auto bg-gray-200 border-0 rounded my-6" />
+                <hr className={`w-full h-0.5 mx-auto border-0 rounded my-6 ${isDark ? "bg-white/10" : "bg-gray-200"}`} />
               </div>
             ))}
           </div>

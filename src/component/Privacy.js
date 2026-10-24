@@ -2,22 +2,29 @@ import React, { useEffect } from "react";
 import policy from "../image/illustrations/privacy_policy_hero 1.svg";
 import Footer from "../component/footer/Footer";
 import Navbar from "../component/Navbar/Navbar";
+import { useTheme } from "../context/ThemeContext";
 
 function Privacy() {
+  const { isDark } = useTheme();
+
   useEffect(() => {
     document.title = "Defo - Privacy Policy";
   }, []);
 
+  const headingStyle = `font-bold pt-6 text-xl md:text-3xl ${isDark ? "text-white" : "text-gray-900"}`;
+
   return (
-    <div className="w-full h-full min-h-screen flex flex-col justify-between">
+    <div className={`w-full h-full min-h-screen flex flex-col justify-between transition-colors duration-300 ${isDark ? "bg-[#06080e] text-white" : "bg-white text-slate-900"}`}>
       <div>
         <Navbar />
         <div className="mx-auto pb-10 mt-8 md:mt-12 w-11/12 max-w-4xl px-4">
           <div className="w-full mb-8 flex items-center justify-center">
             <img src={policy} alt="Privacy Policy illustration" className="w-full max-w-md mx-auto" />
           </div>
-          <h1 className="font-bold pt-2 text-2xl md:text-4xl text-gray-900 mb-4">Privacy Policy</h1>
-          <div className="space-y-4 text-base md:text-lg text-gray-700 leading-relaxed">
+          <h1 className={`font-bold pt-2 text-2xl md:text-4xl mb-4 ${isDark ? "text-white" : "text-gray-900"}`}>
+            Privacy Policy
+          </h1>
+          <div className={`space-y-4 text-base md:text-lg leading-relaxed ${isDark ? "text-slate-300" : "text-gray-700"}`}>
             <p>
               LowPow built the Defo app as a Commercial app. This SERVICE is
               provided by LowPow and is intended for use as is.
@@ -39,7 +46,7 @@ function Privacy() {
               Terms and Conditions, which are accessible at Defo unless otherwise
               defined in this Privacy Policy.
             </p>
-            <h2 className="font-bold pt-6 text-xl md:text-3xl text-gray-900">
+            <h2 className={headingStyle}>
               Information Collection and Use
             </h2>
             <p>
@@ -58,7 +65,7 @@ function Privacy() {
               the app:
             </p>
 
-            <ul className="my-6 list-disc ml-6 space-y-2 text-blue-600">
+            <ul className={`my-6 list-disc ml-6 space-y-2 ${isDark ? "text-cyan-400" : "text-blue-600"}`}>
               <li>
                 <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="hover:underline">
                   Google Play Services
@@ -81,7 +88,7 @@ function Privacy() {
               </li>
             </ul>
 
-            <h2 className="font-bold pt-6 text-xl md:text-3xl text-gray-900">Log Data</h2>
+            <h2 className={headingStyle}>Log Data</h2>
             <p>
               We want to inform you that whenever you use our Service, in a case of
               an error in the app we collect data and information (through
@@ -92,7 +99,7 @@ function Privacy() {
               the Service, and other statistics.
             </p>
 
-            <h2 className="font-bold pt-6 text-xl md:text-3xl text-gray-900">Cookies</h2>
+            <h2 className={headingStyle}>Cookies</h2>
             <p>
               Cookies are files with a small amount of data that are commonly used
               as anonymous unique identifiers. These are sent to your browser from
@@ -104,7 +111,7 @@ function Privacy() {
               sent to your device.
             </p>
 
-            <h2 className="font-bold pt-6 text-xl md:text-3xl text-gray-900">Service Providers</h2>
+            <h2 className={headingStyle}>Service Providers</h2>
             <p>
               We may employ third-party companies and individuals due to the
               following reasons:
@@ -116,7 +123,7 @@ function Privacy() {
               <li>To assist us in analyzing how our Service is used.</li>
             </ul>
 
-            <h2 className="font-bold pt-6 text-xl md:text-3xl text-gray-900">Security</h2>
+            <h2 className={headingStyle}>Security</h2>
             <p>
               We value your trust in providing us your Personal Information, thus we
               are striving to use commercially acceptable means of protecting it.
@@ -125,7 +132,7 @@ function Privacy() {
               cannot guarantee its absolute security.
             </p>
 
-            <h2 className="font-bold pt-6 text-xl md:text-3xl text-gray-900">Links to Other Sites</h2>
+            <h2 className={headingStyle}>Links to Other Sites</h2>
             <p>
               This Service may contain links to other sites. If you click on a
               third-party link, you will be directed to that site. Note that these
@@ -133,29 +140,29 @@ function Privacy() {
               you to review the Privacy Policy of these websites.
             </p>
 
-            <h2 className="font-bold pt-6 text-xl md:text-3xl text-gray-900">Children's Privacy</h2>
+            <h2 className={headingStyle}>Children's Privacy</h2>
             <p>
               These Services do not address anyone under the age of 13. We do not
               knowingly collect personally identifiable information from children
               under 13 years of age.
             </p>
 
-            <h2 className="font-bold pt-6 text-xl md:text-3xl text-gray-900">
+            <h2 className={headingStyle}>
               Changes to This Privacy Policy
             </h2>
             <p>
               We may update our Privacy Policy from time to time. Thus, you are
               advised to review this page periodically for any changes.
             </p>
-            <p className="font-medium text-gray-900 pt-2">
+            <p className={`font-medium pt-2 ${isDark ? "text-slate-200" : "text-gray-900"}`}>
               This policy is effective as of 2023-01-16
             </p>
 
-            <h2 className="font-bold pt-6 text-xl md:text-2xl text-gray-900">Contact Us</h2>
+            <h2 className={`font-bold pt-6 text-xl md:text-2xl ${isDark ? "text-white" : "text-gray-900"}`}>Contact Us</h2>
             <p>
               If you have any questions or suggestions about our Privacy Policy, do
               not hesitate to contact us at{" "}
-              <a href="mailto:support@yesdefo.com" className="text-blue-600 hover:underline font-medium">
+              <a href="mailto:support@yesdefo.com" className={`${isDark ? "text-cyan-400" : "text-blue-600"} hover:underline font-medium`}>
                 support@yesdefo.com
               </a>.
             </p>

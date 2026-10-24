@@ -36,7 +36,7 @@ const CodeRunnerSandbox = () => {
   };
 
   return (
-    <div className="w-full my-12 p-6 md:p-8 rounded-3xl bg-[#090d16] border border-white/10 shadow-2xl relative">
+    <div className="preserve-dark w-full my-12 p-6 md:p-8 rounded-3xl bg-gradient-to-b from-slate-900 via-slate-950 to-[#05070c] border border-white/10 shadow-2xl relative text-white">
       {/* Top subtle glow */}
       <div
         className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-50"
@@ -49,33 +49,71 @@ const CodeRunnerSandbox = () => {
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span>Interactive Code Sandbox & Execution Terminal</span>
           </div>
-          <h3 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+          <h3 className="text-2xl md:text-3xl font-extrabold text-white stay-white tracking-tight">
             Live Language Execution Console
           </h3>
-          <p className="text-slate-400 text-sm mt-1">
+          <p className="text-slate-300 text-sm mt-1">
             Switch between languages to view real-world blueprints, edit syntax live, and trigger the execution pipeline.
           </p>
         </div>
 
         {/* Language selector pills */}
         <div className="flex flex-wrap gap-2">
-          {LEARN_ARTICLES.map((art) => (
-            <button
-              key={art.id}
-              onClick={() => handleSelectTopic(art)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all duration-200 cursor-pointer flex items-center gap-1.5 border ${
-                selectedTopic.id === art.id
-                  ? "bg-white/15 text-white border-white/40 shadow-lg scale-105"
-                  : "bg-white/5 text-slate-400 border-white/5 hover:text-white hover:bg-white/10"
-              }`}
-            >
-              <span
-                className="w-2 h-2 rounded-full"
-                style={{ backgroundColor: art.id === "python" ? "#38bdf8" : art.id === "java" ? "#f59e0b" : art.id === "html5" ? "#f43f5e" : art.id === "css3" ? "#818cf8" : art.id === "javascript" ? "#facc15" : "#34d399" }}
-              />
-              <span>{art.name}</span>
-            </button>
-          ))}
+          {LEARN_ARTICLES.map((art) => {
+            const isSelected = selectedTopic.id === art.id;
+            const langColors = {
+              python: { hex: "#38bdf8", border: "#38bdf8", shadow: "rgba(56, 189, 248, 0.45)" },
+              java: { hex: "#f59e0b", border: "#f59e0b", shadow: "rgba(245, 158, 11, 0.45)" },
+              html5: { hex: "#f43f5e", border: "#f43f5e", shadow: "rgba(244, 63, 94, 0.45)" },
+              css3: { hex: "#818cf8", border: "#818cf8", shadow: "rgba(129, 140, 248, 0.45)" },
+              javascript: { hex: "#facc15", border: "#facc15", shadow: "rgba(250, 204, 21, 0.45)" },
+              backend: { hex: "#34d399", border: "#34d399", shadow: "rgba(52, 211, 153, 0.45)" },
+            };
+            const currentColors = langColors[art.id] || { hex: "#38bdf8", border: "#38bdf8", shadow: "rgba(56, 189, 248, 0.45)" };
+
+            return (
+              <button
+                key={art.id}
+                onClick={() => handleSelectTopic(art)}
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer flex items-center gap-2 border ${
+                  isSelected
+                    ? "scale-105 shadow-xl font-bold"
+                    : "bg-slate-900/90 text-slate-300 border-white/10 hover:text-white hover:bg-slate-800"
+                }`}
+                style={
+                  isSelected
+                    ? {
+                        backgroundColor: "#1e293b",
+                        borderColor: currentColors.border,
+                        boxShadow: `0 0 14px ${currentColors.shadow}`,
+                        color: "#ffffff",
+                      }
+                    : {
+                        color: "#cbd5e1",
+                      }
+                }
+              >
+                <span
+                  className="w-2.5 h-2.5 rounded-full shrink-0"
+                  style={{
+                    backgroundColor: currentColors.hex,
+                    boxShadow: isSelected ? `0 0 8px ${currentColors.hex}` : "none",
+                  }}
+                />
+                <span
+                  style={{
+                    color: isSelected ? "#ffffff" : "#cbd5e1",
+                    fontWeight: isSelected ? 700 : 500,
+                  }}
+                >
+                  {art.name}
+                </span>
+                {isSelected && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse ml-0.5" />
+                )}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -89,9 +127,28 @@ const CodeRunnerSandbox = () => {
               <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block" />
               <span className="w-3 h-3 rounded-full bg-yellow-500/80 inline-block" />
               <span className="w-3 h-3 rounded-full bg-green-500/80 inline-block" />
-              <span className="ml-2 font-mono text-slate-400">
-                main.{selectedTopic.codeLanguage === "python" ? "py" : selectedTopic.codeLanguage === "java" ? "java" : selectedTopic.codeLanguage === "html" ? "html" : selectedTopic.codeLanguage === "css" ? "css" : selectedTopic.codeLanguage === "javascript" ? "js" : "sql"}
-              </span>
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-800 border border-white/10 text-white font-mono font-medium text-[11px] shadow-sm">
+                <span
+                  className="w-2 h-2 rounded-full"
+                  style={{
+                    backgroundColor:
+                      selectedTopic.id === "python"
+                        ? "#38bdf8"
+                        : selectedTopic.id === "java"
+                        ? "#f59e0b"
+                        : selectedTopic.id === "html5"
+                        ? "#f43f5e"
+                        : selectedTopic.id === "css3"
+                        ? "#818cf8"
+                        : selectedTopic.id === "javascript"
+                        ? "#facc15"
+                        : "#34d399",
+                  }}
+                />
+                <span className="text-slate-200 font-bold">
+                  main.{selectedTopic.codeLanguage === "python" ? "py" : selectedTopic.codeLanguage === "java" ? "java" : selectedTopic.codeLanguage === "html" ? "html" : selectedTopic.codeLanguage === "css" ? "css" : selectedTopic.codeLanguage === "javascript" ? "js" : "sql"}
+                </span>
+              </div>
             </div>
 
             <div className="flex items-center gap-2">
@@ -123,8 +180,8 @@ const CodeRunnerSandbox = () => {
 
           {/* Editor Footer / Run Action */}
           <div className="px-4 py-3 bg-slate-900/60 border-t border-white/10 flex items-center justify-between">
-            <span className="text-[11px] text-slate-400 font-mono">
-              Language: <strong className="text-white uppercase">{selectedTopic.name}</strong>
+            <span className="text-[11px] text-slate-300 font-mono">
+              Language: <strong className="text-emerald-400 uppercase font-bold tracking-wider">{selectedTopic.name}</strong>
             </span>
 
             <button

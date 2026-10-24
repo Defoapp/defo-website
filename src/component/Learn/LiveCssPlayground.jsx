@@ -35,7 +35,7 @@ const LiveCssPlayground = () => {
   };
 
   return (
-    <div className="w-full my-12 p-6 md:p-8 rounded-3xl bg-gradient-to-b from-slate-900/90 via-black to-[#05070c] border border-white/10 shadow-2xl relative overflow-hidden">
+    <div className="preserve-dark w-full my-12 p-6 md:p-8 rounded-3xl bg-gradient-to-b from-slate-900 via-slate-950 to-[#05070c] border border-white/10 shadow-2xl relative overflow-hidden text-white">
       {/* Ambient background glows */}
       <div
         className="absolute -top-24 -right-24 w-72 h-72 rounded-full pointer-events-none blur-3xl transition-all duration-700"
@@ -54,10 +54,10 @@ const LiveCssPlayground = () => {
               <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
               <span>Interactive CSS FX Visualizer</span>
             </div>
-            <h3 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+            <h3 className="text-2xl md:text-3xl font-extrabold text-white stay-white tracking-tight">
               Modern CSS Glassmorphism & 3D Lab
             </h3>
-            <p className="text-slate-400 text-sm mt-1 max-w-2xl">
+            <p className="text-slate-300 text-sm mt-1 max-w-2xl leading-relaxed">
               Drag the interactive sliders below to observe how GPU-accelerated backdrop blur, specular lighting, and box-shadow physics compose in real-time.
             </p>
           </div>
@@ -94,32 +94,49 @@ const LiveCssPlayground = () => {
                 1. Select Neon Glow Aura:
               </label>
               <div className="flex flex-wrap gap-2">
-                {PALETTES.map((p) => (
-                  <button
-                    key={p.name}
-                    onClick={() => setSelectedPalette(p)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-2 border ${
-                      selectedPalette.name === p.name
-                        ? "bg-white/20 border-white text-white shadow-md"
-                        : "bg-white/5 border-white/10 text-slate-400 hover:text-white hover:bg-white/10"
-                    }`}
-                  >
-                    <span
-                      className="w-2.5 h-2.5 rounded-full"
-                      style={{ backgroundColor: p.hex, boxShadow: `0 0 8px ${p.hex}` }}
-                    />
-                    <span>{p.name}</span>
-                  </button>
-                ))}
+                {PALETTES.map((p) => {
+                  const isSel = selectedPalette.name === p.name;
+                  return (
+                    <button
+                      key={p.name}
+                      onClick={() => setSelectedPalette(p)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 border cursor-pointer ${
+                        isSel
+                          ? "scale-105 shadow-xl font-bold"
+                          : "bg-slate-900/90 border-white/10 text-slate-300 hover:text-white hover:bg-slate-800"
+                      }`}
+                      style={
+                        isSel
+                          ? {
+                              backgroundColor: "#1e293b",
+                              borderColor: p.hex,
+                              boxShadow: `0 0 12px ${p.hex}66`,
+                              color: "#ffffff",
+                            }
+                          : {
+                              color: "#cbd5e1",
+                            }
+                      }
+                    >
+                      <span
+                        className="w-2.5 h-2.5 rounded-full"
+                        style={{ backgroundColor: p.hex, boxShadow: `0 0 8px ${p.hex}` }}
+                      />
+                      <span style={{ color: isSel ? "#ffffff" : "#cbd5e1", fontWeight: isSel ? 700 : 500 }}>
+                        {p.name}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
             {/* Sliders */}
-            <div className="space-y-4 bg-white/[0.02] p-5 rounded-2xl border border-white/5">
+            <div className="space-y-4 bg-slate-950/80 backdrop-blur-md p-5 rounded-2xl border border-white/10 shadow-inner">
               {/* Blur */}
               <div>
-                <div className="flex justify-between text-xs text-slate-300 mb-1 font-mono">
-                  <span>Backdrop Blur:</span>
+                <div className="flex justify-between text-xs text-slate-200 mb-1.5 font-mono">
+                  <span className="text-slate-200 font-medium">Backdrop Blur:</span>
                   <span className="text-cyan-400 font-bold">{blur}px</span>
                 </div>
                 <input
@@ -128,14 +145,14 @@ const LiveCssPlayground = () => {
                   max="35"
                   value={blur}
                   onChange={(e) => setBlur(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                  className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
                 />
               </div>
 
               {/* Radius */}
               <div>
-                <div className="flex justify-between text-xs text-slate-300 mb-1 font-mono">
-                  <span>Border Radius:</span>
+                <div className="flex justify-between text-xs text-slate-200 mb-1.5 font-mono">
+                  <span className="text-slate-200 font-medium">Border Radius:</span>
                   <span className="text-cyan-400 font-bold">{radius}px</span>
                 </div>
                 <input
@@ -144,14 +161,14 @@ const LiveCssPlayground = () => {
                   max="40"
                   value={radius}
                   onChange={(e) => setRadius(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                  className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
                 />
               </div>
 
               {/* Background Opacity */}
               <div>
-                <div className="flex justify-between text-xs text-slate-300 mb-1 font-mono">
-                  <span>Card Alpha Opacity:</span>
+                <div className="flex justify-between text-xs text-slate-200 mb-1.5 font-mono">
+                  <span className="text-slate-200 font-medium">Card Alpha Opacity:</span>
                   <span className="text-cyan-400 font-bold">{(opacity * 100).toFixed(0)}%</span>
                 </div>
                 <input
@@ -161,14 +178,14 @@ const LiveCssPlayground = () => {
                   step="0.01"
                   value={opacity}
                   onChange={(e) => setOpacity(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                  className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
                 />
               </div>
 
               {/* Glow Intensity */}
               <div>
-                <div className="flex justify-between text-xs text-slate-300 mb-1 font-mono">
-                  <span>Shadow Spread & Depth:</span>
+                <div className="flex justify-between text-xs text-slate-200 mb-1.5 font-mono">
+                  <span className="text-slate-200 font-medium">Shadow Spread & Depth:</span>
                   <span className="text-cyan-400 font-bold">{glowSize}px</span>
                 </div>
                 <input
@@ -177,13 +194,13 @@ const LiveCssPlayground = () => {
                   max="60"
                   value={glowSize}
                   onChange={(e) => setGlowSize(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                  className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
                 />
               </div>
 
               {/* 3D Tilt toggle */}
-              <div className="flex items-center justify-between pt-2 border-t border-white/5">
-                <span className="text-xs text-slate-300">Enable 3D Perspective Hover Tilt</span>
+              <div className="flex items-center justify-between pt-2 border-t border-white/10">
+                <span className="text-xs text-slate-200 font-medium">Enable 3D Perspective Hover Tilt</span>
                 <button
                   type="button"
                   onClick={() => setTilt(!tilt)}
@@ -201,17 +218,17 @@ const LiveCssPlayground = () => {
             </div>
 
             {/* Generated CSS snippet */}
-            <div className="bg-black/60 rounded-xl p-4 border border-white/10 font-mono text-[11px] text-slate-300 overflow-x-auto">
-              <div className="flex items-center justify-between text-slate-500 text-[10px] uppercase font-bold mb-2">
+            <div className="bg-black/80 rounded-xl p-4 border border-white/10 font-mono text-[11px] text-slate-300 overflow-x-auto">
+              <div className="flex items-center justify-between text-slate-400 text-[10px] uppercase font-bold mb-2">
                 <span>Output CSS Ruleset</span>
                 <span className="text-emerald-400">Live Generated</span>
               </div>
-              <pre className="text-cyan-300/90 whitespace-pre-wrap leading-relaxed">{generatedCss}</pre>
+              <pre className="text-cyan-300 whitespace-pre-wrap leading-relaxed">{generatedCss}</pre>
             </div>
           </div>
 
           {/* Interactive Live Canvas preview */}
-          <div className="lg:col-span-6 flex items-center justify-center p-6 sm:p-12 relative min-h-[380px] bg-radial from-slate-900/60 to-black/90 rounded-2xl border border-white/5 overflow-hidden">
+          <div className="lg:col-span-6 flex items-center justify-center p-6 sm:p-12 relative min-h-[380px] bg-radial from-slate-900/60 to-black/90 rounded-2xl border border-white/10 overflow-hidden">
             {/* Background pattern beneath the glass card */}
             <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]" />
 
@@ -251,17 +268,17 @@ const LiveCssPlayground = () => {
                 </div>
               </div>
 
-              <h4 className="text-xl font-bold mb-2 tracking-tight">
+              <h4 className="text-xl font-bold mb-2 tracking-tight text-white stay-white">
                 CSS3 Modern Glassmorphic Engine
               </h4>
-              <p className="text-xs text-slate-300 leading-relaxed mb-4">
+              <p className="text-xs text-slate-200 leading-relaxed mb-4">
                 Notice how the vibrant colors behind this card smoothly blur while the specular border reflects the selected glowing hue.
               </p>
 
-              <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
-                <span className="font-mono">blur({blur}px)</span>
-                <span className="font-mono">radius({radius}px)</span>
-                <span className="text-white font-medium">60 FPS Hardware</span>
+              <div className="pt-3 border-t border-white/15 flex items-center justify-between text-xs text-slate-300">
+                <span className="font-mono text-slate-300">blur({blur}px)</span>
+                <span className="font-mono text-slate-300">radius({radius}px)</span>
+                <span className="text-white stay-white font-medium">60 FPS Hardware</span>
               </div>
             </div>
           </div>

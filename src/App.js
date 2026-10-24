@@ -37,7 +37,6 @@ function App() {
           <Route path="/topics" element={<Topics/>}/>
           <Route path="/learn" element={<Learn/>}/>
           <Route path="/Learn" element={<Learn/>}/>
-          {/* <Route path="" element={}/> */}
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

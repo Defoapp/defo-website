@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import Navbar from "../component/Navbar/Navbar";
 import Footer from "../component/footer/Footer";
 import tick from "../image/report_content/verified.mp4";
+import { useTheme } from "../context/ThemeContext";
 
 const ReportContent = () => {
+  const { isDark } = useTheme();
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -81,8 +84,18 @@ const ReportContent = () => {
     }
   };
 
+  const inputClass = `border-2 rounded-lg w-full py-2 px-3 focus:outline-none transition-colors ${
+    isDark
+      ? "bg-slate-900 border-white/20 text-white placeholder-slate-400 focus:border-cyan-400"
+      : "bg-white border-gray-400 text-slate-900 placeholder-slate-400 focus:border-blue-600"
+  }`;
+
+  const labelClass = `text-lg font-medium block mb-1 ${
+    isDark ? "text-slate-200" : "text-slate-800"
+  }`;
+
   return (
-    <div className="w-full h-full min-h-screen flex flex-col justify-between">
+    <div className={`w-full h-full min-h-screen flex flex-col justify-between transition-colors duration-300 ${isDark ? "bg-[#06080e] text-white" : "bg-white text-slate-900"}`}>
       <div>
         <Navbar />
         <div className="w-11/12 md:w-4/6 lg:w-3/6 my-8 md:my-12 mx-auto px-2">
@@ -91,17 +104,17 @@ const ReportContent = () => {
             {currentStep === 1 && (
               <section className="space-y-4">
                 <div className="text-center mb-6">
-                  <h1 className="font-bold text-3xl md:text-4xl font-bubblegum mx-auto my-3">
+                  <h1 className={`font-bold text-3xl md:text-4xl font-bubblegum mx-auto my-3 ${isDark ? "text-white" : "text-slate-900"}`}>
                     How to make a legal claim relating to content on Defo
                   </h1>
-                  <p className="text-base md:text-xl font-medium text-gray-700 mx-auto">
+                  <p className={`text-base md:text-xl font-medium mx-auto ${isDark ? "text-slate-300" : "text-gray-700"}`}>
                     To notify Defo of an infringement or other legal claim relating to content on the Defo app, please complete the form below.
                   </p>
                 </div>
                 <div className="w-full flex flex-col gap-y-3">
                   <div>
-                    <label htmlFor="firstName" className="text-lg font-medium block mb-1">
-                      First Name<span className="text-red-600 ml-1">*</span>
+                    <label htmlFor="firstName" className={labelClass}>
+                      First Name<span className="text-red-500 ml-1">*</span>
                     </label>
                     <input
                       type="text"
@@ -109,16 +122,16 @@ const ReportContent = () => {
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleInputChange}
-                      className="border-2 border-gray-400 rounded-lg w-full py-2 px-3 focus:outline-none focus:border-black"
+                      className={inputClass}
                     />
                     {errors.firstName && (
-                      <p className="text-red-600 text-sm mt-1">{errors.firstName}</p>
+                      <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
                     )}
                   </div>
 
                   <div>
-                    <label htmlFor="lastName" className="text-lg font-medium block mb-1">
-                      Last Name<span className="text-red-600 ml-1">*</span>
+                    <label htmlFor="lastName" className={labelClass}>
+                      Last Name<span className="text-red-500 ml-1">*</span>
                     </label>
                     <input
                       type="text"
@@ -126,15 +139,15 @@ const ReportContent = () => {
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleInputChange}
-                      className="border-2 border-gray-400 rounded-lg w-full py-2 px-3 focus:outline-none focus:border-black"
+                      className={inputClass}
                     />
                     {errors.lastName && (
-                      <p className="text-red-600 text-sm mt-1">{errors.lastName}</p>
+                      <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
                     )}
                   </div>
 
                   <div>
-                    <label htmlFor="companyName" className="text-lg font-medium block mb-1">
+                    <label htmlFor="companyName" className={labelClass}>
                       Company Name
                     </label>
                     <input
@@ -143,12 +156,12 @@ const ReportContent = () => {
                       name="companyName"
                       value={formData.companyName}
                       onChange={handleInputChange}
-                      className="border-2 border-gray-400 rounded-lg w-full py-2 px-3 focus:outline-none focus:border-black"
+                      className={inputClass}
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="phoneNumber" className="text-lg font-medium block mb-1">
+                    <label htmlFor="phoneNumber" className={labelClass}>
                       Phone Number
                     </label>
                     <input
@@ -157,13 +170,13 @@ const ReportContent = () => {
                       name="phoneNumber"
                       value={formData.phoneNumber}
                       onChange={handleInputChange}
-                      className="border-2 border-gray-400 rounded-lg w-full py-2 px-3 focus:outline-none focus:border-black"
+                      className={inputClass}
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="text-lg font-medium block mb-1">
-                      Email<span className="text-red-600 ml-1">*</span>
+                    <label htmlFor="email" className={labelClass}>
+                      Email<span className="text-red-500 ml-1">*</span>
                     </label>
                     <input
                       type="email"
@@ -171,15 +184,15 @@ const ReportContent = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="border-2 border-gray-400 rounded-lg w-full py-2 px-3 focus:outline-none focus:border-black"
+                      className={inputClass}
                     />
                     {errors.email && (
-                      <p className="text-red-600 text-sm mt-1">{errors.email}</p>
+                      <p className="text-red-500 text-sm mt-1">{errors.email}</p>
                     )}
                   </div>
 
                   <div>
-                    <label htmlFor="furtherDetails" className="text-lg font-medium block mb-1">
+                    <label htmlFor="furtherDetails" className={labelClass}>
                       Any further details
                     </label>
                     <textarea
@@ -188,7 +201,7 @@ const ReportContent = () => {
                       value={formData.furtherDetails}
                       onChange={handleInputChange}
                       rows={3}
-                      className="border-2 border-gray-400 rounded-lg w-full p-3 focus:outline-none focus:border-black"
+                      className={inputClass}
                     />
                   </div>
                 </div>
@@ -199,61 +212,61 @@ const ReportContent = () => {
             {currentStep === 2 && (
               <section className="space-y-4">
                 <div className="text-center mb-6">
-                  <h1 className="font-bold text-3xl md:text-4xl font-bubblegum mx-auto my-3">
+                  <h1 className={`font-bold text-3xl md:text-4xl font-bubblegum mx-auto my-3 ${isDark ? "text-white" : "text-slate-900"}`}>
                     Claim Details
                   </h1>
-                  <p className="text-base md:text-lg font-medium text-gray-700">
+                  <p className={`text-base md:text-lg font-medium ${isDark ? "text-slate-300" : "text-gray-700"}`}>
                     Provide details about the content you wish to report.
                   </p>
                 </div>
                 <div className="w-full flex flex-col gap-y-3">
                   <div>
-                    <label htmlFor="option1" className="text-lg font-medium block mb-1">
-                      Claim type<span className="text-red-600 ml-1">*</span>
+                    <label htmlFor="option1" className={labelClass}>
+                      Claim type<span className="text-red-500 ml-1">*</span>
                     </label>
                     <select
                       id="option1"
                       name="option1"
                       value={formData.option1}
                       onChange={handleInputChange}
-                      className="border-2 border-gray-400 rounded-lg font-medium w-full py-2 px-3 focus:outline-none focus:border-black bg-white"
+                      className={inputClass}
                     >
-                      <option value="">Select claim type</option>
-                      <option value="Copyright">Copyright</option>
-                      <option value="Trademark">Trademark</option>
-                      <option value="Personal image/identity">Personal image/identity</option>
-                      <option value="Other legal claim">Other legal claim</option>
+                      <option value="" className={isDark ? "bg-slate-900 text-white" : "bg-white text-slate-900"}>Select claim type</option>
+                      <option value="Copyright" className={isDark ? "bg-slate-900 text-white" : "bg-white text-slate-900"}>Copyright</option>
+                      <option value="Trademark" className={isDark ? "bg-slate-900 text-white" : "bg-white text-slate-900"}>Trademark</option>
+                      <option value="Personal image/identity" className={isDark ? "bg-slate-900 text-white" : "bg-white text-slate-900"}>Personal image/identity</option>
+                      <option value="Other legal claim" className={isDark ? "bg-slate-900 text-white" : "bg-white text-slate-900"}>Other legal claim</option>
                     </select>
                     {errors.option1 && (
-                      <p className="text-red-600 text-sm mt-1">{errors.option1}</p>
+                      <p className="text-red-500 text-sm mt-1">{errors.option1}</p>
                     )}
                   </div>
 
                   <div>
-                    <label htmlFor="option2" className="text-lg font-medium block mb-1">
-                      Content type<span className="text-red-600 ml-1">*</span>
+                    <label htmlFor="option2" className={labelClass}>
+                      Content type<span className="text-red-500 ml-1">*</span>
                     </label>
                     <select
                       id="option2"
                       name="option2"
                       value={formData.option2}
                       onChange={handleInputChange}
-                      className="border-2 border-gray-400 rounded-lg font-medium w-full py-2 px-3 focus:outline-none focus:border-black bg-white"
+                      className={inputClass}
                     >
-                      <option value="">Select content type</option>
-                      <option value="Music/Audio">Music/Audio</option>
-                      <option value="Image">Image</option>
-                      <option value="Video">Video</option>
-                      <option value="Title & description">Title & description</option>
+                      <option value="" className={isDark ? "bg-slate-900 text-white" : "bg-white text-slate-900"}>Select content type</option>
+                      <option value="Music/Audio" className={isDark ? "bg-slate-900 text-white" : "bg-white text-slate-900"}>Music/Audio</option>
+                      <option value="Image" className={isDark ? "bg-slate-900 text-white" : "bg-white text-slate-900"}>Image</option>
+                      <option value="Video" className={isDark ? "bg-slate-900 text-white" : "bg-white text-slate-900"}>Video</option>
+                      <option value="Title & description" className={isDark ? "bg-slate-900 text-white" : "bg-white text-slate-900"}>Title & description</option>
                     </select>
                     {errors.option2 && (
-                      <p className="text-red-600 text-sm mt-1">{errors.option2}</p>
+                      <p className="text-red-500 text-sm mt-1">{errors.option2}</p>
                     )}
                   </div>
 
                   <div>
-                    <label htmlFor="input2" className="text-lg font-medium block mb-1">
-                      URL of the content<span className="text-red-600 ml-1">*</span>
+                    <label htmlFor="input2" className={labelClass}>
+                      URL of the content<span className="text-red-500 ml-1">*</span>
                     </label>
                     <textarea
                       id="input2"
@@ -262,15 +275,15 @@ const ReportContent = () => {
                       onChange={handleInputChange}
                       rows={2}
                       placeholder="https://..."
-                      className="border-2 border-gray-400 rounded-lg w-full p-3 focus:outline-none focus:border-black"
+                      className={inputClass}
                     />
                     {errors.input2 && (
-                      <p className="text-red-600 text-sm mt-1">{errors.input2}</p>
+                      <p className="text-red-500 text-sm mt-1">{errors.input2}</p>
                     )}
                   </div>
 
                   <div>
-                    <label htmlFor="contentReason" className="text-lg font-medium block mb-1">
+                    <label htmlFor="contentReason" className={labelClass}>
                       Why are you reporting this content?
                     </label>
                     <textarea
@@ -279,13 +292,13 @@ const ReportContent = () => {
                       value={formData.contentReason}
                       onChange={handleInputChange}
                       rows={2}
-                      className="border-2 border-gray-400 rounded-lg w-full p-3 focus:outline-none focus:border-black"
+                      className={inputClass}
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="furtherDetails2" className="text-lg font-medium block mb-1">
-                      Any further details<span className="text-red-600 ml-1">*</span>
+                    <label htmlFor="furtherDetails2" className={labelClass}>
+                      Any further details<span className="text-red-500 ml-1">*</span>
                     </label>
                     <textarea
                       id="furtherDetails2"
@@ -293,10 +306,10 @@ const ReportContent = () => {
                       value={formData.furtherDetails2}
                       onChange={handleInputChange}
                       rows={3}
-                      className="border-2 border-gray-400 rounded-lg w-full p-3 focus:outline-none focus:border-black"
+                      className={inputClass}
                     />
                     {errors.furtherDetails2 && (
-                      <p className="text-red-600 text-sm mt-1">{errors.furtherDetails2}</p>
+                      <p className="text-red-500 text-sm mt-1">{errors.furtherDetails2}</p>
                     )}
                   </div>
                 </div>
@@ -312,7 +325,7 @@ const ReportContent = () => {
                     Submitted Successfully
                   </h2>
                 </div>
-                <p className="text-gray-600 text-base md:text-lg">
+                <p className={`text-base md:text-lg ${isDark ? "text-slate-300" : "text-gray-600"}`}>
                   Thank you for bringing this to our attention. Our team will review your report shortly.
                 </p>
               </section>
@@ -324,7 +337,11 @@ const ReportContent = () => {
                 <button
                   type="button"
                   onClick={handlePrevStep}
-                  className="border-2 border-black text-lg font-medium px-6 py-2 rounded-xl hover:bg-gray-100 transition-colors"
+                  className={`border-2 text-lg font-medium px-6 py-2 rounded-xl transition-colors ${
+                    isDark
+                      ? "border-white/30 text-white hover:bg-white/10"
+                      : "border-slate-800 text-slate-800 hover:bg-gray-100"
+                  }`}
                 >
                   Back
                 </button>
@@ -334,7 +351,7 @@ const ReportContent = () => {
                 <button
                   type="button"
                   onClick={handleNextStep}
-                  className="bg-blue-950 hover:bg-blue-900 text-lg font-medium text-white px-8 py-2 rounded-xl ml-auto transition-colors"
+                  className="bg-blue-600 hover:bg-blue-700 text-lg font-medium text-white px-8 py-2 rounded-xl ml-auto transition-colors shadow-md"
                 >
                   Next
                 </button>
@@ -343,7 +360,7 @@ const ReportContent = () => {
               {currentStep === 2 && (
                 <button
                   type="submit"
-                  className="bg-green-600 hover:bg-green-700 text-lg font-medium text-white px-8 py-2 rounded-xl ml-auto transition-colors"
+                  className="bg-green-600 hover:bg-green-700 text-lg font-medium text-white px-8 py-2 rounded-xl ml-auto transition-colors shadow-md"
                 >
                   Submit
                 </button>

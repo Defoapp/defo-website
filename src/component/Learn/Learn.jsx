@@ -80,7 +80,7 @@ const Learn = () => {
 
   return (
     <div
-      className={`min-h-screen flex flex-col justify-between transition-colors duration-300 ${
+      className={`min-h-screen font-inter flex flex-col justify-between transition-colors duration-300 ${
         isDark ? "bg-[#06080e] text-white" : "bg-[#f5f5f7] text-slate-900"
       }`}
     >
@@ -165,13 +165,16 @@ const Learn = () => {
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer ${
+                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
                   selectedCategory === cat.id
-                    ? "bg-gradient-to-r from-emerald-400 to-cyan-400 text-black font-semibold shadow-md shadow-emerald-500/30 scale-105"
+                    ? "bg-gradient-to-r from-emerald-400 to-cyan-400 text-slate-950 font-bold shadow-md shadow-emerald-500/30 scale-105 border border-cyan-300/60"
                     : isDark
                     ? "bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white border border-white/5"
                     : "bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-900 border border-slate-200 shadow-sm"
                 }`}
+                style={{
+                  color: selectedCategory === cat.id ? "#020617" : undefined,
+                }}
               >
                 {cat.label}
               </button>

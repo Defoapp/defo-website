@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -422,9 +424,23 @@ html.light .bg-neutral-950:not(footer) * {
 .price-section-banner p,
 html.light .price-section-banner h2,
 html.light .price-section-banner p,
-html.light [class*="to-defoBlue"] h2,
-html.light [class*="to-defoBlue"] p {
+html.light [class*="to-defoBlue"] > h1,
+html.light [class*="to-defoBlue"] > h2,
+html.light [class*="to-defoBlue"] > p,
+html.light [class*="to-defoBlue"] > div > h1,
+html.light [class*="to-defoBlue"] > div > h2,
+html.light [class*="to-defoBlue"] > div > p {
   color: #ffffff !important;
+}
+
+/* Explicitly protect card text inside gradient containers from being forced to white */
+html.light [class*="to-defoBlue"] .bg-white p,
+html.light [class*="to-defoBlue"] .bg-white details p {
+  color: #475569 !important;
+}
+html.light [class*="to-defoBlue"] .bg-white span,
+html.light [class*="to-defoBlue"] .bg-white summary span {
+  color: #0f172a !important;
 }
 
 html.light p.text-slate-300,
@@ -466,22 +482,28 @@ html.light .to-\[\#07090e\] {
 }
 
 /* Search input in Light Mode */
-html.light input[type="text"] {
+html.light input[type="text"],
+html.light input[type="email"],
+html.light input[type="search"] {
   background-color: #ffffff !important;
   color: #0f172a !important;
   border-color: #cbd5e1 !important;
 }
 
-html.light input[type="text"]::placeholder {
+html.light input[type="text"]::placeholder,
+html.light input[type="email"]::placeholder,
+html.light input[type="search"]::placeholder {
   color: #94a3b8 !important;
 }
 
-/* Preserve dark terminal code background in Light Mode for optimal syntax contrast */
+/* Preserve dark terminal code background in Light Mode for code runner/sandbox only */
 html.light .bg-\[\#050811\],
 html.light .bg-black\/80,
 html.light .bg-black\/90,
 html.light pre,
-html.light textarea {
+html.light .preserve-dark textarea,
+html.light .code-runner textarea,
+html.light .code-sandbox textarea {
   background-color: #050811 !important;
   color: #38bdf8 !important;
 }
@@ -552,4 +574,62 @@ html.light footer p {
 .cinema-modal-dark p,
 .cinema-modal-dark li {
   color: #cbd5e1 !important;
+}
+
+/* Preserve Dark Terminal & Code Lab Environments in Light Mode */
+.preserve-dark,
+html.light .preserve-dark {
+  color-scheme: dark;
+  color: #ffffff !important;
+}
+
+html.light .preserve-dark h1,
+html.light .preserve-dark h2,
+html.light .preserve-dark h3,
+html.light .preserve-dark h4,
+html.light .preserve-dark h5,
+html.light .preserve-dark h6,
+html.light .preserve-dark strong {
+  color: #ffffff !important;
+}
+
+html.light .preserve-dark p,
+html.light .preserve-dark p.text-slate-400,
+html.light .preserve-dark p.text-slate-300 {
+  color: #cbd5e1 !important;
+}
+
+html.light .preserve-dark span.text-slate-300,
+html.light .preserve-dark span.text-slate-400,
+html.light .preserve-dark span.text-slate-200,
+html.light .preserve-dark label,
+html.light .preserve-dark .text-slate-300,
+html.light .preserve-dark .text-slate-400 {
+  color: #cbd5e1 !important;
+}
+
+html.light .preserve-dark .bg-white\/\[0\.02\],
+html.light .preserve-dark .bg-white\/\[0\.03\],
+html.light .preserve-dark .bg-white\/\[0\.04\],
+html.light .preserve-dark .bg-white\/5,
+html.light .preserve-dark .bg-white\/10,
+html.light .preserve-dark .bg-white\/15,
+html.light .preserve-dark .bg-white\/20 {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+html.light .preserve-dark .border-white\/5,
+html.light .preserve-dark .border-white\/10,
+html.light .preserve-dark .border-white\/15,
+html.light .preserve-dark .border-white\/20,
+html.light .preserve-dark .border-white\/30 {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+html.light .preserve-dark button.text-white,
+html.light .preserve-dark button.stay-white {
+  color: #ffffff !important;
 }

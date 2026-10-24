@@ -51,7 +51,7 @@ const BACKFACE_INFO = {
     accent: "#00f298",
   },
   painting: {
-    backImage: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=450&q=75",
+    backImage: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=450&q=75",
     badge: "Canvas Studio",
     stat: "Watercolor • 4.9★",
     accent: "#f43f5e",

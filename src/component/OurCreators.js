@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Navbar from "../component/Navbar/Navbar";
 import Footer from "../component/footer/Footer";
 import { sampleData } from "../constants/map";
+import { useTheme } from "../context/ThemeContext";
 
 const OurCreators = () => {
+  const { isDark } = useTheme();
   const [showItems, setShowItems] = useState(6);
 
   const handleShowMore = () => {
@@ -15,11 +17,11 @@ const OurCreators = () => {
   };
 
   return (
-    <div className="w-full h-full min-h-screen flex flex-col justify-between">
+    <div className={`w-full h-full min-h-screen flex flex-col justify-between transition-colors duration-300 ${isDark ? "bg-[#06080e] text-white" : "bg-white text-slate-900"}`}>
       <div>
         <Navbar />
         <div className="w-full h-full pb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-center my-8 md:my-10 px-4">
+          <h1 className={`text-3xl md:text-4xl font-bold text-center my-8 md:my-10 px-4 ${isDark ? "text-white" : "text-slate-900"}`}>
             Our Creators
           </h1>
 

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Navbar from "../component/Navbar/Navbar";
 import Footer from "../component/footer/Footer";
-
 import { faqmap } from "../constants/map";
-
 import searchimg from "../image/majesticons_search-line.svg";
 import noData from "../image/faq/3009287 1.svg";
+import { useTheme } from "../context/ThemeContext";
 
 const Faq = () => {
+  const { isDark } = useTheme();
   const [search, setSearch] = useState("");
 
   const filteredFaqs = faqmap.filter((item) =>
@@ -17,41 +17,41 @@ const Faq = () => {
   );
 
   return (
-    <div className="w-full h-full">
+    <div className={`w-full h-full min-h-screen transition-colors duration-300 ${isDark ? "bg-[#06080e] text-white" : "bg-white text-slate-900"}`}>
       <Navbar />
       <div className="w-full h-full pb-10">
         {/* Page Heading */}
-        <h1 className="text-3xl md:text-4xl font-bold text-center my-8 md:my-10 px-4">
+        <h1 className={`text-3xl md:text-4xl font-bold text-center my-8 md:my-10 px-4 ${isDark ? "text-white" : "text-slate-900"}`}>
           Frequently Asked Questions
         </h1>
 
         {/* Search bar */}
-        <div className="bg-gray-300 w-11/12 sm:w-4/5 lg:w-3/6 flex flex-col sm:flex-row items-center justify-between mx-auto p-4 rounded-xl gap-4">
-          <h2 className="text-xl md:text-2xl font-bold">FAQ</h2>
+        <div className={`w-11/12 sm:w-4/5 lg:w-3/6 flex flex-col sm:flex-row items-center justify-between mx-auto p-4 rounded-xl gap-4 transition-colors ${isDark ? "bg-slate-900/80 border border-white/10 text-white" : "bg-slate-100 border border-slate-200 text-slate-800 shadow-sm"}`}>
+          <h2 className={`text-xl md:text-2xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>FAQ</h2>
           <div className="relative w-full sm:w-4/5">
             <input
               type="search"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search..."
-              className="w-full px-5 py-3 rounded-full border-0 focus:ring-2 focus:ring-blue-500 outline-none text-base pr-12"
+              className={`w-full px-5 py-3 rounded-full border focus:ring-2 focus:ring-blue-500 outline-none text-base pr-12 transition-colors ${isDark ? "bg-slate-950 text-white placeholder-slate-400 border-white/20" : "bg-white text-slate-900 placeholder-slate-400 border-slate-300"}`}
             />
-            <button className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-gray-400 hover:bg-gray-500 transition-colors">
-              <img className="w-4 h-4" src={searchimg} alt="Search icon" />
+            <button aria-label="Search FAQ" className={`absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full transition-colors ${isDark ? "bg-slate-800 hover:bg-slate-700 text-white" : "bg-gray-200 hover:bg-gray-300 text-slate-700"}`}>
+              <img className={`w-4 h-4 ${isDark ? "invert brightness-200" : ""}`} src={searchimg} alt="Search icon" />
             </button>
           </div>
         </div>
 
         {/* Questions */}
-        <div className="w-11/12 md:w-4/6 mx-auto my-10 py-6 md:py-10 px-4 rounded-2xl bg-gradient-to-r from-defoGreen from-[-58.97%] to-defoBlue to-50%">
+        <div className="w-11/12 md:w-4/6 mx-auto my-10 py-6 md:py-10 px-4 md:px-8 rounded-2xl bg-gradient-to-r from-defoGreen from-[-58.97%] to-defoBlue to-50% shadow-xl">
           {filteredFaqs.map((item) => (
             <div
               key={item.id}
-              className="w-full mx-auto py-4 my-3 rounded-xl bg-white shadow-sm"
+              className={`w-full mx-auto py-4 my-3 rounded-xl transition-all ${isDark ? "bg-[#0b1120]/95 backdrop-blur-md border border-white/10 text-white shadow-lg" : "bg-white text-slate-900 shadow-md"}`}
             >
               <details className="group px-4">
                 <summary className="flex justify-between items-center font-medium cursor-pointer list-none text-base md:text-lg">
-                  <span className="pr-4">{item.title}</span>
+                  <span className={`pr-4 font-semibold ${isDark ? "text-white" : "text-slate-900"}`}>{item.title}</span>
                   <span className="bg-blue-950 text-white p-1 rounded-full transition-transform group-open:rotate-180 flex-shrink-0">
                     <svg
                       fill="none"
@@ -67,7 +67,7 @@ const Faq = () => {
                     </svg>
                   </span>
                 </summary>
-                <p className="text-gray-600 mt-3 text-left text-sm md:text-base leading-relaxed">
+                <p className={`mt-3 text-left text-sm md:text-base leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"}`}>
                   {item.answer}
                 </p>
               </details>
