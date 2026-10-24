@@ -1,13 +1,13 @@
 import React from "react";
 import Navbar from "./Navbar/Navbar";
 import Footer from "../component/footer/Footer";
-import carrerimg1 from "../image/careers/OBJECTS.svg";
 import carrerimg2 from "../image/careers/image 3.svg";
 import { Vacancies } from "../constants/map";
 import arrow from "../image/careers/formkit_arrowdown.svg";
 import location from "../image/careers/location.svg";
 import time from "../image/careers/carbon_time.svg";
 import { useTheme } from "../context/ThemeContext";
+import HangingHiringBanner from "./Careers/HangingHiringBanner";
 
 const Careers = () => {
   const { isDark } = useTheme();
@@ -46,8 +46,8 @@ const Careers = () => {
             </button>
           </div>
 
-          <div className="w-full md:w-1/2 flex justify-center">
-            <img className="w-4/5 sm:w-3/5 md:w-4/5 max-w-md mx-auto" src={carrerimg1} alt="Careers illustration" />
+          <div className="w-full md:w-1/2 flex justify-center items-center">
+            <HangingHiringBanner onExploreClick={scrollToContainer} />
           </div>
         </div>
         <div id="container"></div>
