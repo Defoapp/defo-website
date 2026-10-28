@@ -21,6 +21,7 @@ function SquircleCard({
       {/* SQUIRCLE BODY (AUTHENTIC CONTINUOUS APPLE CURVATURE)                */}
       {/* =================================================================== */}
       <div
+        style={{ transform: 'translateZ(0)' }}
         className={`w-full h-full transition-transform duration-300 ease-out cursor-pointer ${
           isDimmed ? 'opacity-25 grayscale-[60%] scale-95' : 'opacity-100'
         } ${isHighlighted ? 'scale-110' : ''}`}

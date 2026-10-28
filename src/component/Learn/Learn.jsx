@@ -5,6 +5,9 @@ import { LEARN_ARTICLES, ROADMAP_TRACKS } from "./learnData";
 import LearnArticleModal from "./LearnArticleModal";
 import LiveCssPlayground from "./LiveCssPlayground";
 import CodeRunnerSandbox from "./CodeRunnerSandbox";
+import FlexboxGridArchitect from "./FlexboxGridArchitect";
+import CubicBezierMotionStudio from "./CubicBezierMotionStudio";
+import ColorHarmonyValidator from "./ColorHarmonyValidator";
 import { useTheme } from "../../context/ThemeContext";
 
 const Learn = () => {
@@ -94,32 +97,62 @@ const Learn = () => {
         {/* Search bar, Category Tabs & Navigation Jump Controls */}
         <div className="w-full max-w-3xl mx-auto mb-12">
           {/* Quick jump navigation pills */}
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
+          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-6">
             <button
               onClick={() => scrollToSection("articles-grid")}
-              className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 text-black font-semibold text-xs sm:text-sm hover:scale-105 active:scale-95 transition-all shadow-md shadow-emerald-500/20 cursor-pointer"
+              className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 text-black font-semibold text-xs sm:text-sm hover:scale-105 active:scale-95 transition-all shadow-md shadow-emerald-500/20 cursor-pointer"
             >
-              📚 Curriculum Modules
+              📚 Curriculum
+            </button>
+            <button
+              onClick={() => scrollToSection("flex-grid-architect")}
+              className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl border font-medium text-xs sm:text-sm transition-all cursor-pointer ${
+                isDark
+                  ? "bg-white/5 hover:bg-white/10 border-white/15 text-white"
+                  : "bg-white hover:bg-slate-100 border-slate-300 text-slate-800 shadow-sm"
+              }`}
+            >
+              📐 Flexbox & Grid
+            </button>
+            <button
+              onClick={() => scrollToSection("motion-studio")}
+              className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl border font-medium text-xs sm:text-sm transition-all cursor-pointer ${
+                isDark
+                  ? "bg-white/5 hover:bg-white/10 border-white/15 text-white"
+                  : "bg-white hover:bg-slate-100 border-slate-300 text-slate-800 shadow-sm"
+              }`}
+            >
+              🚀 Motion Studio
+            </button>
+            <button
+              onClick={() => scrollToSection("color-harmony")}
+              className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl border font-medium text-xs sm:text-sm transition-all cursor-pointer ${
+                isDark
+                  ? "bg-white/5 hover:bg-white/10 border-white/15 text-white"
+                  : "bg-white hover:bg-slate-100 border-slate-300 text-slate-800 shadow-sm"
+              }`}
+            >
+              🎨 Color Harmony
             </button>
             <button
               onClick={() => scrollToSection("css-playground")}
-              className={`px-4 py-2 rounded-xl border font-medium text-xs sm:text-sm transition-all cursor-pointer ${
+              className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl border font-medium text-xs sm:text-sm transition-all cursor-pointer ${
                 isDark
                   ? "bg-white/5 hover:bg-white/10 border-white/15 text-white"
                   : "bg-white hover:bg-slate-100 border-slate-300 text-slate-800 shadow-sm"
               }`}
             >
-              🎨 Live CSS FX Lab
+              ✨ 3D Glass Lab
             </button>
             <button
               onClick={() => scrollToSection("code-sandbox")}
-              className={`px-4 py-2 rounded-xl border font-medium text-xs sm:text-sm transition-all cursor-pointer ${
+              className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl border font-medium text-xs sm:text-sm transition-all cursor-pointer ${
                 isDark
                   ? "bg-white/5 hover:bg-white/10 border-white/15 text-white"
                   : "bg-white hover:bg-slate-100 border-slate-300 text-slate-800 shadow-sm"
               }`}
             >
-              ⚡ Code Execution Sandbox
+              ⚡ Code Runner
             </button>
           </div>
 
@@ -346,12 +379,27 @@ const Learn = () => {
           )}
         </section>
 
-        {/* Interactive Live CSS Playground */}
+        {/* 1. Visual CSS Flexbox & Grid Architect */}
+        <section id="flex-grid-architect" className="scroll-mt-20">
+          <FlexboxGridArchitect />
+        </section>
+
+        {/* 2. Cubic-Bezier & Keyframe Motion Studio */}
+        <section id="motion-studio" className="scroll-mt-20">
+          <CubicBezierMotionStudio />
+        </section>
+
+        {/* 3. Color Harmony & WCAG Contrast Validator */}
+        <section id="color-harmony" className="scroll-mt-20">
+          <ColorHarmonyValidator />
+        </section>
+
+        {/* 4. Interactive Live CSS Playground */}
         <section id="css-playground" className="scroll-mt-20">
           <LiveCssPlayground />
         </section>
 
-        {/* Interactive Code Execution Sandbox */}
+        {/* 5. Interactive Code Execution Sandbox */}
         <section id="code-sandbox" className="scroll-mt-20">
           <CodeRunnerSandbox />
         </section>

@@ -11,8 +11,8 @@ import AmbientDecorations from '../Common/AmbientDecorations';
 export default function AppFunnelSection() {
   const sectionRef = useRef(null);
 
-  // InView trigger with generous threshold
-  const isInView = useInView(sectionRef, { amount: 0.12 });
+  // Trigger early so cards and Defo apex are already entering before scroll finishes
+  const isInView = useInView(sectionRef, { amount: 0, margin: "140px 0px 0px 0px", once: true });
   const [hasTriggered, setHasTriggered] = useState(false);
 
   useEffect(() => {
@@ -21,24 +21,6 @@ export default function AppFunnelSection() {
     }
   }, [isInView]);
 
-  // Reset cascade when user scrolls back to the very top without firing every scroll tick
-  useEffect(() => {
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          if (window.scrollY < 60) {
-            setHasTriggered((prev) => (prev ? false : prev));
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <section
       ref={sectionRef}
@@ -46,16 +28,16 @@ export default function AppFunnelSection() {
       className="relative z-10 w-full overflow-hidden apple-funnel-bg transition-colors duration-500 pb-20 sm:pb-28"
     >
       <style>{`
-        /* Vibrant Multi-Color Light Mesh Background */
+        /* Clean, Luminous Multi-Color Light Mesh Background for Light Mode */
         .apple-funnel-bg {
           background: 
-            radial-gradient(ellipse 70% 60% at 50% 18%, rgba(0, 242, 152, 0.22) 0%, transparent 68%),
-            radial-gradient(ellipse 55% 50% at 8% 32%, rgba(56, 189, 248, 0.26) 0%, transparent 62%),
-            radial-gradient(ellipse 55% 50% at 92% 32%, rgba(192, 132, 252, 0.26) 0%, transparent 62%),
-            radial-gradient(ellipse 60% 50% at 50% 68%, rgba(251, 191, 36, 0.22) 0%, transparent 68%),
-            radial-gradient(ellipse 50% 45% at 88% 78%, rgba(244, 114, 182, 0.22) 0%, transparent 62%),
-            radial-gradient(ellipse 50% 45% at 12% 78%, rgba(52, 211, 153, 0.22) 0%, transparent 62%),
-            linear-gradient(180deg, #0a0d14 0%, #0c141c 5%, #112325 12%, #193836 20%, #ecfbf5 36%, #f0f7fe 55%, #f6f3ff 72%, #fff5f2 88%, #f1f5f9 100%);
+            radial-gradient(ellipse 70% 55% at 50% 15%, rgba(0, 242, 152, 0.16) 0%, transparent 68%),
+            radial-gradient(ellipse 55% 50% at 10% 30%, rgba(56, 189, 248, 0.16) 0%, transparent 62%),
+            radial-gradient(ellipse 55% 50% at 90% 30%, rgba(192, 132, 252, 0.16) 0%, transparent 62%),
+            radial-gradient(ellipse 60% 50% at 50% 65%, rgba(251, 191, 36, 0.14) 0%, transparent 68%),
+            radial-gradient(ellipse 50% 45% at 88% 85%, rgba(244, 114, 182, 0.14) 0%, transparent 62%),
+            radial-gradient(ellipse 50% 45% at 12% 85%, rgba(52, 211, 153, 0.14) 0%, transparent 62%),
+            linear-gradient(180deg, #0a0d14 0%, #111a24 3%, #eefbf4 10%, #f0f7fe 35%, #f6f3ff 65%, #fdf2f8 85%, #edf4fc 100%);
         }
 
         /* Dark Mode: Deep Cosmic Tone with Neon Beams */
@@ -65,6 +47,7 @@ export default function AppFunnelSection() {
             radial-gradient(ellipse 70% 55% at 50% 20%, rgba(0, 242, 152, 0.18) 0%, transparent 70%),
             radial-gradient(ellipse 50% 45% at 15% 35%, rgba(14, 165, 233, 0.18) 0%, transparent 65%),
             radial-gradient(ellipse 50% 45% at 85% 35%, rgba(147, 51, 234, 0.18) 0%, transparent 65%),
+            radial-gradient(ellipse 60% 50% at 50% 75%, rgba(251, 191, 36, 0.15) 0%, transparent 70%),
             #07090e;
         }
 
@@ -126,23 +109,23 @@ export default function AppFunnelSection() {
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Top-Center Emerald Brand Halo */}
         <div 
-          className="absolute -top-10 left-1/2 -translate-x-1/2 w-[550px] sm:w-[900px] h-[450px] sm:h-[600px] rounded-full blur-[110px] sm:blur-[140px] opacity-70 dark:opacity-30"
-          style={{ background: 'radial-gradient(circle, rgba(0,242,152,0.45) 0%, rgba(52,211,153,0.25) 50%, transparent 75%)' }}
+          className="absolute -top-10 left-1/2 -translate-x-1/2 w-[550px] sm:w-[900px] h-[450px] sm:h-[600px] rounded-full blur-[64px] sm:blur-[72px] opacity-70 dark:opacity-30 pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(0,242,152,0.45) 0%, rgba(52,211,153,0.25) 50%, transparent 75%)', transform: 'translateZ(0)' }}
         />
         {/* Left Wing Sky Blue / Cyan Aura */}
         <div 
-          className="absolute top-16 -left-20 sm:left-[2%] w-[450px] sm:w-[650px] h-[450px] sm:h-[600px] rounded-full blur-[100px] sm:blur-[130px] opacity-75 dark:opacity-35"
-          style={{ background: 'radial-gradient(circle, rgba(56,189,248,0.45) 0%, rgba(14,165,233,0.22) 50%, transparent 75%)' }}
+          className="absolute top-16 -left-20 sm:left-[2%] w-[450px] sm:w-[650px] h-[450px] sm:h-[600px] rounded-full blur-[60px] sm:blur-[70px] opacity-75 dark:opacity-35 pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(56,189,248,0.45) 0%, rgba(14,165,233,0.22) 50%, transparent 75%)', transform: 'translateZ(0)' }}
         />
         {/* Right Wing Violet / Magenta Aura */}
         <div 
-          className="absolute top-16 -right-20 sm:right-[2%] w-[450px] sm:w-[650px] h-[450px] sm:h-[600px] rounded-full blur-[100px] sm:blur-[130px] opacity-75 dark:opacity-35"
-          style={{ background: 'radial-gradient(circle, rgba(192,132,252,0.45) 0%, rgba(236,72,153,0.22) 50%, transparent 75%)' }}
+          className="absolute top-16 -right-20 sm:right-[2%] w-[450px] sm:w-[650px] h-[450px] sm:h-[600px] rounded-full blur-[60px] sm:blur-[70px] opacity-75 dark:opacity-35 pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(192,132,252,0.45) 0%, rgba(236,72,153,0.22) 50%, transparent 75%)', transform: 'translateZ(0)' }}
         />
         {/* Bottom Apex Warm Peach / Golden Glow */}
         <div 
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[500px] sm:w-[750px] h-[350px] sm:h-[480px] rounded-full blur-[100px] sm:blur-[130px] opacity-65 dark:opacity-25"
-          style={{ background: 'radial-gradient(circle, rgba(251,191,36,0.38) 0%, rgba(249,115,22,0.22) 50%, transparent 75%)' }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[500px] sm:w-[750px] h-[350px] sm:h-[480px] rounded-full blur-[60px] sm:blur-[70px] opacity-65 dark:opacity-25 pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(251,191,36,0.38) 0%, rgba(249,115,22,0.22) 50%, transparent 75%)', transform: 'translateZ(0)' }}
         />
 
         {/* Delicate Modern Mesh Dots Grid Overlay */}
@@ -158,11 +141,11 @@ export default function AppFunnelSection() {
       {/* Interactive Responsive Colorful Designs & Parallax Elements */}
       <AmbientDecorations variant="funnel" />
 
-      {/* Deep Atmospheric Seamless Blend directly from Hero #0a0d14 */}
+      {/* Deep Atmospheric Seamless Blend directly from Hero #0a0d14 in Dark Mode */}
       <div 
-        className="absolute top-0 inset-x-0 h-44 sm:h-64 pointer-events-none z-25"
+        className="absolute top-0 inset-x-0 h-28 sm:h-40 pointer-events-none z-25 hidden dark:block"
         style={{
-          background: 'linear-gradient(180deg, #0a0d14 0%, rgba(10, 13, 20, 0.95) 18%, rgba(10, 13, 20, 0.68) 42%, rgba(10, 13, 20, 0.28) 68%, rgba(10, 13, 20, 0.05) 88%, transparent 100%)'
+          background: 'linear-gradient(180deg, #0a0d14 0%, rgba(10, 13, 20, 0.75) 50%, transparent 100%)'
         }}
       />
 
@@ -176,22 +159,8 @@ export default function AppFunnelSection() {
         {/* 19-COLUMN V-FUNNEL CHICLETS GRID (APPLE APP STORE REPLICA)        */}
         {/* ================================================================= */}
         {/* Padding-top ensures offset cards stay smoothly within frame */}
-        <div 
-          className="w-full overflow-hidden relative pt-12 sm:pt-16 pb-4"
-          style={{
-            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)',
-            maskImage: 'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)',
-          }}
-        >
-          {/* Vertical soft top feathering mask so cards emerge smoothly from the dark hero */}
-          <div
-            className="w-full"
-            style={{
-              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 5%, black 18%, black 100%)',
-              maskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 5%, black 18%, black 100%)',
-            }}
-          >
-            <div className="apple-chiclets-grid">
+        <div className="w-full overflow-hidden relative pt-10 sm:pt-14 pb-4">
+          <div className="apple-chiclets-grid">
             {APPLE_HERO_56_CHICLETS.map((card) => {
               return (
                 <div
@@ -208,8 +177,8 @@ export default function AppFunnelSection() {
                   <motion.div
                     initial={{
                       opacity: 0,
-                      y: -20,
-                      scale: 0.9,
+                      y: -14,
+                      scale: 0.94,
                     }}
                     animate={
                       hasTriggered
@@ -220,14 +189,18 @@ export default function AppFunnelSection() {
                           }
                         : {
                             opacity: 0,
-                            y: -20,
-                            scale: 0.9,
+                            y: -14,
+                            scale: 0.94,
                           }
                     }
                     transition={{
-                      duration: 0.75,
-                      delay: Math.min(card.delaySec, 0.75),
+                      duration: 0.38,
+                      delay: Math.min(card.delaySec * 0.18, 0.22),
                       ease: [0.16, 1, 0.3, 1], // Apple HIG fluid spring easing
+                    }}
+                    style={{
+                      transform: 'translateZ(0)',
+                      willChange: hasTriggered ? 'auto' : 'transform, opacity',
                     }}
                     className="w-full h-full"
                   >
@@ -236,7 +209,6 @@ export default function AppFunnelSection() {
                 </div>
               );
             })}
-          </div>
           </div>
         </div>
 
@@ -248,39 +220,40 @@ export default function AppFunnelSection() {
           
           {/* Blooming ambient halo behind Defo app icon */}
           <motion.div
-            initial={{ scale: 0.3, opacity: 0 }}
+            initial={{ scale: 0.4, opacity: 0 }}
             animate={
               hasTriggered
                 ? {
-                    scale: [0.3, 1.3, 1],
+                    scale: [0.4, 1.15, 1],
                     opacity: [0, 0.55, 0.28],
                   }
-                : { scale: 0.3, opacity: 0 }
+                : { scale: 0.4, opacity: 0 }
             }
             transition={{
-              duration: 1.2,
-              delay: 1.70,
+              duration: 0.55,
+              delay: 0.08,
               ease: 'easeOut',
             }}
-            className="absolute -top-3 w-44 sm:w-56 h-44 sm:h-56 rounded-full bg-[#00f298] blur-[55px] pointer-events-none opacity-35"
+            className="absolute -top-3 w-44 sm:w-56 h-44 sm:h-56 rounded-full bg-[#00f298] blur-[45px] pointer-events-none opacity-35"
           />
 
           {/* Grand Defo App Squircle Icon matching Apple App Store hero size (10% reduced to 128px) */}
           <motion.div
-            initial={{ scale: 0.35, y: -24, opacity: 0 }}
+            initial={{ scale: 0.7, y: -16, opacity: 0 }}
             animate={
               hasTriggered
                 ? { scale: 1, y: 0, opacity: 1 }
-                : { scale: 0.35, y: -24, opacity: 0 }
+                : { scale: 0.7, y: -16, opacity: 0 }
             }
             transition={{
               type: 'spring',
-              stiffness: 240,
-              damping: 18,
-              delay: 1.70,
+              stiffness: 280,
+              damping: 20,
+              delay: 0.06,
             }}
             whileHover={{ scale: 1.06 }}
             whileTap={{ scale: 0.95 }}
+            style={{ transform: 'translateZ(0)' }}
             className="relative group cursor-pointer"
           >
             <div 
@@ -302,9 +275,9 @@ export default function AppFunnelSection() {
 
           {/* Typography under Defo Icon matching Apple App Store eyebrow and title */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={hasTriggered ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-            transition={{ duration: 0.65, delay: 1.85, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={hasTriggered ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+            transition={{ duration: 0.38, delay: 0.14, ease: [0.16, 1, 0.3, 1] }}
             className="text-center mt-4 px-4"
           >
             <h3
@@ -325,9 +298,9 @@ export default function AppFunnelSection() {
 
           {/* Action Badges & Download Button */}
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={hasTriggered ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-            transition={{ duration: 0.65, delay: 1.95, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={hasTriggered ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+            transition={{ duration: 0.38, delay: 0.20, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center mt-3"
           >
             <div className="flex flex-col xs:flex-row items-center justify-center gap-2.5 sm:gap-3.5">
