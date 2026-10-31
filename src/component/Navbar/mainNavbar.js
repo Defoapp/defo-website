@@ -12,24 +12,23 @@ export const navLinks = [
     title: "Home",
     path: "/",
   },
-  { id: "2", title: "Pricing" },
   {
-    id: "3",
+    id: "2",
     title: "Our Story",
     path: "/OurStory",
   },
   {
-    id: "4",
+    id: "3",
     title: "About",
     path: "/about",
   },
   {
-    id: "5",
+    id: "4",
     title: "Our Team",
     path: "/OurTeams",
   },
   {
-    id: "6",
+    id: "5",
     title: "Careers",
     path: "/careers",
   },
@@ -38,25 +37,12 @@ export const navLinks = [
 const Navbar = () => {
   const { isDark } = useTheme();
 
-  const scrollToContainer = (id) => {
-    const container = document.getElementById(id);
-    if (container) {
-      container.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   const [active, setActive] = useState("Home");
   const [toggle, setToggle] = useState(false);
 
-  const handleLinkClick = (title, path) => {
+  const handleLinkClick = (title) => {
     setActive(title);
-    if (title === "Pricing") {
-      // Scroll to the container with ID "price" for the "Pricing" link
-      scrollToContainer("price");
-    } else {
-      // Scroll to the top for other links
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (

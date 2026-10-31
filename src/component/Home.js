@@ -1,9 +1,4 @@
 import React, { useState, useEffect } from "react";
-
-// AOS
-import AOS from "aos";
-import "aos/dist/aos.css";
-
 import { price as staticPrices } from "../constants/map";
 import Navbar from "../component/Navbar/mainNavbar";
 import HeroSection from "./Hero/HeroSection";
@@ -19,24 +14,12 @@ import playstore from "../image/google-play-badge.svg";
 import appstore from "../image/app-store-badge.svg";
 import GpIcon from "../image/Google_Play-Icon-Logo.wine.svg";
 
-
 // -----------------------Footer-------------
 import Footer from "../component/footer/Footer";
 
 function Home() {
   // Start with static data so price cards always show
   const [prices, setPrices] = useState(staticPrices);
-
-  useEffect(() => {
-    AOS.init({
-      offset: 80,
-      duration: 500,
-      easing: "ease-out",
-      delay: 50,
-      once: true,
-    });
-    AOS.refresh();
-  }, []);
 
   // Try to load live data from MongoDB with fast timeout fallback
   useEffect(() => {
@@ -170,15 +153,11 @@ function Home() {
         <div className="w-full flex justify-center py-16 px-4">
           <div className="mx-auto text-center">
             <h2
-              data-aos="zoom-in"
-              data-aos-delay="400"
-              className="font-bold text-2xl xs:text-3xl sm:text-4xl lg:text-5xl"
+              className="font-bold text-2xl xs:text-3xl sm:text-4xl lg:text-5xl text-slate-900 dark:text-white"
             >
               Get the app now!
             </h2>
             <div
-              data-aos="zoom-in"
-              data-aos-delay="400"
               className="flex gap-4 sm:gap-5 flex-col xs:flex-row justify-center items-center my-8"
             >
               <a href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1" target="_blank" rel="noreferrer">

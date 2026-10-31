@@ -43,33 +43,59 @@ const Faq = () => {
         </div>
 
         {/* Questions */}
-        <div className="w-11/12 md:w-4/6 mx-auto my-10 py-6 md:py-10 px-4 md:px-8 rounded-2xl bg-gradient-to-r from-defoGreen from-[-58.97%] to-defoBlue to-50% shadow-xl">
+        <div className={`w-11/12 md:w-4/6 mx-auto my-10 py-6 md:py-10 px-4 md:px-8 rounded-2xl shadow-xl transition-all duration-300 ${
+          isDark
+            ? "bg-gradient-to-r from-emerald-950/70 via-slate-900/90 to-blue-950/80 border border-white/10"
+            : "bg-gradient-to-r from-defoGreen from-[-58.97%] to-defoBlue to-50%"
+        }`}>
           {filteredFaqs.map((item) => (
             <div
               key={item.id}
-              className={`w-full mx-auto py-4 my-3 rounded-xl transition-all ${isDark ? "bg-[#0b1120]/95 backdrop-blur-md border border-white/10 text-white shadow-lg" : "bg-white text-slate-900 shadow-md"}`}
+              className={`w-full mx-auto my-3.5 rounded-2xl overflow-hidden transition-all duration-300 border ${
+                isDark
+                  ? "bg-slate-900/90 border-slate-700/60 hover:border-emerald-400/50 shadow-[0_8px_25px_rgba(0,0,0,0.45)]"
+                  : "bg-white border-slate-200/80 hover:border-emerald-500/40 shadow-md hover:shadow-lg"
+              }`}
             >
-              <details className="group px-4">
-                <summary className="flex justify-between items-center font-medium cursor-pointer list-none text-base md:text-lg">
-                  <span className={`pr-4 font-semibold ${isDark ? "text-white" : "text-slate-900"}`}>{item.title}</span>
-                  <span className="bg-blue-950 text-white p-1 rounded-full transition-transform group-open:rotate-180 flex-shrink-0">
+              <details className="group">
+                <summary className={`flex justify-between items-center font-medium cursor-pointer list-none text-base md:text-lg px-5 py-4 transition-colors select-none ${
+                  isDark
+                    ? "hover:bg-white/[0.04] text-white"
+                    : "hover:bg-slate-50 text-slate-900"
+                }`}>
+                  <span className={`pr-4 font-semibold text-base sm:text-lg tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+                    {item.title}
+                  </span>
+                  <span className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 shrink-0 ${
+                    isDark
+                      ? "bg-white/10 text-slate-300 group-open:bg-emerald-400 group-open:text-slate-950 group-open:rotate-180 border border-white/10"
+                      : "bg-slate-100 text-slate-700 group-open:bg-emerald-500 group-open:text-white group-open:rotate-180 border border-slate-200"
+                  }`}>
                     <svg
                       fill="none"
-                      height="20"
+                      height="18"
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth="2"
+                      strokeWidth="2.5"
                       viewBox="0 0 24 24"
-                      width="20"
+                      width="18"
                     >
                       <path d="M6 9l6 6 6-6"></path>
                     </svg>
                   </span>
                 </summary>
-                <p className={`mt-3 text-left text-sm md:text-base leading-relaxed ${isDark ? "text-slate-300" : "text-slate-600"}`}>
-                  {item.answer}
-                </p>
+
+                {/* Answer Section with Distinct High-Contrast Surface */}
+                <div className={`px-5 py-4 border-t text-sm md:text-base leading-relaxed transition-colors ${
+                  isDark
+                    ? "bg-[#030712]/90 border-white/10 text-slate-200 shadow-inner"
+                    : "bg-slate-50/90 border-slate-100 text-slate-700"
+                }`}>
+                  <p>
+                    {item.answer}
+                  </p>
+                </div>
               </details>
             </div>
           ))}

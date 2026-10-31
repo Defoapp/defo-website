@@ -8,12 +8,16 @@ import teamIllustration from "../image/ourTeams/teams Illustation.svg";
 import TeamMemberCard from "./OurTeams/TeamMemberCard";
 import AmbientDecorations from "./Common/AmbientDecorations";
 
-const CATEGORIES = [
+const ALL_CATEGORIES = [
   { id: "all", label: "All Members" },
   { id: "Leadership", label: "Leadership" },
   { id: "Tech & Design", label: "Tech & Design" },
   { id: "Growth", label: "Growth & Community" },
 ];
+
+const CATEGORIES = ALL_CATEGORIES.filter(
+  (cat) => cat.id === "all" || teamsMembers.some((m) => m.roleCategory === cat.id)
+);
 
 
 

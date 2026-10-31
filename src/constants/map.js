@@ -16,8 +16,6 @@ import Women from "../image/hair-styling.png";
 // import member from "../image/ourTeams/member img.png";
 import jai from "../image/ourTeams/team_Members/jayakumar.webp";
 import rahul from "../image/ourTeams/team_Members/rahul.webp";
-import karan from "../image/ourTeams/team_Members/Karan.webp";
-import sakthi from "../image/ourTeams/team_Members/Sakthi.webp";
 import yogi from "../image/ourTeams/team_Members/yogeeswaran.webp";
 
 //OurCreators image
@@ -178,31 +176,6 @@ export const teamsMembers = [
     bio: "Architecting scalable full-stack architectures, mobile ecosystems, and high-performance APIs.",
     skills: ["Full Stack", "System Architecture", "Performance"],
     linkedin: "https://www.linkedin.com/in/yogeeswaran-n/",
-  },
-  {
-    id: "4",
-    image: karan,
-    name: "Karan P",
-    designation: "CTO & UI/UX Designer",
-    department: "Design & Technology",
-    roleCategory: "Tech & Design",
-    accentColor: "purple",
-    bio: "Shaping world-class user interfaces, aesthetic design systems, and frontend product journeys.",
-    skills: ["UI/UX Design", "Design Systems", "Creative Direction"],
-    linkedin: "https://www.linkedin.com/in/karan-p-965915211/",
-  },
-  {
-    id: "5",
-    image: sakthi,
-    name: "Sakthivel S",
-    designation: "Social Media Manager",
-    department: "Brand & Community",
-    roleCategory: "Growth",
-    accentColor: "pink",
-    bio: "Amplifying Defo's digital voice and nurturing an engaged global creator and learner community.",
-    skills: ["Brand Strategy", "Content Growth", "Community"],
-    linkedin:
-      "https://www.linkedin.com/in/sakthivel-senthilkumar13/?original_referer=https%3A%2F%2Fwww%2Elinkedin%2Ecom%2F&originalSubdomain=in",
   },
 ];
 

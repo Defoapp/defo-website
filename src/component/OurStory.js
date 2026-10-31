@@ -1,255 +1,1080 @@
-import React from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import React, { useState, useRef } from "react";
+import { motion, useScroll, useSpring, useTransform, AnimatePresence } from "framer-motion";
 
 import Navbar from "../component/Navbar/Navbar";
 import Footer from "../component/footer/Footer";
 import { useTheme } from "../context/ThemeContext";
+import AmbientDecorations from "./Common/AmbientDecorations";
 
 import infoGraphics from "../image/OurStory/illustration.svg";
 
-// time line images
+// Timeline illustration images
 import firstPicture from "../image/OurStory/timeline/timeline images/5573520_2928997 1.svg";
 import secondPicture from "../image/OurStory/timeline/timeline images/12643952_5028426 1.svg";
 import thirdPicture from "../image/OurStory/timeline/timeline images/image 2.svg";
 import fourthPicture from "../image/OurStory/timeline/timeline images/join_Creator.svg";
 import fifthPicture from "../image/OurStory/timeline/timeline images/updates.svg";
 
-// bar icons
+// Timeline bar icons
 import firsticon from "../image/OurStory/timeline/bar icon/mingcute_code-fill.svg";
 import secondicon from "../image/OurStory/timeline/bar icon/mdi_web.svg";
 import thirdicon from "../image/OurStory/timeline/bar icon/arcticons_creator-studio.svg";
 import fourthicon from "../image/OurStory/timeline/bar icon/Group 72.svg";
 import fifthicon from "../image/OurStory/timeline/bar icon/mdi_web.svg";
 
-const Timeline = () => {
-  const { isDark } = useTheme();
+// 4-Point Star Sparkle SVG Icon
+const SparkleStarIcon = ({ className, style }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    style={style}
+  >
+    <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" />
+  </svg>
+);
 
-  React.useEffect(() => {
-    AOS.init({
-      offset: 200,
-      duration: 600,
-      easing: "ease-in-sine",
-      delay: 100,
-    });
-    AOS.refresh();
-  }, []);
+// 8 Directional Supernova Ray Beams
+const BLAST_RAYS = [0, 45, 90, 135, 180, 225, 270, 315];
 
-  const nodeClass = `absolute -left-[17px] top-1 w-8 h-8 rounded-full flex items-center justify-center border-2 transition-colors ${
-    isDark ? "bg-slate-900 border-emerald-400" : "bg-white border-slate-800"
-  }`;
-  const iconClass = `w-5 h-5 object-contain ${isDark ? "invert brightness-200" : ""}`;
-  const yearClass = `text-xl md:text-3xl font-bold mb-2 md:mb-0 ${isDark ? "text-cyan-400" : "text-defoBlue"}`;
-  const pClass = `mb-3 text-lg md:text-2xl font-medium ${isDark ? "text-slate-200" : "text-slate-800"}`;
-  const dateClass = `text-lg md:text-xl font-bold ${isDark ? "text-slate-400" : "text-gray-600"}`;
+// 24 Pre-computed blast fireworks particles (360 degree radial explosion)
+const BLAST_PARTICLES = [
+  { id: 1, deg: 0, dist: 65, size: 7, color: "#00f298", delay: 0 },
+  { id: 2, deg: 15, dist: 95, size: 10, color: "#38bdf8", delay: 0.12, isStar: true },
+  { id: 3, deg: 30, dist: 55, size: 6, color: "#fbbf24", delay: 0.04 },
+  { id: 4, deg: 45, dist: 110, size: 12, color: "#ffffff", delay: 0.22, isStar: true },
+  { id: 5, deg: 60, dist: 75, size: 8, color: "#c084fc", delay: 0.18 },
+  { id: 6, deg: 75, dist: 90, size: 9, color: "#00f298", delay: 0.08, isStar: true },
+  { id: 7, deg: 90, dist: 60, size: 6, color: "#38bdf8", delay: 0.15 },
+  { id: 8, deg: 105, dist: 105, size: 11, color: "#fbbf24", delay: 0.06, isStar: true },
+  { id: 9, deg: 120, dist: 70, size: 7, color: "#ffffff", delay: 0.24 },
+  { id: 10, deg: 135, dist: 100, size: 10, color: "#00f298", delay: 0.1, isStar: true },
+  { id: 11, deg: 150, dist: 58, size: 6, color: "#c084fc", delay: 0.16 },
+  { id: 12, deg: 165, dist: 88, size: 9, color: "#38bdf8", delay: 0.05, isStar: true },
+  { id: 13, deg: 180, dist: 62, size: 7, color: "#00f298", delay: 0.14 },
+  { id: 14, deg: 195, dist: 96, size: 10, color: "#fbbf24", delay: 0.07, isStar: true },
+  { id: 15, deg: 210, dist: 54, size: 6, color: "#ffffff", delay: 0.2 },
+  { id: 16, deg: 225, dist: 108, size: 11, color: "#c084fc", delay: 0.11, isStar: true },
+  { id: 17, deg: 240, dist: 72, size: 8, color: "#00f298", delay: 0.09 },
+  { id: 18, deg: 255, dist: 92, size: 9, color: "#38bdf8", delay: 0.17, isStar: true },
+  { id: 19, deg: 270, dist: 60, size: 6, color: "#fbbf24", delay: 0.03 },
+  { id: 20, deg: 285, dist: 104, size: 10, color: "#ffffff", delay: 0.21, isStar: true },
+  { id: 21, deg: 300, dist: 68, size: 7, color: "#00f298", delay: 0.13 },
+  { id: 22, deg: 315, dist: 112, size: 12, color: "#c084fc", delay: 0.19, isStar: true },
+  { id: 23, deg: 330, dist: 56, size: 6, color: "#38bdf8", delay: 0.08 },
+  { id: 24, deg: 345, dist: 86, size: 9, color: "#fbbf24", delay: 0.16, isStar: true },
+];
+
+function TimelineEndSparkle({ isDark, spineScaleY }) {
+  // Dynamic scaling and opacity linked to laser line scroll completion
+  const blastScale = useTransform(spineScaleY, [0.75, 1], [0.7, 1.05]);
+  const blastOpacity = useTransform(spineScaleY, [0.65, 0.95], [0.4, 1]);
 
   return (
-    <div className={`relative w-full h-full min-h-screen transition-colors duration-300 ${isDark ? "bg-[#06080e] text-white" : "bg-white text-slate-900"}`}>
+    <div className="absolute bottom-0 left-7 sm:left-8 lg:left-1/2 -translate-x-1/2 translate-y-1/2 z-30 flex flex-col items-center justify-center pointer-events-none">
+      {/* Central Flash Aura & Blast Shockwaves (Scroll-reactive) */}
+      <motion.div
+        style={{ scale: blastScale, opacity: blastOpacity }}
+        className="relative flex items-center justify-center"
+      >
+        {/* Connection Collar at exact line terminus */}
+        <div className="absolute -top-4 w-3.5 h-3.5 rounded-full bg-white shadow-[0_0_12px_#ffffff,0_0_20px_#00f298] animate-ping" />
+
+        {/* Large Ambient Radial Glow Flare */}
+        <div
+          className="absolute w-52 h-52 rounded-full blur-3xl opacity-80 pointer-events-none animate-pulse"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(0,242,152,0.7) 0%, rgba(56,189,248,0.5) 35%, rgba(192,132,252,0.3) 65%, transparent 85%)",
+          }}
+        />
+
+        {/* 8 Supernova Ray Beams */}
+        {BLAST_RAYS.map((deg, i) => (
+          <motion.div
+            key={`ray-${i}`}
+            animate={{
+              scaleY: [0.4, 1.35, 0.4],
+              opacity: [0.3, 0.9, 0.3],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              delay: i * 0.12,
+              ease: "easeInOut",
+            }}
+            className="absolute w-[2px] h-32 origin-center pointer-events-none"
+            style={{
+              transform: `rotate(${deg}deg)`,
+              background:
+                "linear-gradient(to bottom, transparent, #00f298, #ffffff, #38bdf8, transparent)",
+              filter: "drop-shadow(0 0 6px #00f298)",
+            }}
+          />
+        ))}
+
+        {/* Concentric Expanding Shockwaves */}
+        <motion.div
+          animate={{ scale: [0.3, 3.5], opacity: [0.95, 0] }}
+          transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
+          className="absolute w-16 h-16 rounded-full border-2 border-[#00f298] shadow-[0_0_20px_#00f298]"
+        />
+        <motion.div
+          animate={{ scale: [0.3, 2.9], opacity: [0.85, 0] }}
+          transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut", delay: 0.55 }}
+          className="absolute w-16 h-16 rounded-full border-2 border-cyan-400 shadow-[0_0_16px_#38bdf8]"
+        />
+        <motion.div
+          animate={{ scale: [0.3, 2.3], opacity: [0.75, 0] }}
+          transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut", delay: 1.1 }}
+          className="absolute w-16 h-16 rounded-full border border-purple-400 shadow-[0_0_14px_#c084fc]"
+        />
+        <motion.div
+          animate={{ scale: [0.3, 1.7], opacity: [0.8, 0] }}
+          transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut", delay: 1.65 }}
+          className="absolute w-16 h-16 rounded-full border border-amber-400 shadow-[0_0_12px_#fbbf24]"
+        />
+
+        {/* 360-Degree Radiating Blast Sparkle Particles */}
+        {BLAST_PARTICLES.map((p) => {
+          const rad = (p.deg * Math.PI) / 180;
+          const targetX = Math.round(Math.cos(rad) * p.dist);
+          const targetY = Math.round(Math.sin(rad) * p.dist);
+
+          return (
+            <motion.div
+              key={p.id}
+              initial={{ x: 0, y: 0, scale: 0, opacity: 0 }}
+              animate={{
+                x: [0, targetX],
+                y: [0, targetY],
+                scale: [0, p.isStar ? 1.6 : 1.3, 0],
+                opacity: [1, 1, 0],
+                rotate: p.isStar ? [0, 180] : 0,
+              }}
+              transition={{
+                duration: 2.2,
+                repeat: Infinity,
+                delay: p.delay,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="absolute pointer-events-none flex items-center justify-center"
+              style={{
+                width: p.size,
+                height: p.size,
+                color: p.color,
+              }}
+            >
+              {p.isStar ? (
+                <SparkleStarIcon className="w-full h-full drop-shadow-[0_0_10px_currentColor]" />
+              ) : (
+                <div
+                  className="w-full h-full rounded-full"
+                  style={{
+                    backgroundColor: p.color,
+                    boxShadow: `0 0 10px ${p.color}, 0 0 18px ${p.color}`,
+                  }}
+                />
+              )}
+            </motion.div>
+          );
+        })}
+
+        {/* Central Luminous Energy Core Orb */}
+        <motion.div
+          animate={{ scale: [0.92, 1.25, 0.92], rotate: [0, 180, 360] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="relative w-9 h-9 rounded-full bg-gradient-to-tr from-[#00f298] via-cyan-300 to-white flex items-center justify-center shadow-[0_0_25px_#00f298,0_0_45px_#38bdf8,0_0_70px_#c084fc] z-20"
+        >
+          {/* Inner 4-point Diamond Star */}
+          <SparkleStarIcon
+            className="w-5 h-5 text-slate-950 animate-spin"
+            style={{ animationDuration: "6s" }}
+          />
+        </motion.div>
+      </motion.div>
+
+      {/* Celebratory Terminus Pill Badge */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className={`mt-8 flex items-center gap-2 px-5 py-2 rounded-full text-[11px] font-mono font-extrabold uppercase tracking-widest border shadow-2xl backdrop-blur-md whitespace-nowrap transition-all duration-300 ${
+          isDark
+            ? "bg-slate-900/95 border-emerald-500/50 text-[#00f298] shadow-emerald-500/20"
+            : "bg-white/95 border-emerald-500/50 text-emerald-600 shadow-emerald-500/20"
+        }`}
+      >
+        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+        <SparkleStarIcon className="w-3.5 h-3.5 text-emerald-400" />
+        <span>Milestones Complete • Adventure Ahead</span>
+        <SparkleStarIcon className="w-3.5 h-3.5 text-emerald-400" />
+      </motion.div>
+    </div>
+  );
+}
+
+const MILESTONES = [
+  {
+    id: "m1",
+    year: "2022",
+    date: "Jul 22, 2022",
+    phase: "The Foundation",
+    title: "The Inception of Defo",
+    description:
+      "A passionate team with a bold dream laid the bedrock for what would evolve into the premier destination for edutainment and valuable short-form video discovery.",
+    icon: firsticon,
+    image: firstPicture,
+    accentGrad: "from-emerald-400 to-teal-500",
+    glowColor: "rgba(0, 242, 152, 0.45)",
+    tagClass: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border-emerald-500/30",
+    highlightWord: "Defo Inception",
+    stat: "🌱 The Genesis • Day 1",
+    takeaway: "Foundational vision laid for high-quality, ad-free micro-learning reels.",
+    highlights: [
+      "Codified 100% ad-free micro-learning edutainment vision",
+      "Assembled multidisciplinary founding tech & creative team",
+      "Architected initial high-throughput prototype streaming engine",
+    ],
+    actionLabel: "Read Genesis Story",
+    actionLink: "#timeline-section",
+  },
+  {
+    id: "m2",
+    year: "2022",
+    date: "Aug 30, 2022",
+    phase: "Web Presence",
+    title: "Official Web Platform Reveal",
+    description:
+      "Witness the grand reveal of Defo's infotainment website — a responsive, modern platform engineered to deliver a seamless and engaging browsing experience.",
+    icon: secondicon,
+    image: secondPicture,
+    accentGrad: "from-cyan-400 to-blue-500",
+    glowColor: "rgba(56, 189, 248, 0.45)",
+    tagClass: "bg-cyan-500/15 text-cyan-600 dark:text-cyan-300 border-cyan-500/30",
+    highlightWord: "Infotainment Web",
+    stat: "🌐 Global Web Presence",
+    takeaway: "Sleek, responsive web showcase launched for knowledge discovery.",
+    highlights: [
+      "Responsive edutainment portal launched globally",
+      "Sub-second video delivery pipeline integration",
+      "Dark & Bright adaptive UI designed from day one",
+    ],
+    actionLabel: "Explore Web Platform",
+    actionLink: "/",
+  },
+  {
+    id: "m3",
+    year: "2023",
+    date: "Jan 19, 2023",
+    phase: "Flagship Milestone",
+    title: "Groundbreaking Mobile App Launch",
+    description:
+      "The defining moment! Defo officially launched its mobile app on app stores, bringing high-quality, ad-free short videos and joyful learning to audiences worldwide.",
+    icon: thirdicon,
+    image: thirdPicture,
+    accentGrad: "from-purple-400 to-pink-500",
+    glowColor: "rgba(168, 85, 247, 0.45)",
+    tagClass: "bg-purple-500/15 text-purple-600 dark:text-purple-300 border-purple-500/30",
+    highlightWord: "App Store Debut",
+    stat: "📱 Mobile App Live",
+    takeaway: "Ad-free short video experience launched across Google Play & iOS App Store.",
+    highlights: [
+      "Official Google Play Store release with 4.8★ launch rating",
+      "Bingeable bite-sized infotainment reels recommendation feed",
+      "Instant video bookmarking & personalized curiosity topics",
+    ],
+    actionLabel: "Get App on Google Play",
+    actionLink: "https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1",
+    actionExternal: true,
+  },
+  {
+    id: "m4",
+    year: "2023",
+    date: "Jun 05, 2023",
+    phase: "Creator Ecosystem",
+    title: "Empowering Voices with “Join Creator”",
+    description:
+      "Opening doors to passionate educators, artists, and creators globally. Empowering creators to broadcast meaningful infotainment and nurture their communities.",
+    icon: fourthicon,
+    image: fourthPicture,
+    accentGrad: "from-amber-400 to-orange-500",
+    glowColor: "rgba(251, 191, 36, 0.45)",
+    tagClass: "bg-amber-500/15 text-amber-600 dark:text-amber-300 border-amber-500/30",
+    highlightWord: "Creator Studio",
+    stat: "🎨 Creator Portal Open",
+    takeaway: "Empowering educators, subject experts, and creative minds globally.",
+    highlights: [
+      "Dedicated portal for knowledge creators & domain experts",
+      "Real-time creator analytics and engagement dashboards",
+      "Community curation tools ensuring high-signal edutainment",
+    ],
+    actionLabel: "Visit Creator Studio",
+    actionLink: "https://creator.yesdefo.com/",
+    actionExternal: true,
+  },
+  {
+    id: "m5",
+    year: "2024",
+    date: "Jan 01, 2024",
+    phase: "Next-Gen Horizon",
+    title: "Next-Gen Web & Architecture Overhaul",
+    description:
+      "A complete architectural and visual evolution. Faster page loads, interactive developer studios, and enhanced media discovery across all touchpoints.",
+    icon: fifthicon,
+    image: fifthPicture,
+    accentGrad: "from-emerald-400 via-teal-400 to-cyan-400",
+    glowColor: "rgba(52, 211, 153, 0.45)",
+    tagClass: "bg-teal-500/15 text-teal-600 dark:text-teal-300 border-teal-500/30",
+    highlightWord: "Platform 2.0",
+    stat: "⚡ Platform Architecture 2.0",
+    takeaway: "Interactive developer tools, 3D showcases, and ultra-snappy performance.",
+    highlights: [
+      "40% faster initial bundle load via modern asset chunking",
+      "Interactive 3D timeline and micro-interactions system",
+      "Next-generation media discovery engine and reactive UI",
+    ],
+    actionLabel: "Experience 2.0 Showcase",
+    actionLink: "#timeline-section",
+  },
+];
+
+const ERA_FILTERS = [
+  { id: "all", label: "All Milestones" },
+  { id: "2022", label: "2022 • The Genesis" },
+  { id: "2023", label: "2023 • Mobile & Creators" },
+  { id: "2024", label: "2024 • Evolution" },
+];
+
+const OurStory = () => {
+  const { isDark } = useTheme();
+  const [selectedEra, setSelectedEra] = useState("all");
+  const [expandedMilestones, setExpandedMilestones] = useState({});
+  const [reactions, setReactions] = useState({
+    m1: 38,
+    m2: 52,
+    m3: 89,
+    m4: 67,
+    m5: 114,
+  });
+  const timelineRef = useRef(null);
+
+  const toggleMilestone = (id) => {
+    setExpandedMilestones((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const handleCelebrate = (id, e) => {
+    e?.stopPropagation();
+    setReactions((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
+  };
+
+  // Active Scroll-linked laser spine
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 70%", "end 80%"],
+  });
+
+  const spineScaleY = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 28,
+    restDelta: 0.001,
+  });
+
+  const filteredMilestones = MILESTONES.filter((m) =>
+    selectedEra === "all" ? true : m.year === selectedEra
+  );
+
+  return (
+    <div
+      className={`relative w-full min-h-screen transition-colors duration-500 flex flex-col justify-between overflow-x-hidden ${
+        isDark ? "bg-[#06080e] text-white" : "bg-[#f8fafc] text-slate-900"
+      }`}
+    >
+      {/* Universal Fixed Navbar */}
       <Navbar />
-      <div className="w-full h-full">
-        {/* hero section */}
-        <div className="w-full flex flex-wrap my-10 py-10">
-          <div className="w-full my-5 lg:my-0 lg:w-1/2">
-            <img
-              data-aos="fade-right"
-              data-aos-delay="100"
-              className="w-4/6 mg:5/6 lg:w-3/6 mx-auto"
-              src={infoGraphics}
-              alt="Our Story Illustration"
-            />
-          </div>
+
+      <main className="relative w-full flex-1">
+        {/* =================================================================== */}
+        {/* AMBIENT AURORA BACKGROUND MESH                                      */}
+        {/* =================================================================== */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {/* Top Emerald Brand Spotlight */}
           <div
-            data-aos="fade-up"
-            data-aos-delay="100"
-            className="w-full lg:w-1/2 text-2xl px-5 lg:px-32"
-          >
-            <h1 className="text-4xl font-semibold text-center my-5 lg:my-3">
-              OUR STORY
-            </h1>
-            <h2 className={`text-xl md:text-2xl text-center leading-10 lg:text-left font-normal ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-              <span className={`font-bold ${isDark ? "text-white" : "text-slate-900"}`}>At Defo,</span> we are more than just
-              a brand – we are a journey, a vision, and a passion that has
-              evolved over time. Our story is a testament to our dedication,
-              values, and commitment to making a difference in the world. Our
-              mission is to make learning enjoyable and accessible, fostering a
-              positive attitude towards education.
-            </h2>
-          </div>
+            className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] sm:w-[900px] h-[500px] sm:h-[650px] rounded-full blur-[130px] opacity-65 dark:opacity-25"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(0,242,152,0.38) 0%, rgba(56,189,248,0.2) 50%, transparent 75%)",
+            }}
+          />
+          {/* Middle Cyan Halo */}
+          <div
+            className="absolute top-1/3 -left-20 sm:left-[5%] w-[450px] sm:w-[650px] h-[450px] sm:h-[650px] rounded-full blur-[120px] opacity-60 dark:opacity-20"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(56,189,248,0.35) 0%, rgba(14,165,233,0.18) 50%, transparent 75%)",
+            }}
+          />
+          {/* Right Violet Flare */}
+          <div
+            className="absolute top-2/3 -right-20 sm:right-[5%] w-[450px] sm:w-[650px] h-[450px] sm:h-[650px] rounded-full blur-[120px] opacity-60 dark:opacity-20"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(192,132,252,0.35) 0%, rgba(236,72,153,0.18) 50%, transparent 75%)",
+            }}
+          />
+          {/* Subtle Grid Pattern Overlay */}
+          <div
+            className="absolute inset-0 opacity-[0.035] dark:opacity-[0.03]"
+            style={{
+              backgroundImage:
+                "radial-gradient(rgba(15, 23, 42, 0.8) 1px, transparent 1px)",
+              backgroundSize: "24px 24px",
+            }}
+          />
         </div>
 
-        {/* desc section */}
-        <div className="w-full h-full text-center bg-gradient-to-r from-defoGreen from-[-58.97%] to-defoBlue to-50% py-6 px-8 md:px-28 lg:px-32">
-          <h2 className="my-5 text-white text-2xl md:text-3xl lg:text-4xl font-semibold">
-            The Journey
-          </h2>
+        {/* Ambient Floating Sparkles */}
+        <AmbientDecorations variant="showcase" />
 
-          <p className="my-4 text-white text-lg md:text-xl lg:text-2xl leading-relaxed max-w-4xl mx-auto">
-            Our journey has been a remarkable one, filled with ups and downs,
-            challenges, and triumphs. Explore our key milestones and memorable
-            moments that have shaped the world of entertainment. Along the way,
-            we've learned valuable lessons, forged lasting partnerships, and
-            built a community that shares our passion and values.
-          </p>
-        </div>
+        {/* =================================================================== */}
+        {/* HERO INTRO SECTION WITH FLOATING 3D CARDS & AMBIENT AURA            */}
+        {/* =================================================================== */}
+        <section className="relative z-10 w-full pt-12 sm:pt-16 pb-12 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 sm:gap-16 items-center">
+            {/* Left Graphic Showcase with Floating Badges */}
+            <div className="lg:col-span-6 flex justify-center order-2 lg:order-1">
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="relative group max-w-md w-full"
+              >
+                {/* Rotating Cosmic Glow Aura */}
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                  className="absolute -inset-4 bg-gradient-to-tr from-[#00f298]/30 via-cyan-500/25 to-purple-500/30 rounded-[36px] blur-2xl opacity-75 pointer-events-none"
+                />
 
-        <div>
-          <h2
-            data-aos="fade-up"
-            data-aos-delay="100"
-            className="font-bold font-bubblegum tracking-wider text-4xl md:text-5xl text-white text-center my-12 py-5 bg-gradient-to-r from-defoGreen from-[-58.97%] to-defoBlue to-50%"
-          >
-            Timeline
-          </h2>
-        </div>
-
-        {/* timeline */}
-        <div className="w-11/12 md:w-5/6 lg:w-4/6 mx-auto my-10 px-2 sm:px-4">
-          <div className={`relative border-l-2 ml-4 md:ml-28 space-y-12 pb-8 ${isDark ? "border-white/20" : "border-slate-300"}`}>
-            {/* Timeline Item 1 */}
-            <div className="relative pl-8 md:pl-10">
-              <div className={`md:absolute md:-left-28 md:top-0 ${yearClass}`}>
-                2022
-              </div>
-              <div className={nodeClass}>
-                <img src={firsticon} alt="Inception icon" className={iconClass} />
-              </div>
-              <div className="max-w-3xl">
-                <p data-aos="zoom-in" data-aos-delay="100" className={pClass}>
-                  The inception of <span className="font-bold text-emerald-400">Defo</span>. A small team with a big dream laid the foundation for what would become a go-to destination for edutainment enthusiasts.
-                </p>
-                <div className="mb-4">
-                  <span data-aos="fade-up" data-aos-delay="100" className={dateClass}>
-                    Jul 22, 2022
-                  </span>
-                </div>
-                <div>
+                {/* Main Card */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  whileHover={{ scale: 1.02 }}
+                  className={`relative rounded-3xl p-6 sm:p-8 border shadow-2xl overflow-hidden transition-colors duration-500 ${
+                    isDark
+                      ? "bg-slate-900/80 border-white/10"
+                      : "bg-white/95 border-slate-200/90 shadow-xl"
+                  }`}
+                >
                   <img
-                    data-aos="fade-right"
-                    data-aos-delay="100"
-                    src={firstPicture}
-                    alt="Defo inception"
-                    className="w-full sm:w-4/5 lg:w-3/5 rounded-lg shadow-sm"
+                    className="w-full h-auto max-h-80 object-contain mx-auto drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
+                    src={infoGraphics}
+                    alt="Our Story Illustration"
                   />
-                </div>
-              </div>
+                </motion.div>
+
+                {/* Floating Micro-Badge Top Right */}
+                <motion.div
+                  animate={{ y: [0, 8, 0] }}
+                  transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                  className="absolute -top-4 -right-4 hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 dark:bg-black/90 text-[#00f298] border border-[#00f298]/40 shadow-xl backdrop-blur-md text-xs font-bold pointer-events-none"
+                >
+                  <span className="w-2 h-2 rounded-full bg-[#00f298] animate-pulse" />
+                  <span>🚀 100% Ad-Free Edutainment</span>
+                </motion.div>
+
+                {/* Floating Micro-Badge Bottom Left */}
+                <motion.div
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="absolute -bottom-4 -left-4 hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 dark:bg-black/90 text-cyan-300 border border-cyan-400/40 shadow-xl backdrop-blur-md text-xs font-bold pointer-events-none"
+                >
+                  <span>💡 Knowledge That Sticks</span>
+                </motion.div>
+              </motion.div>
             </div>
 
-            {/* Timeline Item 2 */}
-            <div className="relative pl-8 md:pl-10">
-              <div className={nodeClass}>
-                <img src={secondicon} alt="Website launch icon" className={iconClass} />
+            {/* Right Story Copy */}
+            <div className="lg:col-span-6 order-1 lg:order-2 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 dark:text-[#00f298] text-xs font-mono font-bold uppercase tracking-wider mb-4">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Our Heritage & Purpose</span>
               </div>
-              <div className="max-w-3xl">
-                <p data-aos="zoom-in" data-aos-delay="200" className={pClass}>
-                  Witness the grand reveal of Defo's infotainment <span className="font-bold text-cyan-400">website</span>. A user-friendly platform designed to deliver a seamless and immersive experience to our audience.
-                </p>
-                <div className="mb-4">
-                  <span data-aos="fade-up" data-aos-delay="100" className={dateClass}>
-                    Aug 30, 2022
-                  </span>
-                </div>
-                <div>
-                  <img
-                    data-aos="fade-right"
-                    data-aos-delay="100"
-                    src={secondPicture}
-                    alt="Website reveal"
-                    className="w-full sm:w-4/5 lg:w-3/5 rounded-lg shadow-sm"
-                  />
-                </div>
-              </div>
-            </div>
 
-            {/* Timeline Item 3 */}
-            <div className="relative pl-8 md:pl-10">
-              <div className={`md:absolute md:-left-28 md:top-0 ${yearClass}`}>
-                2023
-              </div>
-              <div className={nodeClass}>
-                <img src={thirdicon} alt="App launch icon" className={iconClass} />
-              </div>
-              <div className="max-w-3xl">
-                <p data-aos="zoom-in" data-aos-delay="200" className={pClass}>
-                  The moment that changed it all! <span className="font-bold text-emerald-400">Defo officially launched</span> its groundbreaking entertainment app, bringing joy and excitement to millions worldwide.
-                </p>
-                <div className="mb-4">
-                  <span data-aos="fade-up" data-aos-delay="100" className={dateClass}>
-                    Jan 19, 2023
-                  </span>
-                </div>
-                <div>
-                  <img
-                    data-aos="fade-right"
-                    data-aos-delay="100"
-                    src={thirdPicture}
-                    alt="App launch"
-                    className="w-full sm:w-4/5 lg:w-3/5 rounded-lg shadow-sm"
-                  />
-                </div>
-              </div>
-            </div>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.12] mb-6"
+                style={{ fontFamily: "Outfit, var(--font-display), sans-serif" }}
+              >
+                Pioneering the Art of <br className="hidden sm:inline" />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-500 to-cyan-500 dark:from-[#00f298] dark:via-teal-300 dark:to-cyan-400">
+                  Infotainment
+                </span>
+              </motion.h1>
 
-            {/* Timeline Item 4 */}
-            <div className="relative pl-8 md:pl-10">
-              <div className={nodeClass}>
-                <img src={fourthicon} alt="Join Creator icon" className={iconClass} />
-              </div>
-              <div className="max-w-3xl">
-                <p data-aos="zoom-in" data-aos-delay="200" className={pClass}>
-                  Celebrate with us as we introduce <span className="font-bold text-cyan-400">“Join Creator”</span>, a game-changing addition to our app. Users experienced a new level of entertainment like never before.
-                </p>
-                <div className="mb-4">
-                  <span data-aos="fade-up" data-aos-delay="100" className={dateClass}>
-                    Jun 05, 2023
-                  </span>
-                </div>
-                <div>
-                  <img
-                    data-aos="fade-right"
-                    data-aos-delay="100"
-                    src={fourthPicture}
-                    alt="Join Creator launch"
-                    className="w-full sm:w-4/5 lg:w-3/5 rounded-lg shadow-sm"
-                  />
-                </div>
-              </div>
-            </div>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+                className={`text-base sm:text-lg leading-relaxed mb-6 font-normal ${
+                  isDark ? "text-slate-300" : "text-slate-700"
+                }`}
+              >
+                <strong className={isDark ? "text-white" : "text-slate-900"}>
+                  At Defo,
+                </strong>{" "}
+                we believe learning should never feel like a chore. Born from a vision
+                to transform idle digital scrolling into enriching micro-learning, our
+                journey is a testament to perseverance, creative technology, and a
+                deep passion for empowering curious minds worldwide.
+              </motion.p>
 
-            {/* Timeline Item 5 */}
-            <div className="relative pl-8 md:pl-10">
-              <div className={`md:absolute md:-left-28 md:top-0 ${yearClass}`}>
-                2024
-              </div>
-              <div className={nodeClass}>
-                <img src={fifthicon} alt="Website updates icon" className={iconClass} />
-              </div>
-              <div className="max-w-3xl">
-                <p data-aos="zoom-in" data-aos-delay="200" className={pClass}>
-                  We're thrilled to introduce the latest update to Defo’s Website. Our team has been hard at work to bring you an enhanced and seamless experience.
-                </p>
-                <div className="mb-4">
-                  <span data-aos="fade-up" data-aos-delay="100" className={dateClass}>
-                    Jan 01, 2024
-                  </span>
-                </div>
-                <div>
-                  <img
-                    data-aos="fade-right"
-                    data-aos-delay="100"
-                    src={fifthPicture}
-                    alt="Website update"
-                    className="w-full sm:w-4/5 lg:w-3/5 rounded-lg shadow-sm"
-                  />
-                </div>
-              </div>
+              {/* Highlights pills with interactive hover pop */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+                className="flex flex-wrap items-center justify-center lg:justify-start gap-3"
+              >
+                {[
+                  { icon: "🚀", text: "100% Ad-Free Video" },
+                  { icon: "💡", text: "Practical Knowledge" },
+                  { icon: "🌐", text: "Global Creator Community" },
+                ].map((pill, idx) => (
+                  <motion.span
+                    key={idx}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    className={`px-3.5 py-2 rounded-xl border text-xs font-semibold flex items-center gap-1.5 cursor-default transition-all ${
+                      isDark
+                        ? "bg-white/5 border-white/10 text-slate-300 hover:border-emerald-400/40"
+                        : "bg-white border-slate-200 text-slate-700 shadow-sm hover:border-emerald-500/40"
+                    }`}
+                  >
+                    <span>{pill.icon}</span>
+                    <span>{pill.text}</span>
+                  </motion.span>
+                ))}
+              </motion.div>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
 
+        {/* =================================================================== */}
+        {/* TIMELINE SECTION HEADER & ERA FILTER TABS WITH SPRING SLIDER        */}
+        {/* =================================================================== */}
+        <section
+          ref={timelineRef}
+          id="timeline-section"
+          className="relative z-10 w-full pt-10 pb-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
+        >
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-500 dark:text-cyan-300 text-xs font-mono font-bold uppercase tracking-wider mb-3">
+              <span>Chronological Milestones</span>
+            </div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight mb-4"
+              style={{ fontFamily: "Outfit, sans-serif" }}
+            >
+              The Journey Through Time
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className={`text-sm sm:text-base leading-relaxed ${
+                isDark ? "text-slate-400" : "text-slate-600"
+              }`}
+            >
+              From our humble startup beginnings to launching full-scale mobile
+              applications and interactive learning studios, explore the defining
+              chapters of Defo.
+            </motion.p>
+          </div>
+
+          {/* Era Filter Pills with Smooth Spring Active Slider */}
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-16 relative">
+            {ERA_FILTERS.map((era) => {
+              const isActive = selectedEra === era.id;
+              return (
+                <button
+                  key={era.id}
+                  onClick={() => setSelectedEra(era.id)}
+                  className={`relative px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold tracking-wide transition-colors duration-300 cursor-pointer ${
+                    isActive
+                      ? "text-white dark:text-slate-950 font-black"
+                      : isDark
+                      ? "text-slate-400 hover:text-white"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeTimelineFilter"
+                      className="absolute inset-0 rounded-full bg-slate-900 dark:bg-emerald-400 shadow-lg shadow-emerald-500/25"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{era.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* ================================================================= */}
+          {/* THE MODERN TIMELINE (ALTERNATING ZIG-ZAG WITH ZERO OVERLAP)        */}
+          {/* ================================================================= */}
+          <div className="relative w-full max-w-6xl mx-auto pt-8 pb-20 sm:pb-28">
+            {/* Luminous Central Spine Base Guide (Desktop: Center 50% | Mobile: Left 28px) */}
+            <div className="absolute top-0 bottom-0 w-[2px] rounded-full left-7 sm:left-8 lg:left-1/2 -translate-x-1/2 bg-slate-200 dark:bg-white/10 pointer-events-none" />
+
+            {/* Dynamic Scroll-Linked Luminous Laser Line */}
+            <motion.div
+              style={{ scaleY: spineScaleY, originY: 0 }}
+              className="absolute top-0 bottom-0 w-[3px] rounded-full left-7 sm:left-8 lg:left-1/2 -translate-x-1/2 bg-gradient-to-b from-[#00f298] via-cyan-400 via-purple-400 to-[#00f298] shadow-[0_0_15px_rgba(0,242,152,0.55)] pointer-events-none"
+            />
+
+            {/* Traveling Laser Spark Particle */}
+            <motion.div
+              animate={{ y: ["0%", "100%"] }}
+              transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
+              className="absolute w-[8px] h-24 -left-[2.5px] rounded-full bg-gradient-to-b from-transparent via-[#00f298] to-transparent blur-[2px] pointer-events-none left-7 sm:left-8 lg:left-1/2 -translate-x-1/2"
+            />
+
+            <div className="space-y-16 sm:space-y-24 relative z-10">
+              <AnimatePresence mode="popLayout">
+                {filteredMilestones.map((item, index) => {
+                  const isEven = index % 2 === 0;
+
+                  return (
+                    <motion.div
+                      key={item.id}
+                      layout
+                      initial={{ opacity: 0, y: 35 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-60px" }}
+                      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                      className={`relative flex flex-col lg:flex-row items-center justify-between w-full group ${
+                        isEven ? "lg:flex-row" : "lg:flex-row-reverse"
+                      }`}
+                    >
+                      {/* ======================================================= */}
+                      {/* CENTER SPINE NODE WITH ILLUMINATED RING & RADAR PULSE   */}
+                      {/* ======================================================= */}
+                      <div className="absolute top-8 sm:top-10 lg:top-1/2 lg:-translate-y-1/2 left-7 sm:left-8 lg:left-1/2 -translate-x-1/2 z-30 pointer-events-auto">
+                        <motion.div
+                          whileHover={{ scale: 1.18, rotate: 5 }}
+                          whileTap={{ scale: 0.95 }}
+                          transition={{ type: "spring", stiffness: 380, damping: 20 }}
+                          className="cursor-pointer"
+                        >
+                          <div className="relative flex items-center justify-center">
+                            {/* Expanding Radar Ping Waves */}
+                            <span
+                              className="absolute w-12 h-12 rounded-2xl animate-ping opacity-40 pointer-events-none"
+                              style={{ backgroundColor: item.glowColor }}
+                            />
+                            {/* Outer Glow Halo */}
+                            <div
+                              className="absolute w-14 h-14 rounded-full blur-md opacity-75 group-hover:opacity-100 transition-opacity pointer-events-none"
+                              style={{ backgroundColor: item.glowColor }}
+                            />
+                            {/* Node Circle Frame */}
+                            <div
+                              className={`relative w-12 h-12 rounded-2xl flex items-center justify-center border-2 shadow-xl transition-all duration-300 ${
+                                isDark
+                                  ? "bg-slate-950 border-white/20 group-hover:border-emerald-400 shadow-black/60"
+                                  : "bg-white border-slate-300 group-hover:border-emerald-500 shadow-md"
+                              }`}
+                            >
+                              <img
+                                src={item.icon}
+                                alt={item.title}
+                                className={`w-6 h-6 object-contain transition-transform duration-300 group-hover:scale-110 ${
+                                  isDark ? "invert brightness-200" : ""
+                                }`}
+                              />
+                            </div>
+                          </div>
+                        </motion.div>
+                      </div>
+
+                      {/* ======================================================= */}
+                      {/* TIMELINE CONTENT CARD (EXACT 56PX CLEARANCE FROM SPINE)  */}
+                      {/* ======================================================= */}
+                      <motion.div
+                        whileHover={{ y: -6, scale: 1.012 }}
+                        transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                        className="w-full lg:w-[calc(50%-56px)] pl-14 sm:pl-16 lg:pl-0 relative group/card"
+                      >
+                        {/* Luminous Connector Branch from Spine Node to Card (Desktop only) */}
+                        {isEven ? (
+                          <div className="hidden lg:block absolute -right-[56px] top-1/2 -translate-y-1/2 w-[56px] h-[2px] bg-gradient-to-r from-emerald-500/60 to-[#00f298] shadow-[0_0_8px_rgba(0,242,152,0.5)] pointer-events-none group-hover/card:h-[3px] group-hover/card:shadow-[0_0_15px_#00f298] transition-all duration-300">
+                            <span className="absolute -top-1 right-0 w-2 h-2 rounded-full bg-emerald-300 animate-ping" />
+                          </div>
+                        ) : (
+                          <div className="hidden lg:block absolute -left-[56px] top-1/2 -translate-y-1/2 w-[56px] h-[2px] bg-gradient-to-l from-cyan-500/60 to-cyan-400 shadow-[0_0_8px_rgba(56,189,248,0.5)] pointer-events-none group-hover/card:h-[3px] group-hover/card:shadow-[0_0_15px_#38bdf8] transition-all duration-300">
+                            <span className="absolute -top-1 left-0 w-2 h-2 rounded-full bg-cyan-300 animate-ping" />
+                          </div>
+                        )}
+
+                        {/* Mobile Connector Branch (Mobile only) */}
+                        <div className="block lg:hidden absolute -left-7 sm:-left-8 top-8 sm:top-10 w-7 sm:w-8 h-[2px] bg-emerald-500/40 pointer-events-none" />
+
+                        {/* The Card */}
+                        <div
+                          className={`rounded-3xl p-6 sm:p-8 border transition-all duration-300 hover:shadow-2xl relative overflow-hidden ${
+                            isDark
+                              ? "bg-slate-900/90 backdrop-blur-xl border-white/10 hover:border-emerald-400/50 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.65)] hover:shadow-[0_20px_50px_-10px_rgba(0,242,152,0.18)]"
+                              : "bg-white border-slate-200/90 hover:border-emerald-500/50 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.06)] hover:shadow-[0_22px_45px_-10px_rgba(16,185,129,0.18)]"
+                          }`}
+                        >
+                          {/* Dynamic Specular Sweep Ray */}
+                          <div className="absolute inset-0 -translate-x-full group-hover/card:translate-x-[250%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 dark:via-white/[0.06] to-transparent pointer-events-none -skew-x-12 z-20" />
+
+                          {/* Card Top Accent Glow Line */}
+                          <div
+                            className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${item.accentGrad} opacity-80 group-hover/card:opacity-100 transition-opacity`}
+                          />
+
+                          {/* Card Header Meta Tags & Interactive Reaction */}
+                          <div className="flex flex-wrap items-center gap-2 mb-4 relative z-10">
+                            {/* Mobile-friendly Year Pill */}
+                            <span className="lg:hidden px-3 py-1 rounded-full text-xs font-mono font-black bg-slate-900 text-white dark:bg-emerald-400 dark:text-slate-950 shadow-sm">
+                              {item.year}
+                            </span>
+                            <span
+                              className={`px-3 py-1 rounded-full text-xs font-mono font-bold border ${item.tagClass}`}
+                            >
+                              {item.phase}
+                            </span>
+                            <span
+                              className={`px-3 py-1 rounded-full text-xs font-bold font-mono ${
+                                isDark
+                                  ? "bg-white/10 text-slate-300"
+                                  : "bg-slate-100 text-slate-700"
+                              }`}
+                            >
+                              📅 {item.date}
+                            </span>
+
+                            {/* Interactive Celebrate Reaction Counter */}
+                            <motion.button
+                              whileHover={{ scale: 1.12 }}
+                              whileTap={{ scale: 0.88 }}
+                              onClick={(e) => handleCelebrate(item.id, e)}
+                              className={`ml-auto px-2.5 py-1 rounded-full text-xs font-mono font-bold flex items-center gap-1.5 transition-all duration-300 cursor-pointer ${
+                                isDark
+                                  ? "bg-white/5 hover:bg-emerald-500/20 text-[#00f298] border border-white/10 hover:border-emerald-400/40"
+                                  : "bg-slate-100 hover:bg-emerald-50 text-emerald-700 border border-slate-200 hover:border-emerald-300"
+                              }`}
+                              title="Applaud this milestone"
+                            >
+                              <span className="text-xs">✦</span>
+                              <span>{reactions[item.id] || 42}</span>
+                            </motion.button>
+                          </div>
+
+                          {/* Card Title */}
+                          <h3
+                            className="text-xl sm:text-2xl font-black tracking-tight mb-3 text-slate-900 dark:text-white group-hover/card:text-transparent group-hover/card:bg-clip-text group-hover/card:bg-gradient-to-r group-hover/card:from-slate-900 group-hover/card:to-emerald-600 dark:group-hover/card:from-white dark:group-hover/card:to-emerald-400 transition-all duration-300"
+                            style={{ fontFamily: "Outfit, sans-serif" }}
+                          >
+                            {item.title}
+                          </h3>
+
+                          {/* Card Narrative */}
+                          <p
+                            className={`text-sm sm:text-base leading-relaxed mb-6 font-normal ${
+                              isDark ? "text-slate-300" : "text-slate-600"
+                            }`}
+                          >
+                            {item.description}
+                          </p>
+
+                          {/* Framed Graphic Illustration Showcase with Floating Hover */}
+                          <div
+                            className={`relative rounded-2xl overflow-hidden p-4 sm:p-5 border transition-all duration-500 ${
+                              isDark
+                                ? "bg-slate-950/60 border-white/10 group-hover/card:border-white/20"
+                                : "bg-slate-50/80 border-slate-200/80 group-hover/card:border-slate-300"
+                            }`}
+                          >
+                            {/* Blooming Glow Behind Image */}
+                            <div
+                              className="absolute inset-0 opacity-20 group-hover/card:opacity-45 transition-opacity duration-500 blur-2xl rounded-2xl pointer-events-none"
+                              style={{ backgroundColor: item.glowColor }}
+                            />
+                            <img
+                              src={item.image}
+                              alt={item.title}
+                              className="relative z-10 w-full h-auto max-h-56 sm:max-h-64 object-contain mx-auto rounded-xl drop-shadow-md group-hover/card:scale-105 group-hover/card:-translate-y-1.5 transition-all duration-500"
+                            />
+                          </div>
+
+                          {/* Card Interactive Action Footer */}
+                          <div className="mt-5 pt-4 border-t border-slate-100 dark:border-white/10 flex flex-wrap items-center justify-between gap-3 relative z-10">
+                            {/* Toggle Highlights Drawer Action */}
+                            <motion.button
+                              whileHover={{ scale: 1.04 }}
+                              whileTap={{ scale: 0.96 }}
+                              onClick={() => toggleMilestone(item.id)}
+                              className={`inline-flex items-center gap-1.5 text-xs font-bold transition-colors cursor-pointer select-none ${
+                                expandedMilestones[item.id]
+                                  ? "text-[#00f298] dark:text-[#00f298]"
+                                  : isDark
+                                  ? "text-slate-300 hover:text-white"
+                                  : "text-slate-600 hover:text-slate-900"
+                              }`}
+                            >
+                              <span>
+                                {expandedMilestones[item.id]
+                                  ? "Hide Highlights"
+                                  : "Key Highlights"}
+                              </span>
+                              <motion.span
+                                animate={{
+                                  rotate: expandedMilestones[item.id] ? 180 : 0,
+                                }}
+                                transition={{ duration: 0.25 }}
+                              >
+                                ▾
+                              </motion.span>
+                            </motion.button>
+
+                            {/* Direct Chapter Action Link */}
+                            <motion.a
+                              whileHover={{ scale: 1.05, x: 2 }}
+                              whileTap={{ scale: 0.96 }}
+                              href={item.actionLink}
+                              target={item.actionExternal ? "_blank" : undefined}
+                              rel={item.actionExternal ? "noreferrer" : undefined}
+                              className={`inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all shadow-sm ${
+                                isDark
+                                  ? "bg-emerald-500/15 hover:bg-emerald-500/25 text-[#00f298] border border-emerald-500/30"
+                                  : "bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200"
+                              }`}
+                            >
+                              <span>{item.actionLabel}</span>
+                              <span>→</span>
+                            </motion.a>
+                          </div>
+
+                          {/* Expandable Key Highlights Drawer */}
+                          <AnimatePresence>
+                            {expandedMilestones[item.id] && (
+                              <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: "auto" }}
+                                exit={{ opacity: 0, height: 0 }}
+                                transition={{ duration: 0.35, ease: "easeInOut" }}
+                                className="overflow-hidden relative z-10"
+                              >
+                                <div
+                                  className={`mt-3 pt-3 border-t border-dashed ${
+                                    isDark
+                                      ? "border-white/10"
+                                      : "border-slate-200"
+                                  } space-y-2`}
+                                >
+                                  {item.highlights &&
+                                    item.highlights.map((h, hIdx) => (
+                                      <motion.div
+                                        key={hIdx}
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: hIdx * 0.08 }}
+                                        className="flex items-start gap-2 text-xs leading-relaxed text-slate-500 dark:text-slate-300"
+                                      >
+                                        <span className="text-[#00f298] font-bold text-sm leading-none">
+                                          ✦
+                                        </span>
+                                        <span>{h}</span>
+                                      </motion.div>
+                                    ))}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      </motion.div>
+
+                      {/* ======================================================= */}
+                      {/* OPPOSITE SIDE DESKTOP YEAR & SPOTLIGHT CAPSULE          */}
+                      {/* ZERO OVERLAP: 56PX+ CLEAN MARGIN FROM CENTER SPINE      */}
+                      {/* ======================================================= */}
+                      <div
+                        className={`hidden lg:flex lg:w-[calc(50%-56px)] flex-col select-none transition-all duration-500 ${
+                          isEven
+                            ? "items-start text-left pl-6 xl:pl-10"
+                            : "items-end text-right pr-6 xl:pr-10"
+                        }`}
+                      >
+                        <div className="relative">
+                          {/* Prominent Milestone Year Header */}
+                          <span
+                            className={`text-6xl xl:text-7xl font-black font-mono tracking-tighter transition-colors duration-300 block leading-none select-none ${
+                              isDark
+                                ? "text-slate-400/90 group-hover:text-emerald-300"
+                                : "text-slate-400 group-hover:text-emerald-600"
+                            }`}
+                            style={{ fontFamily: "Outfit, sans-serif" }}
+                          >
+                            {item.year}
+                          </span>
+
+                          {/* Floating Glass Spotlight Pill */}
+                          <motion.div
+                            whileHover={{ y: -6, scale: 1.03 }}
+                            whileTap={{ scale: 0.98 }}
+                            transition={{ type: "spring", stiffness: 350, damping: 20 }}
+                            className={`mt-3 relative z-10 max-w-sm rounded-2xl p-5 border backdrop-blur-xl shadow-lg transition-all duration-300 cursor-pointer group/spotlight ${
+                              isDark
+                                ? "bg-slate-900/85 border-white/10 shadow-black/40 hover:border-emerald-400/50 hover:shadow-[0_15px_30px_-10px_rgba(0,242,152,0.2)]"
+                                : "bg-white/95 border-slate-200/90 shadow-slate-200/60 hover:border-emerald-500/50 hover:shadow-[0_15px_30px_-10px_rgba(16,185,129,0.2)]"
+                            }`}
+                            onClick={(e) => handleCelebrate(item.id, e)}
+                          >
+                            {/* Ambient Shimmer Sheen on Hover */}
+                            <div className="absolute inset-0 -translate-x-full group-hover/spotlight:translate-x-[200%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 dark:via-white/[0.05] to-transparent pointer-events-none rounded-2xl -skew-x-12" />
+
+                            <div
+                              className={`flex items-center gap-2 mb-2 ${
+                                isEven ? "justify-start" : "justify-end"
+                              }`}
+                            >
+                              <span
+                                className="w-2 h-2 rounded-full animate-ping"
+                                style={{
+                                  backgroundColor: item.glowColor.replace(
+                                    /[\d.]+\)$/g,
+                                    "1)"
+                                  ),
+                                }}
+                              />
+
+                              {/* Mini Soundwave Visualizer Bars */}
+                              <div className="flex items-end gap-0.5 h-3">
+                                <span className="w-0.5 h-2 bg-emerald-400 animate-pulse rounded-full" />
+                                <span className="w-0.5 h-3 bg-cyan-400 animate-pulse rounded-full delay-75" />
+                                <span className="w-0.5 h-1.5 bg-purple-400 animate-pulse rounded-full delay-150" />
+                              </div>
+
+                              <span
+                                className={`text-[11px] font-mono font-extrabold uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r ${item.accentGrad}`}
+                              >
+                                {item.highlightWord}
+                              </span>
+
+                              {/* Celebration Star Indicator */}
+                              <motion.span
+                                whileHover={{ scale: 1.25 }}
+                                whileTap={{ scale: 0.8 }}
+                                className="text-xs text-amber-400 opacity-80 group-hover/spotlight:opacity-100 transition-opacity ml-1"
+                                title="Click to celebrate"
+                              >
+                                ✨
+                              </motion.span>
+                            </div>
+
+                            <div className="text-sm sm:text-base font-bold tracking-tight text-slate-900 dark:text-slate-100 mb-1.5 group-hover/spotlight:text-emerald-500 dark:group-hover/spotlight:text-emerald-300 transition-colors">
+                              {item.stat}
+                            </div>
+
+                            <p className="text-xs leading-relaxed text-slate-500 dark:text-slate-400 font-normal">
+                              {item.takeaway}
+                            </p>
+
+                            {/* Interactive Micro Action Pill */}
+                            <div
+                              className={`mt-3 pt-2.5 border-t ${
+                                isDark ? "border-white/10" : "border-slate-100"
+                              } flex items-center justify-between text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400`}
+                            >
+                              <span>Chapter Focus</span>
+                              <span className="text-emerald-500 group-hover/spotlight:translate-x-1 transition-transform">
+                                ✦ Explored
+                              </span>
+                            </div>
+                          </motion.div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
+            </div>
+
+            {/* ================================================================= */}
+            {/* BLAST SPARKLE FIREWORKS TERMINUS AT THE END OF THE LASER LINE     */}
+            {/* ================================================================= */}
+            <TimelineEndSparkle isDark={isDark} spineScaleY={spineScaleY} />
+          </div>
+        </section>
+
+        {/* =================================================================== */}
+        {/* BOTTOM CALL-TO-ACTION BANNER                                        */}
+        {/* =================================================================== */}
+        <section className="relative z-10 w-full my-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+          <div className="relative rounded-3xl overflow-hidden p-8 sm:p-12 text-center bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 text-white shadow-2xl">
+            {/* Specular Radial Glow */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.25),_transparent_70%)] pointer-events-none" />
+
+            <div className="relative z-10 max-w-2xl mx-auto">
+              <span className="inline-block text-xs uppercase tracking-widest font-extrabold px-3.5 py-1 rounded-full bg-white/20 backdrop-blur-md mb-4 border border-white/25">
+                Join The Adventure
+              </span>
+              <h2
+                className="text-2xl sm:text-4xl font-black tracking-tight mb-4 !text-white"
+                style={{ fontFamily: "Outfit, sans-serif" }}
+              >
+                Be Part of Our Next Chapter
+              </h2>
+              <p className="text-emerald-100 text-sm sm:text-base font-medium mb-8 leading-relaxed">
+                Whether you're discovering insightful infotainment daily or sharing
+                your creative genius with the world, there's a place for you at Defo.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                  href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-slate-950 hover:bg-black text-white font-bold text-sm shadow-xl transition-all duration-300 cursor-pointer border border-white/20"
+                >
+                  <span>Download The App</span>
+                  <span className="text-[#00f298]">→</span>
+                </motion.a>
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                  href="https://creator.yesdefo.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-slate-900 hover:bg-slate-100 font-bold text-sm shadow-xl transition-all duration-300 cursor-pointer"
+                >
+                  <span>Join as Creator</span>
+                  <span className="text-emerald-600">→</span>
+                </motion.a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Universal Footer */}
       <Footer />
     </div>
   );
 };
 
-export default Timeline;
+export default OurStory;
