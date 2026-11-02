@@ -67,151 +67,188 @@ const BLAST_PARTICLES = [
 
 function TimelineEndSparkle({ isDark, spineScaleY }) {
   // Dynamic scaling and opacity linked to laser line scroll completion
-  const blastScale = useTransform(spineScaleY, [0.75, 1], [0.7, 1.05]);
-  const blastOpacity = useTransform(spineScaleY, [0.65, 0.95], [0.4, 1]);
+  const blastScale = useTransform(spineScaleY, [0.65, 0.95], [0.75, 1.05]);
+  const blastOpacity = useTransform(spineScaleY, [0.55, 0.9], [0.4, 1]);
+  const [burstActive, setBurstActive] = useState(false);
+
+  const handleOrbClick = () => {
+    setBurstActive(true);
+    setTimeout(() => setBurstActive(false), 900);
+  };
 
   return (
-    <div className="absolute bottom-0 left-7 sm:left-8 lg:left-1/2 -translate-x-1/2 translate-y-1/2 z-30 flex flex-col items-center justify-center pointer-events-none">
-      {/* Central Flash Aura & Blast Shockwaves (Scroll-reactive) */}
-      <motion.div
-        style={{ scale: blastScale, opacity: blastOpacity }}
-        className="relative flex items-center justify-center"
-      >
-        {/* Connection Collar at exact line terminus */}
-        <div className="absolute -top-4 w-3.5 h-3.5 rounded-full bg-white shadow-[0_0_12px_#ffffff,0_0_20px_#00f298] animate-ping" />
+    <>
+      {/* Central Flash Aura & Blast Shockwaves (at the exact terminus tip of the laser line) */}
+      <div className="absolute bottom-0 left-7 sm:left-8 lg:left-1/2 -translate-x-1/2 translate-y-1/2 z-30 flex items-center justify-center">
+        <motion.div
+          style={{ scale: blastScale, opacity: blastOpacity }}
+          className="relative flex items-center justify-center"
+        >
+          {/* Connection Collar at exact line terminus */}
+          <div className="absolute -top-4 w-3.5 h-3.5 rounded-full bg-white shadow-[0_0_12px_#ffffff,0_0_20px_#00f298] animate-ping" />
 
-        {/* Large Ambient Radial Glow Flare */}
-        <div
-          className="absolute w-52 h-52 rounded-full blur-3xl opacity-80 pointer-events-none animate-pulse"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(0,242,152,0.7) 0%, rgba(56,189,248,0.5) 35%, rgba(192,132,252,0.3) 65%, transparent 85%)",
-          }}
-        />
-
-        {/* 8 Supernova Ray Beams */}
-        {BLAST_RAYS.map((deg, i) => (
-          <motion.div
-            key={`ray-${i}`}
-            animate={{
-              scaleY: [0.4, 1.35, 0.4],
-              opacity: [0.3, 0.9, 0.3],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              delay: i * 0.12,
-              ease: "easeInOut",
-            }}
-            className="absolute w-[2px] h-32 origin-center pointer-events-none"
+          {/* Large Ambient Radial Glow Flare */}
+          <div
+            className="absolute w-52 h-52 rounded-full blur-3xl opacity-80 pointer-events-none animate-pulse"
             style={{
-              transform: `rotate(${deg}deg)`,
               background:
-                "linear-gradient(to bottom, transparent, #00f298, #ffffff, #38bdf8, transparent)",
-              filter: "drop-shadow(0 0 6px #00f298)",
+                "radial-gradient(circle, rgba(0,242,152,0.7) 0%, rgba(56,189,248,0.5) 35%, rgba(192,132,252,0.3) 65%, transparent 85%)",
             }}
           />
-        ))}
 
-        {/* Concentric Expanding Shockwaves */}
-        <motion.div
-          animate={{ scale: [0.3, 3.5], opacity: [0.95, 0] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
-          className="absolute w-16 h-16 rounded-full border-2 border-[#00f298] shadow-[0_0_20px_#00f298]"
-        />
-        <motion.div
-          animate={{ scale: [0.3, 2.9], opacity: [0.85, 0] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut", delay: 0.55 }}
-          className="absolute w-16 h-16 rounded-full border-2 border-cyan-400 shadow-[0_0_16px_#38bdf8]"
-        />
-        <motion.div
-          animate={{ scale: [0.3, 2.3], opacity: [0.75, 0] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut", delay: 1.1 }}
-          className="absolute w-16 h-16 rounded-full border border-purple-400 shadow-[0_0_14px_#c084fc]"
-        />
-        <motion.div
-          animate={{ scale: [0.3, 1.7], opacity: [0.8, 0] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut", delay: 1.65 }}
-          className="absolute w-16 h-16 rounded-full border border-amber-400 shadow-[0_0_12px_#fbbf24]"
-        />
-
-        {/* 360-Degree Radiating Blast Sparkle Particles */}
-        {BLAST_PARTICLES.map((p) => {
-          const rad = (p.deg * Math.PI) / 180;
-          const targetX = Math.round(Math.cos(rad) * p.dist);
-          const targetY = Math.round(Math.sin(rad) * p.dist);
-
-          return (
+          {/* 8 Supernova Ray Beams */}
+          {BLAST_RAYS.map((deg, i) => (
             <motion.div
-              key={p.id}
-              initial={{ x: 0, y: 0, scale: 0, opacity: 0 }}
+              key={`ray-${i}`}
               animate={{
-                x: [0, targetX],
-                y: [0, targetY],
-                scale: [0, p.isStar ? 1.6 : 1.3, 0],
-                opacity: [1, 1, 0],
-                rotate: p.isStar ? [0, 180] : 0,
+                scaleY: [0.4, 1.35, 0.4],
+                opacity: [0.3, 0.9, 0.3],
               }}
               transition={{
-                duration: 2.2,
+                duration: 2,
                 repeat: Infinity,
-                delay: p.delay,
-                ease: [0.16, 1, 0.3, 1],
+                delay: i * 0.12,
+                ease: "easeInOut",
               }}
-              className="absolute pointer-events-none flex items-center justify-center"
+              className="absolute w-[2px] h-32 origin-center pointer-events-none"
               style={{
-                width: p.size,
-                height: p.size,
-                color: p.color,
+                transform: `rotate(${deg}deg)`,
+                background:
+                  "linear-gradient(to bottom, transparent, #00f298, #ffffff, #38bdf8, transparent)",
+                filter: "drop-shadow(0 0 6px #00f298)",
               }}
-            >
-              {p.isStar ? (
-                <SparkleStarIcon className="w-full h-full drop-shadow-[0_0_10px_currentColor]" />
-              ) : (
-                <div
-                  className="w-full h-full rounded-full"
-                  style={{
-                    backgroundColor: p.color,
-                    boxShadow: `0 0 10px ${p.color}, 0 0 18px ${p.color}`,
-                  }}
-                />
-              )}
-            </motion.div>
-          );
-        })}
+            />
+          ))}
 
-        {/* Central Luminous Energy Core Orb */}
-        <motion.div
-          animate={{ scale: [0.92, 1.25, 0.92], rotate: [0, 180, 360] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="relative w-9 h-9 rounded-full bg-gradient-to-tr from-[#00f298] via-cyan-300 to-white flex items-center justify-center shadow-[0_0_25px_#00f298,0_0_45px_#38bdf8,0_0_70px_#c084fc] z-20"
-        >
-          {/* Inner 4-point Diamond Star */}
-          <SparkleStarIcon
-            className="w-5 h-5 text-slate-950 animate-spin"
-            style={{ animationDuration: "6s" }}
+          {/* Concentric Expanding Shockwaves */}
+          <motion.div
+            animate={{ scale: [0.3, 3.5], opacity: [0.95, 0] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
+            className="absolute w-16 h-16 rounded-full border-2 border-[#00f298] shadow-[0_0_20px_#00f298] pointer-events-none"
           />
-        </motion.div>
-      </motion.div>
+          <motion.div
+            animate={{ scale: [0.3, 2.9], opacity: [0.85, 0] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut", delay: 0.55 }}
+            className="absolute w-16 h-16 rounded-full border-2 border-cyan-400 shadow-[0_0_16px_#38bdf8] pointer-events-none"
+          />
+          <motion.div
+            animate={{ scale: [0.3, 2.3], opacity: [0.75, 0] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut", delay: 1.1 }}
+            className="absolute w-16 h-16 rounded-full border border-purple-400 shadow-[0_0_14px_#c084fc] pointer-events-none"
+          />
+          <motion.div
+            animate={{ scale: [0.3, 1.7], opacity: [0.8, 0] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut", delay: 1.65 }}
+            className="absolute w-16 h-16 rounded-full border border-amber-400 shadow-[0_0_12px_#fbbf24] pointer-events-none"
+          />
 
-      {/* Celebratory Terminus Pill Badge */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className={`mt-8 flex items-center gap-2 px-5 py-2 rounded-full text-[11px] font-mono font-extrabold uppercase tracking-widest border shadow-2xl backdrop-blur-md whitespace-nowrap transition-all duration-300 ${
-          isDark
-            ? "bg-slate-900/95 border-emerald-500/50 text-[#00f298] shadow-emerald-500/20"
-            : "bg-white/95 border-emerald-500/50 text-emerald-600 shadow-emerald-500/20"
-        }`}
-      >
-        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-        <SparkleStarIcon className="w-3.5 h-3.5 text-emerald-400" />
-        <span>Milestones Complete • Adventure Ahead</span>
-        <SparkleStarIcon className="w-3.5 h-3.5 text-emerald-400" />
-      </motion.div>
-    </div>
+          {/* Interactive Blast Shockwave on Click */}
+          {burstActive && (
+            <motion.div
+              initial={{ scale: 0.5, opacity: 1 }}
+              animate={{ scale: 4.5, opacity: 0 }}
+              transition={{ duration: 0.85, ease: "easeOut" }}
+              className="absolute w-20 h-20 rounded-full border-4 border-white shadow-[0_0_35px_#00f298] pointer-events-none z-30"
+            />
+          )}
+
+          {/* 360-Degree Radiating Blast Sparkle Particles */}
+          {BLAST_PARTICLES.map((p) => {
+            const rad = (p.deg * Math.PI) / 180;
+            const targetX = Math.round(Math.cos(rad) * p.dist);
+            const targetY = Math.round(Math.sin(rad) * p.dist);
+
+            return (
+              <motion.div
+                key={p.id}
+                initial={{ x: 0, y: 0, scale: 0, opacity: 0 }}
+                animate={{
+                  x: [0, targetX],
+                  y: [0, targetY],
+                  scale: [0, p.isStar ? 1.6 : 1.3, 0],
+                  opacity: [1, 1, 0],
+                  rotate: p.isStar ? [0, 180] : 0,
+                }}
+                transition={{
+                  duration: 2.2,
+                  repeat: Infinity,
+                  delay: p.delay,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="absolute pointer-events-none flex items-center justify-center"
+                style={{
+                  width: p.size,
+                  height: p.size,
+                  color: p.color,
+                }}
+              >
+                {p.isStar ? (
+                  <SparkleStarIcon className="w-full h-full drop-shadow-[0_0_10px_currentColor]" />
+                ) : (
+                  <div
+                    className="w-full h-full rounded-full"
+                    style={{
+                      backgroundColor: p.color,
+                      boxShadow: `0 0 10px ${p.color}, 0 0 18px ${p.color}`,
+                    }}
+                  />
+                )}
+              </motion.div>
+            );
+          })}
+
+          {/* Central Luminous Energy Core Orb (Interactive Micro-Action) */}
+          <motion.button
+            whileHover={{ scale: 1.25, rotate: 15 }}
+            whileTap={{ scale: 0.85 }}
+            onClick={handleOrbClick}
+            className="relative w-10 h-10 rounded-full bg-gradient-to-tr from-[#00f298] via-cyan-300 to-white flex items-center justify-center shadow-[0_0_25px_#00f298,0_0_45px_#38bdf8,0_0_70px_#c084fc] z-20 cursor-pointer pointer-events-auto group focus:outline-none"
+            title="Click for celebratory fireworks burst!"
+          >
+            {/* Inner 4-point Diamond Star */}
+            <SparkleStarIcon
+              className="w-5 h-5 text-slate-950 animate-spin group-hover:text-emerald-900"
+              style={{ animationDuration: "6s" }}
+            />
+            {/* Floating Spark Pop on Click */}
+            <AnimatePresence>
+              {burstActive && (
+                <motion.span
+                  initial={{ opacity: 1, y: 0, scale: 0.8 }}
+                  animate={{ opacity: 0, y: -30, scale: 1.4 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  className="absolute -top-7 text-xs font-mono font-black text-[#00f298] whitespace-nowrap drop-shadow-[0_0_10px_#00f298] pointer-events-none"
+                >
+                  🎉 Sparkle Blast!
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </motion.button>
+        </motion.div>
+      </div>
+
+      {/* Celebratory Terminus Pill Badge (Fully Responsive Centered on All Screen Devices) */}
+      <div className="absolute -bottom-16 sm:-bottom-20 left-0 right-0 z-30 flex justify-center px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.5 }}
+          className={`flex items-center justify-center gap-1.5 sm:gap-2 px-3.5 sm:px-6 py-2 rounded-full text-[10px] sm:text-xs font-mono font-extrabold uppercase tracking-widest border shadow-2xl backdrop-blur-md max-w-full text-center transition-all duration-300 pointer-events-auto cursor-default ${
+            isDark
+              ? "bg-slate-900/95 border-emerald-500/50 text-[#00f298] shadow-emerald-500/20"
+              : "bg-white/95 border-emerald-500/50 text-emerald-600 shadow-emerald-500/20"
+          }`}
+        >
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping flex-shrink-0" />
+          <SparkleStarIcon className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+          <span className="truncate">Milestones Complete • Adventure Ahead</span>
+          <SparkleStarIcon className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+        </motion.div>
+      </div>
+    </>
   );
 }
 
@@ -351,6 +388,7 @@ const OurStory = () => {
   const { isDark } = useTheme();
   const [selectedEra, setSelectedEra] = useState("all");
   const [expandedMilestones, setExpandedMilestones] = useState({});
+  const [activeCelebration, setActiveCelebration] = useState({});
   const [reactions, setReactions] = useState({
     m1: 38,
     m2: 52,
@@ -367,6 +405,10 @@ const OurStory = () => {
   const handleCelebrate = (id, e) => {
     e?.stopPropagation();
     setReactions((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
+    setActiveCelebration((prev) => ({ ...prev, [id]: true }));
+    setTimeout(() => {
+      setActiveCelebration((prev) => ({ ...prev, [id]: false }));
+    }, 700);
   };
 
   // Active Scroll-linked laser spine
@@ -479,17 +521,17 @@ const OurStory = () => {
                 <motion.div
                   animate={{ y: [0, 8, 0] }}
                   transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                  className="absolute -top-4 -right-4 hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 dark:bg-black/90 text-[#00f298] border border-[#00f298]/40 shadow-xl backdrop-blur-md text-xs font-bold pointer-events-none"
+                  className="absolute -top-3 -right-2 sm:-top-4 sm:-right-4 flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-slate-900/90 dark:bg-black/90 text-[#00f298] border border-[#00f298]/40 shadow-xl backdrop-blur-md text-[10px] sm:text-xs font-bold pointer-events-none"
                 >
-                  <span className="w-2 h-2 rounded-full bg-[#00f298] animate-pulse" />
-                  <span>🚀 100% Ad-Free Edutainment</span>
+                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#00f298] animate-pulse" />
+                  <span>🚀 100% Ad-Free</span>
                 </motion.div>
 
                 {/* Floating Micro-Badge Bottom Left */}
                 <motion.div
                   animate={{ y: [0, -8, 0] }}
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="absolute -bottom-4 -left-4 hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 dark:bg-black/90 text-cyan-300 border border-cyan-400/40 shadow-xl backdrop-blur-md text-xs font-bold pointer-events-none"
+                  className="absolute -bottom-3 -left-2 sm:-bottom-4 sm:-left-4 flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-slate-900/90 dark:bg-black/90 text-cyan-300 border border-cyan-400/40 shadow-xl backdrop-blur-md text-[10px] sm:text-xs font-bold pointer-events-none"
                 >
                   <span>💡 Knowledge That Sticks</span>
                 </motion.div>
@@ -632,7 +674,7 @@ const OurStory = () => {
           {/* ================================================================= */}
           {/* THE MODERN TIMELINE (ALTERNATING ZIG-ZAG WITH ZERO OVERLAP)        */}
           {/* ================================================================= */}
-          <div className="relative w-full max-w-6xl mx-auto pt-8 pb-20 sm:pb-28">
+          <div className="relative w-full max-w-6xl mx-auto pt-8 pb-32 sm:pb-44">
             {/* Luminous Central Spine Base Guide (Desktop: Center 50% | Mobile: Left 28px) */}
             <div className="absolute top-0 bottom-0 w-[2px] rounded-full left-7 sm:left-8 lg:left-1/2 -translate-x-1/2 bg-slate-200 dark:bg-white/10 pointer-events-none" />
 
@@ -660,7 +702,7 @@ const OurStory = () => {
                       layout
                       initial={{ opacity: 0, y: 35 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-60px" }}
+                      viewport={{ once: true, margin: "-20px" }}
                       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                       className={`relative flex flex-col lg:flex-row items-center justify-between w-full group ${
                         isEven ? "lg:flex-row" : "lg:flex-row-reverse"
@@ -726,8 +768,10 @@ const OurStory = () => {
                           </div>
                         )}
 
-                        {/* Mobile Connector Branch (Mobile only) */}
-                        <div className="block lg:hidden absolute -left-7 sm:-left-8 top-8 sm:top-10 w-7 sm:w-8 h-[2px] bg-emerald-500/40 pointer-events-none" />
+                        {/* Mobile & Tablet Connector Branch (Aligned to Spine Node Center) */}
+                        <div className="block lg:hidden absolute left-7 sm:left-8 top-14 sm:top-16 w-7 sm:w-8 h-[2px] bg-gradient-to-r from-emerald-400/80 to-[#00f298] shadow-[0_0_8px_rgba(0,242,152,0.6)] pointer-events-none">
+                          <span className="absolute -top-1 right-0 w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                        </div>
 
                         {/* The Card */}
                         <div
@@ -748,7 +792,7 @@ const OurStory = () => {
                           {/* Card Header Meta Tags & Interactive Reaction */}
                           <div className="flex flex-wrap items-center gap-2 mb-4 relative z-10">
                             {/* Mobile-friendly Year Pill */}
-                            <span className="lg:hidden px-3 py-1 rounded-full text-xs font-mono font-black bg-slate-900 text-white dark:bg-emerald-400 dark:text-slate-950 shadow-sm">
+                            <span className="lg:hidden px-3 py-1 rounded-full text-xs font-mono font-black bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-sm">
                               {item.year}
                             </span>
                             <span
@@ -766,21 +810,36 @@ const OurStory = () => {
                               📅 {item.date}
                             </span>
 
-                            {/* Interactive Celebrate Reaction Counter */}
-                            <motion.button
-                              whileHover={{ scale: 1.12 }}
-                              whileTap={{ scale: 0.88 }}
-                              onClick={(e) => handleCelebrate(item.id, e)}
-                              className={`ml-auto px-2.5 py-1 rounded-full text-xs font-mono font-bold flex items-center gap-1.5 transition-all duration-300 cursor-pointer ${
-                                isDark
-                                  ? "bg-white/5 hover:bg-emerald-500/20 text-[#00f298] border border-white/10 hover:border-emerald-400/40"
-                                  : "bg-slate-100 hover:bg-emerald-50 text-emerald-700 border border-slate-200 hover:border-emerald-300"
-                              }`}
-                              title="Applaud this milestone"
-                            >
-                              <span className="text-xs">✦</span>
-                              <span>{reactions[item.id] || 42}</span>
-                            </motion.button>
+                            {/* Interactive Celebrate Reaction Counter with Floating Particle Pop */}
+                            <div className="relative ml-auto">
+                              <AnimatePresence>
+                                {activeCelebration[item.id] && (
+                                  <motion.span
+                                    initial={{ opacity: 1, y: 0, scale: 0.8 }}
+                                    animate={{ opacity: 0, y: -22, scale: 1.3 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.65, ease: "easeOut" }}
+                                    className="absolute -top-4 right-1 text-xs font-black text-[#00f298] pointer-events-none select-none drop-shadow-[0_0_8px_#00f298]"
+                                  >
+                                    +1 ✦
+                                  </motion.span>
+                                )}
+                              </AnimatePresence>
+                              <motion.button
+                                whileHover={{ scale: 1.12 }}
+                                whileTap={{ scale: 0.88 }}
+                                onClick={(e) => handleCelebrate(item.id, e)}
+                                className={`px-2.5 py-1 rounded-full text-xs font-mono font-bold flex items-center gap-1.5 transition-all duration-300 cursor-pointer ${
+                                  isDark
+                                    ? "bg-white/5 hover:bg-emerald-500/20 text-[#00f298] border border-white/10 hover:border-emerald-400/40"
+                                    : "bg-slate-100 hover:bg-emerald-50 text-emerald-700 border border-slate-200 hover:border-emerald-300"
+                                }`}
+                                title="Applaud this milestone"
+                              >
+                                <span className="text-xs">✦</span>
+                                <span>{reactions[item.id] || 42}</span>
+                              </motion.button>
+                            </div>
                           </div>
 
                           {/* Card Title */}
@@ -808,6 +867,12 @@ const OurStory = () => {
                                 : "bg-slate-50/80 border-slate-200/80 group-hover/card:border-slate-300"
                             }`}
                           >
+                            {/* Futuristic Tech Corner Accents */}
+                            <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-emerald-400/50 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                            <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-emerald-400/50 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                            <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-emerald-400/50 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                            <div className="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-emerald-400/50 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
                             {/* Blooming Glow Behind Image */}
                             <div
                               className="absolute inset-0 opacity-20 group-hover/card:opacity-45 transition-opacity duration-500 blur-2xl rounded-2xl pointer-events-none"
@@ -818,6 +883,27 @@ const OurStory = () => {
                               alt={item.title}
                               className="relative z-10 w-full h-auto max-h-56 sm:max-h-64 object-contain mx-auto rounded-xl drop-shadow-md group-hover/card:scale-105 group-hover/card:-translate-y-1.5 transition-all duration-500"
                             />
+                          </div>
+
+                          {/* Mobile & Tablet Milestone Focus Pill (Ensures takeaway & stats are never lost on small devices) */}
+                          <div className="lg:hidden mt-4 p-3.5 rounded-2xl border border-emerald-500/25 bg-emerald-500/5 dark:bg-emerald-500/10 flex items-start gap-2.5">
+                            <span className="text-sm flex-shrink-0 mt-0.5">✨</span>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-1.5 mb-1">
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                                <span
+                                  className={`text-[10px] font-mono font-black uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r ${item.accentGrad}`}
+                                >
+                                  {item.highlightWord}
+                                </span>
+                              </div>
+                              <div className="text-xs font-bold text-slate-900 dark:text-slate-100 mb-0.5">
+                                {item.stat}
+                              </div>
+                              <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed font-normal">
+                                {item.takeaway}
+                              </p>
+                            </div>
                           </div>
 
                           {/* Card Interactive Action Footer */}
@@ -892,9 +978,9 @@ const OurStory = () => {
                                         initial={{ opacity: 0, x: -10 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: hIdx * 0.08 }}
-                                        className="flex items-start gap-2 text-xs leading-relaxed text-slate-500 dark:text-slate-300"
+                                        className="flex items-start gap-2.5 text-xs leading-relaxed text-slate-600 dark:text-slate-300 hover:text-emerald-500 dark:hover:text-[#00f298] hover:translate-x-1 transition-all duration-200 cursor-default"
                                       >
-                                        <span className="text-[#00f298] font-bold text-sm leading-none">
+                                        <span className="text-[#00f298] font-bold text-sm leading-none mt-0.5">
                                           ✦
                                         </span>
                                         <span>{h}</span>
@@ -912,19 +998,44 @@ const OurStory = () => {
                       {/* ZERO OVERLAP: 56PX+ CLEAN MARGIN FROM CENTER SPINE      */}
                       {/* ======================================================= */}
                       <div
-                        className={`hidden lg:flex lg:w-[calc(50%-56px)] flex-col select-none transition-all duration-500 ${
+                        className={`hidden lg:flex lg:w-[calc(50%-56px)] flex-col select-none transition-all duration-500 relative ${
                           isEven
                             ? "items-start text-left pl-6 xl:pl-10"
                             : "items-end text-right pr-6 xl:pr-10"
                         }`}
                       >
+                        {/* Desktop Luminous Connector Branch to Center Spine */}
+                        {isEven ? (
+                          <div className="hidden lg:block absolute -left-[56px] top-1/2 -translate-y-1/2 w-[56px] h-[2px] bg-gradient-to-r from-transparent to-emerald-500/60 shadow-[0_0_8px_rgba(0,242,152,0.5)] pointer-events-none group-hover/spotlight:h-[3px] transition-all duration-300">
+                            <span className="absolute -top-1 left-0 w-2 h-2 rounded-full bg-emerald-300 animate-ping" />
+                          </div>
+                        ) : (
+                          <div className="hidden lg:block absolute -right-[56px] top-1/2 -translate-y-1/2 w-[56px] h-[2px] bg-gradient-to-l from-transparent to-cyan-500/60 shadow-[0_0_8px_rgba(56,189,248,0.5)] pointer-events-none group-hover/spotlight:h-[3px] transition-all duration-300">
+                            <span className="absolute -top-1 right-0 w-2 h-2 rounded-full bg-cyan-300 animate-ping" />
+                          </div>
+                        )}
+
                         <div className="relative">
+                          {/* Milestone Phase & Index Tag */}
+                          <div
+                            className={`flex items-center gap-2 mb-1.5 ${
+                              isEven ? "justify-start" : "justify-end"
+                            }`}
+                          >
+                            <span className="text-[10px] font-mono font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-[#00f298] border border-emerald-500/25">
+                              Milestone 0{index + 1}
+                            </span>
+                            <span className="text-xs font-mono font-semibold text-slate-400 dark:text-slate-500">
+                              • {item.phase}
+                            </span>
+                          </div>
+
                           {/* Prominent Milestone Year Header */}
                           <span
-                            className={`text-6xl xl:text-7xl font-black font-mono tracking-tighter transition-colors duration-300 block leading-none select-none ${
+                            className={`text-6xl xl:text-7xl font-black font-mono tracking-tighter transition-all duration-300 block leading-none select-none ${
                               isDark
-                                ? "text-slate-400/90 group-hover:text-emerald-300"
-                                : "text-slate-400 group-hover:text-emerald-600"
+                                ? "text-slate-500/80 group-hover:text-emerald-400 group-hover:drop-shadow-[0_0_20px_rgba(0,242,152,0.35)]"
+                                : "text-slate-400 group-hover:text-emerald-600 group-hover:drop-shadow-[0_0_15px_rgba(16,185,129,0.25)]"
                             }`}
                             style={{ fontFamily: "Outfit, sans-serif" }}
                           >
@@ -936,7 +1047,7 @@ const OurStory = () => {
                             whileHover={{ y: -6, scale: 1.03 }}
                             whileTap={{ scale: 0.98 }}
                             transition={{ type: "spring", stiffness: 350, damping: 20 }}
-                            className={`mt-3 relative z-10 max-w-sm rounded-2xl p-5 border backdrop-blur-xl shadow-lg transition-all duration-300 cursor-pointer group/spotlight ${
+                            className={`mt-3 relative z-10 max-w-sm rounded-2xl p-5 border backdrop-blur-xl shadow-lg transition-all duration-300 cursor-pointer group/spotlight text-left ${
                               isDark
                                 ? "bg-slate-900/85 border-white/10 shadow-black/40 hover:border-emerald-400/50 hover:shadow-[0_15px_30px_-10px_rgba(0,242,152,0.2)]"
                                 : "bg-white/95 border-slate-200/90 shadow-slate-200/60 hover:border-emerald-500/50 hover:shadow-[0_15px_30px_-10px_rgba(16,185,129,0.2)]"
@@ -946,43 +1057,68 @@ const OurStory = () => {
                             {/* Ambient Shimmer Sheen on Hover */}
                             <div className="absolute inset-0 -translate-x-full group-hover/spotlight:translate-x-[200%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 dark:via-white/[0.05] to-transparent pointer-events-none rounded-2xl -skew-x-12" />
 
-                            <div
-                              className={`flex items-center gap-2 mb-2 ${
-                                isEven ? "justify-start" : "justify-end"
-                              }`}
-                            >
-                              <span
-                                className="w-2 h-2 rounded-full animate-ping"
-                                style={{
-                                  backgroundColor: item.glowColor.replace(
-                                    /[\d.]+\)$/g,
-                                    "1)"
-                                  ),
-                                }}
-                              />
+                            <div className="flex items-center justify-between gap-2 mb-2">
+                              <div className="flex items-center gap-2">
+                                <span
+                                  className="w-2 h-2 rounded-full animate-ping"
+                                  style={{
+                                    backgroundColor: item.glowColor.replace(
+                                      /[\d.]+\)$/g,
+                                      "1)"
+                                    ),
+                                  }}
+                                />
 
-                              {/* Mini Soundwave Visualizer Bars */}
-                              <div className="flex items-end gap-0.5 h-3">
-                                <span className="w-0.5 h-2 bg-emerald-400 animate-pulse rounded-full" />
-                                <span className="w-0.5 h-3 bg-cyan-400 animate-pulse rounded-full delay-75" />
-                                <span className="w-0.5 h-1.5 bg-purple-400 animate-pulse rounded-full delay-150" />
+                                {/* Mini Dynamic Soundwave Visualizer Bars */}
+                                <div className="flex items-end gap-0.5 h-3">
+                                  <motion.span
+                                    animate={{ height: ["4px", "12px", "6px", "14px", "4px"] }}
+                                    transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+                                    className="w-0.5 bg-emerald-400 rounded-full"
+                                  />
+                                  <motion.span
+                                    animate={{ height: ["12px", "4px", "14px", "8px", "12px"] }}
+                                    transition={{ duration: 1.7, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+                                    className="w-0.5 bg-cyan-400 rounded-full"
+                                  />
+                                  <motion.span
+                                    animate={{ height: ["6px", "14px", "4px", "10px", "6px"] }}
+                                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+                                    className="w-0.5 bg-purple-400 rounded-full"
+                                  />
+                                </div>
+
+                                <span
+                                  className={`text-[11px] font-mono font-extrabold uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r ${item.accentGrad}`}
+                                >
+                                  {item.highlightWord}
+                                </span>
                               </div>
 
-                              <span
-                                className={`text-[11px] font-mono font-extrabold uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r ${item.accentGrad}`}
-                              >
-                                {item.highlightWord}
-                              </span>
-
-                              {/* Celebration Star Indicator */}
-                              <motion.span
-                                whileHover={{ scale: 1.25 }}
-                                whileTap={{ scale: 0.8 }}
-                                className="text-xs text-amber-400 opacity-80 group-hover/spotlight:opacity-100 transition-opacity ml-1"
-                                title="Click to celebrate"
-                              >
-                                ✨
-                              </motion.span>
+                              {/* Celebration Star Clicker with Animated +1 Pop */}
+                              <div className="relative">
+                                <AnimatePresence>
+                                  {activeCelebration[item.id] && (
+                                    <motion.span
+                                      initial={{ opacity: 1, y: 0, scale: 0.8 }}
+                                      animate={{ opacity: 0, y: -20, scale: 1.25 }}
+                                      exit={{ opacity: 0 }}
+                                      transition={{ duration: 0.6, ease: "easeOut" }}
+                                      className="absolute -top-4 right-0 text-xs font-black text-[#00f298] pointer-events-none select-none drop-shadow-[0_0_8px_#00f298]"
+                                    >
+                                      +1 ✦
+                                    </motion.span>
+                                  )}
+                                </AnimatePresence>
+                                <motion.span
+                                  whileHover={{ scale: 1.25 }}
+                                  whileTap={{ scale: 0.8 }}
+                                  className="text-xs text-amber-400 opacity-80 group-hover/spotlight:opacity-100 transition-opacity ml-1 cursor-pointer"
+                                  title="Click to celebrate"
+                                >
+                                  ✨
+                                </motion.span>
+                              </div>
                             </div>
 
                             <div className="text-sm sm:text-base font-bold tracking-tight text-slate-900 dark:text-slate-100 mb-1.5 group-hover/spotlight:text-emerald-500 dark:group-hover/spotlight:text-emerald-300 transition-colors">
