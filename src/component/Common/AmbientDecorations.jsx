@@ -16,8 +16,14 @@ import CuteCursorParticles from './CuteCursorParticles';
 export default function AmbientDecorations({ variant = 'funnel', className = '' }) {
   const containerRef = useRef(null);
 
-  // Smooth mouse-tracking parallax with spring damping via CSS variables
+  // Smooth mouse-tracking parallax with spring damping via CSS variables (desktop only)
   useEffect(() => {
+    const isCoarsePointer =
+      typeof window !== 'undefined' &&
+      window.matchMedia &&
+      window.matchMedia('(pointer: coarse)').matches;
+    if (isCoarsePointer) return;
+
     const container = containerRef.current;
     if (!container) return;
 

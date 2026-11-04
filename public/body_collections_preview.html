@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ID Card Body Background Collections</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @keyframes idCardSwing {
+      0% { transform: rotate(0deg); }
+      20% { transform: rotate(-4.5deg); }
+      42% { transform: rotate(3.5deg); }
+      65% { transform: rotate(-2deg); }
+      84% { transform: rotate(1deg); }
+      100% { transform: rotate(0deg); }
+    }
+    .animate-swing {
+      transform-origin: 50% 0px;
+      animation: idCardSwing 1s cubic-bezier(0.34, 1.3, 0.64, 1);
+    }
+  </style>
+</head>
+<body class="bg-[var(--background)] text-[var(--foreground)] antialiased p-4 sm:p-6 min-h-screen">
+
+  <div class="max-w-6xl mx-auto space-y-6">
+
+    <!-- Header -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-2">
+          ✨ Design System Gallery
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-[var(--foreground)]">
+          Card Body Background Collections
+        </h1>
+        <p class="text-[var(--muted-foreground)] text-sm mt-1 max-w-2xl">
+          Choose the attire and silhouette style for the team member cards when hovering into the hanging ID card state.
+        </p>
+      </div>
+
+      <!-- Theme Switcher -->
+      <div class="flex items-center gap-2 bg-[var(--background)] p-1.5 rounded-xl border border-[var(--border)] shrink-0">
+        <button id="themeLightBtn" onclick="setTheme('light')" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all">
+          ☀️ Light
+        </button>
+        <button id="themeDarkBtn" onclick="setTheme('dark')" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all">
+          🌙 Dark
+        </button>
+      </div>
+    </div>
+
+    <!-- Style Selector Tabs -->
+    <div class="flex flex-wrap gap-2 sm:gap-3 p-1.5 bg-[var(--card)] border border-[var(--border)] rounded-2xl">
+      <button onclick="selectCollection(0)" id="tab-0" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2">
+        <span>🧥</span>
+        <span>1. Tech Hoodie (Developer)</span>
+      </button>
+      <button onclick="selectCollection(1)" id="tab-1" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2">
+        <span>💼</span>
+        <span>2. Slim Blazer (Founder)</span>
+      </button>
+      <button onclick="selectCollection(2)" id="tab-2" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2">
+        <span>👔</span>
+        <span>3. Oxford Shirt (Smart-Casual)</span>
+      </button>
+      <button onclick="selectCollection(3)" id="tab-3" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2">
+        <span>⚡</span>
+        <span>4. Neo-Tech Cyber (AI & Tech)</span>
+      </button>
+      <button onclick="selectCollection(4)" id="tab-4" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2">
+        <span>🎩</span>
+        <span>5. Suit & Silk Tie (Executive)</span>
+      </button>
+    </div>
+
+    <!-- Featured Live Preview -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <!-- Left: Interactive Card Preview (5 cols) -->
+      <div class="lg:col-span-5 flex flex-col items-center">
+        <div class="text-xs font-semibold text-[var(--muted-foreground)] uppercase tracking-wider mb-3 flex items-center gap-2">
+          <span>Live Card Preview</span>
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        </div>
+
+        <!-- The Card Stage -->
+        <div id="cardStage" class="relative w-[340px] h-[410px] rounded-3xl border-2 border-emerald-500 shadow-2xl overflow-hidden transition-all duration-300">
+          
+          <!-- Background SVG Body Container -->
+          <div id="svgContainer" class="absolute inset-0 pointer-events-none z-0">
+            <!-- Dynamic SVG injected here -->
+          </div>
+
+          <!-- Hanging ID Card Badge (Perfect Alignment) -->
+          <div class="absolute inset-x-0 top-[99px] flex flex-col items-center pointer-events-none z-20">
+            <div id="hangingBadge" class="flex flex-col items-center origin-top animate-swing pointer-events-auto">
+              <!-- Top Slot Tab -->
+              <div class="w-8 h-2.5 rounded-t-md bg-slate-200 dark:bg-slate-700 border border-b-0 border-slate-300 dark:border-slate-600 flex items-center justify-center shadow-xs -mb-[1px]">
+                <span class="w-4 h-1 rounded-full bg-slate-500/90 dark:bg-slate-900 block shadow-inner"></span>
+              </div>
+
+              <!-- ID Badge Pass -->
+              <div class="w-[236px] bg-white/95 dark:bg-[#0f1422]/95 backdrop-blur-md rounded-2xl p-3 shadow-[0_14px_35px_-4px_rgba(0,0,0,0.38)] border border-slate-200/90 dark:border-slate-700/80 flex flex-col items-center text-center">
+                <!-- Top Emerald Accent Bar -->
+                <div class="w-8 h-1 rounded-full bg-emerald-500/80 mb-2"></div>
+
+                <!-- Photo in Badge -->
+                <div class="relative w-20 h-20 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 border-2 border-emerald-500/40 shadow-md shrink-0">
+                  <img src="/static/media/yogeeswaran.6e1dd144eb692eebf28f.webp" alt="Team member" class="w-full h-full object-cover">
+                  <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/25 pointer-events-none"></div>
+                </div>
+
+                <!-- Name -->
+                <h4 class="font-bold text-slate-900 dark:text-white text-base mt-1.5 leading-snug">
+                  Yogeeswaran N
+                </h4>
+
+                <!-- Designation -->
+                <div class="flex items-center justify-center mt-0.5">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/50">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    CPO & Full Stack Developer
+                  </span>
+                </div>
+
+                <!-- Bio -->
+                <p class="text-[11px] text-slate-600 dark:text-slate-300 font-normal leading-relaxed text-center mt-1.5 line-clamp-2 px-1">
+                  Architecting scalable full-stack architectures, mobile ecosystems, and high-performance APIs.
+                </p>
+
+                <!-- Button -->
+                <div class="mt-2 pt-1.5 border-t border-slate-100 dark:border-slate-800/80 w-full flex justify-center">
+                  <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-slate-900 text-white text-[11px] font-semibold shadow-xs">
+                    Connect ↗
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="retriggerSwing()" class="mt-4 px-4 py-1.5 rounded-lg text-xs font-medium border border-[var(--border)] hover:bg-[var(--card)] transition-colors text-[var(--muted-foreground)]">
+          🔄 Re-play Swing Animation
+        </button>
+      </div>
+
+      <!-- Right: Collection Description & Details (7 cols) -->
+      <div class="lg:col-span-7 bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-sm space-y-5">
+        <div>
+          <div class="flex items-center justify-between">
+            <span id="colTag" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              Style 1 of 5
+            </span>
+            <span id="colVibe" class="text-xs text-[var(--muted-foreground)] font-medium"></span>
+          </div>
+          <h2 id="colTitle" class="text-2xl font-bold text-[var(--foreground)] mt-2"></h2>
+          <p id="colDesc" class="text-sm text-[var(--muted-foreground)] leading-relaxed mt-2"></p>
+        </div>
+
+        <div class="border-t border-[var(--border)] pt-4 space-y-3">
+          <h3 class="text-xs font-bold text-[var(--foreground)] uppercase tracking-wider">Key Visual Elements:</h3>
+          <ul id="colFeatures" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-[var(--muted-foreground)]">
+          </ul>
+        </div>
+
+        <div class="border-t border-[var(--border)] pt-4">
+          <h3 class="text-xs font-bold text-[var(--foreground)] uppercase tracking-wider mb-2">Why It Fits Defo:</h3>
+          <p id="colWhy" class="text-xs text-[var(--muted-foreground)] leading-relaxed"></p>
+        </div>
+
+        <div class="pt-2 flex items-center gap-3">
+          <div class="text-xs text-[var(--muted-foreground)]">
+            💡 <em>Tell me in chat: <strong>"Apply Style 1"</strong>, <strong>"Apply Style 4"</strong>, or tell me which elements you'd like combined!</em>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Side-By-Side Visual Comparison Grid -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-sm space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="font-bold text-lg text-[var(--foreground)]">All 5 Attire Collections Side-by-Side</h3>
+        <span class="text-xs text-[var(--muted-foreground)]">Click any card below to preview in detail above</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <!-- Mini Cards 0 to 4 -->
+        <div onclick="selectCollection(0)" class="mini-card cursor-pointer group p-3 rounded-2xl border border-[var(--border)] hover:border-emerald-500 transition-all text-center space-y-2">
+          <div class="h-44 rounded-xl overflow-hidden bg-slate-900 relative flex items-center justify-center">
+            <div id="mini-svg-0" class="w-full h-full"></div>
+          </div>
+          <div class="text-xs font-bold text-[var(--foreground)] group-hover:text-emerald-400 transition-colors">1. Tech Hoodie</div>
+          <div class="text-[11px] text-[var(--muted-foreground)]">Developer / Startup</div>
+        </div>
+
+        <div onclick="selectCollection(1)" class="mini-card cursor-pointer group p-3 rounded-2xl border border-[var(--border)] hover:border-emerald-500 transition-all text-center space-y-2">
+          <div class="h-44 rounded-xl overflow-hidden bg-slate-900 relative flex items-center justify-center">
+            <div id="mini-svg-1" class="w-full h-full"></div>
+          </div>
+          <div class="text-xs font-bold text-[var(--foreground)] group-hover:text-emerald-400 transition-colors">2. Slim Blazer</div>
+          <div class="text-[11px] text-[var(--muted-foreground)]">Founder / Executive</div>
+        </div>
+
+        <div onclick="selectCollection(2)" class="mini-card cursor-pointer group p-3 rounded-2xl border border-[var(--border)] hover:border-emerald-500 transition-all text-center space-y-2">
+          <div class="h-44 rounded-xl overflow-hidden bg-slate-900 relative flex items-center justify-center">
+            <div id="mini-svg-2" class="w-full h-full"></div>
+          </div>
+          <div class="text-xs font-bold text-[var(--foreground)] group-hover:text-emerald-400 transition-colors">3. Oxford Shirt</div>
+          <div class="text-[11px] text-[var(--muted-foreground)]">Smart Casual / Design</div>
+        </div>
+
+        <div onclick="selectCollection(3)" class="mini-card cursor-pointer group p-3 rounded-2xl border border-[var(--border)] hover:border-emerald-500 transition-all text-center space-y-2">
+          <div class="h-44 rounded-xl overflow-hidden bg-slate-900 relative flex items-center justify-center">
+            <div id="mini-svg-3" class="w-full h-full"></div>
+          </div>
+          <div class="text-xs font-bold text-[var(--foreground)] group-hover:text-emerald-400 transition-colors">4. Neo-Tech Cyber</div>
+          <div class="text-[11px] text-[var(--muted-foreground)]">AI & Futuristic Tech</div>
+        </div>
+
+        <div onclick="selectCollection(4)" class="mini-card cursor-pointer group p-3 rounded-2xl border border-[var(--border)] hover:border-emerald-500 transition-all text-center space-y-2">
+          <div class="h-44 rounded-xl overflow-hidden bg-slate-900 relative flex items-center justify-center">
+            <div id="mini-svg-4" class="w-full h-full"></div>
+          </div>
+          <div class="text-xs font-bold text-[var(--foreground)] group-hover:text-emerald-400 transition-colors">5. Suit & Silk Tie</div>
+          <div class="text-[11px] text-[var(--muted-foreground)]">Classic Formal Executive</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let currentTheme = 'dark';
+    let currentSelection = 0;
+
+    const COLLECTIONS = [
+      {
+        id: 'hoodie',
+        title: 'Collection 1: Tech Zip Hoodie & Cotton Tee',
+        tag: 'Modern Startup Style',
+        vibe: 'Silicon Valley Builder / Engineer',
+        desc: 'The iconic modern tech builder look: a matte athletic zip hoodie with drawstrings over a soft crewneck cotton tee, comfortable joggers/chinos, and an ergonomic waist. Conveys authentic startup builder culture—approachable, high-output, and modern.',
+        features: [
+          '✨ Athletic zipper track down chest',
+          '✨ Silver metal-tipped hood drawstrings',
+          '✨ Ribbed cuff & hem contours',
+          '✨ Cotton crewneck t-shirt collar',
+          '✨ Casual dark denim/chino waistband',
+          '✨ Lanyard drapes seamlessly over hoodie'
+        ],
+        why: 'Perfect match for a fast-moving infotainment tech team. Fits both engineering and creative roles with high relatability.',
+        renderSvg: (dark, idPrefix) => `
+          <svg viewBox="0 0 340 410" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
+            <defs>
+              <linearGradient id="${idPrefix}-bg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="${dark ? '#111827' : '#e2e8f0'}"/>
+                <stop offset="100%" stopColor="${dark ? '#030712' : '#cbd5e1'}"/>
+              </linearGradient>
+              <linearGradient id="${idPrefix}-hoodie" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="${dark ? '#1f2937' : '#334155'}"/>
+                <stop offset="100%" stopColor="${dark ? '#111827' : '#1e293b'}"/>
+              </linearGradient>
+              <linearGradient id="${idPrefix}-tee" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="${dark ? '#374151' : '#f8fafc'}"/>
+                <stop offset="100%" stopColor="${dark ? '#1f2937' : '#e2e8f0'}"/>
+              </linearGradient>
+              <linearGradient id="${idPrefix}-skin" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="${dark ? '#523d33' : '#ebd0bd'}"/>
+                <stop offset="100%" stopColor="${dark ? '#38271e' : '#cf9e86'}"/>
+              </linearGradient>
+              <linearGradient id="${idPrefix}-lanyard" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#00f298"/><stop offset="50%" stopColor="#059669"/><stop offset="100%" stopColor="#00d282"/>
+              </linearGradient>
+            </defs>
+            <rect width="340" height="410" fill="url(#${idPrefix}-bg)"/>
+            <!-- Shoulders & Hoodie Body -->
+            <path d="M 142 30 C 105 36, 55 52, 16 82 C 6 88, 0 99, 0 112 L 0 410 L 340 410 L 340 112 C 340 99, 334 88, 324 82 C 285 52, 235 36, 198 30 Z" fill="url(#${idPrefix}-hoodie)"/>
+            <!-- Hood draped on shoulders -->
+            <path d="M 136 28 C 110 38, 92 65, 96 100 C 100 115, 120 120, 138 95 Z" fill="${dark ? '#111827' : '#1e293b'}" opacity="0.7"/>
+            <path d="M 204 28 C 230 38, 248 65, 244 100 C 240 115, 220 120, 202 95 Z" fill="${dark ? '#111827' : '#1e293b'}" opacity="0.7"/>
+            <!-- Neck & Crewneck Tee -->
+            <path d="M 142 0 L 142 28 C 142 40, 154 48, 170 48 C 186 48, 198 40, 198 28 L 198 0 Z" fill="url(#${idPrefix}-skin)"/>
+            <path d="M 136 34 C 146 56, 194 56, 204 34 L 204 70 C 194 85, 146 85, 136 70 Z" fill="url(#${idPrefix}-tee)"/>
+            <!-- Center Zipper Track -->
+            <line x1="170" y1="65" x2="170" y2="355" stroke="${dark ? '#64748b' : '#94a3b8'}" stroke-width="2.5" stroke-dasharray="2 1"/>
+            <!-- Metal Zipper Pull at chest -->
+            <rect x="168" y="70" width="4" height="9" rx="1" fill="#cbd5e1"/>
+            <!-- Hoodie Drawstrings -->
+            <path d="M 148 45 C 146 75, 142 110, 145 130" stroke="#00f298" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <rect x="143.5" y="128" width="3" height="8" rx="1" fill="#cbd5e1"/>
+            <path d="M 192 45 C 194 75, 198 110, 195 130" stroke="#00f298" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <rect x="193.5" y="128" width="3" height="8" rx="1" fill="#cbd5e1"/>
+            <!-- Kangaroo Pocket Arcs -->
+            <path d="M 65 310 C 95 270, 140 260, 165 260" stroke="${dark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.15)'}" stroke-width="1.5" fill="none"/>
+            <path d="M 275 310 C 245 270, 200 260, 175 260" stroke="${dark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.15)'}" stroke-width="1.5" fill="none"/>
+            <!-- Ribbed Hem Waist -->
+            <rect x="0" y="348" width="340" height="22" fill="${dark ? '#0f172a' : '#1e293b'}"/>
+            <line x1="0" y1="350" x2="340" y2="350" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <!-- Denim/Pants from Waist to Hip -->
+            <rect x="0" y="370" width="340" height="40" fill="${dark ? '#080c14' : '#0f172a'}"/>
+            <line x1="170" y1="370" x2="170" y2="410" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+            <!-- Defo Lanyard -->
+            <path d="M 143 14 C 146 32, 154 54, 166 74 L 171 74 C 160 54, 151 32, 148 14 Z" fill="url(#${idPrefix}-lanyard)"/>
+            <path d="M 197 14 C 194 32, 186 54, 174 74 L 169 74 C 180 54, 189 32, 192 14 Z" fill="url(#${idPrefix}-lanyard)"/>
+            <rect x="165" y="73" width="10" height="8" rx="1.5" fill="#cbd5e1" stroke="#475569" stroke-width="0.5"/>
+            <circle cx="170" cy="85" r="3.5" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+            <path d="M 170 98.5 L 170 105" stroke="#334155" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        `
+      },
+      {
+        id: 'blazer',
+        title: 'Collection 2: Slim-Cut Tailored Blazer',
+        tag: 'Executive Founder Style',
+        vibe: 'Modern Tech Founder / Keynote Speaker',
+        desc: 'Refined, sharp, and confident. Features modern narrow notch lapels, a crisp unbuttoned spread collar dress shirt, angled breast pocket with a folded white silk pocket square, and tailored waistband. Gives an unmistakable executive posture.',
+        features: [
+          '✨ Narrow modern Italian notch lapels',
+          '✨ Spread collar dress shirt with collar stand',
+          '✨ Folded silk pocket square on chest',
+          '✨ Charcoal navy tailored wool texture',
+          '✨ Silver prong leather belt buckle at waist',
+          '✨ Lanyard drapes symmetrically over collar'
+        ],
+        why: 'Gives the team a sharp, world-class executive finish while keeping the open collar fresh and approachable.',
+        renderSvg: (dark, idPrefix) => `
+          <svg viewBox="0 0 340 410" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
+            <defs>
+              <linearGradient id="${idPrefix}-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="${dark ? '#111827' : '#f1f5f9'}"/><stop offset="100%" stopColor="${dark ? '#030712' : '#cbd5e1'}"/></linearGradient>
+              <linearGradient id="${idPrefix}-blazer" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="${dark ? '#121826' : '#1e293b'}"/><stop offset="100%" stopColor="${dark ? '#070a12' : '#0f172a'}"/></linearGradient>
+              <linearGradient id="${idPrefix}-shirt" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stopColor="${dark ? '#1e283b' : '#f8fafc'}"/><stop offset="50%" stopColor="${dark ? '#29354d' : '#ffffff'}"/><stop offset="100%" stopColor="${dark ? '#1e283b' : '#f1f5f9'}"/></linearGradient>
+              <linearGradient id="${idPrefix}-skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="${dark ? '#523d33' : '#ebd0bd'}"/><stop offset="100%" stopColor="${dark ? '#38271e' : '#cf9e86'}"/></linearGradient>
+              <linearGradient id="${idPrefix}-lanyard" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#00f298"/><stop offset="50%" stopColor="#059669"/><stop offset="100%" stopColor="#00d282"/></linearGradient>
+            </defs>
+            <rect width="340" height="410" fill="url(#${idPrefix}-bg)"/>
+            <!-- Blazer Body -->
+            <path d="M 142 26 C 105 32, 55 48, 16 78 C 6 84, 0 95, 0 108 L 0 410 L 340 410 L 340 108 C 340 95, 334 84, 324 78 C 285 48, 235 32, 198 26 Z" fill="url(#${idPrefix}-blazer)"/>
+            <!-- Shirt V-shape -->
+            <path d="M 142 30 L 118 90 L 156 220 L 156 350 L 184 350 L 184 220 L 222 90 L 198 30 Z" fill="url(#${idPrefix}-shirt)"/>
+            <!-- Neck -->
+            <path d="M 142 0 L 142 26 C 142 38, 154 48, 170 48 C 186 48, 198 38, 198 26 L 198 0 Z" fill="url(#${idPrefix}-skin)"/>
+            <!-- Shirt Collar Wings -->
+            <path d="M 142 22 L 157 66 L 166 48 L 149 20 Z" fill="${dark ? '#2a3750' : '#ffffff'}"/>
+            <path d="M 198 22 L 183 66 L 174 48 L 191 20 Z" fill="${dark ? '#2a3750' : '#ffffff'}"/>
+            <!-- Lapels -->
+            <path d="M 140 28 L 116 88 L 128 94 L 158 205 L 156 350 L 140 350 L 134 220 L 104 96 Z" fill="${dark ? '#1a2334' : '#334155'}"/>
+            <path d="M 200 28 L 224 88 L 212 94 L 182 205 L 184 350 L 200 350 L 206 220 L 236 96 Z" fill="${dark ? '#1a2334' : '#334155'}"/>
+            <!-- Pocket Square -->
+            <rect x="58" y="136" width="44" height="4" rx="1" fill="${dark ? '#1a2335' : '#334155'}"/>
+            <path d="M 68 136 L 78 126 L 86 133 L 90 128 L 96 136 Z" fill="#ffffff"/>
+            <!-- Belt & Buckle -->
+            <rect x="0" y="350" width="340" height="18" fill="#18181b"/>
+            <rect x="153" y="347" width="34" height="24" rx="3.5" fill="#cbd5e1" stroke="#475569" stroke-width="0.8"/>
+            <rect x="158" y="352" width="24" height="14" rx="2" fill="#18181b"/>
+            <rect x="169" y="350" width="2.5" height="18" rx="1" fill="#ffffff"/>
+            <!-- Trousers to Hip -->
+            <rect x="0" y="368" width="340" height="42" fill="${dark ? '#080c14' : '#0f172a'}"/>
+            <line x1="170" y1="368" x2="170" y2="410" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+            <!-- Defo Lanyard -->
+            <path d="M 143 14 C 146 32, 154 54, 166 74 L 171 74 C 160 54, 151 32, 148 14 Z" fill="url(#${idPrefix}-lanyard)"/>
+            <path d="M 197 14 C 194 32, 186 54, 174 74 L 169 74 C 180 54, 189 32, 192 14 Z" fill="url(#${idPrefix}-lanyard)"/>
+            <rect x="165" y="73" width="10" height="8" rx="1.5" fill="#cbd5e1" stroke="#475569" stroke-width="0.5"/>
+            <circle cx="170" cy="85" r="3.5" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+            <path d="M 170 98.5 L 170 105" stroke="#334155" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        `
+      },
+      {
+        id: 'oxford',
+        title: 'Collection 3: Smart-Casual Oxford / Denim Shirt',
+        tag: 'Creative Agency / Studio Vibe',
+        vibe: 'Product Designer & Full-Stack Creative',
+        desc: 'Relaxed yet tailored button-down shirt without a jacket. Features visible shoulder yoke seams, buttoned chest pocket with a pen slip, center placket with mother-of-pearl buttons, and a clean leather belt tucking into modern chinos.',
+        features: [
+          '✨ Button-down casual collar with roll',
+          '✨ Left chest utility pocket with pen slot',
+          '✨ Shoulder yoke & armhole stitch lines',
+          '✨ Pearlescent shirt buttons down placket',
+          '✨ Cognac / dark brown leather belt with brass buckle',
+          '✨ Clean relaxed silhouette without a jacket'
+        ],
+        why: 'Highlights the creative, hands-on, human side of product development. Very friendly and relatable.',
+        renderSvg: (dark, idPrefix) => `
+          <svg viewBox="0 0 340 410" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
+            <defs>
+              <linearGradient id="${idPrefix}-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="${dark ? '#0f172a' : '#f8fafc'}"/><stop offset="100%" stopColor="${dark ? '#020617' : '#e2e8f0'}"/></linearGradient>
+              <linearGradient id="${idPrefix}-shirt" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="${dark ? '#1e3a5f' : '#cbd5e1'}"/><stop offset="100%" stopColor="${dark ? '#0f1e33' : '#94a3b8'}"/></linearGradient>
+              <linearGradient id="${idPrefix}-skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="${dark ? '#523d33' : '#ebd0bd'}"/><stop offset="100%" stopColor="${dark ? '#38271e' : '#cf9e86'}"/></linearGradient>
+              <linearGradient id="${idPrefix}-lanyard" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#00f298"/><stop offset="50%" stopColor="#059669"/><stop offset="100%" stopColor="#00d282"/></linearGradient>
+            </defs>
+            <rect width="340" height="410" fill="url(#${idPrefix}-bg)"/>
+            <!-- Shirt Torso -->
+            <path d="M 142 26 C 105 32, 55 48, 16 78 C 6 84, 0 95, 0 108 L 0 350 L 340 350 L 340 108 C 340 95, 334 84, 324 78 C 285 48, 235 32, 198 26 Z" fill="url(#${idPrefix}-shirt)"/>
+            <!-- Shoulder Yoke Seams -->
+            <path d="M 30 90 L 140 50" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/>
+            <path d="M 310 90 L 200 50" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/>
+            <!-- Neck -->
+            <path d="M 142 0 L 142 26 C 142 38, 154 48, 170 48 C 186 48, 198 38, 198 26 L 198 0 Z" fill="url(#${idPrefix}-skin)"/>
+            <!-- Casual Collar Wings -->
+            <path d="M 142 22 L 157 66 L 166 48 L 149 20 Z" fill="${dark ? '#25446f' : '#e2e8f0'}"/>
+            <circle cx="155" cy="62" r="1.5" fill="#ffffff"/>
+            <path d="M 198 22 L 183 66 L 174 48 L 191 20 Z" fill="${dark ? '#25446f' : '#e2e8f0'}"/>
+            <circle cx="185" cy="62" r="1.5" fill="#ffffff"/>
+            <!-- Placket & Buttons -->
+            <rect x="165" y="48" width="10" height="302" fill="${dark ? '#162b45' : '#cbd5e1'}"/>
+            ${[85, 125, 165, 205, 245, 285, 325].map(y => `<circle cx="170" cy="${y}" r="2.5" fill="#ffffff" stroke="#94a3b8" stroke-width="0.5"/>`).join('')}
+            <!-- Chest Pocket -->
+            <rect x="55" y="130" width="42" height="48" rx="2" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/>
+            <line x1="72" y1="120" x2="72" y2="135" stroke="#cbd5e1" stroke-width="2"/><!-- Pen clip -->
+            <!-- Belt & Chinos to Hip -->
+            <rect x="0" y="350" width="340" height="18" fill="#451a03"/><!-- Cognac Leather -->
+            <rect x="153" y="347" width="34" height="24" rx="3.5" fill="#d97706" stroke="#b45309" stroke-width="0.8"/>
+            <rect x="158" y="352" width="24" height="14" rx="2" fill="#451a03"/>
+            <rect x="169" y="350" width="2.5" height="18" rx="1" fill="#fef3c7"/>
+            <rect x="0" y="368" width="340" height="42" fill="${dark ? '#172554' : '#1e293b'}"/>
+            <!-- Defo Lanyard -->
+            <path d="M 143 14 C 146 32, 154 54, 166 74 L 171 74 C 160 54, 151 32, 148 14 Z" fill="url(#${idPrefix}-lanyard)"/>
+            <path d="M 197 14 C 194 32, 186 54, 174 74 L 169 74 C 180 54, 189 32, 192 14 Z" fill="url(#${idPrefix}-lanyard)"/>
+            <rect x="165" y="73" width="10" height="8" rx="1.5" fill="#cbd5e1" stroke="#475569" stroke-width="0.5"/>
+            <circle cx="170" cy="85" r="3.5" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+            <path d="M 170 98.5 L 170 105" stroke="#334155" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        `
+      },
+      {
+        id: 'cyber',
+        title: 'Collection 4: Neo-Tech Cybernetic Suit',
+        tag: 'Futuristic AI & Sci-Fi Style',
+        vibe: 'Autonomous AI / Next-Gen Cyber Engineer',
+        desc: 'Sleek carbon-fiber ballistic plates, glowing neon circuit channels in Defo Emerald (#00f298) and Cyan (#00f6ff), futuristic collar guard, and magnetic utility belt. Looks extraordinary for tech-heavy roles, AntiGravity, and Claude!',
+        features: [
+          '✨ Carbon-weave ballistic armor shoulders',
+          '✨ Glowing emerald & cyan circuit traces',
+          '✨ High-tech modular collar neckpiece',
+          '✨ Chest reactor / biometric indicator glows',
+          '✨ Tactical magnetic latch belt at waist',
+          '✨ Luminescent holographic lanyard ribbon'
+        ],
+        why: 'Incredible visual flair that highlights Defo as an AI-powered cutting-edge infotainment platform. Especially unforgettable for AI team cards!',
+        renderSvg: (dark, idPrefix) => `
+          <svg viewBox="0 0 340 410" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
+            <defs>
+              <linearGradient id="${idPrefix}-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#050811"/><stop offset="100%" stopColor="#000000"/></linearGradient>
+              <linearGradient id="${idPrefix}-armor" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#0f172a"/><stop offset="50%" stopColor="#1e293b"/><stop offset="100%" stopColor="#090d16"/></linearGradient>
+              <linearGradient id="${idPrefix}-neon" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stopColor="#00f298"/><stop offset="100%" stopColor="#00f6ff"/></linearGradient>
+            </defs>
+            <rect width="340" height="410" fill="url(#${idPrefix}-bg)"/>
+            <!-- Cyber Torso Armor -->
+            <path d="M 142 26 C 105 32, 55 48, 16 78 C 6 84, 0 95, 0 108 L 0 410 L 340 410 L 340 108 C 340 95, 334 84, 324 78 C 285 48, 235 32, 198 26 Z" fill="url(#${idPrefix}-armor)"/>
+            <!-- Neon Edge Traces -->
+            <path d="M 142 26 C 105 32, 55 48, 16 78" stroke="#00f298" stroke-width="2" filter="drop-shadow(0 0 6px #00f298)"/>
+            <path d="M 198 26 C 235 32, 285 48, 324 78" stroke="#00f6ff" stroke-width="2" filter="drop-shadow(0 0 6px #00f6ff)"/>
+            <!-- Shoulder Armor Plates -->
+            <polygon points="18,80 50,75 75,130 35,160" fill="#1e293b" stroke="#00f298" stroke-width="0.8"/>
+            <polygon points="322,80 290,75 265,130 305,160" fill="#1e293b" stroke="#00f6ff" stroke-width="0.8"/>
+            <!-- Tech Collar Guard & Neck -->
+            <path d="M 142 0 L 142 26 C 142 38, 154 48, 170 48 C 186 48, 198 38, 198 26 L 198 0 Z" fill="#1e293b"/>
+            <path d="M 136 24 L 150 56 L 164 42 Z" fill="#0f172a" stroke="#00f298" stroke-width="1"/>
+            <path d="M 204 24 L 190 56 L 176 42 Z" fill="#0f172a" stroke="#00f6ff" stroke-width="1"/>
+            <!-- Glowing Circuit Traces down chest -->
+            <path d="M 85 140 L 115 170 L 115 280 L 145 320" stroke="#00f298" stroke-width="1.5" stroke-dasharray="8 4" fill="none" opacity="0.8"/>
+            <path d="M 255 140 L 225 170 L 225 280 L 195 320" stroke="#00f6ff" stroke-width="1.5" stroke-dasharray="8 4" fill="none" opacity="0.8"/>
+            <!-- Tactical Belt -->
+            <rect x="0" y="348" width="340" height="20" fill="#090d16"/>
+            <rect x="150" y="345" width="40" height="26" rx="4" fill="#1e293b" stroke="#00f298" stroke-width="1.5"/>
+            <circle cx="170" cy="358" r="4" fill="#00f298" filter="drop-shadow(0 0 4px #00f298)"/>
+            <rect x="0" y="368" width="340" height="42" fill="#030712"/>
+            <!-- Glowing Lanyard -->
+            <path d="M 143 14 C 146 32, 154 54, 166 74 L 171 74 C 160 54, 151 32, 148 14 Z" fill="url(#${idPrefix}-neon)"/>
+            <path d="M 197 14 C 194 32, 186 54, 174 74 L 169 74 C 180 54, 189 32, 192 14 Z" fill="url(#${idPrefix}-neon)"/>
+            <rect x="165" y="73" width="10" height="8" rx="1.5" fill="#00f298" filter="drop-shadow(0 0 5px #00f298)"/>
+            <circle cx="170" cy="85" r="3.5" fill="none" stroke="#00f6ff" stroke-width="1.5"/>
+            <path d="M 170 98.5 L 170 105" stroke="#00f298" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        `
+      },
+      {
+        id: 'tie',
+        title: 'Collection 5: Classic Executive with Silk Tie',
+        tag: 'Corporate & Boardroom Style',
+        vibe: 'Formal Leadership / Institutional Partner',
+        desc: 'Traditional high-prestige formal attire. Features wide peak lapels, a crisp buttoned wing collar, and an elegant emerald/navy diagonal-stripe silk necktie that runs down the chest and peeks out cleanly behind the hanging ID card badge.',
+        features: [
+          '✨ Formal Windsor knot silk necktie',
+          '✨ Defo Emerald & Navy diagonal tie stripes',
+          '✨ Elegant wide peak lapels with buttonhole',
+          '✨ Stiff white wing collar dress shirt',
+          '✨ Formal dress trousers with satin waistband',
+          '✨ Executive lanyard framing the silk tie'
+        ],
+        why: 'Commands instant authority and trust for institutional partners, enterprise investors, and formal leadership.',
+        renderSvg: (dark, idPrefix) => `
+          <svg viewBox="0 0 340 410" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" class="w-full h-full">
+            <defs>
+              <linearGradient id="${idPrefix}-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="${dark ? '#111827' : '#f1f5f9'}"/><stop offset="100%" stopColor="${dark ? '#030712' : '#cbd5e1'}"/></linearGradient>
+              <linearGradient id="${idPrefix}-suit" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="${dark ? '#0f172a' : '#1e293b'}"/><stop offset="100%" stopColor="${dark ? '#020617' : '#0f172a'}"/></linearGradient>
+              <linearGradient id="${idPrefix}-tie" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#00f298"/><stop offset="50%" stopColor="#0284c7"/><stop offset="100%" stopColor="#059669"/></linearGradient>
+              <linearGradient id="${idPrefix}-skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="${dark ? '#523d33' : '#ebd0bd'}"/><stop offset="100%" stopColor="${dark ? '#38271e' : '#cf9e86'}"/></linearGradient>
+              <linearGradient id="${idPrefix}-lanyard" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#00f298"/><stop offset="50%" stopColor="#059669"/><stop offset="100%" stopColor="#00d282"/></linearGradient>
+            </defs>
+            <rect width="340" height="410" fill="url(#${idPrefix}-bg)"/>
+            <!-- Suit Body -->
+            <path d="M 142 26 C 105 32, 55 48, 16 78 C 6 84, 0 95, 0 108 L 0 410 L 340 410 L 340 108 C 340 95, 334 84, 324 78 C 285 48, 235 32, 198 26 Z" fill="url(#${idPrefix}-suit)"/>
+            <!-- White Dress Shirt V -->
+            <polygon points="142,30 115,95 156,240 184,240 225,95 198,30" fill="${dark ? '#1e293b' : '#ffffff'}"/>
+            <!-- Neck -->
+            <path d="M 142 0 L 142 26 C 142 38, 154 48, 170 48 C 186 48, 198 38, 198 26 L 198 0 Z" fill="url(#${idPrefix}-skin)"/>
+            <!-- Stiff White Collar -->
+            <polygon points="144,24 162,50 170,46 150,22" fill="#ffffff" filter="drop-shadow(0 2px 2px rgba(0,0,0,0.2))"/>
+            <polygon points="196,24 178,50 170,46 190,22" fill="#ffffff" filter="drop-shadow(0 2px 2px rgba(0,0,0,0.2))"/>
+            <!-- Windsor Tie Knot -->
+            <polygon points="163,47 177,47 174,62 166,62" fill="url(#${idPrefix}-tie)"/>
+            <!-- Silk Tie Blade down chest -->
+            <polygon points="166,62 174,62 179,340 170,355 161,340" fill="url(#${idPrefix}-tie)"/>
+            <!-- Diagonal Stripes on Tie -->
+            <line x1="165" y1="80" x2="175" y2="90" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+            <line x1="164" y1="120" x2="176" y2="132" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+            <line x1="163" y1="160" x2="177" y2="174" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+            <!-- Wide Peak Lapels -->
+            <path d="M 140 28 L 108 95 L 126 102 L 158 220 L 156 350 L 138 350 L 128 230 L 98 104 Z" fill="${dark ? '#1a2334' : '#334155'}"/>
+            <path d="M 200 28 L 232 95 L 214 102 L 182 220 L 184 350 L 202 350 L 212 230 L 242 104 Z" fill="${dark ? '#1a2334' : '#334155'}"/>
+            <!-- Belt & Buckle -->
+            <rect x="0" y="350" width="340" height="18" fill="#18181b"/>
+            <rect x="153" y="347" width="34" height="24" rx="3.5" fill="#cbd5e1" stroke="#475569" stroke-width="0.8"/>
+            <rect x="158" y="352" width="24" height="14" rx="2" fill="#18181b"/>
+            <rect x="169" y="350" width="2.5" height="18" rx="1" fill="#ffffff"/>
+            <!-- Trousers to Hip -->
+            <rect x="0" y="368" width="340" height="42" fill="${dark ? '#080c14' : '#0f172a'}"/>
+            <line x1="170" y1="368" x2="170" y2="410" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+            <!-- Defo Lanyard -->
+            <path d="M 143 14 C 146 32, 154 54, 166 74 L 171 74 C 160 54, 151 32, 148 14 Z" fill="url(#${idPrefix}-lanyard)"/>
+            <path d="M 197 14 C 194 32, 186 54, 174 74 L 169 74 C 180 54, 189 32, 192 14 Z" fill="url(#${idPrefix}-lanyard)"/>
+            <rect x="165" y="73" width="10" height="8" rx="1.5" fill="#cbd5e1" stroke="#475569" stroke-width="0.5"/>
+            <circle cx="170" cy="85" r="3.5" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+            <path d="M 170 98.5 L 170 105" stroke="#334155" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        `
+      }
+    ];
+
+    function selectCollection(index) {
+      currentSelection = index;
+      const col = COLLECTIONS[index];
+
+      // Update Tabs styling
+      document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+        if (i === index) {
+          btn.className = 'tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-emerald-500 text-slate-950 shadow-md scale-[1.02]';
+        } else {
+          btn.className = 'tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--background)]';
+        }
+      });
+
+      // Update Details
+      document.getElementById('colTag').innerText = `Style ${index + 1} of 5`;
+      document.getElementById('colVibe').innerText = col.vibe;
+      document.getElementById('colTitle').innerText = col.title;
+      document.getElementById('colDesc').innerText = col.desc;
+      document.getElementById('colWhy').innerText = col.why;
+
+      const featList = document.getElementById('colFeatures');
+      featList.innerHTML = col.features.map(f => `<li class="flex items-center gap-2 p-1.5 rounded-lg bg-[var(--background)]">${f}</li>`).join('');
+
+      // Update Main Stage SVG
+      const svgContainer = document.getElementById('svgContainer');
+      svgContainer.innerHTML = col.renderSvg(currentTheme === 'dark', 'main-' + col.id);
+
+      retriggerSwing();
+    }
+
+    function retriggerSwing() {
+      const badge = document.getElementById('hangingBadge');
+      badge.classList.remove('animate-swing');
+      void badge.offsetWidth; // force reflow
+      badge.classList.add('animate-swing');
+    }
+
+    function setTheme(mode) {
+      currentTheme = mode;
+      const lightBtn = document.getElementById('themeLightBtn');
+      const darkBtn = document.getElementById('themeDarkBtn');
+
+      if (mode === 'light') {
+        lightBtn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 shadow-xs';
+        darkBtn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)]';
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+      } else {
+        darkBtn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 shadow-xs';
+        lightBtn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)]';
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      }
+
+      // Re-render main preview and all mini previews
+      selectCollection(currentSelection);
+      renderMiniPreviews();
+    }
+
+    function renderMiniPreviews() {
+      COLLECTIONS.forEach((col, idx) => {
+        const mini = document.getElementById(`mini-svg-${idx}`);
+        if (mini) {
+          mini.innerHTML = col.renderSvg(currentTheme === 'dark', 'mini-' + col.id);
+        }
+      });
+    }
+
+    // Init
+    setTheme('dark');
+    renderMiniPreviews();
+  </script>
+</body>
+</html>

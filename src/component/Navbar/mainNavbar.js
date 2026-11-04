@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import close from "../Navbar/image/close.svg";
-import menu from "../Navbar/image/menu.svg";
 import logo from "../Navbar/image/Logo.png";
 import { Link } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
@@ -91,25 +89,66 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="sm:hidden mr-4 my-2 flex flex-1 justify-end items-center gap-2">
-        <ThemeToggle />
-        <img
-          src={toggle ? close : menu}
-          alt="menu"
-          className={`w-[28px] h-[28px] object-contain cursor-pointer transition-all ${
-            isDark ? "" : "filter invert brightness-0"
-          }`}
+      <div className="sm:hidden mr-3 sm:mr-4 my-2 flex flex-1 justify-end items-center">
+        {/* Hamburger / Close Button (100% visible across all mobile widths) */}
+        <button
+          type="button"
+          aria-label={toggle ? "Close menu" : "Open menu"}
           onClick={() => setToggle(!toggle)}
-        />
+          className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 cursor-pointer focus:outline-none ${
+            isDark
+              ? "text-white hover:bg-white/10 active:bg-white/20"
+              : "text-slate-900 hover:bg-slate-100 active:bg-slate-200"
+          }`}
+        >
+          {toggle ? (
+            /* Close 'X' Icon */
+            <svg
+              className="w-6 h-6 stroke-current transition-transform duration-300"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          ) : (
+            /* 3-Bar Hamburger Icon */
+            <svg
+              className="w-6 h-6 stroke-current transition-transform duration-300"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          )}
+        </button>
 
-        {/* Sidebar */}
+        {/* Backdrop overlay when mobile menu is open */}
+        {toggle && (
+          <div
+            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm sm:hidden"
+            onClick={() => setToggle(false)}
+          />
+        )}
+
+        {/* Sidebar Dropdown Menu */}
         <div
           className={`${
             !toggle ? "hidden" : "flex"
-          } z-40 p-6 absolute top-16 right-0 mx-2 w-[calc(100vw-2rem)] max-w-xs rounded-2xl sidebar shadow-2xl transition-colors duration-300 ${
+          } z-50 p-6 absolute top-16 right-0 mx-2 w-[calc(100vw-1.5rem)] max-w-xs rounded-2xl sidebar shadow-2xl transition-all duration-300 ${
             isDark
-              ? "bg-black/95 text-white border border-white/10"
-              : "bg-white text-slate-900 border border-slate-200"
+              ? "bg-slate-950/95 text-white border border-white/10 backdrop-blur-xl shadow-black/80"
+              : "bg-white/95 text-slate-900 border border-slate-200/90 backdrop-blur-xl shadow-slate-300/60"
           }`}
         >
           <ul className="list-none text-center flex flex-1 flex-col">
@@ -128,13 +167,13 @@ const Navbar = () => {
               </li>
             ))}
 
-            {/* Mobile Theme Selector */}
+            {/* Mobile Theme Selector (Dark, Bright, Auto) */}
             <ThemeToggle isMobile={true} />
 
             <a href="https://creator.yesdefo.com/" target="_blank" rel="noreferrer">
               <li
                 onClick={() => setToggle(false)}
-                className="font-poppins list-none no-underline font-medium cursor-pointer text-[16px] text-white bg-green-500 p-2 rounded-xl mt-2"
+                className="font-poppins list-none no-underline font-medium cursor-pointer text-[16px] text-white bg-green-500 p-2.5 rounded-xl mt-2 transition-transform active:scale-95 shadow-md shadow-green-500/30"
               >
                 Join Creator
               </li>

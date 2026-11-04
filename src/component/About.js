@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../component/Navbar/Navbar";
 import Footer from "../component/footer/Footer";
 import { useTheme } from "../context/ThemeContext";
+import AmbientDecorations from "./Common/AmbientDecorations";
 
 // Brand Assets
 import logo from "../component/About_page_Img/Logo.png";
@@ -19,11 +20,15 @@ function About() {
 
   return (
     <div
-      className={`min-h-screen font-poppins transition-colors duration-300 selection:bg-[#3ECF7A]/30 ${
+      className={`relative w-full min-h-screen font-poppins transition-colors duration-300 selection:bg-[#3ECF7A]/30 flex flex-col justify-between overflow-x-hidden ${
         isDark ? "bg-[#05070e] text-slate-100" : "bg-[#f8fafc] text-slate-800"
       }`}
     >
       <Navbar />
+
+      <main className="relative w-full flex-1 overflow-hidden">
+        {/* Ambient Floating Sparkles & Fairy Dust Particles */}
+        <AmbientDecorations variant="showcase" />
 
       {/* ========================================================================= */}
       {/* 1. HERO SECTION                                                           */}
@@ -540,6 +545,7 @@ function About() {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </div>

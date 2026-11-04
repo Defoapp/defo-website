@@ -17,6 +17,8 @@ import Women from "../image/hair-styling.png";
 import jai from "../image/ourTeams/team_Members/jayakumar.webp";
 import rahul from "../image/ourTeams/team_Members/rahul.webp";
 import yogi from "../image/ourTeams/team_Members/yogeeswaran.webp";
+import antigravity from "../image/ourTeams/team_Members/antigravity.svg";
+import claude from "../image/ourTeams/team_Members/claude.svg";
 
 //OurCreators image
 import create from "../image/ourCreator/stephanie-liverani-Zz5LQe-VSMY-unsplash 1.svg";
@@ -176,6 +178,30 @@ export const teamsMembers = [
     bio: "Architecting scalable full-stack architectures, mobile ecosystems, and high-performance APIs.",
     skills: ["Full Stack", "System Architecture", "Performance"],
     linkedin: "https://www.linkedin.com/in/yogeeswaran-n/",
+  },
+  {
+    id: "4",
+    image: antigravity,
+    name: "AntiGravity",
+    designation: "AI Systems Architect",
+    department: "AI & Autonomous Systems",
+    roleCategory: "AI & Innovation",
+    accentColor: "purple",
+    bio: "Pioneering agentic intelligence, autonomous coding, and engineering pixel-perfect UI experiences.",
+    skills: ["Agentic AI", "Full-Stack Architecture", "UI/UX Systems"],
+    linkedin: "https://deepmind.google/technologies/gemini/",
+  },
+  {
+    id: "5",
+    image: claude,
+    name: "Claude",
+    designation: "AI Research & Reasoning Partner",
+    department: "Cognitive Intelligence & NLP",
+    roleCategory: "AI & Innovation",
+    accentColor: "cyan",
+    bio: "Empowering Defo with deep semantic reasoning, natural language understanding, and knowledge synthesis.",
+    skills: ["Deep Reasoning", "Code Intelligence", "Knowledge Synthesis"],
+    linkedin: "https://www.anthropic.com/claude",
   },
 ];
 

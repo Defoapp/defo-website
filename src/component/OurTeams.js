@@ -12,6 +12,7 @@ const ALL_CATEGORIES = [
   { id: "all", label: "All Members" },
   { id: "Leadership", label: "Leadership" },
   { id: "Tech & Design", label: "Tech & Design" },
+  { id: "AI & Innovation", label: "AI & Innovation" },
   { id: "Growth", label: "Growth & Community" },
 ];
 
@@ -26,6 +27,11 @@ const OurTeams = () => {
 
   const filteredMembers = useMemo(() => {
     if (selectedCategory === "all") return teamsMembers;
+    if (selectedCategory === "Tech & Design") {
+      return teamsMembers.filter(
+        (m) => m.roleCategory === "Tech & Design" || m.roleCategory === "AI & Innovation"
+      );
+    }
     return teamsMembers.filter(
       (m) => m.roleCategory === selectedCategory
     );
