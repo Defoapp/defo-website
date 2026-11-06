@@ -411,16 +411,16 @@ const OurStory = () => {
     }, 700);
   };
 
-  // Active Scroll-linked laser spine
+  // Active Scroll-linked laser spine: tracks timeline line from center to center
   const { scrollYProgress } = useScroll({
     target: timelineRef,
-    offset: ["start 70%", "end 80%"],
+    offset: ["start 50%", "end 50%"],
   });
 
   const spineScaleY = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 28,
-    restDelta: 0.001,
+    stiffness: 350,
+    damping: 35,
+    restDelta: 0.0005,
   });
 
   const filteredMilestones = MILESTONES.filter((m) =>
@@ -429,9 +429,7 @@ const OurStory = () => {
 
   return (
     <div
-      className={`relative w-full min-h-screen transition-colors duration-500 flex flex-col justify-between overflow-x-hidden ${
-        isDark ? "bg-[#06080e] text-white" : "bg-[#f8fafc] text-slate-900"
-      }`}
+      className="relative w-full min-h-screen transition-colors duration-500 flex flex-col justify-between overflow-x-hidden sparkle-page-bg text-slate-900 dark:text-white"
     >
       {/* Universal Fixed Navbar */}
       <Navbar />
@@ -609,7 +607,6 @@ const OurStory = () => {
         {/* TIMELINE SECTION HEADER & ERA FILTER TABS WITH SPRING SLIDER        */}
         {/* =================================================================== */}
         <section
-          ref={timelineRef}
           id="timeline-section"
           className="relative z-10 w-full pt-10 pb-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
         >
@@ -674,7 +671,7 @@ const OurStory = () => {
           {/* ================================================================= */}
           {/* THE MODERN TIMELINE (ALTERNATING ZIG-ZAG WITH ZERO OVERLAP)        */}
           {/* ================================================================= */}
-          <div className="relative w-full max-w-6xl mx-auto pt-8 pb-32 sm:pb-44">
+          <div ref={timelineRef} className="relative w-full max-w-6xl mx-auto pt-8 pb-32 sm:pb-44">
             {/* Luminous Central Spine Base Guide (Desktop: Center 50% | Mobile: Left 28px) */}
             <div className="absolute top-0 bottom-0 w-[2px] rounded-full left-7 sm:left-8 lg:left-1/2 -translate-x-1/2 bg-slate-200 dark:bg-white/10 pointer-events-none" />
 

@@ -239,7 +239,7 @@ function Footer() {
         {/* Compact Copyright Bar */}
         <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
           <p className="text-center sm:text-left">
-            &copy; 2023 LowPow. All rights reserved.
+            &copy; 2026 LowPow. All rights reserved.
           </p>
           <div className="flex items-center gap-4 text-[11px]">
             <Link

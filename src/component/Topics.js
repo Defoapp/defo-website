@@ -4,6 +4,7 @@ import Footer from "../component/footer/Footer";
 import { TOPICS_DATA, TOPICS_CATEGORIES } from "../data/topicsData";
 import TopicPreviewModal from "./Topics/TopicPreviewModal";
 import { useTheme } from "../context/ThemeContext";
+import AmbientDecorations from "./Common/AmbientDecorations";
 
 const Topics = () => {
   const { isDark } = useTheme();
@@ -65,14 +66,54 @@ const Topics = () => {
 
   return (
     <div
-      className={`min-h-screen flex flex-col justify-between transition-colors duration-300 ${
-        isDark ? "bg-[#06080e] text-white" : "bg-[#f8fafc] text-slate-900"
-      }`}
+      className="min-h-screen flex flex-col justify-between transition-colors duration-300 sparkle-page-bg text-slate-900 dark:text-white"
     >
       {/* Universal Fixed Navbar */}
       <Navbar />
 
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-14 relative">
+      {/* Main Content Area with Ambient Galaxy Sparkles */}
+      <div className="relative w-full flex-1 overflow-hidden">
+        {/* AMBIENT AURORA BACKGROUND MESH */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {/* Top Center Emerald Brand Glow */}
+          <div
+            className="absolute -top-20 left-1/2 -translate-x-1/2 w-[600px] sm:w-[900px] h-[500px] sm:h-[650px] rounded-full blur-[130px] opacity-70 dark:opacity-25"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(0,242,152,0.4) 0%, rgba(56,189,248,0.2) 50%, transparent 75%)",
+            }}
+          />
+          {/* Left Side Violet Flare */}
+          <div
+            className="absolute top-1/4 -left-20 sm:left-[5%] w-[450px] sm:w-[650px] h-[450px] sm:h-[650px] rounded-full blur-[120px] opacity-60 dark:opacity-20"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(192,132,252,0.35) 0%, rgba(236,72,153,0.18) 50%, transparent 75%)",
+            }}
+          />
+          {/* Right Side Sky Cyan Flare */}
+          <div
+            className="absolute top-1/3 -right-20 sm:right-[5%] w-[450px] sm:w-[650px] h-[450px] sm:h-[650px] rounded-full blur-[120px] opacity-60 dark:opacity-20"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(56,189,248,0.35) 0%, rgba(14,165,233,0.18) 50%, transparent 75%)",
+            }}
+          />
+          {/* Mesh Grid Pattern */}
+          <div
+            className="absolute inset-0 opacity-[0.035] dark:opacity-[0.03]"
+            style={{
+              backgroundImage:
+                "radial-gradient(rgba(15, 23, 42, 0.8) 1px, transparent 1px)",
+              backgroundSize: "24px 24px",
+            }}
+          />
+        </div>
+
+        {/* Background Sparkles & Ambient Galaxy Particles */}
+        <AmbientDecorations variant="topics" />
+
+        <main className="relative z-10 flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-14">
         {/* Background Ambient Glows */}
         <div
           className="absolute top-10 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 blur-3xl pointer-events-none -z-10 opacity-40 transition-colors duration-700"
@@ -517,6 +558,7 @@ const Topics = () => {
           </div>
         </section>
       </main>
+      </div>
 
       {/* Interactive Subtopic Preview Modal */}
       {activePreview && (

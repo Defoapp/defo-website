@@ -22,9 +22,7 @@ const Careers = () => {
 
   return (
     <div
-      className={`relative w-full min-h-screen transition-colors duration-300 flex flex-col justify-between overflow-x-hidden ${
-        isDark ? "bg-[#06080e] text-white" : "bg-white text-slate-900"
-      }`}
+      className="relative w-full min-h-screen transition-colors duration-300 flex flex-col justify-between overflow-x-hidden sparkle-page-bg text-slate-900 dark:text-white"
     >
       <Navbar />
 
@@ -63,7 +61,7 @@ const Careers = () => {
         <div className="relative w-full h-full z-10">
           {/* hero section */}
           <div className="w-11/12 md:w-5/6 mx-auto min-h-fit py-12 md:py-20 flex items-center justify-between flex-col md:flex-row gap-8">
-            <div className="w-full md:w-1/2">
+            <div className="w-full md:w-1/2 order-2 md:order-1">
               <span
                 className={`inline-block border-2 py-1 px-4 rounded-lg mb-4 font-semibold text-sm ${
                   isDark
@@ -108,7 +106,7 @@ const Careers = () => {
               </button>
             </div>
 
-            <div className="w-full md:w-1/2 flex justify-center items-center">
+            <div className="w-full md:w-1/2 flex justify-center items-center order-1 md:order-2">
               <HangingHiringBanner onExploreClick={scrollToContainer} />
             </div>
           </div>

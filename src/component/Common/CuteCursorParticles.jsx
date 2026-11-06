@@ -79,6 +79,8 @@ export default function CuteCursorParticles({
     const minFrameInterval = isMobileDevice ? 1000 / 30 : 1000 / 60;
 
     // Resize handler
+    let lastWidth = width;
+    let lastHeight = height;
     const updateSize = () => {
       if (!container) return;
       width = container.clientWidth || window.innerWidth;
@@ -92,19 +94,33 @@ export default function CuteCursorParticles({
       canvas.style.height = `${height}px`;
 
       ctx.scale(dpr, dpr);
+
+      // Re-populate particles if container height/width meaningfully changed (e.g., dynamic page load)
+      if (Math.abs(width - lastWidth) > 80 || Math.abs(height - lastHeight) > 200) {
+        lastWidth = width;
+        lastHeight = height;
+        initBgParticles();
+      }
     };
 
     updateSize();
 
-    // Determine particle count based on density and device capability
-    // Desktop: 36-48 particles; Mobile: 8-12 particles for peak performance
-    const baseCount = isMobileDevice
-      ? density === 'high' ? 12 : 8
-      : density === 'high' ? (width < 1024 ? 32 : 48) : (width < 1024 ? 24 : 36);
+    // Determine particle count based on density, height, and device capability
+    // Multi-screen tall pages (About, Learn, Topics) scale proportionally so all sections have sparkles
+    const getBaseCount = () => {
+      const screens = Math.max(1, Math.ceil(height / 850));
+      if (isMobileDevice) {
+        const perScreen = density === 'high' ? 8 : 6;
+        return Math.min(26, perScreen * screens);
+      }
+      const perScreen = density === 'high' ? (width < 1024 ? 20 : 26) : (width < 1024 ? 16 : 20);
+      return Math.min(110, perScreen * screens);
+    };
 
     // Initialize floating ambient background particles
     const initBgParticles = () => {
       bgParticles.length = 0;
+      const baseCount = getBaseCount();
       for (let i = 0; i < baseCount; i++) {
         const type = SHAPE_TYPES[Math.floor(Math.random() * SHAPE_TYPES.length)];
         const color = PASTEL_PALETTE[Math.floor(Math.random() * PASTEL_PALETTE.length)];

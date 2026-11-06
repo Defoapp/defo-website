@@ -10,7 +10,7 @@ import CuteCursorParticles from './CuteCursorParticles';
  * Strictly rendered in the background layer (z-0) with ZERO backdrop-blur, so they
  * never shade, blur, or obscure any icons or content.
  *
- * @param {'funnel' | 'showcase' | 'categories' | 'hero'} variant - Layout preset for the section
+ * @param {'funnel' | 'showcase' | 'categories' | 'hero' | 'about' | 'learn' | 'topics'} variant - Layout preset for the section
  * @param {string} className - Optional container styling
  */
 export default function AmbientDecorations({ variant = 'funnel', className = '' }) {
@@ -696,6 +696,378 @@ export default function AmbientDecorations({ variant = 'funnel', className = '' 
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" />
               </svg>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* ============================================================== */}
+      {/* SECTION PRESET 5: ABOUT PAGE (FULL-LENGTH NARRATIVE SCROLL)    */}
+      {/* ============================================================== */}
+      {variant === 'about' && (
+        <>
+          {/* Top Hero Left Emerald Sparkle */}
+          <div className="absolute ambient-item" style={{ left: '3%', top: '3%', transform: 'translate3d(calc(var(--mouse-x) * 14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-emerald-400 dark:text-[#00f298] drop-shadow-[0_0_8px_rgba(0,242,152,0.7)]" style={{ animation: 'ambientSparkleTwinkle 4.5s ease-in-out infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Top Hero Right Violet Sparkle */}
+          <div className="absolute ambient-item" style={{ right: '3.5%', top: '4%', transform: 'translate3d(calc(var(--mouse-x) * -14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.7)]" style={{ animation: 'ambientSparkleTwinkle 5.2s ease-in-out 0.8s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Left Bubble (12%) */}
+          <div className="absolute ambient-item hidden sm:block" style={{ left: '5%', top: '12%', transform: 'translate3d(calc(var(--mouse-x) * 10px), calc(var(--mouse-y) * 8px), 0)' }}>
+            <div className="relative w-4 h-4 rounded-full border border-sky-400/60 bg-sky-300/25 shadow-[0_0_10px_rgba(56,189,248,0.5)]" style={{ animation: 'cuteBubbleFloat 6s ease-in-out infinite' }}>
+              <div className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/90" />
+            </div>
+          </div>
+          {/* Right Bubble (14%) */}
+          <div className="absolute ambient-item hidden sm:block" style={{ right: '5%', top: '14%', transform: 'translate3d(calc(var(--mouse-x) * -10px), calc(var(--mouse-y) * 8px), 0)' }}>
+            <div className="relative w-4 h-4 rounded-full border border-purple-400/60 bg-purple-300/25 shadow-[0_0_10px_rgba(192,132,252,0.5)]" style={{ animation: 'cuteBubbleFloat 6.5s ease-in-out 1.2s infinite' }}>
+              <div className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/90" />
+            </div>
+          </div>
+          {/* Left Sky Cyan Sparkle (20%) */}
+          <div className="absolute ambient-item" style={{ left: '2.5%', top: '20%', transform: 'translate3d(calc(var(--mouse-x) * 16px), calc(var(--mouse-y) * 12px), 0)' }}>
+            <div className="w-3.5 h-3.5 text-sky-400 drop-shadow-[0_0_8px_rgba(56,189,248,0.7)]" style={{ animation: 'ambientSparkleTwinkle 5.5s ease-in-out 1.2s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Right Amber Sparkle (22%) */}
+          <div className="absolute ambient-item" style={{ right: '2.5%', top: '22%', transform: 'translate3d(calc(var(--mouse-x) * -14px), calc(var(--mouse-y) * 12px), 0)' }}>
+            <div className="w-4 h-4 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.7)]" style={{ animation: 'ambientSparkleTwinkle 6s ease-in-out 2s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Left Violet Sparkle (30%) */}
+          <div className="absolute ambient-item" style={{ left: '4%', top: '30%', transform: 'translate3d(calc(var(--mouse-x) * 12px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.7)]" style={{ animation: 'ambientSparkleTwinkle 5.8s ease-in-out 0.4s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Right Emerald Sparkle (32%) */}
+          <div className="absolute ambient-item" style={{ right: '4%', top: '32%', transform: 'translate3d(calc(var(--mouse-x) * -14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-3.5 h-3.5 text-emerald-400 drop-shadow-[0_0_8px_rgba(0,242,152,0.7)]" style={{ animation: 'ambientSparkleTwinkle 4.8s ease-in-out 1.5s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Left Pastel Heart (40%) */}
+          <div className="absolute ambient-item hidden sm:block" style={{ left: '6%', top: '40%', transform: 'translate3d(calc(var(--mouse-x) * 10px), calc(var(--mouse-y) * 8px), 0)' }}>
+            <div className="w-3.5 h-3.5 text-pink-400 drop-shadow-[0_0_6px_rgba(244,114,182,0.6)]" style={{ animation: 'cuteHeartFloat 6.5s ease-in-out 0.8s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>
+            </div>
+          </div>
+          {/* Right Cyan Bubble (44%) */}
+          <div className="absolute ambient-item hidden sm:block" style={{ right: '5.5%', top: '44%', transform: 'translate3d(calc(var(--mouse-x) * -12px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="relative w-4 h-4 rounded-full border border-cyan-400/60 bg-cyan-300/25 shadow-[0_0_10px_rgba(56,189,248,0.5)]" style={{ animation: 'cuteBubbleFloat 6.2s ease-in-out infinite' }}>
+              <div className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/90" />
+            </div>
+          </div>
+          {/* Left Amber Sparkle (52%) */}
+          <div className="absolute ambient-item" style={{ left: '3%', top: '52%', transform: 'translate3d(calc(var(--mouse-x) * 16px), calc(var(--mouse-y) * 12px), 0)' }}>
+            <div className="w-4 h-4 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.7)]" style={{ animation: 'ambientSparkleTwinkle 5.5s ease-in-out 0.6s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Right Purple Sparkle (54%) */}
+          <div className="absolute ambient-item" style={{ right: '3%', top: '54%', transform: 'translate3d(calc(var(--mouse-x) * -16px), calc(var(--mouse-y) * 12px), 0)' }}>
+            <div className="w-4 h-4 text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.75)]" style={{ animation: 'ambientSparkleTwinkle 6.2s ease-in-out 1s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Left Emerald Bubble (62%) */}
+          <div className="absolute ambient-item hidden sm:block" style={{ left: '5%', top: '62%', transform: 'translate3d(calc(var(--mouse-x) * 12px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="relative w-3.5 h-3.5 rounded-full border border-emerald-400/60 bg-emerald-300/25 shadow-[0_0_10px_rgba(0,242,152,0.5)]" style={{ animation: 'cuteBubbleFloat 5.5s ease-in-out 2s infinite' }}>
+              <div className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/90" />
+            </div>
+          </div>
+          {/* Right Sky Cyan Sparkle (65%) */}
+          <div className="absolute ambient-item" style={{ right: '2.5%', top: '65%', transform: 'translate3d(calc(var(--mouse-x) * -14px), calc(var(--mouse-y) * 12px), 0)' }}>
+            <div className="w-3.5 h-3.5 text-cyan-400 drop-shadow-[0_0_8px_rgba(56,189,248,0.7)]" style={{ animation: 'ambientSparkleTwinkle 5.4s ease-in-out 0.9s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Left Cyan Sparkle (72%) */}
+          <div className="absolute ambient-item" style={{ left: '2.5%', top: '72%', transform: 'translate3d(calc(var(--mouse-x) * 14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-sky-400 drop-shadow-[0_0_8px_rgba(56,189,248,0.7)]" style={{ animation: 'ambientSparkleTwinkle 5.6s ease-in-out 1.4s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Right Pink Heart (76%) */}
+          <div className="absolute ambient-item hidden sm:block" style={{ right: '4.5%', top: '76%', transform: 'translate3d(calc(var(--mouse-x) * -10px), calc(var(--mouse-y) * 8px), 0)' }}>
+            <div className="w-3.5 h-3.5 text-pink-400 drop-shadow-[0_0_6px_rgba(244,114,182,0.6)]" style={{ animation: 'cuteHeartFloat 6.8s ease-in-out 1s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>
+            </div>
+          </div>
+          {/* Left Purple Sparkle (82%) */}
+          <div className="absolute ambient-item" style={{ left: '4.5%', top: '82%', transform: 'translate3d(calc(var(--mouse-x) * 16px), calc(var(--mouse-y) * 12px), 0)' }}>
+            <div className="w-4 h-4 text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.75)]" style={{ animation: 'ambientSparkleTwinkle 5.9s ease-in-out 0.5s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Right Mint Sparkle (86%) */}
+          <div className="absolute ambient-item" style={{ right: '3%', top: '86%', transform: 'translate3d(calc(var(--mouse-x) * -14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-[#00f298] drop-shadow-[0_0_8px_rgba(0,242,152,0.75)]" style={{ animation: 'ambientSparkleTwinkle 4.7s ease-in-out 1.2s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Bottom Left Emerald Sparkle (92%) */}
+          <div className="absolute ambient-item" style={{ left: '3%', top: '92%', transform: 'translate3d(calc(var(--mouse-x) * 12px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-emerald-400 drop-shadow-[0_0_8px_rgba(0,242,152,0.7)]" style={{ animation: 'ambientSparkleTwinkle 5s ease-in-out infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Bottom Right Amber Sparkle (94%) */}
+          <div className="absolute ambient-item" style={{ right: '4%', top: '94%', transform: 'translate3d(calc(var(--mouse-x) * -12px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.7)]" style={{ animation: 'ambientSparkleTwinkle 5.5s ease-in-out 1.5s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* ============================================================== */}
+      {/* SECTION PRESET 6: LEARN PAGE (CURRICULUM & MOTION SANDBOXES)   */}
+      {/* ============================================================== */}
+      {variant === 'learn' && (
+        <>
+          {/* Top Left Mint Sparkle (2.5%) */}
+          <div className="absolute ambient-item" style={{ left: '3.5%', top: '2.5%', transform: 'translate3d(calc(var(--mouse-x) * 14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-[#00f298] drop-shadow-[0_0_8px_rgba(0,242,152,0.8)]" style={{ animation: 'ambientSparkleTwinkle 4.5s ease-in-out infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Top Right Cyan Sparkle (3.5%) */}
+          <div className="absolute ambient-item" style={{ right: '3%', top: '3.5%', transform: 'translate3d(calc(var(--mouse-x) * -14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-cyan-400 drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]" style={{ animation: 'ambientSparkleTwinkle 5s ease-in-out 1s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Left Bubble (10%) */}
+          <div className="absolute ambient-item hidden sm:block" style={{ left: '5%', top: '10%', transform: 'translate3d(calc(var(--mouse-x) * 10px), calc(var(--mouse-y) * 8px), 0)' }}>
+            <div className="relative w-4 h-4 rounded-full border border-cyan-400/60 bg-cyan-300/25 shadow-[0_0_10px_rgba(56,189,248,0.5)]" style={{ animation: 'cuteBubbleFloat 6s ease-in-out infinite' }}>
+              <div className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/90" />
+            </div>
+          </div>
+          {/* Right Violet Sparkle (12%) */}
+          <div className="absolute ambient-item" style={{ right: '5%', top: '12%', transform: 'translate3d(calc(var(--mouse-x) * -12px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.75)]" style={{ animation: 'ambientSparkleTwinkle 5.5s ease-in-out 0.8s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Left Violet Sparkle (18%) */}
+          <div className="absolute ambient-item" style={{ left: '2.5%', top: '18%', transform: 'translate3d(calc(var(--mouse-x) * 16px), calc(var(--mouse-y) * 12px), 0)' }}>
+            <div className="w-3.5 h-3.5 text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.7)]" style={{ animation: 'ambientSparkleTwinkle 5.8s ease-in-out 1.2s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Right Amber Sparkle (22%) */}
+          <div className="absolute ambient-item" style={{ right: '2.5%', top: '22%', transform: 'translate3d(calc(var(--mouse-x) * -14px), calc(var(--mouse-y) * 12px), 0)' }}>
+            <div className="w-4 h-4 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.7)]" style={{ animation: 'ambientSparkleTwinkle 6s ease-in-out 2s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Left Plus Accent (28%) */}
+          <div className="absolute ambient-item hidden sm:block opacity-60 dark:opacity-40" style={{ left: '4.5%', top: '28%', transform: 'translate3d(calc(var(--mouse-x) * -8px), calc(var(--mouse-y) * -6px), 0)' }}>
+            <span className="text-cyan-400 font-light text-base select-none" style={{ animation: 'ambientPulseGlow 6s ease-in-out infinite' }}>+</span>
+          </div>
+          {/* Right Emerald Bubble (32%) */}
+          <div className="absolute ambient-item hidden sm:block" style={{ right: '4%', top: '32%', transform: 'translate3d(calc(var(--mouse-x) * -12px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="relative w-3.5 h-3.5 rounded-full border border-emerald-400/60 bg-emerald-300/25 shadow-[0_0_10px_rgba(0,242,152,0.5)]" style={{ animation: 'cuteBubbleFloat 6.2s ease-in-out infinite' }}>
+              <div className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/90" />
+            </div>
+          </div>
+          {/* Left Sky Cyan Sparkle (38%) */}
+          <div className="absolute ambient-item" style={{ left: '3%', top: '38%', transform: 'translate3d(calc(var(--mouse-x) * 14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-sky-400 drop-shadow-[0_0_8px_rgba(56,189,248,0.75)]" style={{ animation: 'ambientSparkleTwinkle 5.2s ease-in-out 0.4s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Right Purple Sparkle (42%) */}
+          <div className="absolute ambient-item" style={{ right: '3%', top: '42%', transform: 'translate3d(calc(var(--mouse-x) * -16px), calc(var(--mouse-y) * 12px), 0)' }}>
+            <div className="w-4 h-4 text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.75)]" style={{ animation: 'ambientSparkleTwinkle 5.6s ease-in-out 1.2s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Left Pink Heart (48%) */}
+          <div className="absolute ambient-item hidden sm:block" style={{ left: '5%', top: '48%', transform: 'translate3d(calc(var(--mouse-x) * 10px), calc(var(--mouse-y) * 8px), 0)' }}>
+            <div className="w-3.5 h-3.5 text-pink-400 drop-shadow-[0_0_6px_rgba(244,114,182,0.6)]" style={{ animation: 'cuteHeartFloat 6.5s ease-in-out 0.8s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>
+            </div>
+          </div>
+          {/* Right Cyan Bubble (52%) */}
+          <div className="absolute ambient-item hidden sm:block" style={{ right: '5%', top: '52%', transform: 'translate3d(calc(var(--mouse-x) * -12px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="relative w-4 h-4 rounded-full border border-sky-400/60 bg-sky-300/25 shadow-[0_0_10px_rgba(56,189,248,0.5)]" style={{ animation: 'cuteBubbleFloat 6.8s ease-in-out 1s infinite' }}>
+              <div className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/90" />
+            </div>
+          </div>
+          {/* Left Emerald Sparkle (58%) */}
+          <div className="absolute ambient-item" style={{ left: '2.5%', top: '58%', transform: 'translate3d(calc(var(--mouse-x) * 14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-3.5 h-3.5 text-emerald-400 drop-shadow-[0_0_8px_rgba(0,242,152,0.7)]" style={{ animation: 'ambientSparkleTwinkle 4.8s ease-in-out 0.6s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Right Emerald Sparkle (62%) */}
+          <div className="absolute ambient-item" style={{ right: '2.5%', top: '62%', transform: 'translate3d(calc(var(--mouse-x) * -14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-emerald-400 drop-shadow-[0_0_8px_rgba(0,242,152,0.75)]" style={{ animation: 'ambientSparkleTwinkle 5.2s ease-in-out 1.2s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Left Lavender Bubble (68%) */}
+          <div className="absolute ambient-item hidden sm:block" style={{ left: '4%', top: '68%', transform: 'translate3d(calc(var(--mouse-x) * 10px), calc(var(--mouse-y) * 8px), 0)' }}>
+            <div className="relative w-4 h-4 rounded-full border border-purple-400/60 bg-purple-300/25 shadow-[0_0_10px_rgba(192,132,252,0.5)]" style={{ animation: 'cuteBubbleFloat 6.5s ease-in-out 0.5s infinite' }}>
+              <div className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/90" />
+            </div>
+          </div>
+          {/* Right Plus Accent (72%) */}
+          <div className="absolute ambient-item hidden sm:block opacity-60 dark:opacity-40" style={{ right: '4%', top: '72%', transform: 'translate3d(calc(var(--mouse-x) * 8px), calc(var(--mouse-y) * -6px), 0)' }}>
+            <span className="text-purple-400 font-light text-base select-none" style={{ animation: 'ambientPulseGlow 6.5s ease-in-out infinite' }}>+</span>
+          </div>
+          {/* Left Amber Sparkle (78%) */}
+          <div className="absolute ambient-item" style={{ left: '3%', top: '78%', transform: 'translate3d(calc(var(--mouse-x) * 16px), calc(var(--mouse-y) * 12px), 0)' }}>
+            <div className="w-4 h-4 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.7)]" style={{ animation: 'ambientSparkleTwinkle 5.8s ease-in-out 1.5s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Right Violet Sparkle (82%) */}
+          <div className="absolute ambient-item" style={{ right: '3%', top: '82%', transform: 'translate3d(calc(var(--mouse-x) * -16px), calc(var(--mouse-y) * 12px), 0)' }}>
+            <div className="w-4 h-4 text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.75)]" style={{ animation: 'ambientSparkleTwinkle 6s ease-in-out 0.8s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Left Violet Sparkle (88%) */}
+          <div className="absolute ambient-item" style={{ left: '5%', top: '88%', transform: 'translate3d(calc(var(--mouse-x) * 12px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-3.5 h-3.5 text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.7)]" style={{ animation: 'ambientSparkleTwinkle 5.4s ease-in-out 1s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Right Sky Cyan Sparkle (92%) */}
+          <div className="absolute ambient-item" style={{ right: '4.5%', top: '92%', transform: 'translate3d(calc(var(--mouse-x) * -14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-sky-400 drop-shadow-[0_0_8px_rgba(56,189,248,0.75)]" style={{ animation: 'ambientSparkleTwinkle 5s ease-in-out 1.5s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Bottom Left Emerald Sparkle (95%) */}
+          <div className="absolute ambient-item" style={{ left: '3.5%', top: '95%', transform: 'translate3d(calc(var(--mouse-x) * 14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-emerald-400 drop-shadow-[0_0_8px_rgba(0,242,152,0.7)]" style={{ animation: 'ambientSparkleTwinkle 4.8s ease-in-out infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* ============================================================== */}
+      {/* SECTION PRESET 7: TOPICS PAGE (UNIVERSE GALAXY SPARKLES)       */}
+      {/* ============================================================== */}
+      {variant === 'topics' && (
+        <>
+          {/* Top Left Amber Sparkle (3%) */}
+          <div className="absolute ambient-item" style={{ left: '4%', top: '3%', transform: 'translate3d(calc(var(--mouse-x) * 14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.8)]" style={{ animation: 'ambientSparkleTwinkle 5.5s ease-in-out infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Top Right Cyan Sparkle (4%) */}
+          <div className="absolute ambient-item" style={{ right: '4%', top: '4%', transform: 'translate3d(calc(var(--mouse-x) * -14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-cyan-400 drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]" style={{ animation: 'ambientSparkleTwinkle 4.8s ease-in-out 1s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Left Emerald Sparkle (12%) */}
+          <div className="absolute ambient-item" style={{ left: '2.5%', top: '12%', transform: 'translate3d(calc(var(--mouse-x) * 16px), calc(var(--mouse-y) * 12px), 0)' }}>
+            <div className="w-4 h-4 text-emerald-400 dark:text-[#00f298] drop-shadow-[0_0_8px_rgba(0,242,152,0.7)]" style={{ animation: 'ambientSparkleTwinkle 4.5s ease-in-out 0.5s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Right Violet Sparkle (14%) */}
+          <div className="absolute ambient-item" style={{ right: '2.5%', top: '14%', transform: 'translate3d(calc(var(--mouse-x) * -16px), calc(var(--mouse-y) * 12px), 0)' }}>
+            <div className="w-4 h-4 text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.75)]" style={{ animation: 'ambientSparkleTwinkle 5.2s ease-in-out 1.2s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Left Cyan Bubble (22%) */}
+          <div className="absolute ambient-item hidden sm:block" style={{ left: '5%', top: '22%', transform: 'translate3d(calc(var(--mouse-x) * 10px), calc(var(--mouse-y) * 8px), 0)' }}>
+            <div className="relative w-4 h-4 rounded-full border border-sky-400/60 bg-sky-300/25 shadow-[0_0_10px_rgba(56,189,248,0.5)]" style={{ animation: 'cuteBubbleFloat 6s ease-in-out infinite' }}>
+              <div className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/90" />
+            </div>
+          </div>
+          {/* Right Lavender Bubble (25%) */}
+          <div className="absolute ambient-item hidden sm:block" style={{ right: '5%', top: '25%', transform: 'translate3d(calc(var(--mouse-x) * -10px), calc(var(--mouse-y) * 8px), 0)' }}>
+            <div className="relative w-4 h-4 rounded-full border border-purple-400/60 bg-purple-300/25 shadow-[0_0_10px_rgba(192,132,252,0.5)]" style={{ animation: 'cuteBubbleFloat 6.5s ease-in-out 0.9s infinite' }}>
+              <div className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/90" />
+            </div>
+          </div>
+          {/* Left Violet Sparkle (34%) */}
+          <div className="absolute ambient-item" style={{ left: '3%', top: '34%', transform: 'translate3d(calc(var(--mouse-x) * 14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-3.5 h-3.5 text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.7)]" style={{ animation: 'ambientSparkleTwinkle 5.8s ease-in-out 0.8s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Right Amber Sparkle (38%) */}
+          <div className="absolute ambient-item" style={{ right: '3%', top: '38%', transform: 'translate3d(calc(var(--mouse-x) * -14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.75)]" style={{ animation: 'ambientSparkleTwinkle 6s ease-in-out 1.8s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Left Emerald Sparkle (46%) */}
+          <div className="absolute ambient-item" style={{ left: '4.5%', top: '46%', transform: 'translate3d(calc(var(--mouse-x) * 12px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-emerald-400 drop-shadow-[0_0_8px_rgba(0,242,152,0.7)]" style={{ animation: 'ambientSparkleTwinkle 4.9s ease-in-out 1.1s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Right Emerald Sparkle (50%) */}
+          <div className="absolute ambient-item" style={{ right: '4.5%', top: '50%', transform: 'translate3d(calc(var(--mouse-x) * -12px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-3.5 h-3.5 text-emerald-400 drop-shadow-[0_0_8px_rgba(0,242,152,0.7)]" style={{ animation: 'ambientSparkleTwinkle 5.3s ease-in-out 0.4s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Left Pink Heart (58%) */}
+          <div className="absolute ambient-item hidden sm:block" style={{ left: '2.5%', top: '58%', transform: 'translate3d(calc(var(--mouse-x) * 10px), calc(var(--mouse-y) * 8px), 0)' }}>
+            <div className="w-3.5 h-3.5 text-pink-400 drop-shadow-[0_0_6px_rgba(244,114,182,0.6)]" style={{ animation: 'cuteHeartFloat 6.5s ease-in-out 1.2s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>
+            </div>
+          </div>
+          {/* Right Cyan Bubble (62%) */}
+          <div className="absolute ambient-item hidden sm:block" style={{ right: '2.5%', top: '62%', transform: 'translate3d(calc(var(--mouse-x) * -12px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="relative w-4 h-4 rounded-full border border-sky-400/60 bg-sky-300/25 shadow-[0_0_10px_rgba(56,189,248,0.5)]" style={{ animation: 'cuteBubbleFloat 6.6s ease-in-out 0.3s infinite' }}>
+              <div className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/90" />
+            </div>
+          </div>
+          {/* Left Sky Cyan Sparkle (70%) */}
+          <div className="absolute ambient-item" style={{ left: '4%', top: '70%', transform: 'translate3d(calc(var(--mouse-x) * 14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-sky-400 drop-shadow-[0_0_8px_rgba(56,189,248,0.75)]" style={{ animation: 'ambientSparkleTwinkle 5.5s ease-in-out 0.7s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Right Purple Sparkle (74%) */}
+          <div className="absolute ambient-item" style={{ right: '4%', top: '74%', transform: 'translate3d(calc(var(--mouse-x) * -16px), calc(var(--mouse-y) * 12px), 0)' }}>
+            <div className="w-4 h-4 text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.75)]" style={{ animation: 'ambientSparkleTwinkle 5.8s ease-in-out 1.4s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Left Lavender Bubble (82%) */}
+          <div className="absolute ambient-item hidden sm:block" style={{ left: '3%', top: '82%', transform: 'translate3d(calc(var(--mouse-x) * 10px), calc(var(--mouse-y) * 8px), 0)' }}>
+            <div className="relative w-3.5 h-3.5 rounded-full border border-purple-400/60 bg-purple-300/25 shadow-[0_0_10px_rgba(192,132,252,0.5)]" style={{ animation: 'cuteBubbleFloat 6s ease-in-out 1.5s infinite' }}>
+              <div className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-white/90" />
+            </div>
+          </div>
+          {/* Right Plus Accent (86%) */}
+          <div className="absolute ambient-item hidden sm:block opacity-60 dark:opacity-40" style={{ right: '3%', top: '86%', transform: 'translate3d(calc(var(--mouse-x) * 8px), calc(var(--mouse-y) * -6px), 0)' }}>
+            <span className="text-amber-400 font-light text-base select-none" style={{ animation: 'ambientPulseGlow 6s ease-in-out infinite' }}>+</span>
+          </div>
+          {/* Bottom Left Mint Sparkle (93%) */}
+          <div className="absolute ambient-item" style={{ left: '4%', top: '93%', transform: 'translate3d(calc(var(--mouse-x) * 14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-[#00f298] drop-shadow-[0_0_8px_rgba(0,242,152,0.8)]" style={{ animation: 'ambientSparkleTwinkle 4.6s ease-in-out infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
+            </div>
+          </div>
+          {/* Bottom Right Amber Sparkle (94%) */}
+          <div className="absolute ambient-item" style={{ right: '4%', top: '94%', transform: 'translate3d(calc(var(--mouse-x) * -14px), calc(var(--mouse-y) * 10px), 0)' }}>
+            <div className="w-4 h-4 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.8)]" style={{ animation: 'ambientSparkleTwinkle 5.4s ease-in-out 1s infinite' }}>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" /></svg>
             </div>
           </div>
         </>

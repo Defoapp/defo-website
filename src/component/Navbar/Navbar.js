@@ -84,8 +84,12 @@ const Navbar = () => {
           type="button"
           aria-label={toggle ? "Close menu" : "Open menu"}
           onClick={() => setToggle(!toggle)}
-          className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 cursor-pointer focus:outline-none ${
-            isDark
+          className={`relative z-50 w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 cursor-pointer focus:outline-none ${
+            toggle
+              ? isDark
+                ? "bg-white/20 text-white ring-2 ring-white/30 shadow-lg"
+                : "bg-slate-200 text-slate-950 ring-2 ring-slate-300 shadow-sm"
+              : isDark
               ? "text-white hover:bg-white/10 active:bg-white/20"
               : "text-slate-900 hover:bg-slate-100 active:bg-slate-200"
           }`}
@@ -134,12 +138,37 @@ const Navbar = () => {
         <div
           className={`${
             !toggle ? "hidden" : "flex"
-          } absolute z-50 p-6 top-16 right-0 mx-2 my-2 w-[calc(100vw-1.5rem)] max-w-xs rounded-2xl sidebar shadow-2xl transition-all duration-300 ${
+          } absolute z-50 p-6 top-16 right-0 mx-2 my-2 w-[calc(100vw-1.5rem)] max-w-xs rounded-2xl sidebar shadow-2xl transition-all duration-300 flex-col ${
             isDark
               ? "bg-slate-950/95 text-white border border-white/10 backdrop-blur-xl shadow-black/80"
               : "bg-white/95 text-slate-900 border border-slate-200/90 backdrop-blur-xl shadow-slate-300/60"
           }`}
         >
+          {/* Menu Header with Label and Close Button */}
+          <div className="flex items-center justify-between pb-3 mb-2 border-b border-slate-200/60 dark:border-white/10">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+              Menu
+            </span>
+            <button
+              type="button"
+              onClick={() => setToggle(false)}
+              className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
+              aria-label="Close navigation"
+            >
+              <svg
+                className="w-4 h-4 stroke-current"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
           <ul className="list-none text-center flex flex-1 flex-col">
             {navLinks.map((nav, index) => (
               <li

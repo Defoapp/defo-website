@@ -38,7 +38,7 @@ const OurTeams = () => {
   }, [selectedCategory]);
 
   return (
-    <div className="relative w-full min-h-screen bg-[#e9eef5] dark:bg-[#080b11] text-slate-900 dark:text-white transition-colors duration-500 flex flex-col justify-between overflow-x-hidden">
+    <div className="relative w-full min-h-screen sparkle-page-bg text-slate-900 dark:text-white transition-colors duration-500 flex flex-col justify-between overflow-x-hidden">
       
       {/* Universal Fixed Navbar */}
       <Navbar />

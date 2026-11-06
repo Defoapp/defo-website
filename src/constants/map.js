@@ -17,8 +17,6 @@ import Women from "../image/hair-styling.png";
 import jai from "../image/ourTeams/team_Members/jayakumar.webp";
 import rahul from "../image/ourTeams/team_Members/rahul.webp";
 import yogi from "../image/ourTeams/team_Members/yogeeswaran.webp";
-import antigravity from "../image/ourTeams/team_Members/antigravity.svg";
-import claude from "../image/ourTeams/team_Members/claude.svg";
 
 //OurCreators image
 import create from "../image/ourCreator/stephanie-liverani-Zz5LQe-VSMY-unsplash 1.svg";
@@ -181,7 +179,7 @@ export const teamsMembers = [
   },
   {
     id: "4",
-    image: antigravity,
+    image: "https://miro.medium.com/v2/resize:fit:640/format:webp/1*Ypy3BnIpxE0PAAwyMzkENQ.png",
     name: "AntiGravity",
     designation: "AI Systems Architect",
     department: "AI & Autonomous Systems",
@@ -193,7 +191,7 @@ export const teamsMembers = [
   },
   {
     id: "5",
-    image: claude,
+    image: "https://upload.wikimedia.org/wikipedia/commons/5/58/Claude-ai-icon.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
     name: "Claude",
     designation: "AI Research & Reasoning Partner",
     department: "Cognitive Intelligence & NLP",

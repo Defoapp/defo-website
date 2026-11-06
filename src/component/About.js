@@ -20,24 +20,55 @@ function About() {
 
   return (
     <div
-      className={`relative w-full min-h-screen font-poppins transition-colors duration-300 selection:bg-[#3ECF7A]/30 flex flex-col justify-between overflow-x-hidden ${
-        isDark ? "bg-[#05070e] text-slate-100" : "bg-[#f8fafc] text-slate-800"
-      }`}
+      className="relative w-full min-h-screen font-poppins transition-colors duration-300 selection:bg-[#3ECF7A]/30 flex flex-col justify-between overflow-x-hidden sparkle-page-bg text-slate-800 dark:text-slate-100"
     >
       <Navbar />
 
       <main className="relative w-full flex-1 overflow-hidden">
+        {/* AMBIENT AURORA BACKGROUND MESH */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {/* Top Center Emerald Brand Glow */}
+          <div
+            className="absolute -top-20 left-1/2 -translate-x-1/2 w-[600px] sm:w-[900px] h-[500px] sm:h-[650px] rounded-full blur-[130px] opacity-70 dark:opacity-25"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(0,242,152,0.4) 0%, rgba(56,189,248,0.2) 50%, transparent 75%)",
+            }}
+          />
+          {/* Left Side Violet Flare */}
+          <div
+            className="absolute top-1/4 -left-20 sm:left-[5%] w-[450px] sm:w-[650px] h-[450px] sm:h-[650px] rounded-full blur-[120px] opacity-60 dark:opacity-20"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(192,132,252,0.35) 0%, rgba(236,72,153,0.18) 50%, transparent 75%)",
+            }}
+          />
+          {/* Right Side Sky Cyan Flare */}
+          <div
+            className="absolute top-1/3 -right-20 sm:right-[5%] w-[450px] sm:w-[650px] h-[450px] sm:h-[650px] rounded-full blur-[120px] opacity-60 dark:opacity-20"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(56,189,248,0.35) 0%, rgba(14,165,233,0.18) 50%, transparent 75%)",
+            }}
+          />
+          {/* Mesh Grid Pattern */}
+          <div
+            className="absolute inset-0 opacity-[0.035] dark:opacity-[0.03]"
+            style={{
+              backgroundImage:
+                "radial-gradient(rgba(15, 23, 42, 0.8) 1px, transparent 1px)",
+              backgroundSize: "24px 24px",
+            }}
+          />
+        </div>
+
         {/* Ambient Floating Sparkles & Fairy Dust Particles */}
-        <AmbientDecorations variant="showcase" />
+        <AmbientDecorations variant="about" />
 
       {/* ========================================================================= */}
       {/* 1. HERO SECTION                                                           */}
       {/* ========================================================================= */}
       <section className="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden">
-        {/* Ambient Glowing Orbs */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-gradient-to-tr from-[#3ECF7A]/25 via-[#00f6ff]/15 to-transparent blur-[130px] pointer-events-none rounded-full" />
-        <div className="absolute top-48 right-[-120px] w-96 h-96 bg-[#100C40]/40 blur-[110px] pointer-events-none rounded-full" />
-        <div className="absolute bottom-10 left-[-100px] w-80 h-80 bg-[#3ECF7A]/15 blur-[100px] pointer-events-none rounded-full" />
 
         <div className="relative max-w-6xl mx-auto px-5 sm:px-8">
           {/* Headline */}
