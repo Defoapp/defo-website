@@ -69,7 +69,7 @@ export default function TeamMemberCard({ member, index = 0 }) {
             transitionTimingFunction: 'cubic-bezier(0.34, 1.45, 0.7, 1)',
           }}
         >
-          <svg width="48" height="92" viewBox="0 0 48 92" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-md">
+          <svg width="48" height="112" viewBox="0 0 48 112" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-md">
             <defs>
               <linearGradient id={`lanyardStrap-${member.id}`} x1="0" y1="0" x2="1" y2="0">
                 <stop offset="0%" stopColor="#00f298" />
@@ -90,31 +90,31 @@ export default function TeamMemberCard({ member, index = 0 }) {
             </defs>
 
             {/* Left Woven Strap Strand from Top of Card */}
-            <path d="M14 0 L22 60 L19 60 L11 0 Z" fill={`url(#lanyardStrap-${member.id})`} />
-            <path d="M12.5 0 L20.5 60" stroke="rgba(255,255,255,0.45)" strokeWidth="0.8" strokeDasharray="1.5 1" />
+            <path d="M14 0 L22 78 L19 78 L11 0 Z" fill={`url(#lanyardStrap-${member.id})`} />
+            <path d="M12.5 0 L20.5 78" stroke="rgba(255,255,255,0.45)" strokeWidth="0.8" strokeDasharray="1.5 1" />
 
             {/* Right Woven Strap Strand from Top of Card */}
-            <path d="M34 0 L26 60 L29 60 L37 0 Z" fill={`url(#lanyardStrap-${member.id})`} />
-            <path d="M35.5 0 L27.5 60" stroke="rgba(255,255,255,0.45)" strokeWidth="0.8" strokeDasharray="1.5 1" />
+            <path d="M34 0 L26 78 L29 78 L37 0 Z" fill={`url(#lanyardStrap-${member.id})`} />
+            <path d="M35.5 0 L27.5 78" stroke="rgba(255,255,255,0.45)" strokeWidth="0.8" strokeDasharray="1.5 1" />
 
             {/* Metallic Crimp / Collar joining the straps */}
-            <rect x="19" y="59" width="10" height="7" rx="1.5" fill={`url(#chromeMetal-${member.id})`} stroke="#64748b" strokeWidth="0.5" />
-            <line x1="20" y1="62.5" x2="28" y2="62.5" stroke="#334155" strokeWidth="0.5" />
+            <rect x="19" y="77" width="10" height="7" rx="1.5" fill={`url(#chromeMetal-${member.id})`} stroke="#64748b" strokeWidth="0.5" />
+            <line x1="20" y1="80.5" x2="28" y2="80.5" stroke="#334155" strokeWidth="0.5" />
 
             {/* Swivel Ring */}
-            <circle cx="24" cy="71" r="3.5" fill="none" stroke={`url(#chromeMetal-${member.id})`} strokeWidth="1.5" />
+            <circle cx="24" cy="89" r="3.5" fill="none" stroke={`url(#chromeMetal-${member.id})`} strokeWidth="1.5" />
 
             {/* Lobster Clasp Body */}
             <path
-              d="M22 73 C22 73, 21 77, 21.5 80 C22 83, 23.5 86, 24 86.5 C24.5 86, 26 83, 26.5 80 C27 77, 26 73, 26 73 Z"
+              d="M22 91 C22 91, 21 95, 21.5 98 C22 101, 23.5 104, 24 104.5 C24.5 104, 26 101, 26.5 98 C27 95, 26 91, 26 91 Z"
               fill={`url(#metalHook-${member.id})`}
               stroke="#475569"
               strokeWidth="0.5"
             />
             {/* Clasp trigger lever */}
-            <rect x="25.5" y="77" width="2.5" height="4" rx="0.8" fill={`url(#chromeMetal-${member.id})`} />
+            <rect x="25.5" y="95" width="2.5" height="4" rx="0.8" fill={`url(#chromeMetal-${member.id})`} />
             {/* Clasp Hook tip (clasps directly into the ID badge hole) */}
-            <path d="M24 84.5 L24 90" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" />
+            <path d="M24 102.5 L24 110" stroke="#334155" strokeWidth="2.5" strokeLinecap="round" />
           </svg>
         </div>
 

@@ -348,10 +348,6 @@ function About() {
           {/* Feature 1 */}
           <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
             <div className="w-full lg:w-1/2 order-2 lg:order-1">
-              <span className="inline-flex items-center gap-1.5 text-xs uppercase font-bold tracking-widest text-[#3ECF7A] mb-3">
-                <span className="w-2 h-2 rounded-full bg-[#3ECF7A]" />
-                EXPANSIVE HORIZONS
-              </span>
               <h2 className="text-2xl sm:text-4xl font-bold tracking-tight">
                 Explore a Boundless Universe of Knowledge
               </h2>
@@ -421,10 +417,6 @@ function About() {
             </div>
 
             <div className="w-full lg:w-1/2">
-              <span className="inline-flex items-center gap-1.5 text-xs uppercase font-bold tracking-widest text-cyan-400 mb-3">
-                <span className="w-2 h-2 rounded-full bg-cyan-400" />
-                VISUAL MASTERY
-              </span>
               <h2 className="text-2xl sm:text-4xl font-bold tracking-tight">
                 Infographics & Visual Delights
               </h2>
@@ -470,10 +462,6 @@ function About() {
           {/* Feature 3 */}
           <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
             <div className="w-full lg:w-1/2 order-2 lg:order-1">
-              <span className="inline-flex items-center gap-1.5 text-xs uppercase font-bold tracking-widest text-amber-400 mb-3">
-                <span className="w-2 h-2 rounded-full bg-amber-400" />
-                PURE JOY
-              </span>
               <h2 className="text-2xl sm:text-4xl font-bold tracking-tight">
                 A Daily Dose of Wonder & Fun
               </h2>

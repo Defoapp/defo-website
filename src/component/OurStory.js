@@ -227,27 +227,6 @@ function TimelineEndSparkle({ isDark, spineScaleY }) {
           </motion.button>
         </motion.div>
       </div>
-
-      {/* Celebratory Terminus Pill Badge (Fully Responsive Centered on All Screen Devices) */}
-      <div className="absolute -bottom-16 sm:-bottom-20 left-0 right-0 z-30 flex justify-center px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.5 }}
-          className={`flex items-center justify-center gap-1.5 sm:gap-2 px-3.5 sm:px-6 py-2 rounded-full text-[10px] sm:text-xs font-mono font-extrabold uppercase tracking-widest border shadow-2xl backdrop-blur-md max-w-full text-center transition-all duration-300 pointer-events-auto cursor-default ${
-            isDark
-              ? "bg-slate-900/95 border-emerald-500/50 text-[#00f298] shadow-emerald-500/20"
-              : "bg-white/95 border-emerald-500/50 text-emerald-600 shadow-emerald-500/20"
-          }`}
-        >
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping flex-shrink-0" />
-          <SparkleStarIcon className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
-          <span className="truncate">Milestones Complete • Adventure Ahead</span>
-          <SparkleStarIcon className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
-        </motion.div>
-      </div>
     </>
   );
 }
@@ -514,35 +493,11 @@ const OurStory = () => {
                     alt="Our Story Illustration"
                   />
                 </motion.div>
-
-                {/* Floating Micro-Badge Top Right */}
-                <motion.div
-                  animate={{ y: [0, 8, 0] }}
-                  transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                  className="absolute -top-3 -right-2 sm:-top-4 sm:-right-4 flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-slate-900/90 dark:bg-black/90 text-[#00f298] border border-[#00f298]/40 shadow-xl backdrop-blur-md text-[10px] sm:text-xs font-bold pointer-events-none"
-                >
-                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#00f298] animate-pulse" />
-                  <span>🚀 100% Ad-Free</span>
-                </motion.div>
-
-                {/* Floating Micro-Badge Bottom Left */}
-                <motion.div
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="absolute -bottom-3 -left-2 sm:-bottom-4 sm:-left-4 flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-slate-900/90 dark:bg-black/90 text-cyan-300 border border-cyan-400/40 shadow-xl backdrop-blur-md text-[10px] sm:text-xs font-bold pointer-events-none"
-                >
-                  <span>💡 Knowledge That Sticks</span>
-                </motion.div>
               </motion.div>
             </div>
 
             {/* Right Story Copy */}
             <div className="lg:col-span-6 order-1 lg:order-2 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 dark:text-[#00f298] text-xs font-mono font-bold uppercase tracking-wider mb-4">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>Our Heritage & Purpose</span>
-              </div>
-
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -572,33 +527,6 @@ const OurStory = () => {
                 journey is a testament to perseverance, creative technology, and a
                 deep passion for empowering curious minds worldwide.
               </motion.p>
-
-              {/* Highlights pills with interactive hover pop */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-                className="flex flex-wrap items-center justify-center lg:justify-start gap-3"
-              >
-                {[
-                  { icon: "🚀", text: "100% Ad-Free Video" },
-                  { icon: "💡", text: "Practical Knowledge" },
-                  { icon: "🌐", text: "Global Creator Community" },
-                ].map((pill, idx) => (
-                  <motion.span
-                    key={idx}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    className={`px-3.5 py-2 rounded-xl border text-xs font-semibold flex items-center gap-1.5 cursor-default transition-all ${
-                      isDark
-                        ? "bg-white/5 border-white/10 text-slate-300 hover:border-emerald-400/40"
-                        : "bg-white border-slate-200 text-slate-700 shadow-sm hover:border-emerald-500/40"
-                    }`}
-                  >
-                    <span>{pill.icon}</span>
-                    <span>{pill.text}</span>
-                  </motion.span>
-                ))}
-              </motion.div>
             </div>
           </div>
         </section>
@@ -611,9 +539,6 @@ const OurStory = () => {
           className="relative z-10 w-full pt-10 pb-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
         >
           <div className="text-center max-w-3xl mx-auto mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-500 dark:text-cyan-300 text-xs font-mono font-bold uppercase tracking-wider mb-3">
-              <span>Chronological Milestones</span>
-            </div>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -747,6 +672,54 @@ const OurStory = () => {
                       </div>
 
                       {/* ======================================================= */}
+                      {/* DESKTOP LUMINOUS CONNECTOR BEAMS (SOLID 56PX DUAL ARMS) */}
+                      {/* Connects Center Node to BOTH Left Card & Right Card     */}
+                      {/* ======================================================= */}
+                      {/* Left Horizontal Beam (Spine 50% to Left Card calc(50%-56px)) */}
+                      <div className="hidden lg:block absolute left-[calc(50%-56px)] top-1/2 -translate-y-1/2 w-[57px] h-[2.5px] pointer-events-none z-20 group-hover:h-[3px] transition-all duration-300">
+                        <div
+                          className={`w-full h-full rounded-l-full bg-gradient-to-r ${
+                            isEven
+                              ? "from-emerald-400 via-teal-300 to-[#00f298] shadow-[0_0_12px_rgba(0,242,152,0.7)]"
+                              : "from-cyan-400 via-sky-300 to-blue-400 shadow-[0_0_12px_rgba(56,189,248,0.7)]"
+                          }`}
+                        />
+                        {/* Terminal Node Dot Welded onto Left Card Border */}
+                        <span
+                          className={`absolute -top-[3px] -left-1 w-2.5 h-2.5 rounded-full animate-ping ${
+                            isEven ? "bg-emerald-300 shadow-[0_0_8px_#00f298]" : "bg-cyan-300 shadow-[0_0_8px_#38bdf8]"
+                          }`}
+                        />
+                        <span
+                          className={`absolute -top-[3px] -left-1 w-2.5 h-2.5 rounded-full border border-white/80 ${
+                            isEven ? "bg-emerald-400" : "bg-cyan-400"
+                          }`}
+                        />
+                      </div>
+
+                      {/* Right Horizontal Beam (Spine 50% to Right Card calc(50%+56px)) */}
+                      <div className="hidden lg:block absolute left-1/2 top-1/2 -translate-y-1/2 w-[57px] h-[2.5px] pointer-events-none z-20 group-hover:h-[3px] transition-all duration-300">
+                        <div
+                          className={`w-full h-full rounded-r-full bg-gradient-to-r ${
+                            isEven
+                              ? "from-[#00f298] via-teal-300 to-emerald-400 shadow-[0_0_12px_rgba(0,242,152,0.7)]"
+                              : "from-blue-400 via-sky-300 to-cyan-400 shadow-[0_0_12px_rgba(56,189,248,0.7)]"
+                          }`}
+                        />
+                        {/* Terminal Node Dot Welded onto Right Card Border */}
+                        <span
+                          className={`absolute -top-[3px] -right-1 w-2.5 h-2.5 rounded-full animate-ping ${
+                            isEven ? "bg-emerald-300 shadow-[0_0_8px_#00f298]" : "bg-cyan-300 shadow-[0_0_8px_#38bdf8]"
+                          }`}
+                        />
+                        <span
+                          className={`absolute -top-[3px] -right-1 w-2.5 h-2.5 rounded-full border border-white/80 ${
+                            isEven ? "bg-emerald-400" : "bg-cyan-400"
+                          }`}
+                        />
+                      </div>
+
+                      {/* ======================================================= */}
                       {/* TIMELINE CONTENT CARD (EXACT 56PX CLEARANCE FROM SPINE)  */}
                       {/* ======================================================= */}
                       <motion.div
@@ -754,20 +727,10 @@ const OurStory = () => {
                         transition={{ type: "spring", stiffness: 350, damping: 25 }}
                         className="w-full lg:w-[calc(50%-56px)] pl-14 sm:pl-16 lg:pl-0 relative group/card"
                       >
-                        {/* Luminous Connector Branch from Spine Node to Card (Desktop only) */}
-                        {isEven ? (
-                          <div className="hidden lg:block absolute -right-[56px] top-1/2 -translate-y-1/2 w-[56px] h-[2px] bg-gradient-to-r from-emerald-500/60 to-[#00f298] shadow-[0_0_8px_rgba(0,242,152,0.5)] pointer-events-none group-hover/card:h-[3px] group-hover/card:shadow-[0_0_15px_#00f298] transition-all duration-300">
-                            <span className="absolute -top-1 right-0 w-2 h-2 rounded-full bg-emerald-300 animate-ping" />
-                          </div>
-                        ) : (
-                          <div className="hidden lg:block absolute -left-[56px] top-1/2 -translate-y-1/2 w-[56px] h-[2px] bg-gradient-to-l from-cyan-500/60 to-cyan-400 shadow-[0_0_8px_rgba(56,189,248,0.5)] pointer-events-none group-hover/card:h-[3px] group-hover/card:shadow-[0_0_15px_#38bdf8] transition-all duration-300">
-                            <span className="absolute -top-1 left-0 w-2 h-2 rounded-full bg-cyan-300 animate-ping" />
-                          </div>
-                        )}
-
                         {/* Mobile & Tablet Connector Branch (Aligned to Spine Node Center) */}
-                        <div className="block lg:hidden absolute left-7 sm:left-8 top-14 sm:top-16 w-7 sm:w-8 h-[2px] bg-gradient-to-r from-emerald-400/80 to-[#00f298] shadow-[0_0_8px_rgba(0,242,152,0.6)] pointer-events-none">
-                          <span className="absolute -top-1 right-0 w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                        <div className="block lg:hidden absolute left-7 sm:left-8 top-14 sm:top-16 w-7 sm:w-8 h-[2.5px] bg-gradient-to-r from-emerald-400 to-[#00f298] shadow-[0_0_10px_rgba(0,242,152,0.7)] pointer-events-none">
+                          <span className="absolute -top-[3px] right-0 w-2 h-2 rounded-full bg-emerald-300 animate-ping" />
+                          <span className="absolute -top-[3px] right-0 w-2 h-2 rounded-full bg-emerald-400" />
                         </div>
 
                         {/* The Card */}
@@ -996,21 +959,9 @@ const OurStory = () => {
                       {/* ======================================================= */}
                       <div
                         className={`hidden lg:flex lg:w-[calc(50%-56px)] flex-col select-none transition-all duration-500 relative ${
-                          isEven
-                            ? "items-start text-left pl-6 xl:pl-10"
-                            : "items-end text-right pr-6 xl:pr-10"
+                          isEven ? "items-start text-left" : "items-end text-right"
                         }`}
                       >
-                        {/* Desktop Luminous Connector Branch to Center Spine */}
-                        {isEven ? (
-                          <div className="hidden lg:block absolute -left-[56px] top-1/2 -translate-y-1/2 w-[56px] h-[2px] bg-gradient-to-r from-transparent to-emerald-500/60 shadow-[0_0_8px_rgba(0,242,152,0.5)] pointer-events-none group-hover/spotlight:h-[3px] transition-all duration-300">
-                            <span className="absolute -top-1 left-0 w-2 h-2 rounded-full bg-emerald-300 animate-ping" />
-                          </div>
-                        ) : (
-                          <div className="hidden lg:block absolute -right-[56px] top-1/2 -translate-y-1/2 w-[56px] h-[2px] bg-gradient-to-l from-transparent to-cyan-500/60 shadow-[0_0_8px_rgba(56,189,248,0.5)] pointer-events-none group-hover/spotlight:h-[3px] transition-all duration-300">
-                            <span className="absolute -top-1 right-0 w-2 h-2 rounded-full bg-cyan-300 animate-ping" />
-                          </div>
-                        )}
 
                         <div className="relative">
                           {/* Milestone Phase & Index Tag */}

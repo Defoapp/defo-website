@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import logo from "../Navbar/image/Logo.png";
 import { Link } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
@@ -32,6 +33,61 @@ export const navLinks = [
   },
 ];
 
+const dropdownVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.82,
+    rotateX: -24,
+    rotateY: 12,
+    y: -20,
+    transformPerspective: 1000,
+    transition: {
+      duration: 0.2,
+      ease: "easeIn",
+    },
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    rotateX: 0,
+    rotateY: 0,
+    y: 0,
+    transformPerspective: 1000,
+    transition: {
+      type: "spring",
+      stiffness: 360,
+      damping: 24,
+      mass: 0.8,
+      staggerChildren: 0.04,
+      delayChildren: 0.06,
+    },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.85,
+    rotateX: -18,
+    rotateY: 10,
+    y: -15,
+    transformPerspective: 1000,
+    transition: {
+      duration: 0.18,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: -8, rotateX: -10, transformPerspective: 600 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transformPerspective: 600,
+    transition: { type: "spring", stiffness: 420, damping: 26 },
+  },
+  exit: { opacity: 0, y: -4, transition: { duration: 0.12 } },
+};
+
 const Navbar = () => {
   const { isDark } = useTheme();
 
@@ -47,12 +103,12 @@ const Navbar = () => {
     <nav
       className={`sticky top-0 w-full flex py-2 justify-between items-center z-50 transition-colors duration-300 ${
         isDark
-          ? "bg-black/95 text-white border-b border-white/10"
-          : "bg-white/95 text-slate-800 border-b border-slate-200/90 shadow-sm backdrop-blur-md"
+          ? "bg-black text-white border-b border-white/10"
+          : "bg-white text-slate-800 border-b border-slate-200/90 shadow-sm"
       }`}
     >
       {/* Logo */}
-      <Link to="/" className="flex items-center">
+      <Link to="/" className="flex items-center relative z-50">
         <img className="ml-4 w-15 h-7" src={logo} alt="logo" />
       </Link>
 
@@ -137,78 +193,75 @@ const Navbar = () => {
           )}
         </button>
 
-        {/* Backdrop overlay when mobile menu is open */}
-        {toggle && (
-          <div
-            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm sm:hidden"
-            onClick={() => setToggle(false)}
-          />
-        )}
-
-        {/* Sidebar Dropdown Menu */}
-        <div
-          className={`${
-            !toggle ? "hidden" : "flex"
-          } z-50 p-6 absolute top-16 right-0 mx-2 w-[calc(100vw-1.5rem)] max-w-xs rounded-2xl sidebar shadow-2xl transition-all duration-300 flex-col ${
-            isDark
-              ? "bg-slate-950/95 text-white border border-white/10 backdrop-blur-xl shadow-black/80"
-              : "bg-white/95 text-slate-900 border border-slate-200/90 backdrop-blur-xl shadow-slate-300/60"
-          }`}
-        >
-          {/* Menu Header with Label and Close Button */}
-          <div className="flex items-center justify-between pb-3 mb-2 border-b border-slate-200/60 dark:border-white/10">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-              Menu
-            </span>
-            <button
-              type="button"
-              onClick={() => setToggle(false)}
-              className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
-              aria-label="Close navigation"
-            >
-              <svg
-                className="w-4 h-4 stroke-current"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-          </div>
-          <ul className="list-none text-center flex flex-1 flex-col">
-            {navLinks.map((nav, index) => (
-              <li
-                key={nav.id}
-                className={`font-poppins list-none text-center no-underline font-medium mx-4 cursor-pointer text-[16px] ${
-                  isDark ? "text-white hover:text-cyan-400" : "text-slate-800 hover:text-emerald-600"
-                } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
-                onClick={() => {
-                  handleLinkClick(nav.title, nav.path);
-                  setToggle(false);
-                }}
-              >
-                {nav.path ? <Link to={nav.path}>{nav.title}</Link> : nav.title}
-              </li>
-            ))}
-
-            {/* Mobile Theme Selector (Dark, Bright, Auto) */}
-            <ThemeToggle isMobile={true} />
-
-            <a href="https://creator.yesdefo.com/" target="_blank" rel="noreferrer">
-              <li
+        {/* 3D Animated Dropdown and Backdrop */}
+        <AnimatePresence>
+          {toggle && (
+            <>
+              {/* Backdrop overlay when mobile menu is open (anchored below top navbar at top-16) */}
+              <motion.div
+                key="mobile-backdrop"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.22, ease: "easeOut" }}
+                className="fixed top-16 inset-x-0 bottom-0 z-40 bg-black/40 backdrop-blur-[2px] sm:hidden"
                 onClick={() => setToggle(false)}
-                className="font-poppins list-none no-underline font-medium cursor-pointer text-[16px] text-white bg-green-500 p-2.5 rounded-xl mt-2 transition-transform active:scale-95 shadow-md shadow-green-500/30"
+              />
+
+              {/* 3D Perspective Flip Dropdown Menu */}
+              <motion.div
+                key="mobile-dropdown"
+                variants={dropdownVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                style={{
+                  transformOrigin: "top right",
+                  transformStyle: "preserve-3d",
+                }}
+                className={`fixed z-50 p-6 top-[72px] right-3 sm:right-4 w-[calc(100vw-1.5rem)] max-w-xs rounded-2xl sidebar shadow-2xl flex flex-col ${
+                  isDark
+                    ? "bg-slate-950 text-white border border-white/10 shadow-black/80"
+                    : "bg-white text-slate-900 border border-slate-200/90 shadow-slate-300/60"
+                }`}
               >
-                Join Creator
-              </li>
-            </a>
-          </ul>
-        </div>
+                <motion.ul className="list-none text-center flex flex-1 flex-col">
+                  {navLinks.map((nav, index) => (
+                    <motion.li
+                      key={nav.id}
+                      variants={itemVariants}
+                      className={`font-poppins list-none text-center no-underline font-medium mx-4 cursor-pointer text-[16px] ${
+                        isDark ? "text-white hover:text-cyan-400" : "text-slate-800 hover:text-emerald-600"
+                      } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
+                      onClick={() => {
+                        handleLinkClick(nav.title, nav.path);
+                        setToggle(false);
+                      }}
+                    >
+                      {nav.path ? <Link to={nav.path}>{nav.title}</Link> : nav.title}
+                    </motion.li>
+                  ))}
+
+                  {/* Mobile Theme Selector (Dark, Bright, Auto) */}
+                  <motion.li variants={itemVariants} className="list-none">
+                    <ThemeToggle isMobile={true} />
+                  </motion.li>
+
+                  <motion.li variants={itemVariants} className="list-none">
+                    <a href="https://creator.yesdefo.com/" target="_blank" rel="noreferrer">
+                      <div
+                        onClick={() => setToggle(false)}
+                        className="font-poppins text-center font-medium cursor-pointer text-[16px] text-white bg-green-500 p-2.5 rounded-xl mt-2 transition-transform active:scale-95 shadow-md shadow-green-500/30"
+                      >
+                        Join Creator
+                      </div>
+                    </a>
+                  </motion.li>
+                </motion.ul>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );

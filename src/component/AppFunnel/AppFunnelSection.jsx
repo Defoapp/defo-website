@@ -5,7 +5,6 @@ import SquircleCard from './SquircleCard';
 import defoIcon from '../../image/favicon.png';
 import playstore from '../../image/google-play-badge.svg';
 import appstore from '../../image/app-store-badge.svg';
-import GpIcon from '../../image/Google_Play-Icon-Logo.wine.svg';
 import AmbientDecorations from '../Common/AmbientDecorations';
 
 export default function AppFunnelSection() {
@@ -296,14 +295,14 @@ export default function AppFunnelSection() {
             </p>
           </motion.div>
 
-          {/* Action Badges & Download Button */}
+          {/* Action Badges: Google Play & App Store */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={hasTriggered ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
             transition={{ duration: 0.38, delay: 0.20, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col items-center mt-3"
+            className="flex items-center justify-center mt-3"
           >
-            <div className="flex flex-col xs:flex-row items-center justify-center gap-2.5 sm:gap-3.5">
+            <div className="flex flex-row items-center justify-center gap-3 sm:gap-4">
               {/* Google Play Store Badge */}
               <a
                 href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1"
@@ -331,36 +330,6 @@ export default function AppFunnelSection() {
                   alt="Download Defo on Apple App Store"
                 />
               </a>
-
-              {/* Primary Direct Download Button */}
-              <a
-                href="https://play.google.com/store/apps/details?id=dev.lowpow.defo&pli=1"
-                target="_blank"
-                rel="noreferrer"
-                className="group"
-              >
-                <div className="flex items-center gap-1.5 bg-black hover:bg-neutral-900 border border-white/20 hover:border-[#00f298]/50 px-3.5 py-1.5 rounded-xl transition-all hover:scale-105 shadow-lg cursor-pointer">
-                  <img className="w-4 h-4" src={GpIcon} alt="Play store icon" />
-                  <span className="text-white text-xs font-bold group-hover:text-[#00f298] transition-colors whitespace-nowrap">
-                    Install App
-                  </span>
-                </div>
-              </a>
-            </div>
-
-            {/* Feature Highlights Pills */}
-            <div className="flex flex-wrap items-center justify-center gap-2.5 mt-3 text-neutral-500 dark:text-neutral-400 text-xs font-poppins">
-              <span className="flex items-center gap-1">
-                <span className="text-emerald-500 dark:text-[#00f298] font-bold">✓</span> Free Download
-              </span>
-              <span>•</span>
-              <span className="flex items-center gap-1">
-                <span className="text-emerald-500 dark:text-[#00f298] font-bold">✓</span> 100% Ad-Free
-              </span>
-              <span>•</span>
-              <span className="flex items-center gap-1">
-                <span className="text-emerald-500 dark:text-[#00f298] font-bold">✓</span> 4.9★ Rated
-              </span>
             </div>
           </motion.div>
 
